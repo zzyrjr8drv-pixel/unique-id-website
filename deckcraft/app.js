@@ -14,6 +14,16 @@ function showToast(message) {
   $('#toast').textContent = message; $('#toast').classList.add('show'); clearTimeout(toastTimer);
   toastTimer = setTimeout(() => $('#toast').classList.remove('show'), 2600);
 }
+function pptxConstructor() { return window.PptxGenJS || window.pptxgen; }
+function updateExportStatus() {
+  const status = $('#library-status');
+  if (pptxConstructor()) status.textContent = 'PowerPoint export is ready in your browser.';
+  else if (window.deckcraftExportLoaded === false) status.textContent = 'The export library could not load. Check your connection, or click Build to retry.';
+  else status.textContent = 'Loading the PowerPoint export…';
+}
+window.addEventListener('deckcraft-export-library', updateExportStatus);
+if (window.deckcraftExportPromise) window.deckcraftExportPromise.then(updateExportStatus);
+updateExportStatus();
 function esc(text) { return text.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function sentenceChunks(text, limit = 520) {
   const sentences = text.match(/[^.!?。！？\n]+[.!?。！？]?/gu)?.map(item => item.trim()).filter(Boolean) || [text.trim()];
@@ -239,12 +249,22 @@ $('#add-slide').addEventListener('click', () => {
   $('#slide-editor').lastElementChild.scrollIntoView({behavior:'smooth',block:'center'});
 });
 
-function exportDeck() {
-  if (!window.pptxgen) { showToast('PowerPoint export library did not load. Check your connection and refresh.'); return; }
+async function exportDeck() {
+  const button = $('#generate');
+  if (!pptxConstructor()) {
+    button.disabled = true; button.querySelector('span:first-child').textContent = 'Loading export…';
+    $('#library-status').textContent = 'Trying the export library again…';
+    const loaded = window.deckcraftLoadExportLibrary ? await window.deckcraftLoadExportLibrary() : false;
+    if (!loaded || !pptxConstructor()) {
+      button.disabled = false; button.querySelector('span:first-child').textContent = 'Build my PowerPoint';
+      updateExportStatus(); showToast('Could not load the PowerPoint export library. Check your connection and try again.'); return;
+    }
+  }
   if (!state.slides.length) return showToast('Add some content before building the PowerPoint.');
-  const button = $('#generate'); button.disabled=true; button.querySelector('span:first-child').textContent='Building your deck…';
+  button.disabled=true; button.querySelector('span:first-child').textContent='Building your deck…';
   try {
-    const pptx = new window.pptxgen(); const theme=themes[state.theme];
+    const PptxGen = pptxConstructor();
+    const pptx = new PptxGen(); const theme=themes[state.theme];
     pptx.layout='LAYOUT_WIDE'; pptx.author='Deckcraft'; pptx.subject=$('#deck-title').value.trim() || 'Presentation';
     pptx.title=$('#deck-title').value.trim() || 'Presentation'; pptx.company='Deckcraft'; pptx.lang='en-US';
     pptx.theme={headFontFace:theme.font,bodyFontFace:'Aptos',lang:'en-US'};
