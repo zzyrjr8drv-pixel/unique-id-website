@@ -29,7 +29,7 @@
       <section class="intro">
         <div class="eyebrow"><span class="eyebrow-line"></span> YOUR DECK, WITH DIRECTION</div>
         <h1>Make the brief<br><em>clear.</em></h1>
-        <p class="intro-copy">Bring your PowerPoint and tell us what it needs.<br class="desktop-break"> We’ll turn your notes into a focused production handoff.</p>
+        <p class="intro-copy">Bring any document and tell us what it needs.<br class="desktop-break"> We’ll turn your notes into a focused production handoff.</p>
         <div class="progress" aria-label="Three steps">
           <div class="progress-step active"><span>01</span><b>Upload</b></div><span class="progress-rule"></span>
           <div class="progress-step"><span>02</span><b>Describe</b></div><span class="progress-rule"></span>
@@ -44,15 +44,15 @@
             <span class="required-note">* Required</span>
           </div>
 
-          <label class="dropzone" id="dropzone" for="file-input" tabindex="0" role="button" aria-label="Choose a PowerPoint file or drop it here">
-            <input id="file-input" type="file" accept=".ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation">
+          <label class="dropzone" id="dropzone" for="file-input" tabindex="0" role="button" aria-label="Choose any document file or drop it here">
+            <input id="file-input" type="file" accept="*/*">
             <span class="upload-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15.5v3A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-3"/></svg></span>
-            <span class="drop-title" id="drop-title">Drop your PowerPoint here</span>
+            <span class="drop-title" id="drop-title">Drop your document here</span>
             <span class="drop-subtitle" id="drop-subtitle">or <span>browse files</span> from your computer</span>
-            <span class="file-limit">PPT or PPTX · Up to 100 MB</span>
+            <span class="file-limit">Any file type · Up to 100 MB · Original kept intact</span>
           </label>
           <div class="file-card" id="file-card" hidden>
-            <div class="ppt-icon">P</div><div class="file-meta"><strong id="file-name"></strong><span id="file-size"></span></div>
+            <div class="ppt-icon" id="file-icon">FILE</div><div class="file-meta"><strong id="file-name"></strong><span id="file-size"></span></div>
             <button class="icon-button remove-file" id="remove-file" type="button" aria-label="Remove uploaded file">×</button>
           </div>
 
@@ -125,9 +125,9 @@
             <div class="preview-footer"><span class="mini-mark"><i></i><i></i><i></i></span><span>Made with intention</span><span id="preview-date"></span></div>
           </div>
           <div class="preview-bottom">
-            <div class="deliverable-label"><span class="deliverable-icon">↗</span><div><strong>Your handoff package</strong><small>Original deck + production brief</small></div></div>
+            <div class="deliverable-label"><span class="deliverable-icon">↗</span><div><strong>Your handoff package</strong><small>Original document + production brief</small></div></div>
             <button class="submit-button" id="package-button" type="button"><span>Package my brief</span><span aria-hidden="true">↗</span></button>
-            <p class="prototype-note">This creates a handoff package. Slide editing needs a connected production service.</p>
+            <p class="prototype-note">This creates a handoff package with your original file. Slide editing needs a connected production service.</p>
           </div>
         </aside>
       </div>
