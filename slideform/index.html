@@ -11,6 +11,10 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="correction.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.9.0/mammoth.browser.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/xlsx@0.20.3/dist/xlsx.full.min.js"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -55,6 +59,14 @@
             <div class="ppt-icon" id="file-icon">FILE</div><div class="file-meta"><strong id="file-name"></strong><span id="file-size"></span></div>
             <button class="icon-button remove-file" id="remove-file" type="button" aria-label="Remove uploaded file">×</button>
           </div>
+          <section class="note-draft" id="note-draft" hidden aria-live="polite">
+            <div class="note-draft-head"><span class="step-number">AUTO NOTE → SLIDE DRAFT</span><span class="note-draft-status" id="note-draft-status">Reading your note…</span></div>
+            <h3 id="note-draft-title">Your draft outline</h3>
+            <p id="note-draft-copy">We’ll organize the text we can read into an editable slide outline. Review it in the deck builder before exporting.</p>
+            <ol id="note-draft-preview"></ol>
+            <button class="note-draft-button" id="continue-to-builder" type="button" disabled>Continue to the deck builder <span>↗</span></button>
+            <small class="note-draft-note">Text is extracted in your browser. Scanned pages and image-only files need OCR; files we can’t read can still be included in your brief package.</small>
+          </section>
 
           <div class="field-group">
             <label for="project-title">What should we call this project? <span>*</span></label>
