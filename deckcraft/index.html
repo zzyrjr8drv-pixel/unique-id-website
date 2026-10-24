@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f4ef">
+  <title>Deckcraft — Your story, your choices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="studio-add.css">
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="#"><span class="brand-symbol">d.</span><span>deckcraft</span></a><div class="top-note"><span class="local-dot"></span> Your content stays in this browser</div><a class="help-link" href="#how">How it works <span>↗</span></a></header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy"><div class="eyebrow"><span></span> PRESENTATION STUDIO</div><h1>Your story.<br><em>Your choices.</em></h1><p>Bring your content. You choose the look, the rhythm, and what goes on every slide. Then download your editable PowerPoint.</p><div class="hero-proof"><span class="proof-check">✓</span> No AI deciding your style or structure</div></div>
+      <div class="hero-art" aria-hidden="true"><div class="art-sheet art-sheet-back"><span>04</span><i></i><i></i><i></i></div><div class="art-sheet art-sheet-front"><div class="art-tag">YOUR POINT OF VIEW</div><div class="art-big">Make<br>it <em>matter.</em></div><div class="art-line"></div><div class="art-foot"><span>01 / THE OPENING</span><span class="art-mark">d.</span></div></div><div class="art-orbit"></div><div class="art-spark">✳</div></div>
+    </section>
+    <div class="studio-grid">
+      <section class="builder">
+        <div class="panel-head"><div><span class="overline">01 — YOUR CONTENT</span><h2>Start with what you want to say</h2></div><span class="step-pill">YOUR WORDS, ALWAYS</span></div>
+        <div class="input-row"><label class="text-label" for="deck-title">Presentation title</label><input id="deck-title" maxlength="100" type="text" value="A better way forward" placeholder="Give your presentation a title"></div>
+        <div class="input-row content-row"><label class="text-label" for="source-content">Paste your content</label><textarea id="source-content" rows="7" placeholder="Paste your notes, draft, or slide content. Separate ideas with a blank line. You can edit every slide before export.">The opportunity is bigger than the challenge
+
+Customers are asking for a simpler, more connected experience. Today, our tools make people repeat the same work in three different places.
+
+Make the everyday feel effortless
+One shared workspace brings the most important information together. Teams can find what they need, make a decision, and move forward without switching contexts.
+
+Start focused, then grow with confidence
+We will begin with a small group of teams, learn from their daily work, and expand based on what helps them most.</textarea><div class="textarea-foot"><span>One blank line between ideas works well.</span><span id="word-count">0 words</span></div><button class="structure-button" id="structure-content" type="button">Arrange my content into slides <span>↓</span></button></div>
+        <div class="controls-section"><div class="section-title"><div><span class="overline">02 — YOUR DIRECTION</span><h2>Make the choices</h2></div><span class="no-ai-note"><span>✳</span> Nothing is chosen for you</span></div>
+          <div class="choice-block"><div class="choice-label">The look <span>Choose a visual style</span></div><div class="theme-options" role="radiogroup" aria-label="Presentation visual style">
+            <button class="theme-choice selected" data-theme="studio" type="button" role="radio" aria-checked="true"><span class="theme-swatch swatch-studio"><i></i><i></i><i></i></span><strong>Studio</strong><small>Modern · bright</small></button>
+            <button class="theme-choice" data-theme="editorial" type="button" role="radio" aria-checked="false"><span class="theme-swatch swatch-editorial"><i></i><i></i><i></i></span><strong>Editorial</strong><small>Warm · considered</small></button>
+            <button class="theme-choice" data-theme="midnight" type="button" role="radio" aria-checked="false"><span class="theme-swatch swatch-midnight"><i></i><i></i><i></i></span><strong>Midnight</strong><small>Bold · cinematic</small></button>
+            <button class="theme-choice" data-theme="fieldnotes" type="button" role="radio" aria-checked="false"><span class="theme-swatch swatch-field"><i></i><i></i><i></i></span><strong>Fieldnotes</strong><small>Natural · grounded</small></button>
+          </div></div>
+          <div class="choice-grid"><div class="choice-block"><label class="choice-label" for="story-flow">The flow <span>Pick how it unfolds</span></label><div class="select-box"><select id="story-flow"><option value="direct">Key message first</option><option value="story">Set the scene → reveal</option><option value="problem">Challenge → response</option><option value="evidence">Evidence → takeaway</option><option value="manual">I’ll set the order myself</option></select><span>⌄</span></div><p class="help-text">Sets a starting order. You can edit or reorder every slide.</p></div>
+          <div class="choice-block"><label class="choice-label" for="slide-limit">The length <span>Choose a slide count</span></label><div class="select-box"><select id="slide-limit"><option value="4">4 slides · concise</option><option value="6" selected>6 slides · balanced</option><option value="8">8 slides · detailed</option><option value="10">10 slides · extended</option></select><span>⌄</span></div><p class="help-text">Extra slides stay blank for you to fill in.</p></div></div>
+        </div>
+        <div class="editor-section"><div class="editor-head"><div><span class="overline">03 — YOUR SLIDES</span><h2>Fine-tune every slide</h2></div><button class="text-button" id="add-slide" type="button">＋ Add a slide</button></div><p class="editor-hint">Edit the wording, change the order, or remove anything. This is the content that goes into your PowerPoint.</p><div id="slide-editor" class="slide-editor"></div></div>
+        <div class="generate-row"><div class="generate-caption"><span class="generate-icon">↓</span><div><strong>Ready when you are.</strong><small>Download an editable .pptx file</small></div></div><button class="generate-button" id="generate" type="button"><span>Build my PowerPoint</span><span>↗</span></button><p class="library-note" id="library-status">PowerPoint export runs in your browser. An internet connection is needed to load the export library.</p></div>
+      </section>
+      <aside class="preview-panel"><div class="preview-toolbar"><span class="preview-heading"><i></i> LIVE PREVIEW</span><span id="slide-position">01 / 06</span></div><div class="stage"><div class="slide-canvas theme-studio" id="slide-canvas"><div class="slide-kicker" id="preview-kicker">A BETTER WAY FORWARD</div><div class="slide-title" id="preview-title">The opportunity is bigger than the challenge</div><div class="slide-body" id="preview-body">Customers are asking for a simpler, more connected experience. Today, our tools make people repeat the same work in three different places.</div><div class="slide-counter" id="preview-counter">01</div><div class="canvas-decoration"></div></div></div><div class="preview-controls"><button id="previous-slide" type="button" aria-label="Previous slide">←</button><div class="preview-dots" id="preview-dots"></div><button id="next-slide" type="button" aria-label="Next slide">→</button></div><div class="preview-summary"><span class="summary-label">YOUR DECK</span><div><strong id="summary-title">A better way forward</strong><small><span id="summary-slides">6 slides</span> <i>·</i> <span id="summary-theme">Studio style</span></small></div></div><div class="your-control"><span class="control-star">✳</span><div><strong>You’re in control</strong><p>Your words and choices make the deck. No AI rewrites your content or picks a style for you.</p></div></div></aside>
+    </div>
+    <section class="how" id="how"><div><span class="overline">MADE TO FOLLOW YOUR LEAD</span><h2>From your notes<br>to your PowerPoint.</h2></div><div class="how-steps"><article><span>01</span><h3>Bring your content</h3><p>Paste notes, a draft, or the words you want to share.</p></article><article><span>02</span><h3>Choose your direction</h3><p>Pick the visual style, story flow, and presentation length.</p></article><article><span>03</span><h3>Make it yours</h3><p>Review and edit every slide, then download the editable deck.</p></article></div></section>
+    <footer><span class="footer-brand">deckcraft</span><span>A presentation studio that follows your lead.</span><span>MADE FOR YOUR POINT OF VIEW</span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div><script src="app.js"></script>
+</body>
+</html>
