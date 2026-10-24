@@ -1,51 +1,140 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f4ef">
-  <title>Deckcraft — Your story, your choices</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="studio-add.css">
-  <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="A calm, clear workspace for turning a PowerPoint and your requirements into a production-ready handoff.">
+  <title>Slideform — Make the brief clear</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="correction.css">
 </head>
 <body>
-  <header class="topbar"><a class="brand" href="#"><span class="brand-symbol">d.</span><span>deckcraft</span></a><div class="top-note"><span class="local-dot"></span> Your content stays in this browser</div><a class="help-link" href="#how">How it works <span>↗</span></a></header>
-  <main>
-    <section class="hero">
-      <div class="hero-copy"><div class="eyebrow"><span></span> PRESENTATION STUDIO</div><h1>Your story.<br><em>Your choices.</em></h1><p>Bring your content. You choose the look, the rhythm, and what goes on every slide. Then download your editable PowerPoint.</p><div class="hero-proof"><span class="proof-check">✓</span> No AI deciding your style or structure</div></div>
-      <div class="hero-art" aria-hidden="true"><div class="art-sheet art-sheet-back"><span>04</span><i></i><i></i><i></i></div><div class="art-sheet art-sheet-front"><div class="art-tag">YOUR POINT OF VIEW</div><div class="art-big">Make<br>it <em>matter.</em></div><div class="art-line"></div><div class="art-foot"><span>01 / THE OPENING</span><span class="art-mark">d.</span></div></div><div class="art-orbit"></div><div class="art-spark">✳</div></div>
-    </section>
-    <div class="studio-grid">
-      <section class="builder">
-        <div class="panel-head"><div><span class="overline">01 — YOUR CONTENT</span><h2>Start with what you want to say</h2></div><span class="step-pill">YOUR WORDS, ALWAYS</span></div>
-        <div class="input-row"><label class="text-label" for="deck-title">Presentation title</label><input id="deck-title" maxlength="100" type="text" value="A better way forward" placeholder="Give your presentation a title"></div>
-        <div class="input-row content-row"><label class="text-label" for="source-content">Paste your content</label><textarea id="source-content" rows="7" placeholder="Paste your notes, draft, or slide content. Separate ideas with a blank line. You can edit every slide before export.">The opportunity is bigger than the challenge
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Slideform home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>slideform</span>
+      </a>
+      <div class="topbar-right">
+        <span class="save-state"><i></i> Saved in this browser</span>
+        <button class="avatar" aria-label="Your workspace">S</button>
+      </div>
+    </header>
 
-Customers are asking for a simpler, more connected experience. Today, our tools make people repeat the same work in three different places.
-
-Make the everyday feel effortless
-One shared workspace brings the most important information together. Teams can find what they need, make a decision, and move forward without switching contexts.
-
-Start focused, then grow with confidence
-We will begin with a small group of teams, learn from their daily work, and expand based on what helps them most.</textarea><div class="textarea-foot"><span>One blank line between ideas works well.</span><span id="word-count">0 words</span></div><button class="structure-button" id="structure-content" type="button">Arrange my content into slides <span>↓</span></button></div>
-        <div class="controls-section"><div class="section-title"><div><span class="overline">02 — YOUR DIRECTION</span><h2>Make the choices</h2></div><span class="no-ai-note"><span>✳</span> Nothing is chosen for you</span></div>
-          <div class="choice-block"><div class="choice-label">The look <span>Choose a visual style</span></div><div class="theme-options" role="radiogroup" aria-label="Presentation visual style">
-            <button class="theme-choice selected" data-theme="studio" type="button" role="radio" aria-checked="true"><span class="theme-swatch swatch-studio"><i></i><i></i><i></i></span><strong>Studio</strong><small>Modern · bright</small></button>
-            <button class="theme-choice" data-theme="editorial" type="button" role="radio" aria-checked="false"><span class="theme-swatch swatch-editorial"><i></i><i></i><i></i></span><strong>Editorial</strong><small>Warm · considered</small></button>
-            <button class="theme-choice" data-theme="midnight" type="button" role="radio" aria-checked="false"><span class="theme-swatch swatch-midnight"><i></i><i></i><i></i></span><strong>Midnight</strong><small>Bold · cinematic</small></button>
-            <button class="theme-choice" data-theme="fieldnotes" type="button" role="radio" aria-checked="false"><span class="theme-swatch swatch-field"><i></i><i></i><i></i></span><strong>Fieldnotes</strong><small>Natural · grounded</small></button>
-          </div></div>
-          <div class="choice-grid"><div class="choice-block"><label class="choice-label" for="story-flow">The flow <span>Pick how it unfolds</span></label><div class="select-box"><select id="story-flow"><option value="direct">Key message first</option><option value="story">Set the scene → reveal</option><option value="problem">Challenge → response</option><option value="evidence">Evidence → takeaway</option><option value="manual">I’ll set the order myself</option></select><span>⌄</span></div><p class="help-text">Sets a starting order. You can edit or reorder every slide.</p></div>
-          <div class="choice-block"><label class="choice-label" for="slide-limit">The length <span>Choose a slide count</span></label><div class="select-box"><select id="slide-limit"><option value="4">4 slides · concise</option><option value="6" selected>6 slides · balanced</option><option value="8">8 slides · detailed</option><option value="10">10 slides · extended</option></select><span>⌄</span></div><p class="help-text">Extra slides stay blank for you to fill in.</p></div></div>
+    <main id="top">
+      <section class="intro">
+        <div class="eyebrow"><span class="eyebrow-line"></span> YOUR DECK, WITH DIRECTION</div>
+        <h1>Make the brief<br><em>clear.</em></h1>
+        <p class="intro-copy">Bring your PowerPoint and tell us what it needs.<br class="desktop-break"> We’ll turn your notes into a focused production handoff.</p>
+        <div class="progress" aria-label="Three steps">
+          <div class="progress-step active"><span>01</span><b>Upload</b></div><span class="progress-rule"></span>
+          <div class="progress-step"><span>02</span><b>Describe</b></div><span class="progress-rule"></span>
+          <div class="progress-step"><span>03</span><b>Package</b></div>
         </div>
-        <div class="editor-section"><div class="editor-head"><div><span class="overline">03 — YOUR SLIDES</span><h2>Fine-tune every slide</h2></div><button class="text-button" id="add-slide" type="button">＋ Add a slide</button></div><p class="editor-hint">Edit the wording, change the order, or remove anything. This is the content that goes into your PowerPoint.</p><div id="slide-editor" class="slide-editor"></div></div>
-        <div class="generate-row"><div class="generate-caption"><span class="generate-icon">↓</span><div><strong>Ready when you are.</strong><small>Download an editable .pptx file</small></div></div><button class="generate-button" id="generate" type="button"><span>Build my PowerPoint</span><span>↗</span></button><p class="library-note" id="library-status">PowerPoint export runs in your browser. An internet connection is needed to load the export library.</p></div>
       </section>
-      <aside class="preview-panel"><div class="preview-toolbar"><span class="preview-heading"><i></i> LIVE PREVIEW</span><span id="slide-position">01 / 06</span></div><div class="stage"><div class="slide-canvas theme-studio" id="slide-canvas"><div class="slide-kicker" id="preview-kicker">A BETTER WAY FORWARD</div><div class="slide-title" id="preview-title">The opportunity is bigger than the challenge</div><div class="slide-body" id="preview-body">Customers are asking for a simpler, more connected experience. Today, our tools make people repeat the same work in three different places.</div><div class="slide-counter" id="preview-counter">01</div><div class="canvas-decoration"></div></div></div><div class="preview-controls"><button id="previous-slide" type="button" aria-label="Previous slide">←</button><div class="preview-dots" id="preview-dots"></div><button id="next-slide" type="button" aria-label="Next slide">→</button></div><div class="preview-summary"><span class="summary-label">YOUR DECK</span><div><strong id="summary-title">A better way forward</strong><small><span id="summary-slides">6 slides</span> <i>·</i> <span id="summary-theme">Studio style</span></small></div></div><div class="your-control"><span class="control-star">✳</span><div><strong>You’re in control</strong><p>Your words and choices make the deck. No AI rewrites your content or picks a style for you.</p></div></div></aside>
-    </div>
-    <section class="how" id="how"><div><span class="overline">MADE TO FOLLOW YOUR LEAD</span><h2>From your notes<br>to your PowerPoint.</h2></div><div class="how-steps"><article><span>01</span><h3>Bring your content</h3><p>Paste notes, a draft, or the words you want to share.</p></article><article><span>02</span><h3>Choose your direction</h3><p>Pick the visual style, story flow, and presentation length.</p></article><article><span>03</span><h3>Make it yours</h3><p>Review and edit every slide, then download the editable deck.</p></article></div></section>
-    <footer><span class="footer-brand">deckcraft</span><span>A presentation studio that follows your lead.</span><span>MADE FOR YOUR POINT OF VIEW</span></footer>
-  </main>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div><script src="app.js"></script>
+
+      <div class="workspace">
+        <section class="form-panel" aria-label="Presentation brief form">
+          <div class="section-heading">
+            <div><span class="step-number">01 / 03</span><h2>Start with your deck</h2></div>
+            <span class="required-note">* Required</span>
+          </div>
+
+          <label class="dropzone" id="dropzone" for="file-input" tabindex="0" role="button" aria-label="Choose a PowerPoint file or drop it here">
+            <input id="file-input" type="file" accept=".ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation">
+            <span class="upload-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15.5v3A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-3"/></svg></span>
+            <span class="drop-title" id="drop-title">Drop your PowerPoint here</span>
+            <span class="drop-subtitle" id="drop-subtitle">or <span>browse files</span> from your computer</span>
+            <span class="file-limit">PPT or PPTX · Up to 100 MB</span>
+          </label>
+          <div class="file-card" id="file-card" hidden>
+            <div class="ppt-icon">P</div><div class="file-meta"><strong id="file-name"></strong><span id="file-size"></span></div>
+            <button class="icon-button remove-file" id="remove-file" type="button" aria-label="Remove uploaded file">×</button>
+          </div>
+
+          <div class="field-group">
+            <label for="project-title">What should we call this project? <span>*</span></label>
+            <input id="project-title" type="text" maxlength="100" placeholder="e.g. Q4 investor update">
+          </div>
+
+          <div class="divider"></div>
+          <div class="section-heading section-heading-small">
+            <div><span class="step-number">02 / 03</span><h2>Tell us what you need</h2></div>
+          </div>
+          <div class="field-group">
+            <label for="requirements">Your requirements <span>*</span></label>
+            <textarea id="requirements" rows="5" maxlength="5000" placeholder="What should change? What should stay? Share the story, key points, audience, tone, or anything else we should know..."></textarea>
+            <div class="field-foot"><span>Specific notes make a stronger brief.</span><span id="char-count">0 / 5,000</span></div>
+          </div>
+
+          <section class="correction-studio" id="correction-studio" aria-labelledby="correction-heading">
+            <div class="correction-heading"><div><span class="step-number">OPTIONAL · REVIEW EACH CHANGE</span><h3 id="correction-heading">Make a small correction</h3></div><span class="lang-chip">中文 / English</span></div>
+            <p class="correction-intro">Choose one part of a slide, describe a small change, and preview it. You can save more rounds, then approve the version you want.<br><span lang="zh-Hant">選擇投影片中的一小段，輸入修改要求並預覽；可以反覆修改，最後再核准。</span></p>
+            <div class="field-group correction-field"><label for="correction-target">Which slide or part?</label><input id="correction-target" maxlength="120" placeholder="e.g. Slide 3 — opening sentence / 第 3 張 — 開場句"></div>
+            <div class="field-group correction-field"><label for="correction-original">Paste the current wording for that part</label><textarea id="correction-original" rows="3" maxlength="3000" placeholder="Copy just the text you want to change. The rest of your deck stays outside this correction."></textarea></div>
+            <div class="correction-prompt-example">Try: <b>把「舊文字」改成「新文字」</b> · “Replace ‘old text’ with ‘new text’”</div>
+            <div class="field-group correction-field"><label for="correction-request">What should change? <span>Chinese or English</span></label><textarea id="correction-request" rows="2" maxlength="1000" placeholder="例如：把「我們」改成「團隊」"></textarea></div>
+            <button class="apply-correction" id="apply-correction" type="button">Apply to this part <span>↘</span></button>
+            <div class="field-group correction-field"><label for="correction-draft">Correction draft <span>You can refine this wording directly</span></label><textarea id="correction-draft" rows="3" maxlength="3000" placeholder="The correction preview will appear here. You can also edit the wording yourself."></textarea></div>
+            <div class="correction-preview"><span class="preview-label">PREVIEW · ONLY THE SELECTED WORDING</span><p id="correction-preview">Your corrected wording will appear here.</p></div>
+            <div class="correction-actions"><button id="save-revision" type="button">Save this revision</button><button id="approve-revision" type="button">Approve this version</button></div>
+            <p class="correction-status" id="correction-status" aria-live="polite">No correction saved yet.</p>
+            <ol class="revision-list" id="revision-list"></ol>
+            <p class="correction-limit">This site prepares a correction handoff; it does not rewrite the uploaded PowerPoint. Only the selected wording and your review notes are included as a proposed change.<br><span lang="zh-Hant">此頁會整理修改交接內容，不會直接改寫上傳的 PowerPoint；交接包只會標示你指定的文字和修改版本。</span></p>
+          </section>
+
+          <div class="field-grid">
+            <div class="field-group">
+              <label for="audience">Who is this for?</label>
+              <input id="audience" type="text" maxlength="120" placeholder="e.g. Executive leadership">
+            </div>
+            <div class="field-group">
+              <label for="deadline">When do you need it?</label>
+              <input id="deadline" type="date">
+            </div>
+          </div>
+
+          <div class="field-grid last-grid">
+            <div class="field-group">
+              <label for="slide-count">Target slide count</label>
+              <div class="select-wrap"><select id="slide-count"><option value="Keep the current length">Keep current length</option><option>5–8 slides</option><option>9–12 slides</option><option>13–18 slides</option><option>19+ slides</option></select><span class="select-chevron">⌄</span></div>
+            </div>
+            <div class="field-group">
+              <label for="output-format">Output format</label>
+              <div class="select-wrap"><select id="output-format"><option value="Editable PowerPoint (.pptx)">Editable PowerPoint (.pptx)</option><option>PDF for sharing</option><option>PowerPoint + PDF</option></select><span class="select-chevron">⌄</span></div>
+            </div>
+          </div>
+          <div class="privacy-note"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 3.5 5v4.3c0 4.2 2.8 6.9 6.5 8.2 3.7-1.3 6.5-4 6.5-8.2V5L10 2.5Z"/><path d="m7.5 10 1.7 1.7 3.5-3.5"/></svg><span>Your files stay on your device until you download the handoff package.</span></div>
+        </section>
+
+        <aside class="preview-panel">
+          <div class="preview-topline"><span>LIVE PREVIEW</span><span class="live-dot"></span></div>
+          <div class="preview-content">
+            <div class="preview-kicker">PRODUCTION BRIEF</div>
+            <h3 id="preview-title">Your next<br>great deck.</h3>
+            <div class="preview-rule"></div>
+            <div class="preview-detail"><span>PROJECT</span><strong id="preview-project">Untitled project</strong></div>
+            <div class="preview-detail"><span>FOR</span><strong id="preview-audience">Audience not set</strong></div>
+            <div class="preview-detail"><span>DECK</span><strong id="preview-deck">No file uploaded</strong></div>
+            <div class="preview-detail"><span>FORMAT</span><strong id="preview-format">Editable PowerPoint (.pptx)</strong></div>
+            <div class="preview-request"><span>THE REQUEST</span><p id="preview-request">Your requirements will appear here as you write them.</p></div>
+            <div class="preview-footer"><span class="mini-mark"><i></i><i></i><i></i></span><span>Made with intention</span><span id="preview-date"></span></div>
+          </div>
+          <div class="preview-bottom">
+            <div class="deliverable-label"><span class="deliverable-icon">↗</span><div><strong>Your handoff package</strong><small>Original deck + production brief</small></div></div>
+            <button class="submit-button" id="package-button" type="button"><span>Package my brief</span><span aria-hidden="true">↗</span></button>
+            <p class="prototype-note">This creates a handoff package. Slide editing needs a connected production service.</p>
+          </div>
+        </aside>
+      </div>
+      <footer class="page-footer"><span>SLIDEFORM STUDIO</span><span>Thoughtful decks start with thoughtful direction.</span><a href="#top">Back to top ↑</a></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
 </body>
 </html>
