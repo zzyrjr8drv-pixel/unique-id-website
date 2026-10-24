@@ -4,7 +4,7 @@ Deckcraft turns pasted content or text extracted from a document into an editabl
 
 ## Run it
 
-Open `index.html` in a current browser. The PowerPoint export library is loaded from jsDelivr, so exporting needs an internet connection. The presentation content is processed in the browser and is not uploaded.
+Open `index.html` in a current browser. The PowerPoint export library loads from jsDelivr with an unpkg fallback, so exporting needs an internet connection. The presentation content is processed in the browser and is not uploaded.
 
 ## What it includes
 
