@@ -8,6 +8,9 @@ let selectedFile = null;
 let toastTimer;
 let correctionRevisions = [];
 let approvedRevision = null;
+let noteText = '';
+let noteTitle = '';
+let noteReadToken = 0;
 
 function readableSize(bytes) {
   if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
@@ -33,6 +36,76 @@ function setFile(file) {
   document.querySelector('#drop-subtitle').innerHTML = 'Choose another file <span>or drop it here</span>';
   document.querySelector('#preview-deck').textContent = file.name;
   refreshPreview();
+  readNoteForSlideDraft(file);
+}
+
+function noteExtension(file) { return (file.name.split('.').pop() || '').toLowerCase(); }
+function splitNoteIntoSections(value) {
+  const paragraphs = value.replace(/\r/g, '').trim().split(/\n\s*\n/).map(part => part.trim()).filter(Boolean);
+  return paragraphs.map(part => {
+    const lines = part.split('\n').map(line => line.trim()).filter(Boolean);
+    let title = '', body = part;
+    if (/^#{1,6}\s/.test(lines[0])) { title = lines[0].replace(/^#+\s*/, ''); body = lines.slice(1).join('\n'); }
+    else if (lines.length > 1 && [...lines[0]].length < 90 && !/^[-*•\d]/.test(lines[0])) { title = lines[0]; body = lines.slice(1).join('\n'); }
+    if (!title) {
+      const lead = body.split(/(?<=[.!?。！？])\s+/u)[0] || body;
+      title = [...lead].length > 68 ? [...lead].slice(0, 65).join('') + '…' : lead.replace(/[.!?。！？]$/, '');
+      body = body.slice(lead.length).trim() || lead;
+    }
+    return {title: title || 'Key point', body};
+  }).filter(section => section.title || section.body);
+}
+async function extractNoteText(file) {
+  const ext = noteExtension(file);
+  if (file.size > 100 * 1024 * 1024) throw new Error('This file is larger than the 100 MB limit.');
+  if (['txt','md','csv','tsv','json','xml'].includes(ext)) return file.text();
+  if (['html','htm'].includes(ext)) {
+    const doc = new DOMParser().parseFromString(await file.text(), 'text/html');
+    doc.querySelectorAll('script,style,noscript').forEach(node => node.remove());
+    return doc.body.innerText || doc.body.textContent || '';
+  }
+  if (ext === 'rtf') return file.text().then(text => text.replace(/\\par\b/g, '\n').replace(/\\[a-z]+-?\d* ?/gi, '').replace(/[{}]/g, ''));
+  const data = await file.arrayBuffer();
+  if (ext === 'docx') {
+    if (!window.mammoth) throw new Error('The Word reader is still loading. Try again in a moment.');
+    return (await window.mammoth.extractRawText({arrayBuffer:data})).value;
+  }
+  if (ext === 'pdf') {
+    if (!window.pdfjsLib) throw new Error('The PDF reader is still loading. Try again in a moment.');
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    const pdf = await window.pdfjsLib.getDocument({data}).promise, pages = [];
+    for (let i=1; i<=pdf.numPages; i++) { const page=await pdf.getPage(i), text=await page.getTextContent(); pages.push(text.items.map(item=>item.str).filter(Boolean).join(' ')); }
+    return pages.join('\n\n');
+  }
+  if (ext === 'pptx') {
+    if (!window.JSZip) throw new Error('The PowerPoint reader is still loading. Try again in a moment.');
+    const zip=await window.JSZip.loadAsync(data), names=Object.keys(zip.files).filter(name=>/^ppt\/slides\/slide\d+\.xml$/i.test(name)).sort((a,b)=>Number(a.match(/slide(\d+)/i)[1])-Number(b.match(/slide(\d+)/i)[1])), slides=[];
+    for (const name of names) { const xml=new DOMParser().parseFromString(await zip.file(name).async('string'),'application/xml'); const text=[...xml.getElementsByTagName('*')].filter(node=>node.localName==='t').map(node=>node.textContent).filter(Boolean).join(' '); if(text.trim()) slides.push(text.trim()); }
+    return slides.join('\n\n');
+  }
+  if (['xlsx','xls'].includes(ext)) {
+    if (!window.XLSX) throw new Error('The spreadsheet reader is still loading. Try again in a moment.');
+    const book=window.XLSX.read(data); return book.SheetNames.map(name=>`# ${name}\n${window.XLSX.utils.sheet_to_csv(book.Sheets[name])}`).join('\n\n');
+  }
+  throw new Error('This file can still be packaged, but automatic text reading supports DOCX, PDF, PPTX, XLS/XLSX, CSV/TSV, TXT/MD, RTF, HTML, JSON, and XML.');
+}
+async function readNoteForSlideDraft(file) {
+  const panel=document.querySelector('#note-draft'), status=document.querySelector('#note-draft-status'), preview=document.querySelector('#note-draft-preview'), button=document.querySelector('#continue-to-builder');
+  const token=++noteReadToken; noteText=''; noteTitle=file.name.replace(/\.[^.]+$/, ''); panel.hidden=false; button.disabled=true; preview.innerHTML=''; status.textContent='Reading your note…';
+  try {
+    const text=(await extractNoteText(file)).trim();
+    if (token!==noteReadToken) return;
+    if (!text) throw new Error('No selectable text found. Scanned or image-only documents need OCR.');
+    noteText=text.slice(0, 900000); const sections=splitNoteIntoSections(noteText);
+    if (!sections.length) throw new Error('No usable text sections were found in this file.');
+    preview.innerHTML=sections.slice(0,5).map((section,index)=>`<li><b>${escapeHTML(section.title)}</b><span>${escapeHTML(section.body.slice(0,190))}${section.body.length>190?'…':''}</span></li>`).join('');
+    document.querySelector('#note-draft-title').textContent=`Draft outline · ${sections.length} ${sections.length===1?'section':'sections'}`;
+    document.querySelector('#note-draft-copy').textContent=`We found ${text.length.toLocaleString()} characters and organized them into an editable outline. ${sections.length>5?`Showing the first 5 of ${sections.length} sections.`:'Review it in the deck builder before exporting.'}`;
+    status.textContent='Note ready'; button.disabled=false;
+  } catch(error) {
+    if (token!==noteReadToken) return;
+    status.textContent='Could not read note text'; document.querySelector('#note-draft-copy').textContent=error.message || 'This file can still be packaged with your brief.'; preview.innerHTML='';
+  }
 }
 
 function refreshPreview() {
@@ -59,10 +132,20 @@ for (const eventName of ['dragleave', 'drop']) dropzone.addEventListener(eventNa
 dropzone.addEventListener('drop', event => setFile(event.dataTransfer.files[0]));
 dropzone.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); input.click(); } });
 document.querySelector('#remove-file').addEventListener('click', () => {
+  noteReadToken++; noteText=''; document.querySelector('#note-draft').hidden=true;
   selectedFile = null; input.value = ''; fileCard.hidden = true;
   document.querySelector('#drop-title').textContent = 'Drop your document here';
   document.querySelector('#drop-subtitle').innerHTML = 'or <span>browse files</span> from your computer';
   document.querySelector('#preview-deck').textContent = 'No file uploaded';
+});
+document.querySelector('#continue-to-builder').addEventListener('click', () => {
+  if (!noteText) return;
+  try {
+    const selected=document.querySelector('#slide-count').value;
+    const slideLimit=selected==='Keep the current length'?6:selected==='5–8 slides'?8:selected==='9–12 slides'?12:selected==='13–18 slides'?18:30;
+    localStorage.setItem('slideform-note-draft',JSON.stringify({title:document.querySelector('#project-title').value.trim()||noteTitle,content:noteText,slideLimit,sourceName:selectedFile?.name||''}));
+    window.location.href='../deck-maker/';
+  } catch(error) { announce('Could not transfer the draft. Open the published site and try again.'); }
 });
 document.querySelectorAll('.field-group input, .field-group textarea, .field-group select').forEach(control => control.addEventListener('input', refreshPreview));
 document.querySelectorAll('.field-group select').forEach(control => control.addEventListener('change', refreshPreview));
