@@ -249,6 +249,26 @@ $('#add-slide').addEventListener('click', () => {
   $('#slide-editor').lastElementChild.scrollIntoView({behavior:'smooth',block:'center'});
 });
 
+function importSlideformDraft() {
+  try {
+    const raw=localStorage.getItem('slideform-note-draft');
+    if (!raw) return;
+    localStorage.removeItem('slideform-note-draft');
+    const draft=JSON.parse(raw);
+    if (!draft || typeof draft.content!=='string' || !draft.content.trim()) return;
+    $('#source-content').value=draft.content;
+    $('#deck-title').value=(draft.title||'').trim()||'Untitled presentation';
+    if (draft.slideLimit) {
+      const limits=[...$('#slide-limit').options].map(option=>Number(option.value));
+      const exact=limits.includes(Number(draft.slideLimit))?Number(draft.slideLimit):limits.find(value=>value>=Number(draft.slideLimit))||30;
+      $('#slide-limit').value=String(exact);
+    }
+    $('#source-content').dispatchEvent(new Event('input',{bubbles:true}));
+    updateWordCount(); reviewContent(); structureSlides(false,false);
+    showToast(`Draft from ${draft.sourceName||'your note'} is ready to edit. Review each slide before export.`);
+  } catch(error) { console.warn('Could not import the Slideform draft.',error); }
+}
+
 async function exportDeck() {
   const button = $('#generate');
   if (!pptxConstructor()) {
@@ -287,4 +307,4 @@ async function exportDeck() {
   } catch(error) { console.error(error); showToast('The PowerPoint could not be built. Please try again.'); button.disabled=false; button.querySelector('span:first-child').textContent='Build my PowerPoint'; }
 }
 $('#generate').addEventListener('click',exportDeck);
-updateWordCount(); reviewContent(); structureSlides(false,false);
+importSlideformDraft(); updateWordCount(); reviewContent(); if (!state.slides.length || !$('#source-content').value.trim()) structureSlides(false,false);
