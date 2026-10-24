@@ -198,7 +198,7 @@ async function extractDocumentText(file) {
   }
   if (['xlsx','xls'].includes(ext) || ['csv','tsv'].includes(ext)) {
     if (!window.XLSX) throw new Error('The spreadsheet reader did not load. Refresh and try again.');
-    const workbook = window.XLSX.read(data, {type:'array'});
+    const workbook = window.XLSX.read(data);
     return workbook.SheetNames.map(name => `# ${name}\n${window.XLSX.utils.sheet_to_csv(workbook.Sheets[name])}`).join('\n\n');
   }
   throw new Error(`Text import for .${ext} is not available yet. Try PDF, DOCX, PPTX, XLSX, XLS, CSV, TSV, TXT, MD, RTF, HTML, JSON, or XML.`);
