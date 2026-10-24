@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="correction.css">
 </head>
 <body>
   <div class="app-shell">
@@ -69,6 +70,22 @@
             <textarea id="requirements" rows="5" maxlength="5000" placeholder="What should change? What should stay? Share the story, key points, audience, tone, or anything else we should know..."></textarea>
             <div class="field-foot"><span>Specific notes make a stronger brief.</span><span id="char-count">0 / 5,000</span></div>
           </div>
+
+          <section class="correction-studio" id="correction-studio" aria-labelledby="correction-heading">
+            <div class="correction-heading"><div><span class="step-number">OPTIONAL · REVIEW EACH CHANGE</span><h3 id="correction-heading">Make a small correction</h3></div><span class="lang-chip">中文 / English</span></div>
+            <p class="correction-intro">Choose one part of a slide, describe a small change, and preview it. You can save more rounds, then approve the version you want.<br><span lang="zh-Hant">選擇投影片中的一小段，輸入修改要求並預覽；可以反覆修改，最後再核准。</span></p>
+            <div class="field-group correction-field"><label for="correction-target">Which slide or part?</label><input id="correction-target" maxlength="120" placeholder="e.g. Slide 3 — opening sentence / 第 3 張 — 開場句"></div>
+            <div class="field-group correction-field"><label for="correction-original">Paste the current wording for that part</label><textarea id="correction-original" rows="3" maxlength="3000" placeholder="Copy just the text you want to change. The rest of your deck stays outside this correction."></textarea></div>
+            <div class="correction-prompt-example">Try: <b>把「舊文字」改成「新文字」</b> · “Replace ‘old text’ with ‘new text’”</div>
+            <div class="field-group correction-field"><label for="correction-request">What should change? <span>Chinese or English</span></label><textarea id="correction-request" rows="2" maxlength="1000" placeholder="例如：把「我們」改成「團隊」"></textarea></div>
+            <button class="apply-correction" id="apply-correction" type="button">Apply to this part <span>↘</span></button>
+            <div class="field-group correction-field"><label for="correction-draft">Correction draft <span>You can refine this wording directly</span></label><textarea id="correction-draft" rows="3" maxlength="3000" placeholder="The correction preview will appear here. You can also edit the wording yourself."></textarea></div>
+            <div class="correction-preview"><span class="preview-label">PREVIEW · ONLY THE SELECTED WORDING</span><p id="correction-preview">Your corrected wording will appear here.</p></div>
+            <div class="correction-actions"><button id="save-revision" type="button">Save this revision</button><button id="approve-revision" type="button">Approve this version</button></div>
+            <p class="correction-status" id="correction-status" aria-live="polite">No correction saved yet.</p>
+            <ol class="revision-list" id="revision-list"></ol>
+            <p class="correction-limit">This site prepares a correction handoff; it does not rewrite the uploaded PowerPoint. Only the selected wording and your review notes are included as a proposed change.<br><span lang="zh-Hant">此頁會整理修改交接內容，不會直接改寫上傳的 PowerPoint；交接包只會標示你指定的文字和修改版本。</span></p>
+          </section>
 
           <div class="field-grid">
             <div class="field-group">
