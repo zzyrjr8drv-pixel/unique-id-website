@@ -6,6 +6,8 @@ const fileSize = document.querySelector('#file-size');
 const toast = document.querySelector('#toast');
 let selectedFile = null;
 let toastTimer;
+let correctionRevisions = [];
+let approvedRevision = null;
 
 function readableSize(bytes) {
   if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
@@ -66,6 +68,84 @@ document.querySelector('#remove-file').addEventListener('click', () => {
 document.querySelectorAll('.field-group input, .field-group textarea, .field-group select').forEach(control => control.addEventListener('input', refreshPreview));
 document.querySelectorAll('.field-group select').forEach(control => control.addEventListener('change', refreshPreview));
 
+function updateCorrectionPreview() {
+  const draft = document.querySelector('#correction-draft').value;
+  document.querySelector('#correction-preview').textContent = draft || 'Your corrected wording will appear here.';
+  if (approvedRevision !== null && draft !== correctionRevisions[approvedRevision]?.text) {
+    approvedRevision = null;
+    document.querySelector('#correction-status').textContent = 'Draft changed after approval. Save and approve the revised version again.';
+  }
+}
+
+function invalidateApprovalIfChanged() {
+  if (approvedRevision === null) return;
+  const approved = correctionRevisions[approvedRevision];
+  const same = approved && approved.target === document.querySelector('#correction-target').value.trim()
+    && approved.original === document.querySelector('#correction-original').value
+    && approved.text === document.querySelector('#correction-draft').value
+    && approved.request === document.querySelector('#correction-request').value.trim();
+  if (!same) {
+    approvedRevision = null;
+    document.querySelector('#correction-status').textContent = 'Correction details changed after approval. Save and approve the new version again.';
+    renderRevisions();
+  }
+}
+
+function applyCorrectionRequest() {
+  const original = document.querySelector('#correction-original').value;
+  const request = document.querySelector('#correction-request').value.trim();
+  if (!original.trim() || !request) return announce('Add the current wording and a correction request first.');
+  let updated = original;
+  const replacement = request.match(/把?[「『“"]([^」』”"]+)[」』”"]\s*(?:改成|改為|替換成|替换成|換成|换成)\s*[「『“"]([^」』”"]+)[」』”"]/);
+  const englishReplacement = request.match(/replace\s+["'](.+?)["']\s+with\s+["'](.+?)["']/i);
+  const remove = request.match(/(?:刪除|删除|移除)\s*[「『“"]([^」』”"]+)[」』”"]/);
+  if (replacement || englishReplacement) {
+    const [, before, after] = replacement || englishReplacement;
+    if (!updated.includes(before)) return announce('That exact wording is not in the selected part. Check the text and try again.');
+    updated = updated.replace(before, after);
+  } else if (remove) {
+    if (!updated.includes(remove[1])) return announce('That exact wording is not in the selected part. Check the text and try again.');
+    updated = updated.replace(remove[1], '');
+  } else {
+    return announce('For automatic Chinese/English correction, use the shown “replace X with Y” format. You can also edit the draft directly.');
+  }
+  document.querySelector('#correction-draft').value = updated;
+  updateCorrectionPreview();
+  document.querySelector('#correction-status').textContent = 'Preview updated for the selected wording only. Save it to keep this revision.';
+}
+
+function renderRevisions() {
+  const list = document.querySelector('#revision-list');
+  list.innerHTML = correctionRevisions.map((revision, index) => `<li>Revision ${index + 1}${approvedRevision === index ? ' · approved' : ''} — ${escapeHTML(revision.text.slice(0, 95))}</li>`).join('');
+}
+
+function saveRevision() {
+  const target = document.querySelector('#correction-target').value.trim();
+  const original = document.querySelector('#correction-original').value;
+  const text = document.querySelector('#correction-draft').value;
+  if (!target || !original.trim() || !text.trim()) return announce('Add the target part, current wording, and a correction draft first.');
+  correctionRevisions.push({target, original, text, request:document.querySelector('#correction-request').value.trim(), saved_at:new Date().toISOString()});
+  approvedRevision = null;
+  document.querySelector('#correction-status').textContent = `Revision ${correctionRevisions.length} saved. Keep refining, or approve this version.`;
+  renderRevisions();
+}
+
+document.querySelector('#apply-correction').addEventListener('click', applyCorrectionRequest);
+document.querySelector('#correction-draft').addEventListener('input', updateCorrectionPreview);
+['#correction-target', '#correction-original', '#correction-request', '#correction-draft'].forEach(selector => document.querySelector(selector).addEventListener('input', invalidateApprovalIfChanged));
+document.querySelector('#correction-original').addEventListener('input', event => {
+  const draft = document.querySelector('#correction-draft');
+  if (!draft.value || correctionRevisions.length === 0) { draft.value = event.target.value; updateCorrectionPreview(); }
+});
+document.querySelector('#save-revision').addEventListener('click', saveRevision);
+document.querySelector('#approve-revision').addEventListener('click', () => {
+  if (correctionRevisions.length === 0 || correctionRevisions.at(-1).text !== document.querySelector('#correction-draft').value) saveRevision();
+  if (correctionRevisions.length === 0) return;
+  approvedRevision = correctionRevisions.length - 1;
+  document.querySelector('#correction-status').textContent = `Revision ${approvedRevision + 1} approved. You can still make another change; the new draft will need approval.`;
+  renderRevisions();
+});
+
 // Small ZIP writer using the uncompressed ZIP format, so the package works offline without a service or library.
 const crcTable = (() => { const table = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; table[n] = c >>> 0; } return table; })();
 function crc32(bytes) { let crc = 0xffffffff; for (const byte of bytes) crc = crcTable[(crc ^ byte) & 0xff] ^ (crc >>> 8); return (crc ^ 0xffffffff) >>> 0; }
@@ -87,6 +167,10 @@ document.querySelector('#package-button').addEventListener('click', async event 
   if (!selectedFile) { announce('Add a PowerPoint deck to continue.'); dropzone.scrollIntoView({behavior:'smooth', block:'center'}); return; }
   if (!title.value.trim()) { title.classList.add('field-error'); title.focus(); announce('Give your project a name to continue.'); return; }
   if (!requirements.value.trim()) { requirements.classList.add('field-error'); requirements.focus(); announce('Add your requirements so the handoff has clear direction.'); return; }
+  const currentDraft = document.querySelector('#correction-draft').value;
+  const originalWording = document.querySelector('#correction-original').value;
+  const correctionStarted = document.querySelector('#correction-request').value.trim() || (currentDraft.trim() && currentDraft !== originalWording);
+  if (correctionStarted && (approvedRevision === null || !correctionRevisions[approvedRevision])) { announce('Save and approve your latest correction before packaging it.'); document.querySelector('#correction-studio').scrollIntoView({behavior:'smooth',block:'center'}); return; }
   const button = event.currentTarget; button.disabled = true; button.querySelector('span:first-child').textContent = 'Preparing package…';
   try {
     const brief = {
@@ -95,6 +179,8 @@ document.querySelector('#package-button').addEventListener('click', async event 
       output_format: document.querySelector('#output-format').value,
       deadline: dateString(document.querySelector('#deadline').value), requirements: requirements.value.trim(),
       source_deck: selectedFile.name, source_deck_size_bytes: selectedFile.size,
+      correction_target: approvedRevision === null ? null : correctionRevisions[approvedRevision].target,
+      approved_correction: approvedRevision === null ? null : correctionRevisions[approvedRevision],
       created_at: new Date().toISOString(), status: 'Ready for production handoff',
       note: 'This package contains the original deck and production instructions. It does not contain edited slides.'
     };
@@ -103,6 +189,10 @@ document.querySelector('#package-button').addEventListener('click', async event 
       {name:selectedFile.name, data:new Uint8Array(await selectedFile.arrayBuffer())},
       {name:'production-brief.json', data:new TextEncoder().encode(JSON.stringify(brief, null, 2))},
       {name:'production-brief.md', data:new TextEncoder().encode(reqMd)},
+      ...(correctionRevisions.length ? [
+        {name:'correction-rounds.json', data:new TextEncoder().encode(JSON.stringify({target:correctionRevisions[approvedRevision].target, approved_revision:approvedRevision+1, revisions:correctionRevisions}, null, 2))},
+        {name:'approved-correction.md', data:new TextEncoder().encode(`# Approved correction · ${correctionRevisions[approvedRevision].target}\n\n## Before\n\n${correctionRevisions[approvedRevision].original}\n\n## Approved wording\n\n${correctionRevisions[approvedRevision].text}\n\n## Request\n\n${correctionRevisions[approvedRevision].request || 'Edited directly by the user'}\n\nThis is an approved wording change for the named part only. The uploaded PowerPoint file remains unchanged in this handoff.\n`)}
+      ] : []),
       {name:'README.txt', data:new TextEncoder().encode('SLIDEFORM PRODUCTION HANDOFF\n\nThis ZIP contains your original PowerPoint, production-brief.json, and a readable production-brief.md.\n\nIt is ready to pass to a presentation designer or a connected slide-generation service. The deck has not been edited by this website.\n')}
     ];
     const zip = makeZip(files); const url = URL.createObjectURL(zip); const anchor = document.createElement('a');
