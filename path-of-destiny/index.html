@@ -32,6 +32,58 @@ footer{padding:35px 24px;text-align:center;color:#8e9a8d;font-size:10px;letter-s
 
 @media(max-width:850px){.links{gap:12px}.links a{font-size:9px}.cards{grid-template-columns:repeat(2,1fr)}.two-col,.map-layout{grid-template-columns:1fr}.story-image{min-height:260px}.reflection{grid-template-columns:1fr}}
 @media(max-width:620px){.nav{padding:12px 16px}.menu{display:block}.links{display:none;position:absolute;top:57px;left:0;right:0;background:#131b16;padding:18px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start}.links.open{display:flex}.links a{font-size:11px}.hero{min-height:610px;background-position:58% center}.hero-inner{padding:85px 20px 65px}main{padding:0 18px}.section{padding:65px 0}.section-head{display:block}.section-intro{margin-top:12px}.cards{gap:10px}.card img{height:135px}.card-body{padding:12px}.card h3{font-size:17px}.detail-panel.open{grid-template-columns:1fr}.detail-panel img{height:180px}.facts{grid-template-columns:1fr 1fr}.choices{grid-template-columns:1fr}.map-art{min-height:310px}.pin-label{font-size:9px}.case-art{height:180px}.quiz-controls{align-items:flex-start}.reflection blockquote{padding:21px}}
+
+/* STORY-LED CINEMATIC REDESIGN */
+:root{--bg:#080b09;--panel:#111914;--panel2:#1b261f;--ink:#eee9dc;--muted:#abb0a3;--gold:#d0ad70;--gold2:#e8d0a0;--line:#46513f}
+body{background:#080b09;color:#eee9dc}
+header{background:rgba(8,11,9,.82);border-bottom:1px solid rgba(216,190,139,.22)}
+.nav{max-width:1440px;padding:17px 4vw}
+.brand{font-size:12px;letter-spacing:.22em}.links{gap:clamp(10px,1.8vw,27px)}
+.links a{font-size:10px;letter-spacing:.16em}
+.hero{min-height:calc(100svh - 62px);background-image:linear-gradient(90deg,rgba(5,8,6,.88) 0%,rgba(5,8,6,.38) 58%,rgba(5,8,6,.12) 100%),linear-gradient(0deg,#080b09 0%,transparent 42%),url('https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=2200&q=90');background-position:center;background-attachment:scroll}
+.hero-inner{max-width:1440px;padding:clamp(90px,14vh,180px) 7vw 11vh}
+.hero h1{font-size:clamp(54px,10vw,144px);line-height:.98;letter-spacing:-.035em;max-width:1000px}
+.hero h1 span{color:#d8bd89}
+.hero p{font-size:clamp(22px,2.5vw,34px);max-width:670px}
+.eyebrow,.kicker{letter-spacing:.3em}
+.btn{padding:15px 23px;letter-spacing:.17em}
+main{max-width:none;padding:0}
+.section{padding:clamp(82px,11vw,160px) max(7vw,24px);border-bottom:1px solid rgba(213,190,145,.19);scroll-margin-top:76px}
+.section:nth-child(even){background:#0c120e}
+.section-head{max-width:1440px;margin:0 auto 48px}
+.section h2{font-size:clamp(38px,6vw,76px);letter-spacing:-.025em}
+.section-intro{font-size:clamp(20px,2vw,27px);max-width:600px}
+.two-col{max-width:1260px;margin:auto;gap:clamp(32px,7vw,110px)}
+.story-image{min-height:520px}
+.copy p{font-size:clamp(19px,1.6vw,23px)}
+.facts{gap:0}.fact{padding:22px;background:transparent;border-top:1px solid var(--gold);border-right:1px solid var(--line)}
+.cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.card{border:0;background:#101812}
+.card img{height:clamp(190px,21vw,300px);filter:saturate(.7) contrast(1.06);transition:transform .7s}
+.card:hover img{transform:scale(1.045)}
+.card-body{padding:24px}
+.card h3{font-size:clamp(18px,2vw,25px)}
+.card p{font-size:18px}
+.map-layout{max-width:1260px;margin:auto}
+.map-art{min-height:520px}
+.quiz-box,.case-box{max-width:1080px;margin:0 auto;padding:clamp(28px,5vw,64px);background:#111914;border:1px solid rgba(213,190,145,.35)}
+.question{font-size:clamp(27px,4vw,43px)}
+.choice,.case-option{padding:20px 23px;font-size:19px}
+.case-box h3{font-size:clamp(32px,5vw,54px)}
+.case-art{height:clamp(250px,36vw,470px)}
+.reflection{max-width:1260px;margin:auto;gap:50px}
+.reflection blockquote{padding:clamp(28px,4vw,54px);font-size:clamp(29px,4vw,52px)}
+.reflection p{font-size:20px}
+footer{padding:56px 20px;background:#050706}
+.game-dossier{max-width:1260px;margin:auto}
+.dossier-banner{min-height:480px}
+.dossier-banner-copy{padding:clamp(30px,5vw,70px)}
+.dossier-banner h3{font-size:clamp(42px,6vw,78px)}
+.game-facts div{padding:24px}
+.dossier-card{padding:clamp(25px,4vw,48px)}
+@media(min-width:1000px){.section#world{min-height:90vh;display:flex;align-items:center}.section#world>.two-col{width:100%}}
+@media(max-width:760px){.section{padding:78px 20px}.hero{min-height:85svh}.hero-inner{padding:100px 22px 70px}.hero h1{font-size:clamp(48px,14vw,82px)}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.story-image{min-height:330px}.map-art{min-height:340px}.dossier-banner{min-height:350px}}
+@media(prefers-reduced-motion:no-preference){.hero-inner{animation:arrival 1.1s ease both}@keyframes arrival{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}.section{animation:fade-up .7s ease both}@keyframes fade-up{from{opacity:.75}to{opacity:1}}}
 </style>
 </head>
 <body>
