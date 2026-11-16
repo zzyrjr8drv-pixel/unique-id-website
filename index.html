@@ -1,49 +1,207 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>234b6fa2e21dcc3a - Unique Identifier Site</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        header {
-            background: #6200ea;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        main {
-            padding: 2rem;
-        }
-        .identifier {
-            font-size: 1.5rem;
-            color: #6200ea;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem 0;
-            background: #ccc;
-            color: #333;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17251f">
+<title>Leaf by Niggle — Revision Room</title>
+<style>
+:root{--bg:#f4f2eb;--paper:#fffefa;--ink:#202a25;--muted:#69736c;--green:#254d3b;--gold:#c18b43;--line:#e5e1d6;--red:#a63d35;--softred:#faece9;--softgreen:#eaf2eb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:#17251f;color:#fff;padding:30px 20px 24px}header .wrap,main{max-width:1050px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:#d6bd8e;font-weight:800}h1{font:600 clamp(28px,5vw,43px)/1.1 Georgia,serif;margin:9px 0}header p{color:#dce3dd;max-width:680px;margin:8px 0 0}.pill{display:inline-block;border:1px solid #63756a;border-radius:99px;padding:4px 10px;font-size:12px;margin-top:17px;color:#e8e0cf}
+main{padding:22px 18px 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}.stat,.panel,.question{background:var(--paper);border:1px solid var(--line);border-radius:15px}.stat{padding:13px 15px}.stat b{display:block;font-size:25px;color:var(--green)}.stat span{font-size:12px;color:var(--muted)}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}.tab,button,select{font:inherit}.tab{border:1px solid var(--line);background:#fffefa;color:var(--ink);padding:9px 13px;border-radius:999px;cursor:pointer}.tab.active{background:var(--green);border-color:var(--green);color:white}
+.panel{padding:18px;margin-bottom:16px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.toolbar h2{font:600 22px Georgia,serif;margin:0}.small{font-size:13px;color:var(--muted)}select{border:1px solid var(--line);border-radius:9px;padding:8px;background:white;color:var(--ink)}
+.progress{height:8px;background:#e9e5da;border-radius:20px;overflow:hidden;margin:12px 0}.progress>i{display:block;height:100%;background:var(--gold);width:0;transition:width .2s}
+.qtop{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:12px}.qid{font-weight:800;color:var(--green);letter-spacing:.08em}.question h3{font:600 clamp(19px,3vw,24px)/1.35 Georgia,serif;margin:17px 0 22px}.question{padding:20px;margin:12px 0}.answers{display:flex;gap:10px}.answer{flex:1;border:1px solid var(--line);background:white;border-radius:11px;padding:13px;cursor:pointer;font-weight:750}.answer:hover{border-color:var(--green)}.answer.chosen{background:#edf3ee;border-color:var(--green);color:var(--green)}.answer:disabled{cursor:default;opacity:.8}.feedback{margin-top:15px;border-radius:10px;padding:12px 14px;font-size:14px}.correct{background:var(--softgreen);border:1px solid #c8ddca}.wrong{background:var(--softred);border:1px solid #e9c5bf}.feedback strong{display:block;margin-bottom:4px}.controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}button.primary{background:var(--green);color:#fff;border:1px solid var(--green)}button.secondary{background:white;color:var(--ink);border:1px solid var(--line)}button.danger{background:var(--softred);color:var(--red);border:1px solid #e9c5bf}button{padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}button:disabled{opacity:.4;cursor:not-allowed}.hidden{display:none!important}.section-list{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.section-item{padding:12px;border:1px solid var(--line);border-radius:10px;background:white;cursor:pointer;text-align:left}.section-item b{display:block}.section-item span{font-size:12px;color:var(--muted)}.mistake{padding:14px;border:1px solid var(--line);border-radius:12px;margin:10px 0;background:white}.mistake p{margin:7px 0 10px;font-family:Georgia,serif;font-size:18px}.mistake .reason{font-size:13px;color:var(--muted)}.tag{display:inline-block;font-size:11px;border-radius:5px;padding:2px 6px;background:#f0eee6;color:#5f6259}.empty{padding:32px;text-align:center;color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:12px;padding:15px}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.section-list{grid-template-columns:1fr}main{padding:16px 12px 45px}.panel{padding:14px}.question{padding:16px}.answers{gap:8px}.answer{padding:12px 7px}}
+</style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to 234b6fa2e21dcc3a</h1>
-    </header>
-    <main>
-        <p>Explore our unique app and content linked to identifier:</p>
-        <p class="identifier">234b6fa2e21dcc3a</p>
-        <p>This site is a placeholder inspired by data derived from the unique ID. Multilingual support for Traditional Chinese is available!</p>
-    </main>
-    <footer>
-        <p>&copy; 2025 Identifier App. All rights reserved.</p>
-    </footer>
+<header><div class="wrap"><div class="eyebrow">Literature · Teacher's revision bank</div><h1>Leaf by Niggle</h1><p>A True / False question bank written from a lecturer's perspective. Answer carefully: many false statements change only one detail, character, sequence, or interpretation.</p><span class="pill">J.R.R. Tolkien · Based on your uploaded study notes and story copy</span></div></header>
+<main>
+<section class="stats">
+<div class="stat"><b id="total">0</b><span>Questions in bank</span></div><div class="stat"><b id="done">0</b><span>Attempted</span></div><div class="stat"><b id="accuracy">—</b><span>Accuracy</span></div><div class="stat"><b id="errors">0</b><span>Questions to revise</span></div>
+</section>
+<nav>
+<button class="tab active" data-view="quiz">Question bank</button><button class="tab" data-view="errors">Error questions</button><button class="tab" data-view="records">Study record</button><button class="tab" data-view="guide">How to use</button>
+</nav>
+<section id="quizView">
+<div class="panel">
+<div class="toolbar"><h2 id="modeTitle">Teacher's question bank</h2><select id="filter"><option value="all">All sections</option></select></div>
+<div class="progress"><i id="bar"></i></div><div class="toolbar"><span class="small" id="counter">Question 1</span><span class="small" id="saveState">Progress saves on this device</span></div>
+</div>
+<div id="questionHost"></div>
+<div class="controls"><button class="secondary" id="prev">← Previous</button><button class="secondary" id="skip">Skip for now</button><button class="primary" id="next">Next question →</button><button class="secondary" id="shuffle">Shuffle unseen</button></div>
+</section>
+<section id="errorsView" class="hidden">
+<div class="panel"><div class="toolbar"><h2>Error question bank</h2><span class="small" id="errorCount">0 to revise</span></div><p class="small">Every question you answer incorrectly is collected here automatically. Review the correction, then retry until you can answer it confidently.</p><div class="controls"><button class="primary" id="retryErrors">Start error-only revision</button><button class="secondary" id="clearResolved">Clear resolved errors</button></div></div><div id="errorHost"></div>
+</section>
+<section id="recordsView" class="hidden">
+<div class="panel"><div class="toolbar"><h2>Your study record</h2><span class="small" id="lastSaved">Saved locally</span></div><p class="small">Answers, first attempts, current results, and error notes remain stored in this browser on this device. Reopen this same page in the same browser to continue.</p><div class="progress"><i id="recordBar"></i></div><div id="recordSummary"></div><div class="controls"><button class="secondary" id="export">Download my record</button><button class="danger" id="reset">Reset all progress</button></div></div><div class="panel"><h2 style="font:600 21px Georgia,serif">Question-by-question record</h2><div id="recordList"></div></div>
+</section>
+<section id="guideView" class="hidden"><div class="panel"><h2 style="font:600 22px Georgia,serif">How this revision room works</h2><p><b>1. Answer like an exam.</b> Choose True or False. The feedback explains the exact detail that makes a statement correct or incorrect.</p><p><b>2. Wrong answers become revision targets.</b> Each incorrect attempt is automatically placed in the Error Questions tab, together with the correct answer and explanation.</p><p><b>3. Return later.</b> Your progress is saved in your browser's local storage. Leaving the page or closing the tab should not erase the record, as long as you return to the same browser and device and do not clear its site data.</p><p><b>4. Re-test your weak points.</b> Use Error Questions to retry only the statements you previously missed. Correct answers remove them from the active error list after a successful retry.</p><p><b>Teacher's standard.</b> Questions test close reading, sequence, character identification, factual details, quotation attribution, symbolism, and interpretation. The interpretation questions follow the framing in your study notes rather than pretending every symbol has only one fixed meaning.</p><p class="small">Privacy note: the record is stored on this device in this browser; it is not synchronised to another device or account. Use Download my record for a portable backup.</p></div></section>
+<footer>Revision tool · Persistent local study record · Source: your uploaded “Leaf by Niggle” study notes and story text</footer>
+</main>
+<script>
+const BANK = [
+["A · Life on earth","Niggle is a very successful painter.","False","The notes describe him as not very successful, partly because he has many other things to do."],
+["A · Life on earth","Niggle looks forward to the long journey he must make.","False","The idea is distasteful to him, and he does not hurry his preparations."],
+["A · Life on earth","Niggle makes his preparations for the journey in an ineffectual way from time to time.","True","He occasionally remembers the journey and tries to pack a few things."],
+["A · Life on earth","Niggle paints leaves better than trees.","True","This is stated directly in the story."],
+["A · Life on earth","Niggle's great picture began with a fully formed tree.","False","It began with a leaf caught in the wind and gradually developed into a Tree and a country."],
+["A · Life on earth","The canvas becomes so large that Niggle needs a ladder.","True","He runs up and down the ladder to work on different parts of the canvas."],
+["A · Life on earth","The tall shed for Niggle's painting stands on a plot where he once grew potatoes.","True","The shed is built in his garden on a former potato plot."],
+["A · Life on earth","Niggle's kind heart prevents him from grumbling, losing his temper, or swearing.","False","He is kind-hearted in a limited way, but still grumbles, loses his temper, and swears, mostly to himself."],
+["A · Life on earth","Niggle has a wife who helps him prepare for the journey.","False","The story explicitly states that Niggle has no wife."],
+["A · Life on earth","Niggle lives in a pleasant little house miles away from the town.","True","The spring visitors travel to his country house."],
+["A · Life on earth","Niggle owns a bicycle, while Parish does not and cannot ride one.","True","This difference explains why Niggle has to make the wet journey to the doctor and builder."],
+["A · Life on earth","Niggle is promised a public pension so that he can concentrate on painting.","False","He imagines such an arrangement, but the narrator says there is no public pension."],
+["A · Life on earth","Niggle considers his picture wholly satisfactory and technically perfect.","False","He sees it as wholly unsatisfactory and yet very lovely."],
+["A · Life on earth","The spring visitors want free tea, even though Niggle had invited them during the winter.","True","He had not regarded the earlier invitations as interruptions at the time."],
+["A · Life on earth","Niggle serves on a jury in the town as one of the interruptions to his painting.","True","Jury service is among the interruptions listed in the story."],
+["A · Life on earth","Some visitors suggest that Niggle's neglected garden might attract an Inspector.","True","They hint that an Inspector may visit because the garden is neglected."],
+["A · Life on earth","Most of Niggle's visitors know about his great picture.","False","Very few know about it; the narrator doubts they would think it mattered."],
+["A · Life on earth","The narrator confidently declares that Niggle's picture is a great masterpiece.","False","The narrator is cautious, saying it may not be a very good picture, though it has good passages."],
+["A · Life on earth","Niggle attaches his other pictures to the edges of his great canvas.","True","He tacks the other pictures onto the edges of the main picture."],
+["A · Life on earth","When Parish knocks, Niggle is painting the gleam of the westering sun on a snow-mountain peak in autumn.","True","The story places this scene in the wet and windy autumn."],
+["A · Life on earth","Niggle expects that he may have to leave early the following year.","True","He knows his departure is approaching and thinks it may be early next year."],
+["B · Parish, the Inspector and the journey","Parish is Niggle's only real neighbour; everyone else lives a long way off.","True","The narrator states this when Parish visits the shed."],
+["B · Parish, the Inspector and the journey","Parish has a genuine lame leg that causes him considerable pain.","True","The narrator specifically says it is a genuine lame leg."],
+["B · Parish, the Inspector and the journey","Parish admires Niggle's paintings and praises their artistic technique.","False","He sees only green and grey patches and black lines, which seem nonsensical to him."],
+["B · Parish, the Inspector and the journey","Parish regards pointing out weeds in Niggle's garden as a neighbourly duty.","True","He mentions the weeds but refrains from giving an opinion on the pictures."],
+["B · Parish, the Inspector and the journey","The narrator suggests Parish's silence about the pictures is not quite kind enough; practical help and perhaps praise would be better.","True","The narrator explicitly makes this criticism."],
+["B · Parish, the Inspector and the journey","Parish asks Niggle for spare wood and canvas to patch his damaged roof.","True","Water is pouring into the bedroom after the wind blows tiles away."],
+["B · Parish, the Inspector and the journey","Niggle walks to the doctor because he does not own a bicycle.","False","Niggle owns a bicycle and rides it; Parish is the one who cannot ride one."],
+["B · Parish, the Inspector and the journey","Parish can ride a bicycle, but his lame leg makes him reluctant to do so.","False","The notes say he has no bicycle and cannot ride one."],
+["B · Parish, the Inspector and the journey","The builder's office is open when Niggle arrives, so he speaks directly to the builder.","False","The office is shut; Niggle leaves a note."],
+["B · Parish, the Inspector and the journey","Niggle gets soaked during the bicycle ride and catches a chill.","True","He returns soaked to the skin and becomes ill with a high temperature."],
+["B · Parish, the Inspector and the journey","The doctor arrives on the same day that Niggle visits the builder.","False","The doctor arrives the next day."],
+["B · Parish, the Inspector and the journey","Mrs. Parish turns out to have only a cold, although Parish had described it as a fever.","True","She is getting up by the time the doctor arrives."],
+["B · Parish, the Inspector and the journey","The builder promptly repairs both Parish's roof and Niggle's roof.","False","The builder never comes."],
+["B · Parish, the Inspector and the journey","Parish visits Niggle while Niggle is ill in bed.","False","Parish does not visit; his leg aches and his wife is mopping up water."],
+["B · Parish, the Inspector and the journey","The Inspector of Houses declares Parish's house satisfactory.","False","He says the house is not satisfactory at all."],
+["B · Parish, the Inspector and the journey","The Emergency Service is occupied with a flood in the valley, where many families are homeless.","True","The Inspector explains why the service cannot help immediately."],
+["B · Parish, the Inspector and the journey","The Inspector says Niggle should have helped Parish make temporary repairs.","True","He invokes the law and the duty to prevent the damage becoming more costly."],
+["B · Parish, the Inspector and the journey","The Inspector points to Niggle's painting as material that could be used for repairs.","True","He identifies canvas, wood, and waterproof paint in the picture."],
+["B · Parish, the Inspector and the journey","The Driver is almost the Inspector's double and is dressed all in black.","True","The story describes the Driver as tall, dressed in black, and almost the Inspector's double."],
+["B · Parish, the Inspector and the journey","The Driver gives Niggle plenty of time to pack before leaving.","False","He gives Niggle no time, saying he should have packed earlier."],
+["B · Parish, the Inspector and the journey","Niggle's little bag contains food, clothes, a paint-box, and a sketchbook.","False","It contains only a paint-box and a small book of sketches, with neither food nor clothes."],
+["B · Parish, the Inspector and the journey","After the dark tunnel, Niggle wakes in a large, dim railway station.","True","This is the first scene after the train journey."],
+["B · Parish, the Inspector and the journey","The Porter shouts the name of the railway station rather than Niggle's name.","False","The Porter shouts 'Niggle!' rather than a place name."],
+["B · Parish, the Inspector and the journey","Niggle leaves his bag on the train, which has already gone when he tries to retrieve it.","True","He has no luggage when he meets the Porter."],
+["B · Parish, the Inspector and the journey","The Porter sends Niggle to the Workhouse because he has no luggage.","True","The Porter explicitly connects the lack of luggage with the Workhouse."],
+["C · Workhouse and the hearing","Niggle receives gentle and pleasant treatment in the Workhouse from the beginning.","False","The medicine is bitter, the staff are strict, and the place resembles a prison."],
+["C · Workhouse and the hearing","Niggle's Workhouse tasks include digging, carpentry, and painting bare boards one plain colour.","True","These are the stated forms of work."],
+["C · Workhouse and the hearing","The Workhouse windows look out over the surrounding countryside.","False","The windows look inwards, and Niggle is not allowed outside."],
+["C · Workhouse and the hearing","The staff keep Niggle in the dark for periods of time so that he can do some thinking.","True","This is the stated explanation for the dark periods."],
+["C · Workhouse and the hearing","During the first century or so, Niggle repeatedly worries about not repairing Parish's first loose roof tiles.","True","He imagines that early action might have prevented later problems and given him another week."],
+["C · Workhouse and the hearing","Niggle remembers throughout the Workhouse exactly why he wanted an extra week.","False","In time he forgets what he wanted the extra week for."],
+["C · Workhouse and the hearing","Niggle's new feeling in the Workhouse is described as pleasure and entertainment.","False","It is satisfaction rather than pleasure: 'bread rather than jam.'"],
+["C · Workhouse and the hearing","Niggle learns to respond to bells, finish small tasks neatly, and become master of his time.","True","He develops order and a quieter inner state despite having little personal time."],
+["C · Workhouse and the hearing","The Workhouse staff openly praise Niggle for becoming useful.","False","The narrator says nobody tells him so."],
+["C · Workhouse and the hearing","Before the hearing, Niggle is removed from carpentry and kept on plain digging until his back and hands are badly hurt.","True","The work continues until he cannot manage another spadeful."],
+["C · Workhouse and the hearing","The doctor tells Niggle, 'Knock off! Complete rest, in the dark.'","True","This comes immediately before Niggle hears the two Voices."],
+["C · Workhouse and the hearing","The First Voice is even more severe than the doctor.","True","The narrator directly compares the First Voice with the doctor."],
+["C · Workhouse and the hearing","The Second Voice is described as soft, weak, and lacking authority.","False","It is gentle but not soft; it is authoritative, hopeful, and sad."],
+["C · Workhouse and the hearing","The First Voice criticises Niggle for arriving almost destitute despite being moderately well-off.","True","The Voice regards his lack of preparation as a serious failing."],
+["C · Workhouse and the hearing","The Second Voice says Niggle never expected any Return for helping Parish.","True","The Second Voice notes that he did not expect Parish's gratitude."],
+["C · Workhouse and the hearing","The Second Voice says Niggle repeatedly claimed that his artistic work excused his neglect of duties.","False","It says there is no record of him pretending, even to himself, that art excused neglect."],
+["C · Workhouse and the hearing","The First Voice says Niggle answered only a small percentage of Calls, mostly the easier ones, and called them Interruptions.","True","This is the First Voice's criticism of his charitable record."],
+["C · Workhouse and the hearing","The First Voice fully agrees that the wet bicycle ride was a great sacrifice.","False","It says the Second Voice puts it too strongly, though it gives the Second Voice the last word."],
+["C · Workhouse and the hearing","The Second Voice proposes that Niggle should receive 'a little gentle treatment.'","True","This is the proposed verdict."],
+["C · Workhouse and the hearing","Niggle feels proud and triumphant when he hears the verdict.","False","He feels ashamed, as if receiving public praise that everyone knows is undeserved."],
+["C · Workhouse and the hearing","Niggle's first question to the Voices concerns whether his painting has survived.","False","He asks about Parish, his health, and whether his leg can be cured."],
+["C · Workhouse and the hearing","Niggle says Parish was a good neighbour who sold him excellent potatoes cheaply.","True","He says the cheap potatoes saved him a lot of time."],
+["C · Workhouse and the hearing","The Voices agree that Niggle may go on to the next stage tomorrow.","True","The First Voice agrees to let him proceed the next day."],
+["D · Niggle's Country and the Edge","Niggle is given hospital uniform to wear when he leaves the Workhouse.","False","He finds comfortable clothes laid out, not hospital uniform."],
+["D · Niggle's Country and the Edge","The doctor heals Niggle's sore hands immediately with salve.","True","The salve heals them at once."],
+["D · Niggle's Country and the Edge","Niggle receives a biscuit, a glass of wine, and a ticket before going to the station.","True","These are given in the middle of the morning."],
+["D · Niggle's Country and the Edge","Niggle walks out of the Workhouse into a large town.","False","Although he expects a town, he finds himself on a bare green hill."],
+["D · Niggle's Country and the Edge","The new local train already has a fixed name for its destination.","False","The Porter says they have not fixed its name yet."],
+["D · Niggle's Country and the Edge","Niggle's bicycle waits at the wicket-gate with a yellow label bearing his name.","True","The label reads NIGGLE in large black letters."],
+["D · Niggle's Country and the Edge","The turf and curves of the landscape feel familiar to Niggle.","True","He seems to remember or dream of the landscape."],
+["D · Niggle's Country and the Edge","The Tree is unfinished when Niggle sees it in the new country.","False","It is finished and alive, although it is 'finished, though not finished with.'"],
+["D · Niggle's Country and the Edge","The leaves appear exactly as Niggle physically painted them on the original canvas.","False","They appear as he imagined them rather than as he made them."],
+["D · Niggle's Country and the Edge","Some of the most beautiful and characteristic leaves are shown to have been produced in collaboration with Parish.","True","The story directly identifies Parish's contribution."],
+["D · Niggle's Country and the Edge","The Forest loses its charm once Niggle enters it.","False","He can approach and enter the distant Forest without losing its particular charm."],
+["D · Niggle's Country and the Edge","Niggle realises that he needs Parish's practical knowledge to develop the country.","True","He says he ought to have got Parish sooner."],
+["D · Niggle's Country and the Edge","Niggle finds Parish in a hollow, leaning on a spade and still limping a little.","True","This is how Parish first appears in the new country."],
+["D · Niggle's Country and the Edge","Niggle and Parish spend a long conversation negotiating where to build their house.","False","Without talking, they agree where to make a small house and garden."],
+["D · Niggle's Country and the Edge","Niggle becomes absorbed in building and gardening, while Parish often wanders and looks at the trees.","True","The men contribute in different ways."],
+["D · Niggle's Country and the Edge","Parish thanks Niggle for putting in a word for him, and Niggle credits the Second Voice.","True","Niggle says they both owe it to the Second Voice."],
+["D · Niggle's Country and the Edge","Niggle and Parish never disagree during their work together.","False","They sometimes disagree at first, especially when tired."],
+["D · Niggle's Country and the Edge","The tonic is taken in water from the Spring in the heart of the Forest.","True","The tonic label instructs that it be taken in Spring water."],
+["D · Niggle's Country and the Edge","Niggle had once imagined the Spring but never drawn it.","True","The notes identify this detail about the Spring."],
+["D · Niggle's Country and the Edge","Parish's limp remains unchanged throughout the new country.","False","He eventually loses his limp after drinking the tonic in Spring water."],
+["D · Niggle's Country and the Edge","At the Edge, a shepherd offers to guide Niggle and Parish further.","True","The shepherd asks whether they want a guide."],
+["D · Niggle's Country and the Edge","Both Niggle and Parish immediately choose to continue toward the Mountains.","False","Niggle wants to go on, but Parish wants to wait for his wife and show her the house."],
+["D · Niggle's Country and the Edge","The shepherd names the region 'Niggle's Country' and says a little of it is now Parish's Garden.","True","He explains the relationship between the picture and Parish's contribution."],
+["D · Niggle's Country and the Edge","Parish already understood that the country was Niggle's picture before the shepherd explained it.","False","Parish is astonished and learns what the painting represented."],
+["D · Niggle's Country and the Edge","Niggle had clearly explained his picture to Parish during their life on earth.","False","Niggle admits that he never tried to explain it."],
+["D · Niggle's Country and the Edge","The Edge is marked by a visible fence or wall.","False","The Edge is invisible, without a line, fence, or wall."],
+["D · Niggle's Country and the Edge","Niggle and Parish part on hostile terms at the Edge.","False","They shake hands warmly; Niggle leaves with the shepherd."],
+["E · Epilogue and interpretation","Councillor Tompkins thinks Niggle was useful to Society.","False","He calls Niggle worthless and of no use to Society."],
+["E · Epilogue and interpretation","Tompkins suggests that people like Niggle should be given dull useful jobs or put away.","True","He mentions washing dishes in a communal kitchen and putting such people away."],
+["E · Epilogue and interpretation","Atkins is the Councillor, while Tompkins is the schoolmaster.","False","Tompkins is the Councillor; Atkins is the schoolmaster."],
+["E · Epilogue and interpretation","Tompkins says Niggle could not design a telling poster.","True","He dismisses Niggle's artistic ability in practical terms."],
+["E · Epilogue and interpretation","Niggle once tells Tompkins that leaves are 'pretty'.","True","Tompkins mocks this description by giving a biological description of leaves."],
+["E · Epilogue and interpretation","Atkins finds a torn corner of Niggle's canvas in a field.","True","He remembers the mountain peak and spray of leaves on the fragment."],
+["E · Epilogue and interpretation","The recovered corner shows a mountain peak and a spray of leaves.","True","This fragment stays in Atkins's mind."],
+["E · Epilogue and interpretation","Perkins says he always knew that Niggle was a painter.","False","Perkins says, 'Never knew he painted.'"],
+["E · Epilogue and interpretation","Tompkins had his eye on Niggle's house and eventually acquired it.","True","Atkins points out that Tompkins gets Niggle's house as well as his town house."],
+["E · Epilogue and interpretation","Most of the saved canvas remains intact and is displayed in the museum.","False","Most crumbles; one leaf survives and is framed."],
+["E · Epilogue and interpretation","Atkins frames the surviving leaf and leaves it to the Town Museum.","True","The leaf hangs in a recess in the museum for a time."],
+["E · Epilogue and interpretation","The Town Museum remains standing permanently, preserving Niggle's work.","False","The museum burns down, and Niggle is forgotten in his old country."],
+["E · Epilogue and interpretation","The Second Voice describes the region as a place of refreshment and convalescence and an introduction to the Mountains.","True","It is a restorative stage before the further journey."],
+["E · Epilogue and interpretation","The Second Voice says that people sent to the region seldom have to come back.","True","This is part of the final conversation between the Voices."],
+["E · Epilogue and interpretation","The First Voice gives the region its final name, 'Niggle's Parish'.","False","The Porter names it 'Niggle's Parish'."],
+["E · Epilogue and interpretation","Niggle and Parish both laugh when they hear the final name.","True","Their laughter makes the Mountains ring."],
+["F · Themes and symbols","The story is best understood as a strict one-to-one allegory in which every detail has only one fixed equivalent.","False","The notes describe a Christian-influenced pattern but caution that it is not a strict allegory."],
+["F · Themes and symbols","The Workhouse can be read as a purgatory-like stage of purification through work and discipline.","True","This is the interpretation offered in the study notes."],
+["F · Themes and symbols","The First Voice represents mercy, while the Second Voice represents justice.","False","The First Voice is associated with justice and the Second with mercy."],
+["F · Themes and symbols","The story argues that artistic ambition automatically excuses neglect of ordinary duties.","False","Niggle's art is not condemned, but it does not excuse neglected duties."],
+["F · Themes and symbols","The wet bicycle ride is treated by the Second Voice as a genuine sacrifice.","True","Niggle risks losing his last chance to work on the picture by helping Parish."],
+["F · Themes and symbols","Tompkins represents a utilitarian view that judges value mainly by practical social use.","True","He dismisses art because it does not serve his narrow idea of usefulness."],
+["F · Themes and symbols","The story suggests that beauty can have value beyond economic or immediate practical use.","True","Atkins's remark about what counts as use challenges Tompkins's view."],
+["F · Themes and symbols","Parish's healing suggests renewal in the new country.","True","His limp disappears after the restorative tonic."],
+["F · Themes and symbols","The finished Tree contains only the exact leaves that Niggle managed to paint on earth.","False","It includes leaves he imagined and others that might have budded if he had had time."],
+["F · Themes and symbols","The final name 'Niggle's Parish' reflects the cooperation of the artist and the practical neighbour.","True","The name brings both men into the identity of the country."],
+["F · Themes and symbols","Niggle reaches the Mountains and the narrator fully describes what lies beyond them.","False","Niggle sets off toward them, but the narrator cannot guess what comes next."]
+];
+const KEY='leafNiggleRevision.v1';
+const defaultState={answers:{},first:{},errors:{},attempts:{},lastSaved:null};
+let state=load(),view='quiz',mode='all',queue=[],pos=0;
+function load(){try{return {...defaultState,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){return structuredClone(defaultState)}}
+function save(){state.lastSaved=new Date().toISOString();try{localStorage.setItem(KEY,JSON.stringify(state));document.getElementById('saveState').textContent='Saved just now';}catch(e){document.getElementById('saveState').textContent='Could not save locally — export your record';}}
+function correct(i){return BANK[i][2]}
+function isCorrect(i){return state.answers[i]===correct(i)}
+function activeErrors(){return Object.keys(state.errors).map(Number).filter(i=>state.errors[i]&&!isCorrect(i))}
+function answered(){return Object.keys(state.answers).length}
+function updateStats(){document.getElementById('total').textContent=BANK.length;document.getElementById('done').textContent=answered();let n=answered(),good=Object.keys(state.answers).filter(k=>state.answers[k]===correct(+k)).length;document.getElementById('accuracy').textContent=n?Math.round(good/n*100)+'%':'—';document.getElementById('errors').textContent=activeErrors().length;document.getElementById('errorCount').textContent=activeErrors().length+' to revise';}
+function buildFilter(){let s=document.getElementById('filter');let cats=[...new Set(BANK.map(q=>q[0]))];s.innerHTML='<option value="all">All sections</option>'+cats.map(c=>'<option>'+c+'</option>').join('');}
+function makeQueue(){let f=document.getElementById('filter').value;queue=BANK.map((q,i)=>i).filter(i=>f==='all'||BANK[i][0]===f);pos=Math.min(pos,Math.max(queue.length-1,0));}
+function showQ(){updateStats();let host=document.getElementById('questionHost');if(!queue.length){host.innerHTML='<div class="empty">No questions in this selection.</div>';return}let i=queue[pos],q=BANK[i],given=state.answers[i],done=given!==undefined,ok=done&&given===q[2];document.getElementById('modeTitle').textContent=mode==='errors'?'Error-only revision':'Teacher\'s question bank';document.getElementById('counter').textContent='Question '+(pos+1)+' of '+queue.length+' · '+q[0];document.getElementById('bar').style.width=((pos+(done?1:0))/queue.length*100)+'%';
+host.innerHTML='<article class="question"><div class="qtop"><span class="qid">QUESTION '+String(i+1).padStart(3,'0')+'</span><span class="tag">'+q[0]+'</span></div><h3>'+q[1]+'</h3><div class="answers"><button class="answer '+(given==='True'?'chosen':'')+'" data-answer="True" '+(done?'disabled':'')+'>TRUE</button><button class="answer '+(given==='False'?'chosen':'')+'" data-answer="False" '+(done?'disabled':'')+'>FALSE</button></div>'+(done?'<div class="feedback '+(ok?'correct':'wrong')+'"><strong>'+(ok?'Correct — well done.':'Not quite. Correct answer: '+q[2]+'.')+'</strong>'+q[3]+'</div>':'<p class="small" style="margin:13px 0 0">Choose one answer. Your response will be saved automatically.</p>')+'</article>';
+host.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>submit(i,b.dataset.answer)));
+document.getElementById('prev').disabled=pos===0;document.getElementById('next').disabled=pos===queue.length-1;document.getElementById('skip').disabled=pos===queue.length-1;
+}
+function submit(i,a){if(state.answers[i]!==undefined)return;state.answers[i]=a;state.attempts[i]=(state.attempts[i]||0)+1; if(state.first[i]===undefined)state.first[i]=a;if(a!==correct(i)){state.errors[i]={firstWrong:a,reason:BANK[i][3],wrongAt:new Date().toISOString()};}else if(state.errors[i]){state.errors[i].resolvedAt=new Date().toISOString();}save();showQ();}
+function setView(v){view=v;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.view===v));['quiz','errors','records','guide'].forEach(x=>document.getElementById(x+'View').classList.toggle('hidden',x!==v));if(v==='errors')renderErrors();if(v==='records')renderRecords();if(v==='quiz')showQ();}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+document.getElementById('filter').addEventListener('change',()=>{mode='all';makeQueue();showQ()});
+document.getElementById('prev').onclick=()=>{if(pos>0){pos--;showQ()}};
+document.getElementById('next').onclick=()=>{if(pos<queue.length-1){pos++;showQ()}};
+document.getElementById('skip').onclick=()=>{if(pos<queue.length-1){pos++;showQ()}};
+document.getElementById('shuffle').onclick=()=>{mode='all';makeQueue();queue=queue.filter(i=>state.answers[i]===undefined);for(let i=queue.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[queue[i],queue[j]]=[queue[j],queue[i]]}pos=0;showQ()};
+function renderErrors(){let host=document.getElementById('errorHost'),ids=activeErrors();if(!ids.length){host.innerHTML='<div class="empty">No active mistakes. Excellent — keep practising to retain them.</div>';return}host.innerHTML=ids.map(i=>{let q=BANK[i],e=state.errors[i];return '<div class="mistake"><div class="qtop"><span class="qid">QUESTION '+(i+1)+'</span><span class="tag">'+q[0]+'</span></div><p>'+q[1]+'</p><div class="reason">Your answer: <b>'+e.firstWrong+'</b> · Correct answer: <b>'+q[2]+'</b><br>'+q[3]+'</div><div class="controls"><button class="secondary" data-review="'+i+'">Review this question</button></div></div>'}).join('');host.querySelectorAll('[data-review]').forEach(b=>b.onclick=()=>{mode='errors';queue=activeErrors();pos=queue.indexOf(+b.dataset.review);setView('quiz');showQ()});}
+document.getElementById('retryErrors').onclick=()=>{mode='errors';queue=activeErrors();pos=0;setView('quiz');showQ()};
+document.getElementById('clearResolved').onclick=()=>{Object.keys(state.errors).forEach(k=>{if(state.answers[k]===correct(+k))delete state.errors[k]});save();renderErrors();updateStats()};
+function renderRecords(){let n=answered(),good=Object.keys(state.answers).filter(k=>state.answers[k]===correct(+k)).length;document.getElementById('lastSaved').textContent=state.lastSaved?'Last saved: '+new Date(state.lastSaved).toLocaleString():'No saved attempts yet';document.getElementById('recordBar').style.width=(n/BANK.length*100)+'%';document.getElementById('recordSummary').innerHTML='<p><b>'+n+'</b> of '+BANK.length+' attempted · <b>'+good+'</b> currently correct · <b>'+activeErrors().length+'</b> active errors · <b>'+Object.keys(state.attempts).reduce((s,k)=>s+state.attempts[k],0)+'</b> total submitted answers.</p>';let el=document.getElementById('recordList');el.innerHTML=BANK.map((q,i)=>{let a=state.answers[i],status=a===undefined?'Not attempted':a===correct(i)?'Correct':'Needs revision';return '<div class="mistake"><div class="qtop"><span class="qid">#'+(i+1)+'</span><span class="tag">'+status+'</span></div><div>'+q[1]+'</div><div class="small">Your answer: '+(a===undefined?'—':a)+' · Answer key: '+q[2]+'</div>'+(a!==undefined&&a!==correct(i)?'<div class="reason">'+q[3]+'</div>':'')+'</div>'}).join('');}
+document.getElementById('export').onclick=()=>{let blob=new Blob([JSON.stringify({title:'Leaf by Niggle revision record',exportedAt:new Date().toISOString(),state,bank:BANK},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='leaf-by-niggle-study-record.json';a.click();URL.revokeObjectURL(a.href)};
+document.getElementById('reset').onclick=()=>{if(confirm('Delete all saved answers and error records from this browser? This cannot be undone.')){state=structuredClone(defaultState);save();renderRecords();updateStats();}};
+window.addEventListener('beforeunload',save);
+buildFilter();makeQueue();showQ();updateStats();
+</script>
 </body>
 </html>
