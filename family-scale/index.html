@@ -92,7 +92,38 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}
  .knob{width:44px;height:44px}
  .action{min-height:45px}
 }
-</style></head><body><canvas id="world"></canvas>
+
+.reflection-overlay{z-index:20;background:rgba(10,12,23,.78);backdrop-filter:blur(12px);padding:18px}
+.reflection-panel{position:relative;width:min(760px,100%);max-height:min(88vh,820px);overflow:auto;padding:0;border-radius:26px;background:#f2eee6;color:#29263a;border:1px solid #fff8;box-shadow:0 30px 100px #050611aa}
+.reflection-top{padding:20px 25px 17px;background:linear-gradient(115deg,#39334d,#5e506c);color:#fff;position:relative;overflow:hidden}
+.reflection-top:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-80px;top:-115px;border:1px solid #ffffff24;box-shadow:0 0 0 24px #ffffff08,0 0 0 48px #ffffff05}
+.reflection-eyebrow{font-size:10px;letter-spacing:.17em;font-weight:950;color:#f4d99b}
+.reflection-headline{display:flex;align-items:center;gap:13px;margin-top:10px;position:relative;z-index:1}
+.reflection-icon{width:52px;height:52px;flex:0 0 52px;border-radius:17px;background:#ffffff19;border:1px solid #ffffff38;display:grid;place-items:center;font-size:27px}
+.reflection-headline h2{margin:0;font-size:clamp(19px,3vw,26px);line-height:1.25;color:white}
+.reflection-sub{font-size:11px;color:#e0d9e9;margin-top:5px}
+.reflection-body{padding:20px 25px 24px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.reflection-block{padding:15px 16px;border-radius:17px;background:#fff;border:1px solid #ded8ce;min-width:0}
+.reflection-block.full{grid-column:1/-1}
+.reflection-label{font-size:9px;letter-spacing:.13em;font-weight:950;color:#82778a;text-transform:uppercase;margin-bottom:7px}
+.reflection-text{font-size:13px;line-height:1.75;color:#454052}
+.reflection-quote{font-size:15px;line-height:1.65;font-weight:750;color:#393348}
+.theory-block{background:#e7e0ef;border-color:#d4c8e1}
+.theory-tag{display:inline-flex;align-items:center;gap:6px;border-radius:99px;background:#554467;color:#fff;padding:6px 10px;font-size:10px;font-weight:900;margin-bottom:9px}
+.theory-name{font-size:17px;font-weight:950;color:#3c304e;line-height:1.35;margin-bottom:5px}
+.theory-copy{font-size:12px;line-height:1.75;color:#50465d}
+.reflection-question{border-left:3px solid #c18a50;padding:3px 0 3px 12px;font-size:12px;line-height:1.7;color:#5c4b3c}
+.reflection-footer{padding:0 25px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.reflection-footnote{font-size:10px;color:#8b8490;line-height:1.5}
+.reflection-next{border:0;border-radius:13px;padding:13px 20px;background:linear-gradient(110deg,#edcf83,#e7a36f);color:#30273b;font-size:13px;font-weight:950;white-space:nowrap;box-shadow:0 5px 15px #76553822}
+@media(max-width:600px){
+ .reflection-overlay{padding:10px}.reflection-panel{border-radius:21px;max-height:91vh}
+ .reflection-top{padding:16px 17px 14px}.reflection-icon{width:43px;height:43px;flex-basis:43px;font-size:23px;border-radius:14px}
+ .reflection-headline{gap:10px;margin-top:8px}.reflection-headline h2{font-size:19px}.reflection-sub{font-size:10px}
+ .reflection-body{padding:13px;grid-template-columns:1fr;gap:9px}.reflection-block{padding:12px 13px;border-radius:14px}.reflection-block.full{grid-column:auto}
+ .reflection-text{font-size:12px;line-height:1.65}.reflection-quote{font-size:13px}.theory-name{font-size:15px}.theory-copy{font-size:11px}
+ .reflection-footer{padding:0 13px 14px;align-items:stretch;flex-direction:column}.reflection-footnote{font-size:9px}.reflection-next{width:100%;padding:13px}
+}</style></head><body><canvas id="world"></canvas>
 <div class="hud-shade"></div>
 <div class="hud">
  <div class="meta-row"><span class="brand">THE WEIGHT OF A DAY</span><span class="stage" id="num">FAMILY DAY</span></div>
@@ -112,6 +143,20 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}
 <div class="overlay show" id="intro"><div class="modal"><div class="kicker">A DAY IN JENNY'S SHOES</div><h2>先從 Jenny 的一天開始</h2><p>第二個孩子出生後，Jenny 辭去工作，主要負責照顧孩子和處理家務。她感到育兒壓力，也覺得 Bob 缺乏實際協助與情感支持。她希望自己的需要、獨立與個人發展也能被看見。</p><p>Bob 是家中唯一的經濟來源，承受經濟壓力，也希望成為好父親；但他未必真正理解 Jenny 每天承擔的照顧工作。</p><p><b>現在你將以 Bob 的視角進入 2D 家庭場景。</b>在家中走動，逐一完成 Jenny 平常承擔的家務與育兒任務。早餐、洗衣等是體驗用的模擬任務，不是聲稱案例逐項記載的事實。</p><button class="primary" id="start">進入家中，接手 Jenny 的一天 →</button></div></div>
 <div class="overlay" id="pauseBox"><div class="modal"><h2>暫停一下</h2><p>準備好後繼續探索。</p><button class="primary" id="resume">繼續</button></div></div>
 <div class="overlay" id="childNeedBox"><div class="modal"><div class="kicker">FAMILY REMINDER</div><h2>孩子需要你</h2><p id="childNeedText">孩子需要你的陪伴與照顧。請先查看目前的任務。</p><button class="primary" id="childNeedClose">我知道了，繼續照顧</button></div></div>
+<div class="overlay reflection-overlay" id="reflection">
+ <section class="reflection-panel" role="dialog" aria-modal="true" aria-labelledby="reflectionTitle">
+  <header class="reflection-top"><div class="reflection-eyebrow" id="reflectionEyebrow">TASK COMPLETE · FAMILY DAY</div>
+   <div class="reflection-headline"><div class="reflection-icon" id="reflectionIcon">🧹</div><div><h2 id="reflectionTitle">整理客廳與收拾玩具</h2><div class="reflection-sub" id="reflectionSub">10:00 · 客廳</div></div></div>
+  </header>
+  <div class="reflection-body">
+   <div class="reflection-block full"><div class="reflection-label" id="storyLabel">你剛剛經歷的事</div><div class="reflection-text" id="reflectionStory"></div></div>
+   <div class="reflection-block"><div class="reflection-label" id="quoteLabel">Bob 的發現</div><div class="reflection-quote" id="reflectionQuote"></div></div>
+   <div class="reflection-block theory-block"><div class="reflection-label">理論視角</div><div class="theory-tag">✦ FEMINIST LENS</div><div class="theory-name" id="reflectionTheory"></div><div class="theory-copy" id="reflectionTheoryCopy"></div></div>
+   <div class="reflection-block full"><div class="reflection-label">停一停，想一想</div><div class="reflection-question" id="reflectionQuestion"></div></div>
+  </div>
+  <footer class="reflection-footer"><div class="reflection-footnote">理論不是替角色下判斷，而是幫助我們看見日常背後的性別分工與權力關係。</div><button class="reflection-next" id="reflectionNext">繼續下一個任務 →</button></footer>
+ </section>
+</div>
 <div class="overlay" id="end"><div class="modal"><div class="kicker">CASE JOURNEY COMPLETE</div><h2>看見彼此，才有新的可能。</h2><p>你先從 Jenny 的處境出發，再以 Bob 的視角完成一天的家務與育兒，最後回到社工會談和家庭協商。案例中的結果是 Bob 同意在 Jenny 上課期間照顧孩子；這是重要改變，但不能推論所有不平等已經消失，仍需持續追蹤。</p><h3>五個女性主義鏡頭</h3><div class="theories"><div><b>自由主義女性主義</b>Jenny 是否有進修、工作與個人發展的機會？</div><div><b>基進女性主義</b>家庭權力與照顧責任是否受到父權角色影響？</div><div><b>社會主義女性主義</b>有薪與無酬勞動如何被衡量？</div><div><b>文化女性主義</b>關懷與照顧是否受到肯定，而非被視為女性天職？</div><div><b>後現代女性主義</b>「男主外、女主內」如何透過家庭經驗與文化期待被建構？</div></div><h3>整合女性主義處遇六步驟</h3><p>1. 了解家庭處境與需求；2. 透過家務日記讓付出與不平等變得可見；3. 挑戰傳統性別觀念；4. 協商新的家庭分工；5. 支持雙方自主發展；6. 持續追蹤與調整。案例中 Bob 同意在 Jenny 上課期間照顧孩子，但仍需持續檢視分工是否公平。</p><button class="primary" id="again">再玩一次</button></div></div>
 <script>
 const $=id=>document.getElementById(id),c=$('world'),g=c.getContext('2d');let w=innerWidth,h=innerHeight,dpr=1,scene='home',started=false,paused=false,finished=false,idx=0,toastT=0,joy={x:0,y:0},keys={},cam={x:0,y:0},p={x:480,y:470},pointer=null;
@@ -122,7 +167,30 @@ function target(){if(finished)return null;if(scene==='home'){const t=home[idx];r
 function distance(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}function close(){return started&&target()&&distance(p,target())<75}
 function say(s){$('toast').textContent=s;$('toast').classList.add('show');toastT=3}
 function updateHud(){const total=home.length+city.length,done=scene==='home'?idx:home.length+idx,t=scene==='home'?home[idx]:city[idx],goal=target(),near=close();$('num').textContent=scene==='home'?'家庭日常｜'+Math.min(idx+1,home.length)+' / '+home.length:'城市探索｜'+Math.min(idx+1,city.length)+' / '+city.length;$('title').textContent=finished?'旅程完成':scene==='home'?(t?t[1]:'家庭日常完成'):(t?t[0]:'城市探索完成');$('hint').textContent=finished?'今天的家庭旅程完成了。':scene==='home'?(t?t[0]+' · '+t[2]:'即將進入城市探索'):(t?t[1]:'旅程完成');$('detail').textContent=finished?'你已完成所有任務。':scene==='home'?(t?t[6]:''):(t?t[5]:'');$('bar').style.width=(Math.min(done,total)/total*100)+'%';$('act').disabled=!near||paused||finished;$('act').textContent=near?'✦ 已抵達｜開始互動':'跟隨箭頭前往目標';$('actor').textContent=scene==='home'?'家中探索｜Bob 的視角':'城市探索｜個案會談與協商';$('guide').classList.toggle('hidden',!started||finished||paused||!goal);if(goal){const dx=goal.x-p.x,dy=goal.y-p.y,angle=Math.atan2(dy,dx)*180/Math.PI;$('guideArrow').style.transform='rotate('+angle+'deg)';$('guideName').textContent=scene==='home'?home[idx][2]:(city[idx][1].replace(/^前往/,'').replace(/^切換至Jenny，/,'')||'任務地點');$('guideDistance').textContent=near?'已到達目的地，可以按下互動':distance(p,goal)<170?'目標就在附近':'依箭頭方向移動，前往目前任務';}}
-function interact(){if(!close()||paused||finished)return;if(scene==='home'){let t=home[idx];say('完成 '+t[1]+'｜'+t[8]+'：'+t[9]);idx++;if(idx>=home.length){scene='city';idx=0;p.x=480;p.y=470;say('你完成了 Bob 的一天。接下來回到城市，繼續個案會談與家庭協商。')}}else{let t=city[idx];if(t[4]==='Jenny'&&activePerson!=='Jenny'){say('這一段需要切換至 Jenny。');return}if(t[4]==='Bob'&&activePerson!=='Bob'){say('這一段需要切換至 Bob。');return}say(t[0]+'｜'+t[6]);idx++;if(idx>=city.length){finished=true;$('end').classList.add('show')}}updateHud()}
+let pendingReflection=null;
+function showReflection(type,t){
+ paused=true;pendingReflection={type,task:t};
+ if(type==='home'){
+  $('reflectionEyebrow').textContent='TASK COMPLETE · FAMILY DAY';$('reflectionIcon').textContent=t[5];$('reflectionTitle').textContent=t[1];$('reflectionSub').textContent=t[0]+' · '+t[2];
+  $('storyLabel').textContent='你剛剛經歷的事';$('reflectionStory').textContent=t[6];$('quoteLabel').textContent='Bob 的發現';$('reflectionQuote').textContent=t[7];
+  const parts=t[8].split('｜');$('reflectionTheory').textContent=parts[0]||t[8];$('reflectionTheoryCopy').textContent=(parts[1]?parts[1]+'。':'')+t[9];
+  $('reflectionQuestion').textContent='如果這項工作長期只由 Jenny 承擔，她的休息、個人選擇與發展空間會受到什麼影響？';$('reflectionNext').textContent='繼續下一個任務 →';
+ }else{
+  $('reflectionEyebrow').textContent='CONVERSATION INSIGHT · CITY';$('reflectionIcon').textContent='💬';$('reflectionTitle').textContent=t[0];$('reflectionSub').textContent='社工會談與家庭協商';
+  $('storyLabel').textContent='這段會談需要看見的處境';$('reflectionStory').textContent=t[5];$('quoteLabel').textContent='社工觀察焦點';$('reflectionQuote').textContent='不要急著把問題歸咎於其中一個人；先理解雙方的壓力、需要，以及家庭角色如何形成。';
+  const parts=t[6].split('：');$('reflectionTheory').textContent=parts[0]||'女性主義觀點';$('reflectionTheoryCopy').textContent=parts.slice(1).join('：')||t[6];
+  $('reflectionQuestion').textContent='在這段對話中，社工如何同時理解 Bob 的壓力、聽見 Jenny 的需要，並協助兩人建立更公平的安排？';$('reflectionNext').textContent='繼續下一段會談 →';
+ }
+ $('reflection').classList.add('show');
+}
+function continueReflection(){
+ if(!pendingReflection)return;
+ const type=pendingReflection.type;pendingReflection=null;$('reflection').classList.remove('show');paused=false;
+ if(type==='home'){idx++;if(idx>=home.length){scene='city';idx=0;p.x=480;p.y=470;say('你完成了 Bob 的一天。接下來回到城市，繼續個別會談與家庭協商。')}}
+ else{idx++;if(idx>=city.length){finished=true;$('end').classList.add('show')}}
+ updateHud();
+}
+function interact(){if(!close()||paused||finished)return;if(scene==='home'){showReflection('home',home[idx])}else{const t=city[idx];if(t[4]==='Jenny'&&activePerson!=='Jenny'){say('這一段需要切換至 Jenny。');return}if(t[4]==='Bob'&&activePerson!=='Bob'){say('這一段需要切換至 Bob。');return}showReflection('city',t)}updateHud()}
 let activePerson='Bob';$('person').onclick=()=>{activePerson=activePerson==='Bob'?'Jenny':'Bob';$('personLabel').textContent=activePerson;$('person').setAttribute('aria-label','目前角色：'+activePerson+'；點擊切換');say('目前角色：'+activePerson)};
 function move(dt){if(!started||paused||finished)return;let x=joy.x,y=joy.y;if(keys.ArrowLeft||keys.a)x--;if(keys.ArrowRight||keys.d)x++;if(keys.ArrowUp||keys.w)y--;if(keys.ArrowDown||keys.s)y++;let n=Math.hypot(x,y);if(n>1){x/=n;y/=n}let nx=p.x+x*200*dt,ny=p.y+y*200*dt;if(scene==='home'){if(nx>45&&nx<1150)p.x=nx;if(ny>65&&ny<650)p.y=ny}else{p.x=Math.max(25,Math.min(1775,nx));p.y=Math.max(25,Math.min(1375,ny))}}
 function person(x,y,name,color){g.fillStyle='#1118';g.beginPath();g.ellipse(x,y+12,18,7,0,0,7);g.fill();g.fillStyle=color;g.fillRect(x-12,y-4,24,26);g.fillStyle='#eac2a3';g.beginPath();g.arc(x,y-15,11,0,7);g.fill();g.fillStyle='#382b35';g.beginPath();g.arc(x,y-20,11,Math.PI,2*Math.PI);g.fill();g.fillStyle='#fff';g.font='bold 12px sans-serif';g.textAlign='center';g.fillText(name,x,y+40)}
@@ -131,7 +199,7 @@ function drawGuideArrow(){const t=target();if(!t)return;const dx=t.x-p.x,dy=t.y-
 function cityDraw(){g.fillStyle='#293a32';g.fillRect(0,0,1800,1400);for(let y=0;y<1400;y+=72)for(let x=0;x<1800;x+=72){g.fillStyle=((x+y)/72)%2?'#2d3e34':'#293a32';g.fillRect(x+3,y+3,66,66)}g.fillStyle='#39394f';g.fillRect(0,480,1800,170);g.fillRect(790,0,180,1400);const bs=[{x:110,y:100,w:310,h:235,n:'家庭',c:'#465b73'},{x:1240,y:100,w:360,h:260,n:'社工會談室',c:'#416c68'},{x:100,y:900,w:360,h:285,n:'社區空間',c:'#765c50'},{x:510,y:90,w:205,h:220,n:'課程中心',c:'#625c7b'}];bs.forEach(b=>{g.fillStyle=b.c;g.fillRect(b.x,b.y,b.w,b.h);g.fillStyle='#ffffff22';for(let r=0;r<2;r++)for(let x=0;x<3;x++)g.fillRect(b.x+25+x*75,b.y+50+r*75,25,34);g.fillStyle='#fff';g.font='bold 23px sans-serif';g.textAlign='center';g.fillText(b.n,b.x+b.w/2,b.y+b.h+30)});const goal=target();if(goal)marker(goal.x,goal.y,'目前任務')}
 function homeDraw(){g.fillStyle='#b6a38b';g.fillRect(0,0,1200,720);g.fillStyle='#e8d8c2';g.fillRect(35,55,1130,620);g.fillStyle='#9a7861';g.fillRect(35,55,1130,18);g.fillRect(35,657,1130,18);g.fillRect(35,55,18,620);g.fillRect(1147,55,18,620);g.fillStyle='#c9b59b';g.fillRect(500,55,14,620);g.fillRect(820,55,14,620);g.fillRect(35,350,1130,14);const rooms=[['廚房',60,80,420,245,'#7b6758'],['客廳',530,80,270,245,'#536b75'],['洗衣區',850,80,270,245,'#617b70'],['用餐區',60,390,420,245,'#80684e'],['遊戲區',530,390,270,245,'#74617b'],['孩子房間／學習空間',850,390,270,245,'#5b6d89']];rooms.forEach(r=>{g.fillStyle=r[5];g.fillRect(r[1],r[2],r[3],r[4]);g.fillStyle='#fff3';g.font='bold 20px sans-serif';g.textAlign='left';g.fillText(r[0],r[1]+15,r[2]+30)});g.fillStyle='#a66e57';g.fillRect(100,150,130,70);g.fillStyle='#6c4738';g.fillRect(585,160,150,75);g.fillStyle='#e5d9c8';g.fillRect(875,150,180,85);g.fillStyle='#9b6b4d';g.fillRect(110,460,190,85);g.fillStyle='#d6bd9b';g.fillRect(555,465,210,100);g.fillStyle='#f1d38e';g.fillRect(890,465,170,100);if(home[idx])marker(home[idx][3],home[idx][4],home[idx][5]);g.fillStyle='#fff';g.font='bold 13px sans-serif';g.textAlign='center';g.fillText('在家中移動，靠近黃色任務標記並按互動',600,700)}
 function loop(now){if(!loop.last)loop.last=now;let dt=Math.min((now-loop.last)/1000,.04);loop.last=now;move(dt);if(toastT>0){toastT-=dt;if(toastT<=0)$('toast').classList.remove('show')}cam.x=Math.max(0,Math.min((scene==='home'?1200:1800)-w,p.x-w/2));cam.y=Math.max(0,Math.min((scene==='home'?720:1400)-h,p.y-h/2));g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);g.save();g.translate(-cam.x,-cam.y);scene==='home'?homeDraw():cityDraw();person(p.x,p.y,activePerson,activePerson==='Bob'?'#51bdca':'#d68ab8');drawGuideArrow();g.restore();updateHud();requestAnimationFrame(loop)}
-$('start').onclick=()=>{$('intro').classList.remove('show');started=true;scene='home';idx=0;activePerson='Bob';$('personLabel').textContent='Bob';$('person').setAttribute('aria-label','目前角色：Bob；點擊切換');updateHud()};$('act').onclick=interact;$('childNeed').onclick=()=>{const t=scene==='home'?home[idx]:city[idx];const need=scene==='home'&&t?t[6]:scene==='city'&&t?t[5]:'孩子需要你的陪伴與照顧。請先完成目前的家庭任務。';$('childNeedText').textContent=need;$('childNeedBox').classList.add('show')};$('childNeedClose').onclick=()=>{$('childNeedBox').classList.remove('show')};$('pause').onclick=()=>{paused=!paused;$('pauseBox').classList.toggle('show',paused)};$('resume').onclick=()=>{paused=false;$('pauseBox').classList.remove('show')};$('again').onclick=()=>{scene='home';idx=0;started=true;paused=false;finished=false;p.x=480;p.y=470;activePerson='Bob';$('personLabel').textContent='Bob';$('person').setAttribute('aria-label','目前角色：Bob；點擊切換');$('end').classList.remove('show');updateHud()};
+$('start').onclick=()=>{$('intro').classList.remove('show');started=true;scene='home';idx=0;activePerson='Bob';$('personLabel').textContent='Bob';$('person').setAttribute('aria-label','目前角色：Bob；點擊切換');updateHud()};$('act').onclick=interact;$('reflectionNext').onclick=continueReflection;$('childNeed').onclick=()=>{const t=scene==='home'?home[idx]:city[idx];const need=scene==='home'&&t?t[6]:scene==='city'&&t?t[5]:'孩子需要你的陪伴與照顧。請先完成目前的家庭任務。';$('childNeedText').textContent=need;$('childNeedBox').classList.add('show')};$('childNeedClose').onclick=()=>{$('childNeedBox').classList.remove('show')};$('pause').onclick=()=>{paused=!paused;$('pauseBox').classList.toggle('show',paused)};$('resume').onclick=()=>{paused=false;$('pauseBox').classList.remove('show')};$('again').onclick=()=>{scene='home';idx=0;started=true;paused=false;finished=false;p.x=480;p.y=470;activePerson='Bob';$('personLabel').textContent='Bob';$('person').setAttribute('aria-label','目前角色：Bob；點擊切換');$('end').classList.remove('show');updateHud()};
 addEventListener('keydown',e=>{if(e.key.startsWith('Arrow')||e.key===' ')e.preventDefault();if(e.key===' '||e.key==='e'){interact();return}keys[e.key.length===1?e.key.toLowerCase():e.key]=true});addEventListener('keyup',e=>keys[e.key.length===1?e.key.toLowerCase():e.key]=false);
 const joyEl=$('joy'),knob=$('knob');function joyMove(e){let r=joyEl.getBoundingClientRect(),dx=e.clientX-r.left-r.width/2,dy=e.clientY-r.top-r.height/2,m=r.width*.32,n=Math.hypot(dx,dy),s=n>m?m/n:1;joy.x=dx*s/m;joy.y=dy*s/m;knob.style.transform='translate('+dx*s+'px,'+dy*s+'px)'}joyEl.onpointerdown=e=>{pointer=e.pointerId;joyEl.setPointerCapture(pointer);joyMove(e)};joyEl.onpointermove=e=>{if(e.pointerId===pointer)joyMove(e)};function endJoy(e){if(e.pointerId!==pointer)return;pointer=null;joy={x:0,y:0};knob.style.transform='translate(0,0)'}joyEl.onpointerup=endJoy;joyEl.onpointercancel=endJoy;
 updateHud();requestAnimationFrame(loop);
