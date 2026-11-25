@@ -1,205 +1,33 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f4ecdf">
-<title>今天換你｜Bob 體驗 Jenny 的一天</title>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#17192a"><title>一天的重量｜2D 家庭城市探索</title>
 <style>
-:root{--ink:#302b29;--muted:#756b63;--paper:#faf7f0;--cream:#f0e5d5;--rose:#c8798f;--blue:#597d83;--green:#718b70;--gold:#bd9148;--line:#e8ddce;--white:#fffdfa}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif}
-header{padding:25px max(20px,calc((100vw - 1020px)/2));background:#eee0ce;border-bottom:1px solid var(--line)}
-.kicker{font-size:11px;letter-spacing:.15em;font-weight:900;color:#8d6d5d}
-h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:8px 0}
-header p{margin:0;color:#665a50;max-width:760px;line-height:1.8;font-size:14px}
-main{max-width:1020px;margin:auto;padding:20px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.8fr);gap:18px}
-.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 8px 24px #60472a0a}
-.intro{max-width:850px;margin:28px auto;padding:0 18px 36px}
-.intro-card{background:white;border:1px solid var(--line);border-radius:22px;padding:clamp(20px,4vw,34px);box-shadow:0 10px 32px #60472a0c}
-.intro h2{font-size:25px;margin:8px 0 12px}
-.intro-copy{color:#625950;font-size:14px;line-height:1.9;margin:0 0 20px}
-.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
-.fact{background:#f8f2e9;border:1px solid #eee2d3;border-radius:15px;padding:14px}
-.fact b{display:block;font-size:13px;margin-bottom:6px}
-.fact span{font-size:12px;line-height:1.7;color:#6e6259}
-.handover{background:#fdf5f6;border-left:4px solid var(--rose);padding:14px 16px;border-radius:0 13px 13px 0;margin:18px 0;color:#66535a;font-size:13px;line-height:1.8}
-.btn{border:0;border-radius:12px;padding:13px 17px;font-weight:850;font-size:13px;cursor:pointer}
-.primary{background:#3b5d60;color:white}
-.secondary{background:#f1e7d8;color:#55483e}
-.btn:disabled{opacity:.4;cursor:not-allowed}
-#game{display:none}
-.daybar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
-.daybar strong{font-size:14px}
-.clock{font-weight:900;color:var(--rose);font-size:15px}
-.progress{height:8px;background:#f0e8df;border-radius:99px;overflow:hidden;margin:10px 0 16px}
-.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#d78da0,#d2ab61);transition:width .25s}
-.meters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.meter{background:#f8f3eb;border:1px solid #eee3d5;border-radius:12px;padding:10px 12px}
-.meterline{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#71665d;margin-bottom:7px}
-.meterbar{height:7px;border-radius:99px;background:#e8ded1;overflow:hidden}
-.meterbar i{height:100%;display:block;width:0;background:#c9858d;transition:width .25s}
-.home{background:#f7f0e6;border:1px solid #eadfce;border-radius:16px;padding:14px}
-.home-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px}
-.home-top b{font-size:14px}.home-top span{font-size:11px;color:var(--muted)}
-.rooms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.room{border:1px solid #e7d9c8;background:#fffdf9;border-radius:13px;padding:11px;text-align:left;min-height:84px;color:var(--ink);transition:.15s}
-.room.active{border:2px solid var(--rose);background:#fff6f8;box-shadow:0 5px 15px #c56d8c17}
-.room.done{background:#edf4ed;border-color:#c8d9c9}
-.room .emoji{font-size:20px}.room b{display:block;font-size:12px;margin-top:5px}.room small{color:var(--muted);font-size:10px}
-.story{margin-top:15px}.time{font-size:11px;color:var(--rose);font-weight:900;letter-spacing:.08em}
-.story h2{font-size:21px;margin:5px 0}.story p{font-size:13px;line-height:1.8;color:#615952;margin:8px 0}
-.taskmeta{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.tag{font-size:10px;border-radius:99px;padding:5px 9px;background:#f4eee6;color:#6f6258}
-.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
-.side h3{font-size:15px;margin:0 0 9px}.side p{font-size:12px;color:var(--muted);line-height:1.8}
-.lens{border-left:3px solid var(--gold);background:#fcf8ef;padding:12px;border-radius:0 12px 12px 0;margin:12px 0}
-.lens b{display:block;font-size:12px;color:#896b35;margin-bottom:5px}.lens p{margin:0;color:#615747}
-.diary{margin-top:14px}.diary-list{max-height:230px;overflow:auto}
-.diary-item{padding:9px 0;border-bottom:1px solid #f0e9e1;font-size:11px;line-height:1.6}
-.diary-item b{display:block}.diary-item span{color:var(--muted)}
-.note{font-size:10px!important;color:#887c71!important;line-height:1.7!important;margin-top:14px}
-.overlay{display:none;position:fixed;inset:0;background:#28221dcc;z-index:5;padding:14px;place-items:center}
-.overlay.show{display:grid}
-.modal{width:min(680px,100%);background:#fffaf3;border-radius:20px;padding:clamp(18px,4vw,28px);max-height:92vh;overflow:auto}
-.modal h2{font-size:25px;margin:6px 0 10px}.modal p{font-size:13px;line-height:1.85;color:#62584f}
-.theories{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0}
-.theory{background:#f8f2e9;border-radius:12px;padding:11px;font-size:11px;line-height:1.7}
-.theory b{display:block;font-size:12px;margin-bottom:4px}
-.steps{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
-.step{border:1px solid var(--line);border-radius:11px;padding:10px;font-size:11px;line-height:1.6}
-.step b{display:block;margin-bottom:3px}
-footer{text-align:center;padding:0 20px 28px;color:#887c71;font-size:11px}
-@media(max-width:760px){main{grid-template-columns:1fr;padding:12px}.side{order:2}header{padding:22px 18px}.panel{padding:14px}.rooms{gap:7px}.room{padding:9px;min-height:80px}.facts{grid-template-columns:1fr}.theories,.steps{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-<header>
- <div class="kicker">A DAY IN THE FAMILY · FEMINIST SOCIAL WORK</div>
- <h1>今天換你：體驗 Jenny 的一天</h1>
- <p>先從 Jenny 的處境出發，再換成 Bob 的視角。你不是來判斷誰比較辛苦，而是親自接手一天的家務與育兒，看看那些平日容易被忽略的工作，究竟需要多少時間、注意力與責任。</p>
-</header>
-
-<section class="intro" id="intro">
- <div class="intro-card">
-  <div class="kicker">第一幕｜先看見 JENNY</div>
-  <h2>早上，家裡又開始忙起來。</h2>
-  <p class="intro-copy">六個月前，Bob 和 Jenny 迎來第二個孩子。Jenny 生下孩子後辭去工作，主要負責照顧兩個孩子和處理家庭事務。她感到育兒壓力很大，也覺得 Bob 很少提供實際協助和情感支持。她並不是不重視家庭；她同時也擔心離開工作會影響自己的獨立與個人發展。</p>
-  <div class="facts">
-   <div class="fact"><b>👩 Jenny 的一天</b><span>照顧孩子、處理家務，很多責任會一件接一件地出現。</span></div>
-   <div class="fact"><b>👨 Bob 的處境</b><span>是家中唯一經濟來源，承受經濟壓力，也希望成為有參與感的父親。</span></div>
-   <div class="fact"><b>🏠 家庭的背景</b><span>雙方父母都是父親賺錢、母親持家的模式，影響兩人對親職的期待。</span></div>
-  </div>
-  <div class="handover"><b>Jenny 的心情：</b>「我知道 Bob 也有工作的壓力，但家裡的事不會因為沒有薪水就消失。我想被理解，也想有時間照顧自己、繼續學習。」<br><span style="font-size:10px">這段文字是依案例處境創作的情境旁白，不是 PPT 的逐字引言。</span></div>
-  <p class="intro-copy">Bob 並非沒有壓力。他是唯一的經濟來源，也想陪伴孩子，卻覺得自己沒有足夠時間。問題在於：他未必真正看見 Jenny 每天承擔的無酬家務與照顧工作。</p>
-  <div class="handover"><b>現在，換你成為 Bob。</b> 今天先不只是說「我會幫忙」。你要接手 Jenny 平常負責的家務與育兒，從早上一直做到晚上。每完成一項，家務日記就會留下紀錄；你也會逐步看到這些工作如何影響休息、個人時間和家庭分工。</div>
-  <button class="btn primary" id="start">接手 Jenny 的一天 →</button>
- </div>
-</section>
-
-<main id="game">
- <section class="panel">
-  <div class="daybar"><strong>🏠 今天你是 Bob｜家庭照顧班</strong><span class="clock" id="clock">07:00</span></div>
-  <div class="progress"><i id="progress"></i></div>
-  <div class="meters">
-   <div class="meter"><div class="meterline"><b>今日任務</b><span id="count">0 / 9 完成</span></div><div class="meterbar"><i id="taskMeter"></i></div></div>
-   <div class="meter"><div class="meterline"><b>忙碌感（模擬）</b><span id="loadLabel">剛開始</span></div><div class="meterbar"><i id="loadMeter"></i></div></div>
-  </div>
-  <div class="home">
-   <div class="home-top"><b>今天的家務與育兒清單</b><span>選取時段查看任務</span></div>
-   <div class="rooms" id="rooms"></div>
-  </div>
-  <div class="story">
-   <div class="time" id="time">07:00 · 早上</div>
-   <h2 id="taskTitle">準備早餐與照顧孩子</h2>
-   <p id="taskText"></p>
-   <div class="taskmeta"><span class="tag" id="taskType">家務與育兒</span><span class="tag" id="taskFocus">無酬勞動</span></div>
-   <div class="actions"><button class="btn primary" id="doBtn">我來完成這項工作</button><button class="btn secondary" id="nextBtn" disabled>下一個時段 →</button></div>
-  </div>
- </section>
-
- <aside class="panel side">
-  <h3>💭 Bob 的理解正在改變</h3>
-  <p id="reflection">「我以為家裡的事只是順手做一做。現在我需要真正接手，才會知道這些工作如何一件接一件。」</p>
-  <div class="lens"><b id="lensTitle">女性主義觀點｜社會主義女性主義</b><p id="lensText">家務與育兒是維持家庭運作的無酬勞動，不應因為沒有薪水就被忽略。</p></div>
-  <div class="diary">
-   <h3>📖 家務日記｜讓勞動被看見</h3>
-   <p>完成的任務會記錄在這裡。這是遊戲中的模擬紀錄，可用來討論家務日記如何呈現工作內容。</p>
-   <div class="diary-list" id="diary"><div class="diary-item"><span>還沒有完成的任務。從第一項開始吧。</span></div></div>
-  </div>
-  <p class="note">案例明確指出 Jenny 承擔大量育兒與家務、Bob 協助不足；早餐、洗衣、清潔等具體任務則是為了讓玩家體驗照顧工作的模擬情境，並非宣稱 PPT 逐項記載這些家務。忙碌感也是遊戲表現，不是個案量表。</p>
- </aside>
-</main>
-
-<footer>家庭天平｜女性主義社會工作 × Bob 與 Jenny 案例</footer>
-
-<div class="overlay" id="end">
- <div class="modal">
-  <div class="kicker">一天結束｜回到案例與社工實務</div>
-  <h2>你完成了一天，但 Jenny 的責任不會只出現一天。</h2>
-  <p>今天你以 Bob 的視角接手了家務和育兒。你可能發現：照顧工作不是單一任務，而是持續出現、彼此連動的責任。Bob 的經濟壓力是真實的；Jenny 的無酬照顧勞動也同樣真實。女性主義分析不是簡單地把 Bob 定義成壞人，而是看見傳統性別規範如何影響雙方對家庭角色、勞動價值與責任的理解。</p>
-  <p><b>回到 PPT 的案例結果：</b>Jenny 開始釐清自己的需求並參加課程；Bob 同意在 Jenny 上課期間照顧孩子。雙方認為這有助平衡家庭角色、增加各自的自由時間與對家庭的付出。這是重要調整，但不能據此斷言所有不平等已經消失，仍需持續追蹤。</p>
-  <h3>五個女性主義鏡頭</h3>
-  <div class="theories">
-   <div class="theory"><b>自由主義女性主義</b>Jenny 是否有進修、工作與個人發展的機會？照顧安排能否讓選擇變成真正可行的資源？</div>
-   <div class="theory"><b>基進女性主義</b>家庭私領域中的權力與照顧責任，是否受到父權和傳統性別角色影響？</div>
-   <div class="theory"><b>社會主義女性主義</b>有薪工作與無酬家務如何被不同評價？照顧責任是否影響 Jenny 的經濟自主與工作機會？</div>
-   <div class="theory"><b>文化女性主義</b>關懷、照顧與關係維繫是否受到肯定？同時避免把照顧視為女性天生應負的責任。</div>
-   <div class="theory"><b>後現代女性主義</b>「男主外、女主內」如何透過家庭經驗與文化期待被建構？夫妻能否重新定義母職與父職？</div>
-  </div>
-  <h3>整合女性主義處遇：六個實務步驟</h3>
-  <div class="steps">
-   <div class="step"><b>1｜了解家庭處境</b>分別及共同了解經濟壓力、家務育兒分工、雙方需求與原生家庭期待。</div>
-   <div class="step"><b>2｜看見付出與不平等</b>用家務日記記錄工作內容；肯定 Bob 的經濟承擔，也確認 Jenny 的無酬勞動價值。</div>
-   <div class="step"><b>3｜挑戰傳統性別觀念</b>反思「男性賺錢、女性照顧」是否必然，理解角色受到家庭和文化影響。</div>
-   <div class="step"><b>4｜共同協商新分工</b>例如 Jenny 上課時由 Bob 照顧孩子，讓責任不再集中在 Jenny 身上。</div>
-   <div class="step"><b>5｜支持雙方自主發展</b>支持 Jenny 進修及工作選擇，也協助 Bob 取得工作與親職平衡。</div>
-   <div class="step"><b>6｜追蹤與調整</b>持續檢視分工、公平休息、Jenny 的自主性及 Bob 的親職參與是否真正提升。</div>
-  </div>
-  <div class="handover"><b>最後想一想：</b>如果 Bob 今天完成所有家務，明天又全部交還 Jenny，家庭真的改變了嗎？「幫忙一次」和「共同承擔責任」有甚麼不同？真正的改變需要持續協商、實際分工和追蹤。</div>
-  <p class="note">本遊戲依課堂材料的五個主要流派與六步整合處遇設計。PPT 亦提及黑色女性主義、跨國／後殖民女性主義，但現有 Bob 與 Jenny 案例沒有足夠資料支持直接套用相關分析，因此遊戲不自行推定其種族、移民或跨國處境。</p>
-  <div class="actions"><button class="btn primary" id="restart">重新體驗一天</button><button class="btn secondary" id="backIntro">回到 Jenny 的故事</button></div>
- </div>
-</div>
-
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#202234;color:#f6f4fb;font-family:system-ui,"Noto Sans TC",sans-serif}button{font:inherit;cursor:pointer;touch-action:manipulation}#world{position:fixed;inset:0;width:100%;height:100%;touch-action:none}.hud{position:fixed;z-index:3;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}.card{width:min(540px,calc(100vw - 150px));padding:12px 15px;border:1px solid #ffffff20;border-radius:16px;background:#1a1c30ed;pointer-events:auto}.kicker{font-size:10px;letter-spacing:.12em;color:#b6b5c9;font-weight:900}.title{font-size:clamp(16px,2.5vw,22px);font-weight:900;margin:4px 0}.hint{color:#ee7ea8;font-size:12px;font-weight:800}.detail{font-size:11px;color:#c0bfd0;line-height:1.5;margin-top:5px}.progress{height:4px;background:#ffffff20;border-radius:9px;margin-top:8px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,#ee7ea8,#ffd65e);width:0}.right{display:flex;align-items:flex-end;flex-direction:column;gap:7px;pointer-events:auto}.pill{background:#171923e8;border:1px solid #ffffff32;border-radius:99px;color:#fff;padding:8px 11px;font-size:11px;font-weight:800}.controls{position:fixed;z-index:4;left:14px;right:14px;bottom:18px;display:flex;justify-content:space-between;align-items:flex-end;pointer-events:none}.joy{width:140px;height:140px;border-radius:50%;border:3px solid #ffffff55;background:#17192366;display:grid;place-items:center;touch-action:none;pointer-events:auto}.knob{width:65px;height:65px;border-radius:50%;border:3px solid #ffffffbb;background:#999bb9cc;pointer-events:none}.action{pointer-events:auto;border:1px solid #fff8;border-radius:17px;padding:15px 17px;background:linear-gradient(145deg,#f0c96d,#e99b67);color:#262032;font-weight:900;min-height:58px}.action:disabled{opacity:.45}.toast{position:fixed;z-index:6;left:50%;bottom:180px;transform:translate(-50%,10px);opacity:0;background:#171923ed;border:1px solid #ffffff20;border-radius:13px;padding:11px 14px;font-size:12px;max-width:88vw;text-align:center;transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}.overlay{position:fixed;z-index:8;inset:0;display:none;place-items:center;padding:16px;background:#10121ddd}.overlay.show{display:grid}.modal{width:min(640px,100%);max-height:90vh;overflow:auto;padding:23px;border-radius:20px;background:#1b1e32;border:1px solid #ffffff20}.modal h2{margin:7px 0;font-size:24px}.modal p{font-size:13px;line-height:1.8;color:#c0bfd0}.primary{width:100%;border:0;border-radius:12px;padding:13px;background:linear-gradient(110deg,#f0c96d,#e99b67);font-weight:900;color:#282033}.theories{display:grid;grid-template-columns:1fr 1fr;gap:8px}.theories div{background:#292c43;padding:10px;border-radius:10px;font-size:11px;line-height:1.7}.theories b{display:block;color:#f3c96f}.actor{position:fixed;right:14px;bottom:175px;z-index:3;background:#171923c9;padding:7px 10px;border-radius:9px;font-size:10px}
+@media(max-width:600px){.card{width:calc(100vw - 130px);padding:10px}.detail{display:none}.joy{width:125px;height:125px}.knob{width:58px;height:58px}.action{font-size:12px;padding:12px}.theories{grid-template-columns:1fr}.actor{bottom:160px}}
+</style></head><body><canvas id="world"></canvas>
+<div class="hud"><div class="card"><div class="kicker" id="num">FAMILY DAY</div><div class="title" id="title">先看見 Jenny 的一天</div><div class="hint" id="hint">準備進入家中</div><div class="detail" id="detail"></div><div class="progress"><i id="bar"></i></div></div><div class="right"><button class="pill" id="person">目前：Bob</button><button class="pill" id="pause">暫停</button></div></div>
+<div class="actor" id="actor">2D 家庭場景｜Bob 的視角</div>
+<div class="controls"><div class="joy" id="joy"><div class="knob" id="knob"></div></div><button class="action" id="act" disabled>接近黃色標記後互動</button></div><div class="toast" id="toast"></div>
+<div class="overlay show" id="intro"><div class="modal"><div class="kicker">A DAY IN JENNY'S SHOES</div><h2>先從 Jenny 的一天開始</h2><p>第二個孩子出生後，Jenny 辭去工作，主要負責照顧孩子和處理家務。她感到育兒壓力，也覺得 Bob 缺乏實際協助與情感支持。她希望自己的需要、獨立與個人發展也能被看見。</p><p>Bob 是家中唯一的經濟來源，承受經濟壓力，也希望成為好父親；但他未必真正理解 Jenny 每天承擔的照顧工作。</p><p><b>現在你將以 Bob 的視角進入 2D 家庭場景。</b>在家中走動，逐一完成 Jenny 平常承擔的家務與育兒任務。早餐、洗衣等是體驗用的模擬任務，不是聲稱案例逐項記載的事實。</p><button class="primary" id="start">進入家中，接手 Jenny 的一天 →</button></div></div>
+<div class="overlay" id="pauseBox"><div class="modal"><h2>暫停一下</h2><p>準備好後繼續探索。</p><button class="primary" id="resume">繼續</button></div></div>
+<div class="overlay" id="end"><div class="modal"><div class="kicker">CASE JOURNEY COMPLETE</div><h2>看見彼此，才有新的可能。</h2><p>你先從 Jenny 的處境出發，再以 Bob 的視角完成一天的家務與育兒，最後回到社工會談和家庭協商。案例中的結果是 Bob 同意在 Jenny 上課期間照顧孩子；這是重要改變，但不能推論所有不平等已經消失，仍需持續追蹤。</p><h3>五個女性主義鏡頭</h3><div class="theories"><div><b>自由主義女性主義</b>Jenny 是否有進修、工作與個人發展的機會？</div><div><b>基進女性主義</b>家庭權力與照顧責任是否受到父權角色影響？</div><div><b>社會主義女性主義</b>有薪與無酬勞動如何被衡量？</div><div><b>文化女性主義</b>關懷與照顧是否受到肯定，而非被視為女性天職？</div><div><b>後現代女性主義</b>「男主外、女主內」如何透過家庭經驗與文化期待被建構？</div></div><h3>整合女性主義處遇六步驟</h3><p>1. 了解家庭處境與需求；2. 透過家務日記讓付出與不平等變得可見；3. 挑戰傳統性別觀念；4. 協商新的家庭分工；5. 支持雙方自主發展；6. 持續追蹤與調整。案例中 Bob 同意在 Jenny 上課期間照顧孩子，但仍需持續檢視分工是否公平。</p><button class="primary" id="again">再玩一次</button></div></div>
 <script>
-const tasks=[
- {time:"07:00 · 早上",clock:"07:00",title:"準備早餐與孩子起床",emoji:"🍳",room:"廚房",type:"家務＋育兒",focus:"無酬勞動",text:"新的一天開始。你要準備早餐、留意兩個孩子的需要，也要安排接下來的早晨。照顧不只是把食物放上桌，還包括記住誰需要甚麼、誰要先被照顧。",reflect:"「原來早上不是只做一頓早餐。我需要同時安排時間、照顧孩子，還要留意很多小事。」",lens:"社會主義女性主義｜看見無酬勞動",theory:"家務與育兒維持家庭運作，卻沒有薪水標籤。不能只用收入衡量家庭成員的貢獻。"},
- {time:"08:30 · 上午",clock:"08:30",title:"照顧孩子、安撫與陪伴",emoji:"🧸",room:"客廳",type:"育兒照顧",focus:"情緒與關係勞動",text:"孩子需要陪伴，也可能哭鬧、爭玩具或突然需要你。你要持續觀察、回應和安撫。當你正在做一件事，另一個孩子也可能同時需要你。",reflect:"「我不能只說『我有看著孩子』。真正的照顧需要投入注意力，也需要情感支持。」",lens:"文化女性主義｜關懷的價值",theory:"關懷、照顧與關係維繫是重要的家庭勞動，不應因沒有薪水而被低估；但也不能因此認定女性天生就應負責照顧。"},
- {time:"10:00 · 上午",clock:"10:00",title:"整理客廳與收拾玩具",emoji:"🧹",room:"客廳",type:"家務整理",focus:"持續性家務",text:"玩具散落一地，生活空間需要整理。家務常常不是做一次便結束，而是持續出現；完成後，孩子又開始玩，工作也可能重新開始。",reflect:"「我開始明白，家務不是偶爾幫忙，而是反覆發生、需要有人持續負責的工作。」",lens:"基進女性主義｜私領域中的性別角色",theory:"為何照顧與整理容易被認為是母親的責任？要檢視傳統性別角色如何在家庭日常中運作，而不是把它當成自然安排。"},
- {time:"11:30 · 中午前",clock:"11:30",title:"洗衣、晾衣與整理衣物",emoji:"🧺",room:"洗衣區",type:"家務整理",focus:"無酬勞動",text:"衣服要分類、清洗、晾曬，之後還要收回和整理。這些工作有前後順序，也需要記住家人的生活需要。若沒有人處理，事情不會自動消失。",reflect:"「每一項家務都有流程。若我沒有做，工作不會消失，只會留給 Jenny。」",lens:"社會主義女性主義｜有薪與無酬勞動",theory:"家務日記能把工作內容具體記錄下來，讓原本不容易被看見的無酬勞動變得可討論，也協助夫妻重新評估分工。"},
- {time:"13:00 · 午後",clock:"13:00",title:"準備午餐與清理廚房",emoji:"🥘",room:"廚房",type:"家務＋育兒",focus:"工作接續工作",text:"準備食物、照顧孩子用餐，飯後還要清理桌面和廚具。完成一餐不代表工作結束，清潔、收拾和下一個照顧需要又接著出現。",reflect:"「我做完一餐，才發現後面還有清潔、收拾和孩子的需要。」",lens:"文化女性主義｜肯定照顧與合作",theory:"家庭福祉不只靠收入，也靠照顧、合作與關係維繫。肯定照顧價值，不代表照顧責任應由女性單獨承擔。"},
- {time:"15:00 · 下午",clock:"15:00",title:"孩子需要你，休息被打斷",emoji:"🧩",room:"遊戲區",type:"育兒照顧",focus:"休息與個人時間",text:"你原本想坐下來休息一下，但孩子又需要協助。照顧者很難完全按照自己的時間表生活，休息也可能被打斷。Jenny 不只要做事情，也要一直記掛孩子的需要。",reflect:"「Jenny 的時間可能不是她自己能完整安排的。她需要的不只是口頭安慰，而是實際分擔。」",lens:"自由主義女性主義｜機會與個人選擇",theory:"當照顧責任集中在 Jenny 身上，她進修、工作和個人發展的選擇可能受到限制。重點是她是否真正有時間與資源作出選擇。"},
- {time:"17:30 · 傍晚",clock:"17:30",title:"晚餐、收拾與家務收尾",emoji:"🍽️",room:"廚房",type:"家務＋育兒",focus:"家庭責任分配",text:"晚餐時間到了。你要安排用餐、照顧孩子，也要收拾餐桌和清潔廚房。一天的工作並不會因為下班而自然結束。",reflect:"「我有工作的壓力，也想做個好父親；但 Jenny 的工作可能沒有明確的下班時間。」",lens:"後現代女性主義｜性別角色如何被建構",theory:"雙方原生家庭都呈現父親賺錢、母親持家的模式。這些經驗可能影響兩人對母職、父職與責任的想像，但不代表只有一種家庭安排是正確答案。"},
- {time:"19:00 · 晚上",clock:"19:00",title:"睡前照顧與準備明天",emoji:"🌙",room:"孩子房間",type:"育兒照顧",focus:"持續的照顧責任",text:"陪孩子準備睡覺、安撫情緒，再把明天需要的東西整理好。即使一天快結束，照顧責任仍然存在。你開始明白，這不是 Jenny 偶爾做一次的事情，而是日常生活的一部分。",reflect:"「我終於感受到，Jenny 的疲累不是因為她不會安排時間，而是她長期承擔大量持續發生的工作。」",lens:"整合女性主義觀點｜平等協商",theory:"改變不只是 Bob 說自己願意幫忙，而是共同承擔照顧、讓 Jenny 有個人發展時間，並持續評估分工是否公平。"},
- {time:"20:00 · 晚上課程時段",clock:"20:00",title:"Jenny 去上課，Bob 接手照顧孩子",emoji:"📚",room:"學習與照顧",type:"共同分擔育兒",focus:"Jenny 的個人發展",text:"現在 Jenny 要去上課。你要自己照顧孩子，讓她有一段真正可以用來學習和發展的時間。這不是「替她看一下孩子」，而是你也承擔家庭照顧責任。",reflect:"「我明白，支持 Jenny 不只是說我支持她上課，而是要實際安排時間、照顧孩子，讓她真的能去。」",lens:"自由主義女性主義｜機會平等與自主",theory:"這一幕直接連結 PPT 的處遇結果：Bob 同意在 Jenny 上課期間照顧孩子，讓她能參與課程，也重新取得個人發展的空間。"}
-];
-let index=0,done=new Set();
-const $=id=>document.getElementById(id);
-function renderRooms(){
- $('rooms').innerHTML=tasks.map((t,i)=>'<button class="room '+(done.has(i)?'done ':'')+(i===index?'active':'')+'" data-i="'+i+'"><span class="emoji">'+t.emoji+'</span><b>'+t.room+'｜'+t.title+'</b><small>'+(done.has(i)?'✓ 已完成':t.time)+'</small></button>').join('');
- document.querySelectorAll('.room').forEach(b=>b.addEventListener('click',()=>{const n=Number(b.dataset.i);if(n<=index||done.has(n)){index=n;render()}}));
-}
-function render(){
- const t=tasks[index],pct=done.size/tasks.length*100;
- $('clock').textContent=t.clock;$('time').textContent=t.time;$('taskTitle').textContent=t.title;$('taskText').textContent=t.text;
- $('taskType').textContent=t.type;$('taskFocus').textContent=t.focus;$('reflection').textContent=t.reflect;
- $('lensTitle').textContent=t.lens;$('lensText').textContent=t.theory;
- $('count').textContent=done.size+' / '+tasks.length+' 完成';$('progress').style.width=pct+'%';$('taskMeter').style.width=pct+'%';
- $('loadMeter').style.width=Math.min(100,done.size*11)+'%';
- $('loadLabel').textContent=done.size===0?'剛開始':done.size<4?'事情逐漸累積':done.size<7?'需要持續投入':'一天接近尾聲';
- $('doBtn').disabled=done.has(index);$('doBtn').textContent=done.has(index)?'這項工作已完成 ✓':'我來完成這項工作';
- $('nextBtn').disabled=!done.has(index)||index===tasks.length-1;
- $('nextBtn').textContent=index===tasks.length-1?'完成今天':'下一個時段 →';
- $('diary').innerHTML=done.size?tasks.map((x,i)=>done.has(i)?'<div class="diary-item"><b>'+x.time+'｜'+x.title+'</b><span>'+x.focus+' · '+x.type+'</span></div>':'').join(''):'<div class="diary-item"><span>還沒有完成的任務。從第一項開始吧。</span></div>';
- renderRooms();
-}
-$('start').addEventListener('click',()=>{$('intro').style.display='none';$('game').style.display='grid';window.scrollTo(0,0);render()});
-$('doBtn').addEventListener('click',()=>{done.add(index);render();if(done.size===tasks.length){$('end').classList.add('show')}});
-$('nextBtn').addEventListener('click',()=>{if(index<tasks.length-1){index++;render()}});
-$('restart').addEventListener('click',()=>{index=0;done.clear();$('end').classList.remove('show');$('intro').style.display='none';$('game').style.display='grid';render();window.scrollTo(0,0)});
-$('backIntro').addEventListener('click',()=>{$('end').classList.remove('show');$('game').style.display='none';$('intro').style.display='block';window.scrollTo(0,0)});
-render();
-</script>
-</body>
-</html>
+const $=id=>document.getElementById(id),c=$('world'),g=c.getContext('2d');let w=innerWidth,h=innerHeight,dpr=1,scene='home',started=false,paused=false,finished=false,idx=0,toastT=0,joy={x:0,y:0},keys={},cam={x:0,y:0},p={x:480,y:470},pointer=null;
+const home=[['07:00','早餐與孩子起床','廚房',340,260,'🍳','孩子醒來了。準備早餐、留意兩個孩子的需要，也要安排早晨時間。','「原來早上不是只做一頓早餐，還要同時安排時間和照顧孩子。」','社會主義女性主義｜無酬勞動','家務與育兒維持家庭運作，卻沒有薪水標籤。不能只用收入衡量家庭成員的貢獻。'],['08:30','照顧孩子、安撫與陪伴','客廳',650,260,'🧸','孩子需要陪伴，也可能哭鬧或突然需要你。你要持續觀察、回應和安撫。','「真正的照顧需要投入注意力，也需要情感支持。」','文化女性主義｜關懷的價值','關懷與關係維繫是重要的家庭勞動，不應因沒有薪水而被低估。'],['10:00','整理客廳與收拾玩具','客廳',650,440,'🧹','玩具散落一地，生活空間需要整理。家務不是做一次便結束，而是持續出現。','「家務不是偶爾幫忙，而是反覆發生、需要有人持續負責。」','基進女性主義｜私領域性別角色','檢視為何照顧與整理容易被認為是母親的責任，以及傳統性別角色如何在家庭日常中運作。'],['11:30','洗衣、晾衣與整理衣物','洗衣區',950,260,'🧺','衣服要分類、清洗、晾曬，之後還要收回和整理。','「每一項家務都有流程。若我沒有做，工作不會消失，只會留給 Jenny。」','社會主義女性主義｜家務日記','家務日記能把工作內容具體記錄下來，讓無酬勞動變得可討論。'],['13:00','準備午餐與清理廚房','廚房',340,260,'🥘','準備食物、照顧孩子用餐，飯後還要清理桌面和廚具。','「我做完一餐，才發現後面還有清潔、收拾和孩子的需要。」','文化女性主義｜照顧與合作','家庭福祉不只靠收入，也靠照顧、合作與關係維繫。'],['15:00','孩子需要你，休息被打斷','遊戲區',650,440,'🧩','你原本想休息，但孩子又需要協助。照顧者很難完全按照自己的時間表生活。','「Jenny 需要的不只是口頭安慰，而是實際分擔。」','自由主義女性主義｜個人選擇','當照顧責任集中在 Jenny 身上，她進修、工作和個人發展的選擇可能受到限制。'],['17:30','晚餐、收拾與家務收尾','廚房',340,260,'🍽️','晚餐時間到了。你要安排用餐、照顧孩子，也要收拾餐桌和清潔廚房。','「我有工作的壓力，也想做個好父親；但 Jenny 的工作可能沒有明確下班時間。」','後現代女性主義｜性別角色建構','雙方原生家庭都呈現父親賺錢、母親持家的模式，影響兩人對母職與父職的想像。'],['19:00','睡前照顧與準備明天','孩子房間',950,440,'🌙','陪孩子準備睡覺、安撫情緒，再把明天需要的東西整理好。','「Jenny 的疲累不是因為她不會安排時間，而是她長期承擔大量工作。」','整合女性主義｜平等協商','改變需要共同承擔照顧、讓 Jenny 有個人發展時間，並持續評估分工是否公平。'],['20:00','Jenny 去上課，Bob 接手照顧孩子','學習空間',950,440,'📚','Jenny 要去上課。你要自己照顧孩子，讓她有真正可以用來學習和發展的時間。','「支持 Jenny 不只是說我支持她上課，而是要實際安排時間。」','自由主義女性主義｜機會平等','案例結果：Bob 同意在 Jenny 上課期間照顧孩子，讓她能參與課程並取得個人發展空間。']];
+const city=[['個別會談：理解 Bob 的壓力','前往城市中的社工會談室',1420,390,'Bob','Bob 是唯一經濟來源，承受經濟責任，也想成為盡責父親，卻覺得工作讓自己沒有足夠時間陪伴孩子。','文化與基進女性主義：看見父職期待與家庭性別角色，也不忽略 Bob 真實的經濟壓力。'],['個別會談：聽見 Jenny 的需要','切換至 Jenny，前往會談室',1420,390,'Jenny','Jenny 主要負責育兒與家務，感到缺乏實際協助與情感支持，也擔心個人發展和獨立。','自由主義女性主義：關注 Jenny 是否仍有進修、工作與個人發展的選擇。'],['家庭協商：建立新的育兒安排','回到家庭，重新協商分工',480,470,'Bob','雙方父母都呈現父親賺錢、母親持家的家庭模式。現在兩人要反思這些期待，並持續檢視新的照顧安排是否公平。','整合處遇：共同對話、重新協商分工，並持續追蹤與調整。']];
+function resize(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;c.style.width=w+'px';c.style.height=h+'px'}addEventListener('resize',resize);resize();
+function target(){return scene==='home'?{x:home[idx][3],y:home[idx][4]}:city[idx].slice(2,4).reduce((a,v,i)=>(a[i?'y':'x']=v,a),{})}
+function distance(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}function close(){return started&&target()&&distance(p,target())<75}
+function say(s){$('toast').textContent=s;$('toast').classList.add('show');toastT=3}
+function updateHud(){let total=home.length+city.length,done=scene==='home'?idx:home.length+idx,t=scene==='home'?home[idx]:city[idx];$('num').textContent=scene==='home'?'家庭日常｜'+(idx+1)+' / '+home.length:'城市探索｜'+(idx+1)+' / '+city.length;$('title').textContent=finished?'旅程完成':scene==='home'?t[1]:t[0];$('hint').textContent=finished?'今天的家庭旅程完成了。':scene==='home'?t[0]+' · '+t[2]:t[1];$('detail').textContent=scene==='home'?t[6]:t[5];$('bar').style.width=(done/total*100)+'%';$('act').disabled=!close();$('act').textContent=close()?'✦ 互動':'接近黃色標記後互動';$('actor').textContent=scene==='home'?'家中探索｜Bob 的視角':'城市探索｜個案會談與協商'}
+function interact(){if(!close()||paused||finished)return;if(scene==='home'){let t=home[idx];say('完成 '+t[1]+'｜'+t[8]+'：'+t[9]);idx++;if(idx>=home.length){scene='city';idx=0;p.x=480;p.y=470;say('你完成了 Bob 的一天。接下來回到城市，繼續個案會談與家庭協商。')}}else{let t=city[idx];if(t[4]==='Jenny'&&activePerson!=='Jenny'){say('這一段需要切換至 Jenny。');return}if(t[4]==='Bob'&&activePerson!=='Bob'){say('這一段需要切換至 Bob。');return}say(t[0]+'｜'+t[6]);idx++;if(idx>=city.length){finished=true;$('end').classList.add('show')}}updateHud()}
+let activePerson='Bob';$('person').onclick=()=>{activePerson=activePerson==='Bob'?'Jenny':'Bob';$('person').textContent='目前：'+activePerson;say('目前角色：'+activePerson)};
+function move(dt){if(!started||paused||finished)return;let x=joy.x,y=joy.y;if(keys.ArrowLeft||keys.a)x--;if(keys.ArrowRight||keys.d)x++;if(keys.ArrowUp||keys.w)y--;if(keys.ArrowDown||keys.s)y++;let n=Math.hypot(x,y);if(n>1){x/=n;y/=n}let nx=p.x+x*200*dt,ny=p.y+y*200*dt;if(scene==='home'){if(nx>45&&nx<1150)p.x=nx;if(ny>65&&ny<650)p.y=ny}else{p.x=Math.max(25,Math.min(1775,nx));p.y=Math.max(25,Math.min(1375,ny))}}
+function person(x,y,name,color){g.fillStyle='#1118';g.beginPath();g.ellipse(x,y+12,18,7,0,0,7);g.fill();g.fillStyle=color;g.fillRect(x-12,y-4,24,26);g.fillStyle='#eac2a3';g.beginPath();g.arc(x,y-15,11,0,7);g.fill();g.fillStyle='#382b35';g.beginPath();g.arc(x,y-20,11,Math.PI,2*Math.PI);g.fill();g.fillStyle='#fff';g.font='bold 12px sans-serif';g.textAlign='center';g.fillText(name,x,y+40)}
+function marker(x,y,label){g.fillStyle='#ffd65e';g.beginPath();g.arc(x,y,13+Math.sin(Date.now()/180)*2,0,7);g.fill();g.fillStyle='#332b36';g.font='bold 12px sans-serif';g.textAlign='center';g.fillText(label,x,y+4);g.fillStyle='#ffd65e';g.font='bold 22px sans-serif';g.fillText('▼',x,y-24)}
+function cityDraw(){g.fillStyle='#293a32';g.fillRect(0,0,1800,1400);for(let y=0;y<1400;y+=72)for(let x=0;x<1800;x+=72){g.fillStyle=((x+y)/72)%2?'#2d3e34':'#293a32';g.fillRect(x+3,y+3,66,66)}g.fillStyle='#39394f';g.fillRect(0,480,1800,170);g.fillRect(790,0,180,1400);const bs=[{x:110,y:100,w:310,h:235,n:'家庭',c:'#465b73'},{x:1240,y:100,w:360,h:260,n:'社工會談室',c:'#416c68'},{x:100,y:900,w:360,h:285,n:'社區空間',c:'#765c50'},{x:510,y:90,w:205,h:220,n:'課程中心',c:'#625c7b'}];bs.forEach(b=>{g.fillStyle=b.c;g.fillRect(b.x,b.y,b.w,b.h);g.fillStyle='#ffffff22';for(let r=0;r<2;r++)for(let x=0;x<3;x++)g.fillRect(b.x+25+x*75,b.y+50+r*75,25,34);g.fillStyle='#fff';g.font='bold 23px sans-serif';g.textAlign='center';g.fillText(b.n,b.x+b.w/2,b.y+b.h+30)});marker(target().x,target().y,'目的地')}
+function homeDraw(){g.fillStyle='#b6a38b';g.fillRect(0,0,1200,720);g.fillStyle='#e8d8c2';g.fillRect(35,55,1130,620);g.fillStyle='#9a7861';g.fillRect(35,55,1130,18);g.fillRect(35,657,1130,18);g.fillRect(35,55,18,620);g.fillRect(1147,55,18,620);g.fillStyle='#c9b59b';g.fillRect(500,55,14,620);g.fillRect(820,55,14,620);g.fillRect(35,350,1130,14);const rooms=[['廚房',60,80,420,245,'#7b6758'],['客廳',530,80,270,245,'#536b75'],['洗衣區',850,80,270,245,'#617b70'],['用餐區',60,390,420,245,'#80684e'],['遊戲區',530,390,270,245,'#74617b'],['孩子房間／學習空間',850,390,270,245,'#5b6d89']];rooms.forEach(r=>{g.fillStyle=r[5];g.fillRect(r[1],r[2],r[3],r[4]);g.fillStyle='#fff3';g.font='bold 20px sans-serif';g.textAlign='left';g.fillText(r[0],r[1]+15,r[2]+30)});g.fillStyle='#a66e57';g.fillRect(100,150,130,70);g.fillStyle='#6c4738';g.fillRect(585,160,150,75);g.fillStyle='#e5d9c8';g.fillRect(875,150,180,85);g.fillStyle='#9b6b4d';g.fillRect(110,460,190,85);g.fillStyle='#d6bd9b';g.fillRect(555,465,210,100);g.fillStyle='#f1d38e';g.fillRect(890,465,170,100);home.forEach(t=>marker(t[3],t[4],t[5]));g.fillStyle='#fff';g.font='bold 13px sans-serif';g.textAlign='center';g.fillText('在家中移動，靠近黃色任務標記並按互動',600,700)}
+function loop(now){if(!loop.last)loop.last=now;let dt=Math.min((now-loop.last)/1000,.04);loop.last=now;move(dt);if(toastT>0){toastT-=dt;if(toastT<=0)$('toast').classList.remove('show')}cam.x=Math.max(0,Math.min((scene==='home'?1200:1800)-w,p.x-w/2));cam.y=Math.max(0,Math.min((scene==='home'?720:1400)-h,p.y-h/2));g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);g.save();g.translate(-cam.x,-cam.y);scene==='home'?homeDraw():cityDraw();person(p.x,p.y,activePerson,activePerson==='Bob'?'#51bdca':'#d68ab8');g.restore();updateHud();requestAnimationFrame(loop)}
+$('start').onclick=()=>{$('intro').classList.remove('show');started=true;scene='home';idx=0;activePerson='Bob';$('person').textContent='目前：Bob';updateHud()};$('act').onclick=interact;$('pause').onclick=()=>{paused=!paused;$('pauseBox').classList.toggle('show',paused)};$('resume').onclick=()=>{paused=false;$('pauseBox').classList.remove('show')};$('again').onclick=()=>{scene='home';idx=0;started=true;paused=false;finished=false;p.x=480;p.y=470;activePerson='Bob';$('person').textContent='目前：Bob';$('end').classList.remove('show');updateHud()};
+addEventListener('keydown',e=>{if(e.key.startsWith('Arrow')||e.key===' ')e.preventDefault();if(e.key===' '||e.key==='e'){interact();return}keys[e.key.length===1?e.key.toLowerCase():e.key]=true});addEventListener('keyup',e=>keys[e.key.length===1?e.key.toLowerCase():e.key]=false);
+const joyEl=$('joy'),knob=$('knob');function joyMove(e){let r=joyEl.getBoundingClientRect(),dx=e.clientX-r.left-r.width/2,dy=e.clientY-r.top-r.height/2,m=r.width*.32,n=Math.hypot(dx,dy),s=n>m?m/n:1;joy.x=dx*s/m;joy.y=dy*s/m;knob.style.transform='translate('+dx*s+'px,'+dy*s+'px)'}joyEl.onpointerdown=e=>{pointer=e.pointerId;joyEl.setPointerCapture(pointer);joyMove(e)};joyEl.onpointermove=e=>{if(e.pointerId===pointer)joyMove(e)};function endJoy(e){if(e.pointerId!==pointer)return;pointer=null;joy={x:0,y:0};knob.style.transform='translate(0,0)'}joyEl.onpointerup=endJoy;joyEl.onpointercancel=endJoy;
+updateHud();requestAnimationFrame(loop);
+</script></body></html>
