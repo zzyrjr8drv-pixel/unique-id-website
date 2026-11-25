@@ -1,159 +1,112 @@
 <!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#17192a"><title>一天的重量｜2D 家庭城市探索</title>
 <style>
 *{box-sizing:border-box}
-:root{--ink:#f7f5fb;--muted:#c2c1d2;--panel:rgba(24,27,46,.94);--line:#ffffff25;--gold:#ffd36b}
+:root{--ink:#f7f5fb;--muted:#c8c7d5;--gold:#ffd36b;--pink:#f18ab0;--deep:#171a2d}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#202234;color:var(--ink);font-family:system-ui,"Noto Sans TC",sans-serif}
 button{font:inherit;cursor:pointer;touch-action:manipulation}
 #world{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
-.hud{position:fixed;z-index:7;top:max(12px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(710px,calc(100vw - 190px));pointer-events:none}
-.card{width:100%;padding:14px 17px;border:1px solid var(--line);border-radius:19px;background:var(--panel);box-shadow:0 12px 35px #08091455;backdrop-filter:blur(14px);pointer-events:auto}
-.kicker{font-size:10px;letter-spacing:.14em;color:#b9b8cc;font-weight:900}
-.title{font-size:clamp(17px,2.4vw,23px);font-weight:950;line-height:1.25;margin:5px 0}
-.hint{color:#ffd989;font-size:13px;font-weight:900}
-.detail{color:var(--muted);font-size:12px;line-height:1.55;margin-top:6px;max-width:70ch}
-.progress{height:5px;background:#ffffff20;border-radius:9px;margin-top:10px;overflow:hidden}
-.progress i{display:block;height:100%;background:linear-gradient(90deg,#ee7ea8,#ffd65e);width:0;transition:width .2s}
-.right{position:fixed;z-index:9;right:14px;top:max(14px,env(safe-area-inset-top));display:flex;align-items:flex-end;flex-direction:column;gap:8px;pointer-events:auto}
-.pill{background:#1c2034ed;border:1px solid #ffffff38;border-radius:12px;color:#fff;padding:10px 13px;font-size:12px;font-weight:850;box-shadow:0 5px 18px #08091444;backdrop-filter:blur(12px)}
-#childNeed{background:linear-gradient(135deg,#8e466d,#c65f88);border-color:#f5a4c1;color:white}
-#pause{background:#2b3049}
-.guide{position:fixed;z-index:6;top:116px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:11px;padding:9px 15px;border:1px solid #fff3;border-radius:16px;background:#171a2def;box-shadow:0 8px 24px #08091455;pointer-events:none;min-width:210px;max-width:min(420px,calc(100vw - 28px))}
-.guide-arrow{flex:0 0 38px;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#ffd36b;color:#292238;font-size:27px;font-weight:1000;line-height:1;transform-origin:center;transition:transform .12s}
-.guide-copy{min-width:0;display:flex;flex-direction:column;gap:2px}
+.hud-shade{position:fixed;z-index:6;top:0;left:0;right:0;height:280px;background:linear-gradient(180deg,rgba(15,18,32,.94) 0%,rgba(15,18,32,.72) 66%,rgba(15,18,32,0) 100%);pointer-events:none}
+.hud{position:fixed;z-index:7;top:max(14px,env(safe-area-inset-top));left:18px;width:min(900px,calc(100vw - 108px));pointer-events:none;text-shadow:0 2px 10px #090b17aa}
+.meta-row{display:flex;align-items:center;gap:12px;min-width:0}
+.brand{font-size:9px;letter-spacing:.19em;font-weight:950;color:#b9b8ca;white-space:nowrap}
+.stage{font-size:10px;font-weight:850;color:#f4dca2;white-space:nowrap}
+.progress{height:3px;width:100%;margin:9px 0 12px;background:#ffffff30;border-radius:10px;overflow:hidden}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,#ed85ad,#ffd36b);width:0;transition:width .25s}
+.title{font-size:clamp(19px,2.5vw,27px);font-weight:950;line-height:1.22;letter-spacing:.01em;margin:0 0 7px;color:#fff}
+.hint{font-size:12px;color:#ffd989;font-weight:900;line-height:1.4}
+.detail{font-size:11px;color:#d1d0dc;line-height:1.5;margin-top:4px;max-width:76ch}
+.guide{display:flex;align-items:center;gap:9px;margin:0 0 7px;min-height:31px;pointer-events:none}
+.guide-arrow{flex:0 0 28px;width:28px;height:28px;border:1.5px solid #ffd36b;border-radius:50%;display:grid;place-items:center;color:#242033;background:#ffd36b;font-size:19px;font-weight:1000;line-height:1;transform-origin:center;transition:transform .12s;box-shadow:0 0 16px #ffd36b4d}
+.guide-copy{min-width:0;display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
 .guide-copy small{font-size:9px;color:#aaa9be;letter-spacing:.12em;font-weight:900}
-.guide-copy b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.guide-copy span{font-size:10px;color:#d2d0df}
+.guide-copy b{font-size:12px;color:#fff;font-weight:950}
+.guide-copy span{font-size:10px;color:#c7c5d4}
 .guide.hidden{display:none}
+.right{position:fixed;z-index:9;right:13px;top:max(14px,env(safe-area-inset-top));display:flex;align-items:center;flex-direction:column;gap:9px;pointer-events:auto}
+.pill{width:46px;height:46px;padding:0;border:1px solid #ffffff35;border-radius:50%;color:#fff;background:rgba(25,28,47,.86);display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:900;box-shadow:0 6px 20px #08091440;backdrop-filter:blur(12px);transition:transform .15s,border-color .15s,background .15s}
+.pill:active{transform:scale(.94)}
+.pill:hover{border-color:#ffd36b;background:#343148}
+#childNeed{color:#ffb2cf;border-color:#df83a65c;background:rgba(92,40,67,.86)}
+#pause{color:#d6d5e2}
+.ui-icon{font-size:17px;line-height:1}
+.button-label{display:none}
 .controls{position:fixed;z-index:5;left:14px;right:14px;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:flex-end;pointer-events:none}
 .joy{width:140px;height:140px;border-radius:50%;border:2px solid #ffffff65;background:#17192378;display:grid;place-items:center;touch-action:none;pointer-events:auto;box-shadow:0 8px 24px #08091444}
 .knob{width:65px;height:65px;border-radius:50%;border:3px solid #ffffffcc;background:#999bb9df;pointer-events:none;box-shadow:inset 0 2px 8px #fff4}
-.action{pointer-events:auto;border:1px solid #fff8;border-radius:17px;padding:15px 20px;background:linear-gradient(145deg,#f5d77e,#eea16c);color:#282032;font-weight:950;min-height:60px;box-shadow:0 8px 24px #08091455}
-.action:disabled{opacity:.62;filter:saturate(.55)}
+.action{pointer-events:auto;border:1px solid #fff9;border-radius:15px;padding:15px 20px;background:linear-gradient(145deg,#f5d77e,#eea16c);color:#282032;font-weight:950;min-height:58px;box-shadow:0 8px 24px #08091455}
+.action:disabled{opacity:.64;filter:saturate(.55)}
 .toast{position:fixed;z-index:10;left:50%;bottom:calc(178px + env(safe-area-inset-bottom));transform:translate(-50%,10px);opacity:0;background:#171923f5;border:1px solid #ffffff28;border-radius:14px;padding:12px 16px;font-size:12px;max-width:min(520px,88vw);text-align:center;line-height:1.55;box-shadow:0 10px 28px #08091466;transition:.2s;pointer-events:none}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .overlay{position:fixed;z-index:12;inset:0;display:none;place-items:center;padding:16px;background:#10121ddd;backdrop-filter:blur(7px)}
 .overlay.show{display:grid}
-.modal{width:min(640px,100%);max-height:90vh;overflow:auto;padding:23px;border-radius:22px;background:#1b1e32;border:1px solid #ffffff28;box-shadow:0 25px 80px #0008}
+.modal{width:min(640px,100%);max-height:90vh;overflow:auto;padding:24px;border-radius:22px;background:linear-gradient(145deg,#242840,#191c30);border:1px solid #ffffff28;box-shadow:0 25px 80px #0008}
 .modal h2{margin:7px 0;font-size:24px}
 .modal p{font-size:13px;line-height:1.8;color:#c9c8d6}
 .primary{width:100%;border:0;border-radius:13px;padding:14px;background:linear-gradient(110deg,#f0c96d,#e99b67);font-weight:950;color:#282033}
 .theories{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .theories div{background:#292c43;padding:10px;border-radius:10px;font-size:11px;line-height:1.7}
 .theories b{display:block;color:#f3c96f}
-.actor{position:fixed;left:14px;bottom:175px;z-index:3;background:#171923c9;padding:7px 10px;border-radius:9px;font-size:10px;pointer-events:none}
+.actor{display:none}
+@media(min-width:700px){
+ .hud{top:20px;left:24px;width:min(920px,calc(100vw - 120px))}
+ .right{right:20px;top:20px;gap:10px}
+ .pill{width:auto;min-width:46px;padding:0 14px;border-radius:14px;justify-content:flex-start}
+ .button-label{display:inline;font-size:11px}
+ .ui-icon{font-size:15px}
+ .guide{margin-bottom:8px}
+ .detail{font-size:12px}
+}
 @media(max-width:600px){
- .hud{top:max(7px,env(safe-area-inset-top));width:calc(100vw - 16px)}
- .card{padding:10px 12px;border-radius:15px}
- .kicker{font-size:9px}
- .title{font-size:17px;margin:3px 0}
- .hint{font-size:11px}
- .detail{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:10px;line-height:1.4;margin-top:5px}
- .progress{margin-top:7px;height:4px}
- .right{top:calc(142px + env(safe-area-inset-top));left:9px;right:9px;display:flex;flex-direction:row;justify-content:space-between;gap:6px}
- .pill{flex:1;padding:9px 7px;font-size:10px;white-space:nowrap;border-radius:11px}
- .guide{top:calc(190px + env(safe-area-inset-top));min-width:0;width:max-content;max-width:calc(100vw - 28px);padding:7px 11px;gap:8px;border-radius:13px}
- .guide-arrow{width:33px;height:33px;flex-basis:33px;font-size:23px;border-radius:10px}
+ .hud-shade{height:255px;background:linear-gradient(180deg,rgba(15,18,32,.96) 0%,rgba(15,18,32,.78) 73%,rgba(15,18,32,0) 100%)}
+ .hud{top:max(9px,env(safe-area-inset-top));left:12px;width:calc(100vw - 70px)}
+ .meta-row{gap:8px}
+ .brand{font-size:8px;letter-spacing:.14em}
+ .stage{font-size:9px}
+ .progress{margin:7px 0 9px;height:3px}
+ .title{font-size:17px;line-height:1.24;margin-bottom:6px;max-width:100%}
+ .guide{gap:7px;margin-bottom:6px;min-height:27px}
+ .guide-arrow{flex-basis:25px;width:25px;height:25px;font-size:17px}
+ .guide-copy{gap:5px}
  .guide-copy small{font-size:8px}
- .guide-copy b{font-size:12px}
+ .guide-copy b{font-size:11px}
  .guide-copy span{font-size:9px}
+ .hint{font-size:10px}
+ .detail{font-size:10px;line-height:1.4;margin-top:4px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+ .right{top:max(10px,env(safe-area-inset-top));right:9px;gap:7px}
+ .pill{width:39px;height:39px;min-width:39px}
+ .ui-icon{font-size:15px}
+ .controls{left:10px;right:10px;bottom:calc(12px + env(safe-area-inset-bottom))}
  .joy{width:116px;height:116px}
  .knob{width:55px;height:55px}
- .action{font-size:12px;padding:12px 14px;min-height:53px}
- .controls{left:10px;right:10px;bottom:calc(12px + env(safe-area-inset-bottom))}
- .actor{display:none}
+ .action{font-size:11px;padding:12px 13px;min-height:51px;border-radius:13px}
  .toast{bottom:calc(142px + env(safe-area-inset-bottom));font-size:11px}
  .theories{grid-template-columns:1fr}
 }
 @media(max-height:650px) and (max-width:600px){
+ .hud-shade{height:205px}
  .detail{display:none}
- .right{top:calc(105px + env(safe-area-inset-top))}
- .guide{top:calc(150px + env(safe-area-inset-top))}
- .joy{width:94px;height:94px}
- .knob{width:45px;height:45px}
-}
-
-/* Full visual refresh: preserve all game content and mechanics */
-:root{
- --ink:#fffaf3;--muted:#d2c8c2;--panel:rgba(36,31,43,.94);--line:#f8e6d633;--gold:#f6c86f;
- --rose:#dc8c9d;--sage:#9ab7a1;--plum:#4b3d53;
-}
-html,body{background:#282a35;color:var(--ink);font-family:ui-rounded,"Avenir Next",system-ui,"Noto Sans TC",sans-serif}
-#world{background:radial-gradient(ellipse at 50% 20%,#59605b 0%,#30333d 58%,#252733 100%)}
-.hud{left:18px;top:max(18px,env(safe-area-inset-top));transform:none;width:min(560px,calc(100vw - 250px))}
-.card{padding:17px 20px;border:1px solid #f4dfc44a;border-radius:22px;background:linear-gradient(145deg,rgba(54,45,57,.96),rgba(34,37,48,.94));box-shadow:0 16px 42px #15131d70, inset 0 1px #ffffff18;backdrop-filter:blur(18px)}
-.kicker{color:#d8bfae;font-size:10px;letter-spacing:.18em}
-.title{color:#fff8ed;font-size:clamp(19px,2.4vw,25px);letter-spacing:.01em;margin:7px 0}
-.hint{display:inline-flex;align-items:center;gap:7px;color:#ffe0a0;background:#f4c96e18;border:1px solid #f4c96e38;padding:5px 9px;border-radius:8px;font-size:12px}
-.detail{color:#ded3ce;font-size:12px;line-height:1.65;margin-top:10px}
-.progress{height:7px;background:#ffffff17;border-radius:99px;margin-top:13px}
-.progress i{border-radius:99px;background:linear-gradient(90deg,#d887a0,#f5c86d,#b4c99e);box-shadow:0 0 12px #f5c86d66}
-.right{right:18px;top:max(18px,env(safe-area-inset-top));align-items:stretch;gap:9px}
-.pill{border:1px solid #f5e5d23b;border-radius:14px;background:linear-gradient(145deg,#494253ed,#303342ed);color:#fff8ef;padding:11px 16px;font-size:12px;letter-spacing:.01em;box-shadow:0 8px 22px #17151e55,inset 0 1px #ffffff18;transition:transform .16s,border-color .16s,filter .16s}
-.pill:active,.action:active,.primary:active{transform:translateY(2px) scale(.985)}
-#childNeed{background:linear-gradient(130deg,#a65372,#ce7890);border-color:#f4b4c4;color:white;box-shadow:0 8px 22px #6c344b66,inset 0 1px #ffffff35}
-#pause{background:linear-gradient(130deg,#515c67,#37404d)}
-.guide{top:150px;left:18px;transform:none;min-width:255px;max-width:min(390px,calc(100vw - 36px));padding:10px 14px;border:1px solid #f7df9b66;border-radius:17px;background:linear-gradient(120deg,rgba(58,48,55,.97),rgba(38,42,52,.97));box-shadow:0 12px 30px #15131d77,inset 0 1px #ffffff1c}
-.guide-arrow{background:linear-gradient(145deg,#ffe5a0,#f0bd5e);color:#443346;border-radius:13px;box-shadow:0 3px 12px #e7b85c55}
-.guide-copy small{color:#d8bca9;font-size:9px;letter-spacing:.15em}
-.guide-copy b{color:#fff6e9;font-size:14px}
-.guide-copy span{color:#e1d6cf;font-size:10px}
-.controls{left:22px;right:22px;bottom:calc(22px + env(safe-area-inset-bottom))}
-.joy{width:146px;height:146px;border:1px solid #f9e9d777;background:radial-gradient(circle at 35% 28%,#73727c99,#292c3dbb);box-shadow:0 12px 28px #17151e66,inset 0 1px 12px #ffffff20;backdrop-filter:blur(8px)}
-.knob{width:66px;height:66px;border:2px solid #fff9;background:linear-gradient(145deg,#d8d0d0,#8c91a1);box-shadow:0 5px 16px #17151e77,inset 0 2px 5px #ffffffaa}
-.action{border:1px solid #fff0cf;border-radius:17px;padding:16px 23px;background:linear-gradient(135deg,#ffe19a,#edb66c 60%,#d99b78);color:#493448;font-size:14px;letter-spacing:.02em;min-height:60px;box-shadow:0 12px 26px #17151e66,inset 0 1px #ffffffa6;transition:transform .16s,filter .16s}
-.action:disabled{opacity:.72;filter:saturate(.45);box-shadow:0 7px 18px #17151e44}
-.toast{bottom:calc(190px + env(safe-area-inset-bottom));border:1px solid #f4dfc44a;border-radius:16px;background:linear-gradient(145deg,#403747f7,#292d3af7);color:#fff6e9;padding:13px 18px;box-shadow:0 14px 35px #11131b88}
-.overlay{background:linear-gradient(135deg,#191a25df,#302634e8);backdrop-filter:blur(12px)}
-.modal{width:min(680px,100%);padding:clamp(22px,4vw,34px);border:1px solid #f4dfc455;border-radius:26px;background:linear-gradient(150deg,#403747,#282e3b 75%);box-shadow:0 30px 90px #10111bb8,inset 0 1px #ffffff1d}
-.modal .kicker{color:#e6bb9c}
-.modal h2{color:#fff5e8;font-size:clamp(23px,4vw,30px);line-height:1.25;margin:10px 0 16px}
-.modal h3{color:#f6d79c;font-size:15px;margin:22px 0 10px}
-.modal p{color:#e0d6d1;font-size:13px;line-height:1.9}
-.primary{border:1px solid #fff0cf;border-radius:15px;padding:15px 18px;background:linear-gradient(120deg,#ffe09a,#e9b16e 65%,#d88e82);color:#493448;font-size:14px;box-shadow:0 8px 20px #15131d55,inset 0 1px #ffffffa6;transition:transform .16s,filter .16s}
-.theories{gap:10px}
-.theories div{border:1px solid #ffffff14;border-radius:13px;background:linear-gradient(145deg,#555064,#3c4350);padding:13px;color:#e7ded9;font-size:11px;line-height:1.75}
-.theories b{color:#f6d79c;font-size:12px;margin-bottom:3px}
-.actor{border:1px solid #ffffff22;border-radius:10px;background:#292d3ddd;color:#eee3d9}
-button:focus-visible{outline:3px solid #ffe19a;outline-offset:3px}
-@media(max-width:700px){
- .hud{left:9px;right:9px;top:max(8px,env(safe-area-inset-top));width:auto}
- .card{padding:12px 14px;border-radius:17px}
- .kicker{font-size:8px}
- .title{font-size:18px;margin:5px 0}
- .hint{font-size:10px;padding:4px 7px}
- .detail{font-size:10px;line-height:1.5;margin-top:7px;-webkit-line-clamp:2}
- .progress{height:5px;margin-top:9px}
- .right{top:calc(137px + env(safe-area-inset-top));left:9px;right:9px;gap:6px;flex-direction:row;align-items:stretch}
- .pill{flex:1;min-width:0;padding:9px 6px;font-size:10px;border-radius:11px}
- .guide{top:calc(184px + env(safe-area-inset-top));left:9px;right:9px;width:auto;min-width:0;max-width:none;padding:8px 11px;border-radius:14px}
- .guide-arrow{width:34px;height:34px;flex-basis:34px;font-size:23px}
- .guide-copy b{font-size:12px}
- .guide-copy span{font-size:9px}
- .controls{left:12px;right:12px;bottom:calc(13px + env(safe-area-inset-bottom))}
- .joy{width:112px;height:112px}
- .knob{width:52px;height:52px}
- .action{font-size:11px;padding:12px 14px;min-height:52px;border-radius:14px;max-width:58vw}
- .toast{bottom:calc(139px + env(safe-area-inset-bottom));font-size:11px}
- .modal{padding:22px 18px;border-radius:21px;max-height:88vh}
- .modal h2{font-size:23px}
- .theories{grid-template-columns:1fr 1fr;gap:7px}
- .theories div{padding:10px;font-size:10px}
- .theories b{font-size:11px}
-}
-@media(max-height:650px) and (max-width:700px){
- .detail{display:none}
- .right{top:calc(101px + env(safe-area-inset-top))}
- .guide{top:calc(146px + env(safe-area-inset-top))}
- .joy{width:88px;height:88px}
- .knob{width:43px;height:43px}
- .controls{bottom:calc(9px + env(safe-area-inset-bottom))}
- .action{min-height:46px}
- .modal{max-height:84vh}
+ .right{top:max(7px,env(safe-area-inset-top));gap:5px}
+ .pill{width:34px;height:34px;min-width:34px}
+ .controls{bottom:calc(8px + env(safe-area-inset-bottom))}
+ .joy{width:92px;height:92px}
+ .knob{width:44px;height:44px}
+ .action{min-height:45px}
 }
 </style></head><body><canvas id="world"></canvas>
-<div class="hud"><div class="card"><div class="kicker" id="num">FAMILY DAY</div><div class="title" id="title">先看見 Jenny 的一天</div><div class="hint" id="hint">準備進入家中</div><div class="detail" id="detail"></div><div class="progress"><i id="bar"></i></div></div></div>
-<div class="right"><button class="pill" id="person">目前：Bob</button><button class="pill" id="childNeed">孩子需要你 ♥</button><button class="pill" id="pause">暫停</button></div>
-<div class="guide hidden" id="guide"><div class="guide-arrow" id="guideArrow">➤</div><div class="guide-copy"><small>方向指引｜只標示目前任務</small><b id="guideName">廚房</b><span id="guideDistance">開始後顯示方向</span></div></div>
+<div class="hud-shade"></div>
+<div class="hud">
+ <div class="meta-row"><span class="brand">THE WEIGHT OF A DAY</span><span class="stage" id="num">FAMILY DAY</span></div>
+ <div class="progress"><i id="bar"></i></div>
+ <div class="title" id="title">先看見 Jenny 的一天</div>
+ <div class="guide hidden" id="guide"><div class="guide-arrow" id="guideArrow">➤</div><div class="guide-copy"><small>目的地</small><b id="guideName">廚房</b><span id="guideDistance">開始後顯示方向</span></div></div>
+ <div class="hint" id="hint">準備進入家中</div>
+ <div class="detail" id="detail"></div>
+</div>
+<div class="right">
+ <button class="pill" id="person" aria-label="切換角色" title="切換角色"><span class="ui-icon">⇄</span><span class="button-label" id="personLabel">Bob</span></button>
+ <button class="pill" id="childNeed" aria-label="孩子需要你" title="孩子需要你"><span class="ui-icon">♥</span><span class="button-label">孩子需要你</span></button>
+ <button class="pill" id="pause" aria-label="暫停" title="暫停"><span class="ui-icon">Ⅱ</span><span class="button-label">暫停</span></button>
+</div>
 <div class="actor" id="actor">2D 家庭場景｜Bob 的視角</div>
 <div class="controls"><div class="joy" id="joy"><div class="knob" id="knob"></div></div><button class="action" id="act" disabled>接近黃色標記後互動</button></div><div class="toast" id="toast"></div>
 <div class="overlay show" id="intro"><div class="modal"><div class="kicker">A DAY IN JENNY'S SHOES</div><h2>先從 Jenny 的一天開始</h2><p>第二個孩子出生後，Jenny 辭去工作，主要負責照顧孩子和處理家務。她感到育兒壓力，也覺得 Bob 缺乏實際協助與情感支持。她希望自己的需要、獨立與個人發展也能被看見。</p><p>Bob 是家中唯一的經濟來源，承受經濟壓力，也希望成為好父親；但他未必真正理解 Jenny 每天承擔的照顧工作。</p><p><b>現在你將以 Bob 的視角進入 2D 家庭場景。</b>在家中走動，逐一完成 Jenny 平常承擔的家務與育兒任務。早餐、洗衣等是體驗用的模擬任務，不是聲稱案例逐項記載的事實。</p><button class="primary" id="start">進入家中，接手 Jenny 的一天 →</button></div></div>
@@ -170,7 +123,7 @@ function distance(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}function close(){retur
 function say(s){$('toast').textContent=s;$('toast').classList.add('show');toastT=3}
 function updateHud(){const total=home.length+city.length,done=scene==='home'?idx:home.length+idx,t=scene==='home'?home[idx]:city[idx],goal=target(),near=close();$('num').textContent=scene==='home'?'家庭日常｜'+Math.min(idx+1,home.length)+' / '+home.length:'城市探索｜'+Math.min(idx+1,city.length)+' / '+city.length;$('title').textContent=finished?'旅程完成':scene==='home'?(t?t[1]:'家庭日常完成'):(t?t[0]:'城市探索完成');$('hint').textContent=finished?'今天的家庭旅程完成了。':scene==='home'?(t?t[0]+' · '+t[2]:'即將進入城市探索'):(t?t[1]:'旅程完成');$('detail').textContent=finished?'你已完成所有任務。':scene==='home'?(t?t[6]:''):(t?t[5]:'');$('bar').style.width=(Math.min(done,total)/total*100)+'%';$('act').disabled=!near||paused||finished;$('act').textContent=near?'✦ 已抵達｜開始互動':'跟隨箭頭前往目標';$('actor').textContent=scene==='home'?'家中探索｜Bob 的視角':'城市探索｜個案會談與協商';$('guide').classList.toggle('hidden',!started||finished||paused||!goal);if(goal){const dx=goal.x-p.x,dy=goal.y-p.y,angle=Math.atan2(dy,dx)*180/Math.PI;$('guideArrow').style.transform='rotate('+angle+'deg)';$('guideName').textContent=scene==='home'?home[idx][2]:(city[idx][1].replace(/^前往/,'').replace(/^切換至Jenny，/,'')||'任務地點');$('guideDistance').textContent=near?'已到達目的地，可以按下互動':distance(p,goal)<170?'目標就在附近':'依箭頭方向移動，前往目前任務';}}
 function interact(){if(!close()||paused||finished)return;if(scene==='home'){let t=home[idx];say('完成 '+t[1]+'｜'+t[8]+'：'+t[9]);idx++;if(idx>=home.length){scene='city';idx=0;p.x=480;p.y=470;say('你完成了 Bob 的一天。接下來回到城市，繼續個案會談與家庭協商。')}}else{let t=city[idx];if(t[4]==='Jenny'&&activePerson!=='Jenny'){say('這一段需要切換至 Jenny。');return}if(t[4]==='Bob'&&activePerson!=='Bob'){say('這一段需要切換至 Bob。');return}say(t[0]+'｜'+t[6]);idx++;if(idx>=city.length){finished=true;$('end').classList.add('show')}}updateHud()}
-let activePerson='Bob';$('person').onclick=()=>{activePerson=activePerson==='Bob'?'Jenny':'Bob';$('person').textContent='目前：'+activePerson;say('目前角色：'+activePerson)};
+let activePerson='Bob';$('person').onclick=()=>{activePerson=activePerson==='Bob'?'Jenny':'Bob';$('personLabel').textContent=activePerson;$('person').setAttribute('aria-label','目前角色：'+activePerson+'；點擊切換');say('目前角色：'+activePerson)};
 function move(dt){if(!started||paused||finished)return;let x=joy.x,y=joy.y;if(keys.ArrowLeft||keys.a)x--;if(keys.ArrowRight||keys.d)x++;if(keys.ArrowUp||keys.w)y--;if(keys.ArrowDown||keys.s)y++;let n=Math.hypot(x,y);if(n>1){x/=n;y/=n}let nx=p.x+x*200*dt,ny=p.y+y*200*dt;if(scene==='home'){if(nx>45&&nx<1150)p.x=nx;if(ny>65&&ny<650)p.y=ny}else{p.x=Math.max(25,Math.min(1775,nx));p.y=Math.max(25,Math.min(1375,ny))}}
 function person(x,y,name,color){g.fillStyle='#1118';g.beginPath();g.ellipse(x,y+12,18,7,0,0,7);g.fill();g.fillStyle=color;g.fillRect(x-12,y-4,24,26);g.fillStyle='#eac2a3';g.beginPath();g.arc(x,y-15,11,0,7);g.fill();g.fillStyle='#382b35';g.beginPath();g.arc(x,y-20,11,Math.PI,2*Math.PI);g.fill();g.fillStyle='#fff';g.font='bold 12px sans-serif';g.textAlign='center';g.fillText(name,x,y+40)}
 function marker(x,y,label){g.save();g.shadowColor='#ffd65e';g.shadowBlur=16;g.fillStyle='#fff1b8';g.beginPath();g.arc(x,y,19,0,Math.PI*2);g.fill();g.shadowBlur=0;g.strokeStyle='#754c25';g.lineWidth=4;g.beginPath();g.arc(x,y,19,0,Math.PI*2);g.stroke();g.fillStyle='#443047';g.font='900 12px sans-serif';g.textAlign='center';g.fillText('目標',x,y+4);g.fillStyle='#fff1b8';g.font='900 25px sans-serif';g.fillText('▼',x,y-29);g.restore()}
@@ -178,7 +131,7 @@ function drawGuideArrow(){const t=target();if(!t)return;const dx=t.x-p.x,dy=t.y-
 function cityDraw(){g.fillStyle='#293a32';g.fillRect(0,0,1800,1400);for(let y=0;y<1400;y+=72)for(let x=0;x<1800;x+=72){g.fillStyle=((x+y)/72)%2?'#2d3e34':'#293a32';g.fillRect(x+3,y+3,66,66)}g.fillStyle='#39394f';g.fillRect(0,480,1800,170);g.fillRect(790,0,180,1400);const bs=[{x:110,y:100,w:310,h:235,n:'家庭',c:'#465b73'},{x:1240,y:100,w:360,h:260,n:'社工會談室',c:'#416c68'},{x:100,y:900,w:360,h:285,n:'社區空間',c:'#765c50'},{x:510,y:90,w:205,h:220,n:'課程中心',c:'#625c7b'}];bs.forEach(b=>{g.fillStyle=b.c;g.fillRect(b.x,b.y,b.w,b.h);g.fillStyle='#ffffff22';for(let r=0;r<2;r++)for(let x=0;x<3;x++)g.fillRect(b.x+25+x*75,b.y+50+r*75,25,34);g.fillStyle='#fff';g.font='bold 23px sans-serif';g.textAlign='center';g.fillText(b.n,b.x+b.w/2,b.y+b.h+30)});const goal=target();if(goal)marker(goal.x,goal.y,'目前任務')}
 function homeDraw(){g.fillStyle='#b6a38b';g.fillRect(0,0,1200,720);g.fillStyle='#e8d8c2';g.fillRect(35,55,1130,620);g.fillStyle='#9a7861';g.fillRect(35,55,1130,18);g.fillRect(35,657,1130,18);g.fillRect(35,55,18,620);g.fillRect(1147,55,18,620);g.fillStyle='#c9b59b';g.fillRect(500,55,14,620);g.fillRect(820,55,14,620);g.fillRect(35,350,1130,14);const rooms=[['廚房',60,80,420,245,'#7b6758'],['客廳',530,80,270,245,'#536b75'],['洗衣區',850,80,270,245,'#617b70'],['用餐區',60,390,420,245,'#80684e'],['遊戲區',530,390,270,245,'#74617b'],['孩子房間／學習空間',850,390,270,245,'#5b6d89']];rooms.forEach(r=>{g.fillStyle=r[5];g.fillRect(r[1],r[2],r[3],r[4]);g.fillStyle='#fff3';g.font='bold 20px sans-serif';g.textAlign='left';g.fillText(r[0],r[1]+15,r[2]+30)});g.fillStyle='#a66e57';g.fillRect(100,150,130,70);g.fillStyle='#6c4738';g.fillRect(585,160,150,75);g.fillStyle='#e5d9c8';g.fillRect(875,150,180,85);g.fillStyle='#9b6b4d';g.fillRect(110,460,190,85);g.fillStyle='#d6bd9b';g.fillRect(555,465,210,100);g.fillStyle='#f1d38e';g.fillRect(890,465,170,100);if(home[idx])marker(home[idx][3],home[idx][4],home[idx][5]);g.fillStyle='#fff';g.font='bold 13px sans-serif';g.textAlign='center';g.fillText('在家中移動，靠近黃色任務標記並按互動',600,700)}
 function loop(now){if(!loop.last)loop.last=now;let dt=Math.min((now-loop.last)/1000,.04);loop.last=now;move(dt);if(toastT>0){toastT-=dt;if(toastT<=0)$('toast').classList.remove('show')}cam.x=Math.max(0,Math.min((scene==='home'?1200:1800)-w,p.x-w/2));cam.y=Math.max(0,Math.min((scene==='home'?720:1400)-h,p.y-h/2));g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);g.save();g.translate(-cam.x,-cam.y);scene==='home'?homeDraw():cityDraw();person(p.x,p.y,activePerson,activePerson==='Bob'?'#51bdca':'#d68ab8');drawGuideArrow();g.restore();updateHud();requestAnimationFrame(loop)}
-$('start').onclick=()=>{$('intro').classList.remove('show');started=true;scene='home';idx=0;activePerson='Bob';$('person').textContent='目前：Bob';updateHud()};$('act').onclick=interact;$('childNeed').onclick=()=>{const t=scene==='home'?home[idx]:city[idx];const need=scene==='home'&&t?t[6]:scene==='city'&&t?t[5]:'孩子需要你的陪伴與照顧。請先完成目前的家庭任務。';$('childNeedText').textContent=need;$('childNeedBox').classList.add('show')};$('childNeedClose').onclick=()=>{$('childNeedBox').classList.remove('show')};$('pause').onclick=()=>{paused=!paused;$('pauseBox').classList.toggle('show',paused)};$('resume').onclick=()=>{paused=false;$('pauseBox').classList.remove('show')};$('again').onclick=()=>{scene='home';idx=0;started=true;paused=false;finished=false;p.x=480;p.y=470;activePerson='Bob';$('person').textContent='目前：Bob';$('end').classList.remove('show');updateHud()};
+$('start').onclick=()=>{$('intro').classList.remove('show');started=true;scene='home';idx=0;activePerson='Bob';$('personLabel').textContent='Bob';$('person').setAttribute('aria-label','目前角色：Bob；點擊切換');updateHud()};$('act').onclick=interact;$('childNeed').onclick=()=>{const t=scene==='home'?home[idx]:city[idx];const need=scene==='home'&&t?t[6]:scene==='city'&&t?t[5]:'孩子需要你的陪伴與照顧。請先完成目前的家庭任務。';$('childNeedText').textContent=need;$('childNeedBox').classList.add('show')};$('childNeedClose').onclick=()=>{$('childNeedBox').classList.remove('show')};$('pause').onclick=()=>{paused=!paused;$('pauseBox').classList.toggle('show',paused)};$('resume').onclick=()=>{paused=false;$('pauseBox').classList.remove('show')};$('again').onclick=()=>{scene='home';idx=0;started=true;paused=false;finished=false;p.x=480;p.y=470;activePerson='Bob';$('personLabel').textContent='Bob';$('person').setAttribute('aria-label','目前角色：Bob；點擊切換');$('end').classList.remove('show');updateHud()};
 addEventListener('keydown',e=>{if(e.key.startsWith('Arrow')||e.key===' ')e.preventDefault();if(e.key===' '||e.key==='e'){interact();return}keys[e.key.length===1?e.key.toLowerCase():e.key]=true});addEventListener('keyup',e=>keys[e.key.length===1?e.key.toLowerCase():e.key]=false);
 const joyEl=$('joy'),knob=$('knob');function joyMove(e){let r=joyEl.getBoundingClientRect(),dx=e.clientX-r.left-r.width/2,dy=e.clientY-r.top-r.height/2,m=r.width*.32,n=Math.hypot(dx,dy),s=n>m?m/n:1;joy.x=dx*s/m;joy.y=dy*s/m;knob.style.transform='translate('+dx*s+'px,'+dy*s+'px)'}joyEl.onpointerdown=e=>{pointer=e.pointerId;joyEl.setPointerCapture(pointer);joyMove(e)};joyEl.onpointermove=e=>{if(e.pointerId===pointer)joyMove(e)};function endJoy(e){if(e.pointerId!==pointer)return;pointer=null;joy={x:0,y:0};knob.style.transform='translate(0,0)'}joyEl.onpointerup=endJoy;joyEl.onpointercancel=endJoy;
 updateHud();requestAnimationFrame(loop);
