@@ -6,7 +6,7 @@
 <div class="actor-label" id="actorLabel">目前操控：Bob</div><div class="controls"><div class="joystick" id="joystick" aria-label="虛擬方向搖桿"><span class="joy-label joy-up">▲</span><span class="joy-label joy-down">▼</span><span class="joy-label joy-left">◀</span><span class="joy-label joy-right">▶</span><div class="knob" id="knob"></div></div><div class="actions"><div class="control-tip" id="actorTip">角色正確，可以出發！</div><button class="action-button" id="actionButton" disabled>接近目標後互動</button></div></div>
 <div class="toast" id="toast"></div><div class="overlay" id="pauseOverlay"><div class="modal"><div class="eyebrow">PAUSED</div><h2>先休息一下</h2><p>你的行程已暫停。準備好後可以繼續探索城市。</p><button class="primary" id="resumeButton">繼續遊戲</button></div></div>
 <div class="overlay" id="finishOverlay"><div class="modal"><div class="eyebrow">DAY COMPLETE · 4 / 4</div><h2>今晚，兩個人都辛苦了。</h2><p id="finishText"></p><button class="primary" id="againButton">再玩一次</button></div></div><button id="restartButton" style="position:fixed;right:12px;bottom:12px;width:2px;height:2px;opacity:0">restart</button>
-<script>const canvas=$('world'),ctx=canvas.getContext('2d');
+<script>const $=id=>document.getElementById(id);const canvas=$('world'),ctx=canvas.getContext('2d');
 const W=1800,H=1400,players={bob:{x:480,y:380,name:'Bob',skin:'#e9bd99',hair:'#342a34',shirt:'#51bdca'},jenny:{x:555,y:380,name:'Jenny',skin:'#f1c8a8',hair:'#362b3b',shirt:'#d68ab8'}};
 const tasks=[
 {actor:'bob',title:'去便利商店買宵夜',hint:'跟著黃色箭頭前進',detail:'孩子睡了，家裡想吃點宵夜。控制 Bob 走到便利商店門口，按下互動。',target:{x:1420,y:390},place:'便利商店',done:'Bob 買好了宵夜，也記得 Jenny 喜歡的口味。'},
