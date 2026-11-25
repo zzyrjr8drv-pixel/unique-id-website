@@ -18,6 +18,64 @@ section{padding:76px 0}section.alt{background:var(--band)}.kicker{font-size:12px
 
 .sim-meter-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0 8px}.sim-meter>div:first-child{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px}.sim-meter strong{color:var(--jenny);font-variant-numeric:tabular-nums}.sim-track{height:10px;background:#e9e6e1;border-radius:99px;overflow:hidden}.sim-track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--bob),var(--jenny));border-radius:99px;transition:width .35s}.sim-scene{max-width:800px;margin:auto;padding:8px 0}.sim-scene h3{font:900 clamp(25px,4vw,34px) var(--serif);margin:10px 0}.sim-dialogue{display:flex;gap:13px;align-items:flex-start;background:#f5f3ef;border-radius:10px;padding:13px 15px;margin:10px 0}.sim-dialogue b{min-width:54px;color:var(--bob)}.sim-dialogue span{font-size:14px}.task-list{display:grid;gap:12px;margin:20px 0}.task-card{border:1px solid var(--line);border-radius:12px;padding:15px;background:#faf9f7}.task-card.done{opacity:.72;border-color:#8bb9a2;background:#f0f7f2}.task-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.task-head h4{margin:0;font:800 19px var(--serif)}.task-weight{font-size:12px;color:var(--muted);white-space:nowrap}.task-card p{font-size:13px;color:var(--muted);margin:5px 0 12px}.assign-row{display:flex;gap:8px;flex-wrap:wrap}.assign-btn{border:1px solid var(--line);background:white;border-radius:8px;padding:8px 13px;font-size:13px;font-weight:700;color:var(--ink)}.assign-btn:hover{border-color:var(--bob);background:#eef5f5}.assign-btn:disabled{opacity:.4;cursor:not-allowed}.task-result{font-size:12px;font-weight:700;color:#287d5a;margin-top:8px}.sim-choice{display:grid;gap:9px;margin:18px 0}.sim-choice button{border:1px solid var(--line);background:#faf9f7;border-radius:9px;padding:13px 15px;text-align:left;color:var(--ink)}.sim-choice button:hover{border-color:var(--bob)}.sim-outcome{padding:17px;background:#f2f0eb;border-left:4px solid var(--gold);border-radius:8px;margin:16px 0}.sim-outcome b{display:block;margin-bottom:4px}.sim-ending{text-align:center;padding:30px 8px}.sim-ending .big{font:900 48px var(--serif);color:var(--bob)}.sim-ending h3{font:900 30px var(--serif)}.sim-ending p{color:var(--muted)}@media(max-width:600px){.sim-meter-grid{grid-template-columns:1fr}.task-head{display:block}.task-weight{display:block;margin-top:4px}}
 
+
+/* New original household-simulation interface */
+.sim-hud{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.sim-brand span{display:block;font-size:10px;letter-spacing:.18em;font-weight:900;color:var(--muted)}
+.sim-brand strong{display:block;font:900 23px var(--serif);margin-top:2px}
+.sim-stats{display:grid;grid-template-columns:repeat(4,minmax(68px,1fr));gap:8px}
+.sim-stats>div{padding:8px 11px;background:#f5f3ef;border-radius:9px;text-align:center}
+.sim-stats small{display:block;font-size:10px;color:var(--muted)}
+.sim-stats b{display:block;font-size:16px;color:var(--jenny);font-variant-numeric:tabular-nums}
+.sim-meter-grid{margin:18px 0}
+.sim-meter>small{display:block;margin-top:5px;font-size:10px;color:var(--muted)}
+.sim-stage-wrap{min-height:360px}
+.sim-scene{max-width:850px;margin:0 auto;padding:12px 0}
+.sim-scene-head{display:flex;align-items:center;gap:16px;margin:10px 0 18px}
+.sim-scene-icon{display:grid;place-items:center;width:68px;height:68px;flex:0 0 68px;background:#eee9e1;border-radius:16px;font-size:34px}
+.sim-scene-title{min-width:0}
+.sim-scene-title .game-tag{font-size:10px;letter-spacing:.14em}
+.sim-scene-title h3{margin:3px 0 0;font:900 clamp(25px,4vw,34px) var(--serif)}
+.sim-scene>p{color:var(--muted);margin:10px 0 18px}
+.sim-dialogue{border:1px solid var(--line);background:#faf9f7;border-radius:10px;padding:12px 15px;margin:9px 0;display:flex;gap:12px;align-items:flex-start}
+.sim-dialogue b{min-width:48px;color:var(--bob);font:900 15px var(--serif)}
+.sim-dialogue.jenny b{color:var(--jenny)}
+.sim-dialogue span{font-size:13px;color:var(--ink)}
+.sim-task-heading{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:24px 0 10px}
+.sim-task-heading b{font:800 19px var(--serif)}
+.sim-task-heading span{font-size:11px;color:var(--muted)}
+.task-list{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:12px 0}
+.task-card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#faf9f7;transition:border-color .2s,background .2s}
+.task-card.done{border-color:#8bb9a2;background:#f0f7f2}
+.task-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.task-head h4{margin:0;font:800 17px var(--serif)}
+.task-when{display:inline-block;font-size:10px;color:var(--muted);background:#eee9e1;border-radius:99px;padding:2px 8px;margin-bottom:8px}
+.task-weight{font-size:11px;color:var(--muted);white-space:nowrap}
+.task-card p{font-size:12px;color:var(--muted);margin:7px 0 12px;line-height:1.65}
+.assign-row{display:flex;gap:6px;flex-wrap:wrap}
+.assign-btn{border:1px solid var(--line);background:white;border-radius:7px;padding:7px 9px;font-size:11px;font-weight:800;color:var(--ink)}
+.assign-btn:hover{border-color:var(--bob);background:#eef5f5}
+.assign-btn:focus-visible,.sim-choice button:focus-visible{outline:3px solid #b87f0c;outline-offset:2px}
+.assign-btn:disabled{opacity:.4;cursor:not-allowed}
+.task-result{font-size:11px;font-weight:800;color:#287d5a;margin-top:7px}
+.sim-choice{display:grid;grid-template-columns:1fr;gap:9px;margin:17px 0}
+.sim-choice button{border:1px solid var(--line);background:#faf9f7;border-radius:10px;padding:13px 15px;text-align:left;color:var(--ink)}
+.sim-choice button:hover{border-color:var(--bob);background:#f1f6f5}
+.sim-choice button b{display:block;font:800 16px var(--serif);margin-bottom:3px}
+.sim-choice button span{display:block;color:var(--muted);font-size:12px}
+.sim-outcome{padding:16px 18px;background:#f2f0eb;border-left:4px solid var(--gold);border-radius:8px;margin:18px 0;font-size:13px}
+.sim-outcome b{display:block;margin-bottom:5px;font:800 18px var(--serif)}
+.sim-next-row{display:flex;justify-content:flex-end;margin:16px 0 0}
+.sim-scene .btn{margin-top:12px}
+.sim-ending{text-align:center;padding:38px 10px}
+.sim-ending .big{font:900 58px var(--serif);color:var(--bob)}
+.sim-ending h3{font:900 clamp(25px,4vw,34px) var(--serif);margin:7px auto 12px}
+.sim-ending>p{max-width:660px;margin:9px auto;color:var(--muted)}
+.sim-ending .sim-outcome{text-align:left;max-width:700px;margin:20px auto}
+.sim-ending .btn{margin-top:18px}
+.sim-footnote{margin-top:13px}
+@media(max-width:650px){.sim-hud{align-items:flex-start}.sim-stats{width:100%;grid-template-columns:repeat(4,1fr)}.sim-stats>div{padding:7px 4px}.task-list{grid-template-columns:1fr}.sim-scene-head{align-items:flex-start}.sim-scene-icon{width:55px;height:55px;flex-basis:55px;font-size:27px}.assign-btn{flex:1}.game-controls{align-items:flex-start}}
+
 </style>
 </head>
 <body>
@@ -26,7 +84,30 @@ section{padding:76px 0}section.alt{background:var(--band)}.kicker{font-size:12px
 <svg class="scale" viewBox="0 0 400 300" role="img" aria-label="天平代表 Bob 與 Jenny"><path d="M200 120 L150 270 H250 Z" fill="var(--ink)" opacity=".9"/><g class="beam"><rect x="30" y="114" width="340" height="12" rx="6" fill="var(--ink)"/><g><line x1="52" y1="126" x2="52" y2="168" stroke="var(--ink)" stroke-width="3"/><circle cx="52" cy="200" r="34" fill="var(--bob)"/><circle cx="42" cy="196" r="3.5" fill="#fff"/><circle cx="62" cy="196" r="3.5" fill="#fff"/><path d="M42 210 Q52 218 62 210" stroke="#fff" stroke-width="3" fill="none"/></g><g><line x1="348" y1="126" x2="348" y2="168" stroke="var(--ink)" stroke-width="3"/><circle cx="348" cy="200" r="34" fill="var(--jenny)"/><circle cx="338" cy="196" r="3.5" fill="#fff"/><circle cx="358" cy="196" r="3.5" fill="#fff"/><path d="M338 210 Q348 218 358 210" stroke="#fff" stroke-width="3" fill="none"/></g></g><text x="52" y="262" text-anchor="middle" font-size="15" font-weight="700" fill="var(--bob)">Bob</text><text x="348" y="262" text-anchor="middle" font-size="15" font-weight="700" fill="var(--jenny)">Jenny</text></svg></div></header>
 <main>
 <section class="alt" id="case"><div class="wrap"><p class="kicker">案例</p><h2>兩個人都在付出，卻都覺得自己扛得更多</h2><p class="lead">Bob 和 Jenny 在接受諮商的六個月前迎來第二個孩子。Jenny 辭去工作，在家照顧孩子；Bob 成為家中唯一的經濟來源。吵架的原因不只是溝通不良，還牽涉家庭角色分工與彼此支持不足。</p><div class="two"><article class="card b"><p class="kicker">經濟支柱</p><h3>Bob</h3><p>身為唯一的經濟來源壓力很大。他想當盡責的好爸爸，卻覺得自己沒有那麼多時間陪孩子。</p></article><article class="card j"><p class="kicker">全職照顧者</p><h3>Jenny</h3><p>生下第二個孩子後辭職。照顧孩子讓她壓力很大，因為先生幾乎不提供協助和支持。</p></article></div><div class="result-note"><b>處遇結果</b><p>Bob 同意在每天傍晚 Jenny 去上課時照顧孩子。兩人都認為這樣的安排能平衡家務角色，增加個人的自由時間，也提高對家庭的付出。</p></div></div></section>
-<section id="game"><div class="wrap"><p class="kicker">互動家庭模擬遊戲</p><h2>這個家的一天，怎麼一起過？</h2><p class="lead">你不是在考試，而是要協助 Bob 和 Jenny 安排真實生活。分配照顧、家務與休息時間，觀察每個決定如何影響兩人的負擔與關係。</p><div class="levels"><article class="level"><small>第一章</small><h3>忙碌的一天</h3><p>安排日常家務與育兒工作，看看誰有時間喘口氣。</p></article><article class="level"><small>第二章</small><h3>快要撐不住了</h3><p>兩人的疲勞累積，必須面對衝突並重新協商。</p></article><article class="level"><small>第三章</small><h3>新的家庭節奏</h3><p>建立可持續的分工，讓兩個人都保有自己的生活。</p></article></div><div class="game-shell" id="gameShell"><div class="game-top"><div class="stats"><span class="stat">章節 <strong id="simChapter">序幕</strong></span><span class="stat">平衡 <strong id="simBalance">50</strong></span><span class="stat">關係 <strong id="simTrust">60</strong></span><span class="stat">完成 <strong id="simDone">0/4</strong></span></div><button class="btn secondary" id="simRestart" type="button">重新開始</button></div><div class="sim-meter-grid"><div class="sim-meter"><div><b>Bob 的負擔</b><strong id="bobLoad">0</strong></div><div class="sim-track"><i id="bobBar"></i></div></div><div class="sim-meter"><div><b>Jenny 的負擔</b><strong id="jennyLoad">0</strong></div><div class="sim-track"><i id="jennyBar"></i></div></div></div><div class="progress"><i id="simProgress"></i></div><div class="game-stage" id="simStage"><div class="sim-scene"><div class="game-tag">家庭模擬｜序幕</div><h3>星期一，早上 6:45</h3><p>孩子哭了，早餐還沒準備，Bob 得趕去上班，而 Jenny 今天也有自己的課程。家裡的事情不會自己完成——你會怎麼安排？</p><div class="sim-dialogue"><b>Jenny</b><span>「我知道你要上班，但我也需要一點時間處理自己的事。我不想每天都忙到沒有休息。」</span></div><div class="sim-dialogue"><b>Bob</b><span>「我不是不想幫忙，只是我也怕工作和家裡兩邊都顧不好。」</span></div><button class="btn" id="simStart" type="button">開始安排今天 →</button></div></div><div class="game-controls"><span class="small" id="simHint">每項工作都要有人承擔；共同分擔也可以是一個選擇。</span><span class="small">小提醒：公平不代表每件事都必須各做一半。</span></div></div></div></section>
+<section id="game"><div class="wrap">
+<p class="kicker">互動家庭模擬遊戲</p><h2>這個家的一天，怎麼一起過？</h2>
+<p class="lead">你會親自安排家務、育兒與個人時間。每個決定都會改變 Bob 和 Jenny 的工作量、關係，以及他們能否保留自己的生活。</p>
+<div class="levels"><article class="level"><small>第一章</small><h3>忙碌的一天</h3><p>從早餐、接送到睡前照顧，安排一家人的日常。</p></article><article class="level"><small>第二章</small><h3>快要撐不住了</h3><p>Jenny 想繼續進修，Bob 面臨加班，家庭必須作出選擇。</p></article><article class="level"><small>第三章</small><h3>新的家庭節奏</h3><p>透過協商建立能調整、能持續的家庭分工。</p></article></div>
+<div class="game-shell" id="gameShell">
+<div class="sim-hud">
+<div class="sim-brand"><span>THE FAMILY SIMULATOR</span><strong>家庭協作日誌</strong></div>
+<div class="sim-stats">
+<div><small>目前章節</small><b id="simChapter">序幕</b></div>
+<div><small>分工公平</small><b id="simBalance">50</b></div>
+<div><small>彼此信任</small><b id="simTrust">55</b></div>
+<div><small>已完成工作</small><b id="simDone">0/12</b></div>
+</div>
+</div>
+<div class="sim-meter-grid">
+<div class="sim-meter"><div><b>Bob 的總負擔</b><strong id="bobLoad">2</strong></div><div class="sim-track"><i id="bobBar"></i></div><small>包括有酬工作與家庭責任</small></div>
+<div class="sim-meter"><div><b>Jenny 的總負擔</b><strong id="jennyLoad">3</strong></div><div class="sim-track"><i id="jennyBar"></i></div><small>包括照顧、家務與心智勞動</small></div>
+</div>
+<div class="progress"><i id="simProgress"></i></div>
+<div class="game-stage" id="simStage" aria-live="polite"></div>
+<div class="game-controls"><span class="small" id="simHint">每一項工作都要有人承擔；公平不一定是機械式的五五分。</span><button class="btn secondary" id="simRestart" type="button">重新開始 ↻</button></div>
+</div>
+<p class="small sim-footnote">遊戲提醒：這是一個用來討論性別角色、無酬照顧與家庭權力的情境模擬，不是在替任何一方打分數。</p>
+</div></section>
 <section class="alt" id="theory"><div class="wrap"><p class="kicker">理論</p><h2>一個核心理論，五個分析方向</h2><p class="lead">核心理論是女性主義，關注性別不平等與權力分配，促進男女平等。再用五個流派看同一個家庭。</p><div class="theories"><div><b>自由女性主義</b><span>主張平等機會，關心 Jenny 的發展機會。</span></div><div><b>後現代女性主義</b><span>主張性別建構，關心雙方在原生家庭的角色影響。</span></div><div><b>文化女性主義</b><span>主張肯定照顧價值，關心女性在家務及育兒的付出。</span></div><div><b>基進女性主義</b><span>主張家庭權力，關注家庭內部的權力分配。</span></div><div><b>社會主義女性主義</b><span>關注女性無酬勞動，以及經濟自主與勞動價值是否被重視。</span></div></div></div></section>
 <section id="process"><div class="wrap"><p class="kicker">處遇</p><h2>社工介入的六個階段</h2><p class="lead">處遇計劃的目標，是重新分配家庭中的權力與照顧責任，讓雙方都能兼顧家庭與個人發展。</p><ol class="steps"><li><b>了解家庭處境和雙方需求</b><span>分別訪談，盤點家庭狀況，談原生家庭的責任分配。</span></li><li><b>看見付出和不平等</b><span>用家務日記呈現勞動分配，肯定 Jenny，也肯定 Bob 的經濟壓力。</span></li><li><b>挑戰傳統性別觀念</b><span>反思「男主外、女主內」，讓雙方明白責任不由性別決定。</span></li><li><b>協商新的家庭分工</b><span>共同討論具體計劃，例如 Jenny 上課時由 Bob 照顧孩子。</span></li><li><b>支持雙方自主發展</b><span>支持 Jenny 進修與就業，讓 Bob 有更多時間陪伴孩子。</span></li><li><b>追蹤、評估和調整</b><span>定期追蹤，行不通就重新討論，建立長期穩定的關係。</span></li></ol></div></section>
 <section class="alt" id="movement"><div class="wrap"><p class="kicker">延伸案例</p><h2>婦女新知基金會與台灣婦運</h2><p class="lead">家庭裡的不平等，也需要制度一起改變。1993 年以前，婦女新知是台灣婦運的主導團體，除了倡導女性自覺，也聯合其他團體推動體制改造。</p><div class="timeline"><article><time>1984</time>聯合七個婦女團體，促成優生保健法通過。</article><article><time>1987.01</time>聯合三十一個團體到華西街遊行，抗議販賣人口、關懷雛妓。這是婦運首次大規模示威。</article><article><time>1987.08</time>為女服務員爭取工作權，並成立男女雇用均等法案小組。</article><article><time>1989</time>公布立委問政評估與「十大婦女聯合政見」。</article><article><time>1990.09</time>舉辦大專女生姐妹營，各大學陸續成立女研社。</article><article><time>1993.11</time>培訓修法種子隊，到社區演講、帶討論、演短劇。</article><article><time>1995.03</time>在立法院前行動，要求民法親屬篇全面修法、澈底修法。</article></div></div></section>
@@ -35,127 +116,167 @@ section{padding:76px 0}section.alt{background:var(--band)}.kicker{font-size:12px
 </main>
 <footer><div class="wrap"><p>資料來源：Dankoski, M. E., & Deacon, S. A. (2000). Using a Feminist Lens in Contextual Therapy. Family Process, 39(1), 51-66.</p><p>資料來源：顧燕翎 (1998). 婦女參政：體制外的運動.</p><p>本網站為課堂報告《社會工作理論：女性主義》（2025）的延伸作品。</p></div></footer>
 <script>
+
 const $=id=>document.getElementById(id);
 const chapters=[
-{title:"第一章｜忙碌的一天",time:"星期一，早上 6:45",intro:"今天有四件事等著處理。先安排誰負責，再看看一天結束時兩人的狀態。",tasks:[
-{name:"準備早餐與孩子用品",detail:"孩子要吃早餐，外出用品也要準備好。",weight:2},
-{name:"接送孩子",detail:"接送需要配合工作時間，也需要有人調整行程。",weight:2},
-{name:"洗衣與整理家裡",detail:"衣服、餐具和客廳都需要整理。",weight:2},
-{name:"陪孩子洗澡、睡前照顧",detail:"這段照顧需要耐心，也會影響晚上的休息時間。",weight:3}
-]},
-{title:"第二章｜快要撐不住了",time:"星期三，晚上 8:10",intro:"前幾天的疲勞沒有消失。Jenny 想去上課，Bob 也剛結束加班。你需要處理新的衝突。",tasks:[
-{name:"安排 Jenny 的上課時間",detail:"Jenny 希望持續進修；這不是額外的奢侈，而是她的個人發展。",weight:2},
-{name:"處理孩子半夜醒來",detail:"夜間照顧會打斷睡眠，也常被忽略在家務清單之外。",weight:3},
-{name:"採買與規劃一週用品",detail:"不只是購物，還包括記住家裡缺什麼、孩子需要什麼。",weight:2},
-{name:"讓 Bob 有陪伴孩子的時間",detail:"Bob 想當一個投入的父親，而不是只負責賺錢。",weight:2}
-]},
-{title:"第三章｜新的家庭節奏",time:"星期日，下午 3:30",intro:"兩人願意重新協商。這一次，不只要把工作分出去，也要確保兩個人都能休息、發展和參與家庭。",tasks:[
-{name:"固定每週家庭會議",detail:"一起檢視行程、分工與彼此的需要。",weight:1},
-{name:"安排 Jenny 的進修與個人時間",detail:"Jenny 需要有穩定、不必臨時請求的個人時間。",weight:2},
-{name:"安排 Bob 的親子時間",detail:"Bob 希望有品質的陪伴，而不只是偶爾幫忙。",weight:2},
-{name:"建立可持續的家務輪替",detail:"讓工作透明化，並在工作量改變時重新協商。",weight:2}
-]}
+{
+ title:'忙碌的一天',time:'星期一 · 06:45–21:30',icon:'🏠',
+ intro:'星期一早上，孩子比鬧鐘更早醒來。Bob 要趕去上班，Jenny 今天要照顧兩個孩子，也想留一點時間處理自己的事。請把一天的工作安排好。',
+ dialogue:[['Jenny','「我不是不願意照顧孩子，只是有時候連吃一頓飯都要等到大家睡著。」'],['Bob','「我知道你很累。我也想多陪孩子，但工作時間真的很緊。」']],
+ tasks:[
+  {title:'準備早餐與孩子用品',when:'早上 06:45',detail:'準備早餐、奶瓶、書包和外出用品。這些小事每天都會重複。',load:2},
+  {title:'送孩子上學／托育',when:'早上 07:30',detail:'接送需要配合交通與上班時間，也需要有人調整自己的行程。',load:2},
+  {title:'洗衣、採買與晚餐準備',when:'下午 17:30',detail:'除了動手做，還要記得家裡缺什麼、孩子需要什麼。這也是心智勞動。',load:3},
+  {title:'洗澡、陪玩與睡前照顧',when:'晚上 20:00',detail:'照顧不是單一工作，而是一連串需要耐心與情緒投入的責任。',load:3}
+ ],
+ event:{title:'晚飯後的一段對話',text:'孩子終於睡了。Jenny 說自己整天沒有真正休息；Bob 則覺得自己的工作壓力沒有被看見。兩人的疲勞都是真的。',choices:[
+  {title:'先聽兩人說完，再一起看工作清單',detail:'不急著判斷誰比較辛苦，先讓彼此的付出被看見。',result:'兩人開始理解，對方的壓力並不會抵銷自己的需要。一起討論，為下一天留下協商空間。',effects:{trust:12,fairness:4,growth:1}},
+  {title:'先讓 Bob 休息，家務暫時由 Jenny 承擔',detail:'認為 Bob 在外工作已經很累，家裡的事先由 Jenny 處理。',result:'Bob 得到休息，但 Jenny 的照顧責任再度增加。短期安靜下來，不代表問題消失。',effects:{jenny:2,trust:-8,fairness:-7}},
+  {title:'要求 Bob 把所有家務補回來',detail:'希望立即扭轉不平等，但沒有討論實際時間與能力。',result:'Jenny 感覺有人站在自己這邊；Bob 卻覺得自己被責怪。分工需要改變，也需要能持續的協商。',effects:{bob:2,trust:-4,fairness:-2}}
+ ]}
+},
+{
+ title:'快要撐不住了',time:'星期三 · 17:30–23:00',icon:'🌧️',
+ intro:'幾天過去，疲勞仍然累積。Jenny 有一堂重要的課，Bob 卻臨時被要求加班。孩子需要有人照顧，家庭也需要有人記得所有安排。',
+ dialogue:[['Jenny','「我想繼續上課，這對我以後工作很重要。我不想每次都要先問可不可以。」'],['Bob','「公司今天真的很忙。我也想幫忙，但如果不加班，工作可能會受影響。」']],
+ tasks:[
+  {title:'安排晚餐與孩子用餐',when:'下午 17:30',detail:'孩子需要按時吃飯。誰準備、誰陪吃，也影響另一個人能否準時出門。',load:2},
+  {title:'Jenny 上課期間照顧孩子',when:'晚上 18:30',detail:'這段時間需要有人完整承擔照顧，而不是一邊工作、一邊等待 Jenny 回來。',load:3},
+  {title:'處理孩子半夜醒來',when:'晚上 22:30',detail:'夜間照顧會打斷睡眠。若長期由同一人負責，疲勞會不斷累積。',load:3},
+  {title:'採買並規劃下週用品',when:'晚上 20:30',detail:'記住尿布、食物、接送和孩子的安排，是容易被忽略的心智勞動。',load:2}
+ ],
+ event:{title:'今晚，Jenny 還能去上課嗎？',text:'Jenny 不想放棄自己的進修機會；Bob 也需要處理工作壓力。你要協助他們找到一個不把任何一方犧牲掉的方案。',choices:[
+  {title:'保留 Jenny 的上課時間，Bob 承擔照顧安排',detail:'把進修視為家庭需要支持的發展，而不是可有可無的空檔。',result:'Jenny 能繼續進修，Bob 也有機會實際參與親職。這可能需要重新安排工作，但雙方的需要都被認真對待。',effects:{bob:1,trust:12,fairness:5,growth:2}},
+  {title:'請 Jenny 取消課程，先把家裡顧好',detail:'短期最省事，但個人發展又一次被家庭責任擠掉。',result:'當晚的安排比較簡單，但 Jenny 失去自己的時間。若這種情況反覆出現，家庭分工就會限制她的選擇。',effects:{jenny:2,trust:-12,fairness:-8,growth:-2}},
+  {title:'尋求可信任的外部支援，再共同分擔',detail:'例如親友短暫協助或可負擔的社區照顧資源。',result:'兩人不用只在彼此身上尋找答案。適當的支持網絡，也能讓家庭照顧更可持續。',effects:{bob:-1,jenny:-1,trust:8,fairness:5,growth:2}}
+ ]}
+},
+{
+ title:'新的家庭節奏',time:'星期日 · 15:30–20:30',icon:'🌱',
+ intro:'兩人決定重新協商。這次不只是把工作分出去，更要確保雙方有休息、進修、工作與陪伴孩子的空間。',
+ dialogue:[['Bob','「我想當一個真正參與孩子生活的爸爸，不只是負責賺錢。」'],['Jenny','「我也希望我們的安排不是靠我一直提醒，而是兩個人都記得、都負責。」']],
+ tasks:[
+  {title:'固定每週家庭會議',when:'星期日 15:30',detail:'一起檢視下週行程、工作量與彼此需要，讓協商成為固定習慣。',load:1},
+  {title:'安排 Jenny 的進修與個人時間',when:'每週固定時段',detail:'Jenny 的學習與發展不應只在所有家務完成後才有剩餘時間。',load:2},
+  {title:'安排 Bob 的親子照顧時段',when:'每週固定時段',detail:'Bob 不只是「幫忙」，而是共同承擔照顧責任，也建立與孩子的關係。',load:2},
+  {title:'建立家務輪替與提醒制度',when:'每週共同檢視',detail:'把採買、清潔、接送和照顧等工作寫下來，避免責任默默落在同一個人身上。',load:2}
+ ],
+ event:{title:'要把新的分工怎樣落實？',text:'兩人同意改變，但真正的考驗是：當工作忙起來、孩子生病，或有人需要休息時，這套安排能不能調整？',choices:[
+  {title:'建立共同日曆，每週檢視並按需要調整',detail:'不是硬性平均，而是共同負責、看見差異、定期重新協商。',result:'兩人有共同參與的制度，也保留了調整空間。Jenny 的發展與 Bob 的親職參與都成為家庭計劃的一部分。',effects:{trust:14,fairness:12,growth:2}},
+  {title:'把所有工作固定五五分，不再討論',detail:'看似公平，但忽略工作時數、照顧需求和生活變化。',result:'明確的清單讓事情比較好追蹤，但如果情況改變，僵化的平均分配也可能造成新的不公平。',effects:{trust:4,fairness:4,growth:1}},
+  {title:'維持 Jenny 作為主要照顧者，Bob 有空再幫忙',detail:'回到熟悉的方式，短期不用磨合。',result:'家庭運作看似穩定，但主要照顧責任仍集中在 Jenny 身上，個人時間和發展機會也容易再次被犧牲。',effects:{jenny:3,trust:-14,fairness:-12,growth:-2}}
+ ]}
+}
 ];
-let sim={chapter:0,task:0,bob:0,jenny:0,trust:60,balance:50,done:0,history:[],started:false,chapterScores:[],ending:null};
-function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
+
+let sim={chapter:0,bob:2,jenny:3,trust:55,fairnessBonus:0,growth:0,history:[],eventChosen:[],started:false};
+const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
+function fairness(){return clamp(100-Math.abs(sim.bob-sim.jenny)*5+sim.fairnessBonus,0,100);}
 function updateMeters(){
- const total=sim.bob+sim.jenny;
- const diff=Math.abs(sim.bob-sim.jenny);
- sim.balance=clamp(100-Math.round(diff*9),0,100);
- $("simChapter").textContent=sim.started?(sim.chapter+1)+"/3":"序幕";
- $("simBalance").textContent=sim.balance;
- $("simTrust").textContent=sim.trust;
- $("simDone").textContent=sim.task+"/"+4;
- $("bobLoad").textContent=sim.bob;
- $("jennyLoad").textContent=sim.jenny;
- $("bobBar").style.width=clamp(sim.bob/22*100,0,100)+"%";
- $("jennyBar").style.width=clamp(sim.jenny/22*100,0,100)+"%";
- $("simProgress").style.width=((sim.chapter*4+sim.task)/12*100)+"%";
+ const f=fairness();
+ $('simChapter').textContent=sim.started?(sim.chapter+1)+'/3':'序幕';
+ $('simBalance').textContent=sim.started?f:50;
+ $('simTrust').textContent=sim.started?clamp(sim.trust,0,100):55;
+ $('simDone').textContent=sim.history.length+'/12';
+ $('bobLoad').textContent=sim.bob;
+ $('jennyLoad').textContent=sim.jenny;
+ $('bobBar').style.width=clamp(sim.bob/25*100,0,100)+'%';
+ $('jennyBar').style.width=clamp(sim.jenny/25*100,0,100)+'%';
+ $('simProgress').style.width=(sim.history.length/12*100)+'%';
 }
 function intro(){
- $("simStage").innerHTML='<div class="sim-scene"><div class="game-tag">家庭模擬｜序幕</div><h3>星期一，早上 6:45</h3><p>孩子哭了，早餐還沒準備，Bob 得趕去上班，而 Jenny 今天也有自己的課程。家裡的事情不會自己完成——你會怎麼安排？</p><div class="sim-dialogue"><b>Jenny</b><span>「我知道你要上班，但我也需要一點時間處理自己的事。我不想每天都忙到沒有休息。」</span></div><div class="sim-dialogue"><b>Bob</b><span>「我不是不想幫忙，只是我也怕工作和家裡兩邊都顧不好。」</span></div><button class="btn" id="simStart" type="button">開始安排今天 →</button></div>';
- $("simHint").textContent="每項工作都要有人承擔；共同分擔也可以是一個選擇。";
+ sim={chapter:0,bob:2,jenny:3,trust:55,fairnessBonus:0,growth:0,history:[],eventChosen:[],started:false};
+ $('simStage').innerHTML='<div class="sim-scene"><div class="sim-scene-head"><div class="sim-scene-icon">🏡</div><div class="sim-scene-title"><div class="game-tag">A FAMILY STORY · INTERACTIVE SIMULATION</div><h3>家的事情，從來不會自己完成</h3></div></div><p>Bob 是家中唯一的經濟來源；Jenny 辭去工作後負責照顧孩子。兩個人都付出，也都感到疲累。你將陪他們走過三天，安排家務、回應衝突，並嘗試建立新的家庭節奏。</p><div class="sim-dialogue"><b>Jenny</b><span>「我希望照顧孩子的責任能被看見，也希望我還有機會進修和發展。」</span></div><div class="sim-dialogue"><b>Bob</b><span>「我想照顧家庭，也想陪孩子，但我不太知道怎樣在工作和家裡之間取得平衡。」</span></div><div class="sim-outcome"><b>你的任務</b>安排 12 項家庭工作，作出 3 次重要協商。留意的不只是誰做了多少事，還有誰有時間休息、學習和參與家庭。</div><button class="btn" id="simStart" type="button">進入星期一 →</button></div>';
+ $('simHint').textContent='工作量包含有酬工作、家務、照顧與心智勞動。';
  updateMeters();
 }
-function start(){
- sim={chapter:0,task:0,bob:0,jenny:0,trust:60,balance:50,done:0,history:[],started:true,chapterScores:[],ending:null};
- renderChapter();
-}
+function start(){sim.started=true;sim.chapter=0;renderChapter();}
 function renderChapter(){
  const c=chapters[sim.chapter];
- $("simStage").innerHTML='<div class="sim-scene"><div class="game-tag">'+c.title+' · '+c.time+'</div><h3>'+c.title.split("｜")[1]+'</h3><p>'+c.intro+'</p><div class="task-list" id="taskList"></div><div class="sim-outcome" id="chapterFeedback" hidden></div><button class="btn" id="chapterContinue" type="button" hidden>繼續下一章 →</button></div>';
- renderTasks();
- $("simHint").textContent="點選 Bob、Jenny 或「一起做」，把工作分配出去。分工會影響兩人的負擔與關係。";
- updateMeters();
+ const dialogue=c.dialogue.map((d,i)=>'<div class="sim-dialogue '+(i?'jenny':'')+'"><b>'+d[0]+'</b><span>'+d[1]+'</span></div>').join('');
+ $('simStage').innerHTML='<div class="sim-scene"><div class="sim-scene-head"><div class="sim-scene-icon">'+c.icon+'</div><div class="sim-scene-title"><div class="game-tag">CHAPTER 0'+(sim.chapter+1)+' · '+c.time+'</div><h3>'+c.title+'</h3></div></div><p>'+c.intro+'</p>'+dialogue+'<div class="sim-task-heading"><b>今日待辦工作</b><span>選擇由誰負責 · 可共同完成</span></div><div class="task-list" id="taskList"></div><div id="chapterFeedback"></div></div>';
+ $('simHint').textContent='每項工作可以交給 Bob、Jenny，或由兩人共同完成。';
+ renderTasks();updateMeters();
 }
 function renderTasks(){
- const list=$("taskList"),c=chapters[sim.chapter];
+ const c=chapters[sim.chapter],list=$('taskList');
  list.innerHTML=c.tasks.map((t,i)=>{
- const record=sim.history.find(x=>x.chapter===sim.chapter&&x.task===i);
- return '<article class="task-card '+(record?'done':'')+'"><div class="task-head"><h4>'+(record?'✓ ':'')+t.name+'</h4><span class="task-weight">工作量 '+t.weight+'</span></div><p>'+t.detail+'</p>'+(record?'<div class="task-result">已安排：'+record.label+'</div>':'<div class="assign-row"><button class="assign-btn" data-task="'+i+'" data-owner="bob">交給 Bob</button><button class="assign-btn" data-task="'+i+'" data-owner="jenny">交給 Jenny</button><button class="assign-btn" data-task="'+i+'" data-owner="shared">一起完成</button></div>')+'</article>';
- }).join("");
+  const record=sim.history.find(x=>x.chapter===sim.chapter&&x.task===i);
+  return '<article class="task-card '+(record?'done':'')+'"><span class="task-when">'+t.when+'</span><div class="task-head"><h4>'+(record?'✓ ':'')+t.title+'</h4><span class="task-weight">負擔 '+t.load+'</span></div><p>'+t.detail+'</p>'+(record?'<div class="task-result">已安排：'+record.label+'</div>':'<div class="assign-row"><button class="assign-btn" data-task="'+i+'" data-owner="bob">Bob 負責</button><button class="assign-btn" data-task="'+i+'" data-owner="jenny">Jenny 負責</button><button class="assign-btn" data-task="'+i+'" data-owner="shared">共同完成</button></div>')+'</article>';
+ }).join('');
+ if(c.tasks.every((t,i)=>sim.history.some(x=>x.chapter===sim.chapter&&x.task===i)))finishChapter();
 }
 function assign(i,owner){
- if(i!==sim.task||sim.history.some(x=>x.chapter===sim.chapter&&x.task===i))return;
- const task=chapters[sim.chapter].tasks[i],w=task.weight;
- let label="";
- if(owner==="bob"){sim.bob+=w;label="Bob";}
- else if(owner==="jenny"){sim.jenny+=w;label="Jenny";}
- else{sim.bob+=Math.ceil(w/2);sim.jenny+=Math.floor(w/2);label="共同分擔";}
- const gap=Math.abs(sim.bob-sim.jenny);
- if(owner==="shared")sim.trust=clamp(sim.trust+3,0,100);
- else sim.trust=clamp(sim.trust-(gap>4?4:1),0,100);
+ const c=chapters[sim.chapter],t=c.tasks[i];
+ if(!t||sim.history.some(x=>x.chapter===sim.chapter&&x.task===i))return;
+ let label='';
+ if(owner==='bob'){sim.bob+=t.load;label='Bob';}
+ else if(owner==='jenny'){sim.jenny+=t.load;label='Jenny';}
+ else{const b=Math.ceil(t.load/2),j=Math.floor(t.load/2);sim.bob+=b;sim.jenny+=j;sim.trust+=3;label='共同分擔';}
+ if(owner!=='shared'&&Math.abs(sim.bob-sim.jenny)>=6)sim.trust-=2;
  sim.history.push({chapter:sim.chapter,task:i,label});
- sim.task++;sim.done++;
  updateMeters();renderTasks();
- if(sim.task===4)finishChapter();
 }
 function finishChapter(){
- const gap=Math.abs(sim.bob-sim.jenny);
- const chapterScore=clamp(100-gap*8+Math.round((sim.trust-50)/3),0,100);
- sim.chapterScores.push(chapterScore);
- const feedback=$("chapterFeedback");
- let message=gap<=2?"兩人的工作量相當接近，這個安排留下了更多共同協商的空間。":gap<=5?"目前分工仍有落差。別忘了，公平不只是把工作分完，也要看誰還有休息和個人時間。":"其中一人的負擔明顯較重。這可能讓疲勞累積，也讓關係中的不滿增加。";
- feedback.hidden=false;
- feedback.innerHTML="<b>這一章的結果｜平衡指數 "+chapterScore+"</b>"+message;
- $("chapterContinue").hidden=false;
- $("chapterContinue").textContent=sim.chapter===2?"看看這個家的結局 →":"進入下一章 →";
- $("simHint").textContent="工作已全部安排。閱讀結果後，繼續看看這些決定帶來什麼影響。";
- $("taskList").querySelectorAll("button").forEach(b=>b.disabled=true);
+ const c=chapters[sim.chapter],f=fairness(),feedback=$('chapterFeedback');
+ if(!feedback||feedback.dataset.ready)return;
+ feedback.dataset.ready='1';
+ const note=Math.abs(sim.bob-sim.jenny)<=2?'目前兩人的總工作量相當接近。':Math.abs(sim.bob-sim.jenny)<=5?'目前仍有一些負擔落差，記得也要看休息與個人時間。':'一方承擔了明顯較多的工作；家務完成了，不代表分工公平。';
+ feedback.innerHTML='<div class="sim-outcome"><b>本章安排完成｜目前公平指數 '+f+'</b>'+note+'</div><div class="sim-next-row"><button class="btn" id="chapterContinue" type="button">面對家庭事件 →</button></div>';
+ $('simHint').textContent='工作都已安排。接下來的對話，會影響兩人如何理解彼此。';
+}
+function renderEvent(){
+ const e=chapters[sim.chapter].event;
+ $('simStage').innerHTML='<div class="sim-scene"><div class="game-tag">CHAPTER 0'+(sim.chapter+1)+' · A FAMILY DECISION</div><h3>'+e.title+'</h3><p>'+e.text+'</p><div class="sim-choice">'+e.choices.map((c,i)=>'<button data-choice="'+i+'"><b>'+String.fromCharCode(65+i)+' · '+c.title+'</b><span>'+c.detail+'</span></button>').join('')+'</div></div>';
+ $('simHint').textContent='選擇你認為最能回應雙方需要的做法；每個選擇都有代價與影響。';
+}
+function chooseEvent(i){
+ const e=chapters[sim.chapter].event,choice=e.choices[i];
+ if(!choice||sim.eventChosen[sim.chapter]!==undefined)return;
+ const x=choice.effects;
+ sim.bob+=x.bob||0;sim.jenny+=x.jenny||0;sim.trust=clamp(sim.trust+(x.trust||0),0,100);
+ sim.fairnessBonus+=x.fairness||0;sim.growth+=x.growth||0;
+ sim.eventChosen[sim.chapter]=i;updateMeters();
+ $('simStage').innerHTML='<div class="sim-scene"><div class="game-tag">DECISION '+(i+1)+' · CONSEQUENCES</div><h3>'+choice.title+'</h3><div class="sim-outcome"><b>事情接下來如何發展？</b>'+choice.result+'</div><p>這個選擇已影響家庭的負擔、信任和個人發展。接下來看看他們如何面對下一個階段。</p><div class="sim-next-row"><button class="btn" id="nextChapter" type="button">'+(sim.chapter===2?'看看這個家的結局 →':'進入下一章 →')+'</button></div></div>';
+ $('simHint').textContent='決定已記錄。不同的路線，會帶來不同的家庭結局。';
 }
 function nextChapter(){
- if(sim.chapter<2){
- sim.chapter++;sim.task=0;
- // 每一章開始前，疲勞不會歸零；但適度休息能讓累積負擔稍微下降。
- if(sim.chapter===1){sim.bob=Math.max(0,sim.bob-1);sim.jenny=Math.max(0,sim.jenny-1);}
- if(sim.chapter===2){sim.bob=Math.max(0,sim.bob-1);sim.jenny=Math.max(0,sim.jenny-1);}
- renderChapter();
- }else showEnding();
+ if(sim.chapter<2){sim.chapter++;renderChapter();}
+ else showEnding();
 }
 function showEnding(){
- const total=sim.chapterScores.reduce((a,b)=>a+b,0);
- const avg=Math.round(total/3),gap=Math.abs(sim.bob-sim.jenny);
- let title,body,lesson;
- if(avg>=78&&sim.trust>=65&&gap<=4){
- title="一起生活，而不是一個人扛起整個家";body="Bob 和 Jenny 開始把照顧視為共同責任。Jenny 有時間進修，Bob 也能投入親職，兩人會定期重新討論分工。";lesson="這不是完美的五五分，而是一套能被討論、能調整，也尊重雙方需要的安排。";
- }else if(avg>=55){
- title="有了改變，但還需要磨合";body="兩人已經開始看見彼此的付出，不過部分工作仍然分配不均。若沒有持續溝通，舊有模式可能再次出現。";lesson="平等不是一次協商就能完成，而是持續檢視權力、資源與照顧責任。";
+ const f=fairness(),t=clamp(sim.trust,0,100),g=sim.growth;
+ let title,body,lesson,grade;
+ if(f>=72&&t>=68&&g>=2){
+  grade='A';title='一起生活，而不是一個人扛起整個家';
+  body='Bob 和 Jenny 開始把照顧視為共同責任。Jenny 有機會持續進修，Bob 也更投入親職。兩人並非每件事都一人一半，而是能持續看見彼此的需要。';
+  lesson='公平不是機械式的五五分，而是讓雙方都有協商權、休息時間與個人發展的空間。';
+ }else if(f>=48&&t>=42){
+  grade='B';title='有了改變，但仍需要磨合';
+  body='兩人開始看見彼此的付出，不過部分工作仍然分配不均。若沒有持續溝通，舊有模式可能再次出現。';
+  lesson='平等不是一次協商就能完成，而是持續檢視權力、資源與照顧責任。';
  }else{
- title="舊有分工再次把兩人困住";body="家庭裡的工作雖然有人完成，卻沒有真正解決負擔不均。Jenny 或 Bob 仍可能感到疲憊、孤單，甚至覺得自己的需要不重要。";lesson="只把事情做完並不等於公平；也要問誰失去了休息、選擇與發展的機會。";
+  grade='C';title='舊有分工再次把兩人困住';
+  body='家庭裡的工作雖然有人完成，卻沒有真正解決負擔不均。Jenny 或 Bob 仍可能感到疲憊，個人時間和發展機會也容易被犧牲。';
+  lesson='只把事情做完並不等於公平；也要問誰失去了休息、選擇與發展的機會。';
  }
- $("simProgress").style.width="100%";
- $("simStage").innerHTML='<div class="sim-ending"><div class="game-tag">家庭模擬｜結局</div><div class="big">'+avg+'<span style="font-size:18px"> / 100</span></div><h3>'+title+'</h3><p>'+body+'</p><div class="sim-outcome"><b>帶走的社工思考</b>'+lesson+'</div><p>最終關係指數：'+sim.trust+'｜最後工作量差距：'+gap+'</p><button class="btn" id="simAgain" type="button">再玩一次，試試不同安排 ↻</button></div>';
- $("simHint").textContent="沒有唯一標準答案。試著比較不同分工如何改變兩人的生活。";
+ $('simProgress').style.width='100%';
+ $('simStage').innerHTML='<div class="sim-ending"><div class="game-tag">YOUR FAMILY STORY · ENDING</div><div class="big">'+grade+'</div><h3>'+title+'</h3><p>'+body+'</p><div class="sim-outcome"><b>帶走的社工思考</b>'+lesson+'</div><p>分工公平指數：'+f+'｜彼此信任：'+t+'｜Jenny 個人發展支持：'+Math.max(0,g)+'</p><p>Bob 工作負擔：'+sim.bob+'｜Jenny 工作負擔：'+sim.jenny+'</p><button class="btn" id="simAgain" type="button">再玩一次，嘗試另一種安排 ↻</button></div>';
+ $('simHint').textContent='你可以重新開始，試試不同分工與協商，看看結局如何改變。';
  updateMeters();
 }
-$("simStage").addEventListener("click",event=>{
- const assignButton=event.target.closest("[data-task]");
- if(assignButton){assign(Number(assignButton.dataset.task),assignButton.dataset.owner);return;}
- if(event.target.closest("#simStart")){start();return;}
- if(event.target.closest("#chapterContinue")){nextChapter();return;}
- if(event.target.closest("#simAgain")){start();return;}
+$('simStage').addEventListener('click',event=>{
+ const taskButton=event.target.closest('[data-task]');
+ if(taskButton){assign(Number(taskButton.dataset.task),taskButton.dataset.owner);return;}
+ const choiceButton=event.target.closest('[data-choice]');
+ if(choiceButton){chooseEvent(Number(choiceButton.dataset.choice));return;}
+ if(event.target.closest('#simStart')){start();return;}
+ if(event.target.closest('#chapterContinue')){renderEvent();return;}
+ if(event.target.closest('#nextChapter')){nextChapter();return;}
+ if(event.target.closest('#simAgain')){intro();return;}
 });
-$("simRestart").addEventListener("click",intro);
+$('simRestart').addEventListener('click',intro);
 intro();
+
 </script>
 </body></html>
