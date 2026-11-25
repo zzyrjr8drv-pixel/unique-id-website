@@ -1,139 +1,53 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#111522"><title>家庭日常：城市任務｜The Home Shift</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#f7f5f8;--muted:#b9bbca;--pink:#ff729b;--cyan:#77d9e7;--gold:#ffd36d;--panel:#171b2b}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111522;color:var(--ink);font-family:"DM Sans","Noto Sans TC",sans-serif;touch-action:none}button{font:inherit;touch-action:none}#game{position:relative;width:100%;height:100%;height:100dvh;overflow:hidden;background:#22283b}
-#world{display:block;width:100%;height:100%;background:#242a3e}
-.top-ui{position:absolute;z-index:5;top:max(12px,env(safe-area-inset-top));left:14px;right:14px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;pointer-events:none}
-.mission{pointer-events:auto;width:min(66%,430px);padding:14px 16px 13px;background:rgba(22,25,43,.94);border:1px solid rgba(255,255,255,.14);border-radius:19px;box-shadow:0 12px 34px #080b1690;backdrop-filter:blur(14px)}
-.mission-kicker{font-size:11px;color:#aeb5cb;letter-spacing:.12em;font-weight:800}.mission h1{font-size:clamp(16px,3vw,23px);line-height:1.35;margin:5px 0 4px}.mission p{font-size:12px;color:var(--pink);margin:0;font-weight:700}.mission-progress{height:4px;background:#ffffff18;border-radius:9px;margin-top:11px;overflow:hidden}.mission-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--gold));transition:width .3s}
-.top-actions{display:flex;gap:8px;pointer-events:auto}.pill{border:1px solid #ffffff35;background:#171b2be8;color:#fff;border-radius:99px;padding:10px 14px;font-size:11px;font-weight:800;backdrop-filter:blur(10px)}.pill:active,.action:active{transform:scale(.96)}
-.character-switch{position:absolute;z-index:5;top:max(120px,calc(env(safe-area-inset-top) + 108px));right:14px;display:flex;gap:7px}.char-btn{display:flex;align-items:center;gap:7px;border:1px solid #ffffff30;background:#171b2bdc;color:#fff;border-radius:14px;padding:8px 11px;font-size:11px;font-weight:800;backdrop-filter:blur(10px)}.char-btn .dot{width:9px;height:9px;border-radius:50%;background:var(--cyan)}.char-btn.jenny .dot{background:var(--pink)}.char-btn.active{border-color:var(--gold);box-shadow:0 0 0 2px #ffd36d30}
-.hint{position:absolute;z-index:4;left:50%;top:42%;transform:translate(-50%,-50%);width:max-content;max-width:82%;padding:12px 18px;border-radius:14px;background:#111522df;border:1px solid #ffffff20;text-align:center;font-size:clamp(13px,2.8vw,18px);font-weight:700;line-height:1.6;box-shadow:0 8px 30px #0005;pointer-events:none;transition:opacity .25s}.hint.hide{opacity:0}
-.bottom-ui{position:absolute;z-index:5;left:0;right:0;bottom:max(20px,env(safe-area-inset-bottom));display:flex;align-items:flex-end;justify-content:space-between;padding:0 24px;pointer-events:none}
-.joystick{width:142px;height:142px;border-radius:50%;border:4px solid #ffffff38;background:#aab2c322;box-shadow:0 0 0 9px #080b162d,inset 0 0 24px #fff1;position:relative;pointer-events:auto;touch-action:none;backdrop-filter:blur(4px)}
-.stick{position:absolute;left:50%;top:50%;width:61px;height:61px;transform:translate(-50%,-50%);border-radius:50%;border:4px solid #ffffffb8;background:linear-gradient(145deg,#d9dce8a8,#69728caa);box-shadow:0 4px 14px #0006;pointer-events:none}
-.joy-arrow{position:absolute;color:#ffffff9c;font-size:17px;font-weight:900;pointer-events:none}.up{top:9px;left:calc(50% - 6px)}.down{bottom:8px;left:calc(50% - 6px)}.left{left:10px;top:calc(50% - 11px)}.right{right:10px;top:calc(50% - 11px)}
-.action-wrap{display:flex;align-items:flex-end;gap:12px;pointer-events:auto}.action{width:82px;height:82px;border-radius:50%;border:2px solid #ffffff9c;background:linear-gradient(145deg,#ff91ad,#d84979);color:white;font-size:13px;font-weight:900;box-shadow:0 7px 24px #d8497950;touch-action:none}.action:disabled{filter:grayscale(1);opacity:.55}.mini-action{width:54px;height:54px;border-radius:50%;border:1px solid #ffffff75;background:#171b2bdc;color:white;font-size:11px;font-weight:800}
-.toast{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);opacity:0;pointer-events:none;background:#171b2bf5;border:1px solid #ffffff28;border-radius:18px;padding:20px 23px;text-align:center;width:min(86%,380px);box-shadow:0 20px 60px #0009;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}.toast .emoji{font-size:34px}.toast h2{font-size:20px;margin:7px 0}.toast p{font-size:13px;color:var(--muted);line-height:1.7;margin:0 0 15px}.toast button{border:0;border-radius:11px;background:linear-gradient(100deg,#ff91ad,#ffd36d);color:#231722;padding:11px 18px;font-weight:900}
-.status{position:absolute;z-index:4;left:14px;top:max(125px,calc(env(safe-area-inset-top) + 112px));background:#171b2bc9;border:1px solid #ffffff20;border-radius:12px;padding:8px 11px;font-size:10px;color:#cbd1e0;backdrop-filter:blur(10px)}.status b{color:var(--gold)}
-@media(min-width:850px){.mission{width:400px}.bottom-ui{padding:0 7vw}.joystick{width:154px;height:154px}.stick{width:66px;height:66px}.action{width:92px;height:92px}}
-@media(max-width:520px){.top-ui{left:10px;right:10px}.mission{width:70%;padding:11px 12px;border-radius:16px}.mission-kicker{font-size:9px}.mission h1{font-size:16px}.mission p{font-size:10px}.pill{padding:9px 10px;font-size:10px}.character-switch{top:max(118px,calc(env(safe-area-inset-top) + 108px));right:10px}.char-btn{padding:7px 9px;font-size:10px}.status{top:max(174px,calc(env(safe-area-inset-top) + 164px));left:10px}.joystick{width:126px;height:126px}.stick{width:56px;height:56px}.bottom-ui{padding:0 18px 8px}.action{width:73px;height:73px}.mini-action{width:48px;height:48px}}
-</style>
-</head>
-<body>
-<div id="game">
-<canvas id="world" aria-label="可操作的家庭城市冒險遊戲"></canvas>
-<div class="top-ui">
- <section class="mission"><div class="mission-kicker" id="missionKicker">任務 1 / 4 · 星期五晚上</div><h1 id="missionTitle">去便利商店買宵夜</h1><p id="missionSub">跟著黃色箭頭走</p><div class="mission-progress"><i id="progressBar"></i></div></section>
- <div class="top-actions"><button class="pill" id="pauseBtn">Ⅱ 暫停</button></div>
-</div>
-<div class="character-switch"><button class="char-btn active" id="bobBtn"><i class="dot"></i> Bob</button><button class="char-btn jenny" id="jennyBtn"><i class="dot"></i> Jenny</button></div>
-<div class="status" id="status">目前操控：<b>Bob</b>　·　靠近目的地按互動</div>
-<div class="hint" id="hint">穿上喜歡的衣服，出門買宵夜吧！<br><span style="color:#ff91ad">滑動左下方搖桿開始移動</span></div>
-<div class="bottom-ui">
- <div class="joystick" id="joystick"><span class="joy-arrow up">▲</span><span class="joy-arrow down">▼</span><span class="joy-arrow left">◀</span><span class="joy-arrow right">▶</span><div class="stick" id="stick"></div></div>
- <div class="action-wrap"><button class="mini-action" id="switchBtn">切換<br>角色</button><button class="action" id="interactBtn" disabled>互動</button></div>
-</div>
-<div class="toast" id="toast"><div class="emoji" id="toastEmoji">✨</div><h2 id="toastTitle">任務完成</h2><p id="toastText"></p><button id="toastBtn">繼續 →</button></div>
-</div>
-<script>
-(()=>{
-const canvas=document.getElementById('world'),ctx=canvas.getContext('2d');
-const $=id=>document.getElementById(id);
-const W=800,H=1000;
-let scale=1,paused=false,finished=false,toastOpen=false,last=0,move={x:0,y:0},keys={};
-const colors={bob:'#72d6e3',jenny:'#f08cba'};
-const characters={bob:{name:'Bob',x:125,y:890,color:colors.bob,load:0},jenny:{name:'Jenny',x:165,y:890,color:colors.jenny,load:0}};
-let active='bob',mission=0,steps=0;
-const missions=[
- {title:'去便利商店買宵夜',sub:'跟著螢光黃箭頭走',place:'便利商店',x:660,y:285,icon:'🏪',task:'買好孩子和兩人的宵夜',detail:'你走進便利商店，買了牛奶、麵包和孩子喜歡的小點心。記得：採買也包含事前記住家裡需要什麼。',who:'採買與規劃'},
- {title:'到托育中心接孩子',sub:'孩子正在等你回家',place:'托育中心',x:145,y:535,icon:'🧸',task:'接孩子並確認明天用品',detail:'老師交代了孩子今天的情況，也提醒明天要帶替換衣物。照顧不只是接送，也包括記住孩子的需要。',who:'接送與照顧'},
- {title:'到市場買晚餐食材',sub:'準備一家人的晚餐',place:'街市',x:660,y:630,icon:'🥬',task:'買齊晚餐食材',detail:'你買好了晚餐食材。這個家需要有人動手，也需要有人記得冰箱還缺什麼。',who:'家務與心智勞動'},
- {title:'回家一起準備晚餐',sub:'今天的最後一個任務',place:'家',x:145,y:890,icon:'🏠',task:'與家人一起完成晚餐',detail:'孩子回到家了。今天的任務完成，但家庭分工不是一天就能解決。Bob 和 Jenny 開始討論：以後如何讓照顧和家務成為兩個人共同的責任？',who:'共同照顧'}
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#17192a"><title>只是走在路上｜Bob & Jenny</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><style>
+:root{--ink:#f6f4fb;--muted:#b6b5c9;--pink:#ee7ea8;--yellow:#ffd65e;--bob:#58c7d9;--jenny:#e6a0cf}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#202234;color:var(--ink);font-family:"DM Sans","Noto Sans TC",sans-serif;overscroll-behavior:none}button{font:inherit;cursor:pointer;touch-action:manipulation}#world{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}.hud{position:fixed;z-index:3;top:calc(env(safe-area-inset-top) + 12px);left:14px;right:14px;display:flex;align-items:flex-start;justify-content:space-between;gap:9px;pointer-events:none}.mission-card{width:min(540px,calc(100vw - 170px));padding:14px 17px;border:1px solid #ffffff17;border-radius:18px;background:#1a1c30f2;box-shadow:0 14px 38px #0005;backdrop-filter:blur(14px);pointer-events:auto}.mission-kicker{font-size:11px;letter-spacing:.11em;color:#a7a8c2;font-weight:800}.mission-title{font-size:clamp(17px,2.5vw,24px);font-weight:900;margin:5px 0 1px}.mission-hint{color:var(--pink);font-size:14px;font-weight:700}.mission-detail{font-size:11px;color:#b7bad0;margin-top:6px;line-height:1.45}.progress{height:4px;background:#ffffff19;border-radius:99px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--yellow));transition:width .3s}.hud-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:auto}.hud-button{border:1px solid #ffffff32;background:#171923e8;color:#f6f4fb;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:800;backdrop-filter:blur(12px)}.characters{display:flex;gap:5px;background:#171923d9;padding:5px;border:1px solid #ffffff20;border-radius:999px}.character-btn{border:0;border-radius:999px;padding:8px 12px;background:transparent;color:#b6b5c9;font-size:12px;font-weight:900}.character-btn.active{background:#ffffff20;color:#fff}.character-btn[data-person="bob"].active{box-shadow:inset 0 0 0 1px var(--bob);color:#8de5ee}.character-btn[data-person="jenny"].active{box-shadow:inset 0 0 0 1px var(--jenny);color:#f4b5dc}.controls{position:fixed;z-index:4;left:18px;right:18px;bottom:calc(env(safe-area-inset-bottom) + 19px);display:flex;align-items:flex-end;justify-content:space-between;pointer-events:none}.joystick{width:154px;height:154px;border-radius:50%;border:3px solid #ffffff55;background:#17192355;box-shadow:0 5px 24px #0004,inset 0 0 0 7px #ffffff08;position:relative;touch-action:none;pointer-events:auto;display:grid;place-items:center;user-select:none}.joystick:before{content:"";position:absolute;width:5px;height:5px;background:#fff7;border-radius:50%}.knob{width:72px;height:72px;border-radius:50%;border:3px solid #ffffffbb;background:radial-gradient(circle at 35% 30%,#d7d7e8cc,#777a98cc);box-shadow:0 5px 20px #0005;position:relative;z-index:1;pointer-events:none}.joy-label{position:absolute;color:#ffffffaa;font-size:14px;font-weight:800}.joy-up{top:8px}.joy-down{bottom:8px}.joy-left{left:10px}.joy-right{right:10px}.actions{display:flex;flex-direction:column;align-items:flex-end;gap:9px;pointer-events:auto}.action-button{min-width:124px;min-height:62px;padding:12px 18px;border-radius:18px;border:1px solid #fff8;background:linear-gradient(145deg,#f0c96d,#e99b67);color:#262032;font-size:14px;font-weight:900;box-shadow:0 8px 24px #0005}.action-button:disabled{opacity:.55;filter:saturate(.4)}.control-tip{padding:7px 10px;border-radius:10px;background:#171923c9;color:#e8e5f1;font-size:10px}.toast{position:fixed;z-index:6;left:50%;bottom:calc(env(safe-area-inset-bottom) + 200px);transform:translate(-50%,15px);opacity:0;pointer-events:none;background:#171923ed;border:1px solid #ffffff20;border-radius:13px;padding:12px 16px;font-size:13px;text-align:center;max-width:min(88vw,440px);box-shadow:0 8px 30px #0005;transition:opacity .2s,transform .2s}.toast.show{opacity:1;transform:translate(-50%,0)}.overlay{position:fixed;z-index:8;inset:0;display:none;place-items:center;padding:24px;background:#10121dcc;backdrop-filter:blur(8px)}.overlay.visible{display:grid}.modal{width:min(430px,100%);padding:25px;border-radius:22px;background:#1b1e32;border:1px solid #ffffff20;box-shadow:0 24px 80px #0008}.eyebrow{font-size:10px;color:var(--pink);font-weight:900;letter-spacing:.18em}.modal h2{font-size:27px;margin:7px 0}.modal p{font-size:13px;color:#c0bfd0;line-height:1.7}.modal button{margin-top:10px}.modal .primary{width:100%;border:0;border-radius:12px;padding:13px;background:linear-gradient(110deg,#f0c96d,#e99b67);color:#282033;font-weight:900}.actor-label{position:fixed;z-index:3;right:18px;bottom:calc(env(safe-area-inset-bottom) + 190px);font-size:10px;padding:7px 10px;border-radius:9px;background:#171923c9;color:#dedceb;pointer-events:none}
+@media(max-width:600px){.hud{top:calc(env(safe-area-inset-top) + 9px);left:9px;right:9px}.mission-card{width:min(74vw,390px);padding:11px 12px;border-radius:16px}.mission-detail{display:none}.mission-title{font-size:17px}.mission-hint{font-size:12px}.hud-button{padding:8px 10px;font-size:11px}.character-btn{padding:7px 9px;font-size:11px}.controls{left:13px;right:13px;bottom:calc(env(safe-area-inset-bottom) + 17px)}.joystick{width:138px;height:138px}.knob{width:66px;height:66px}.action-button{min-width:106px;min-height:58px;padding:10px 12px;font-size:12px}.control-tip{font-size:9px}.actor-label{bottom:calc(env(safe-area-inset-bottom) + 174px);right:13px}.toast{bottom:calc(env(safe-area-inset-bottom) + 175px)}}@media(orientation:landscape) and (max-height:520px){.mission-card{padding:8px 12px}.mission-detail{display:none}.controls{bottom:10px}.joystick{width:110px;height:110px}.knob{width:54px;height:54px}.actor-label,.toast{bottom:128px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><canvas id="world" aria-label="2D 城市探索遊戲場景"></canvas>
+<div class="hud"><div class="mission-card"><div class="mission-kicker" id="missionNumber">任務 1 / 4</div><div class="mission-title" id="missionTitle">去便利商店買宵夜</div><div class="mission-hint" id="missionHint">跟著黃色箭頭前進</div><div class="mission-detail" id="missionDetail"></div><div class="progress"><i id="progressFill"></i></div></div><div class="hud-right"><div class="characters"><button class="character-btn active" id="bobSelect" data-person="bob" aria-pressed="true">Bob</button><button class="character-btn" id="jennySelect" data-person="jenny" aria-pressed="false">Jenny</button></div><button class="hud-button" id="pauseButton">暫停</button></div></div>
+<div class="actor-label" id="actorLabel">目前操控：Bob</div><div class="controls"><div class="joystick" id="joystick" aria-label="虛擬方向搖桿"><span class="joy-label joy-up">▲</span><span class="joy-label joy-down">▼</span><span class="joy-label joy-left">◀</span><span class="joy-label joy-right">▶</span><div class="knob" id="knob"></div></div><div class="actions"><div class="control-tip" id="actorTip">角色正確，可以出發！</div><button class="action-button" id="actionButton" disabled>接近目標後互動</button></div></div>
+<div class="toast" id="toast"></div><div class="overlay" id="pauseOverlay"><div class="modal"><div class="eyebrow">PAUSED</div><h2>先休息一下</h2><p>你的行程已暫停。準備好後可以繼續探索城市。</p><button class="primary" id="resumeButton">繼續遊戲</button></div></div>
+<div class="overlay" id="finishOverlay"><div class="modal"><div class="eyebrow">DAY COMPLETE · 4 / 4</div><h2>今晚，兩個人都辛苦了。</h2><p id="finishText"></p><button class="primary" id="againButton">再玩一次</button></div></div><button id="restartButton" style="position:fixed;right:12px;bottom:12px;width:2px;height:2px;opacity:0">restart</button>
+<script>const canvas=$('world'),ctx=canvas.getContext('2d');
+const W=1800,H=1400,players={bob:{x:480,y:380,name:'Bob',skin:'#e9bd99',hair:'#342a34',shirt:'#51bdca'},jenny:{x:555,y:380,name:'Jenny',skin:'#f1c8a8',hair:'#362b3b',shirt:'#d68ab8'}};
+const tasks=[
+{actor:'bob',title:'去便利商店買宵夜',hint:'跟著黃色箭頭前進',detail:'孩子睡了，家裡想吃點宵夜。控制 Bob 走到便利商店門口，按下互動。',target:{x:1420,y:390},place:'便利商店',done:'Bob 買好了宵夜，也記得 Jenny 喜歡的口味。'},
+{actor:'jenny',title:'到公園拿回孩子的外套',hint:'切換至 Jenny，前往公園',detail:'孩子把外套留在公園。換 Jenny 出發，到長椅附近找回外套。',target:{x:1320,y:800},place:'城市公園',done:'Jenny 找回外套，也終於能在公園喘一口氣。'},
+{actor:'bob',title:'去街市買明天的食材',hint:'切換至 Bob，前往街市',detail:'明天的早餐和孩子的午餐都要準備。控制 Bob 到街市買齊食材。',target:{x:500,y:1050},place:'街市',done:'Bob 買齊食材，並先把購物袋送回家。'},
+{actor:'jenny',title:'回家一起準備宵夜',hint:'切換至 Jenny，回到家門口',detail:'最後一段路。控制 Jenny 回家，兩人一起整理食物，結束忙碌的一天。',target:{x:480,y:380},place:'家',done:'Bob 和 Jenny 終於一起坐下來。家務不會自動消失，但可以由兩個人共同承擔。'}
 ];
-const blocks=[
- {x:0,y:0,w:800,h:115,c:'#20263a'}, {x:0,y:115,w:800,h:90,c:'#283e38'},
- {x:0,y:205,w:800,h:90,c:'#444b63'}, {x:0,y:295,w:800,h:250,c:'#20263a'},
- {x:0,y:545,w:800,h:85,c:'#454c64'}, {x:0,y:630,w:800,h:240,c:'#20263a'},
- {x:0,y:870,w:800,h:130,c:'#454c64'}
-];
-const buildings=[
- {x:22,y:120,w:250,h:145,name:'公寓',color:'#353b53',win:true},
- {x:520,y:120,w:250,h:145,name:'便利商店',color:'#3d465c',win:true,sign:'便利商店'},
- {x:22,y:650,w:250,h:200,name:'家',color:'#41465e',win:true,sign:'HOME'},
- {x:520,y:650,w:250,h:200,name:'街市',color:'#3b435a',win:true,sign:'街市'},
- {x:22,y:315,w:250,h:205,name:'托育中心',color:'#3c465d',win:true,sign:'托育中心'},
- {x:520,y:315,w:250,h:205,name:'公園',color:'#29463e',win:false,sign:'PARK'}
-];
-function resize(){const dpr=Math.min(devicePixelRatio||1,2),r=canvas.getBoundingClientRect();canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);scale=Math.min(canvas.width/W,canvas.height/H);ctx.setTransform(scale,0,0,scale,(canvas.width-W*scale)/2,(canvas.height-H*scale)/2);}
-window.addEventListener('resize',resize);resize();
-function roundRect(x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}}
-function drawBuilding(b){
- roundRect(b.x,b.y,b.w,b.h,8,b.color,'#ffffff13');
- if(b.win){for(let y=b.y+25;y<b.y+b.h-15;y+=48)for(let x=b.x+20;x<b.x+b.w-15;x+=48){ctx.fillStyle=((x+y)%3<1)?'#f3c86b':'#262c42';ctx.fillRect(x,y,18,20);}}
- if(b.sign){roundRect(b.x+22,b.y+10, b.w-44,28,7,'#171b2b','#ffffff22');ctx.fillStyle='#f7e9c9';ctx.font='bold 13px sans-serif';ctx.textAlign='center';ctx.fillText(b.sign,b.x+b.w/2,b.y+29);}
-}
-function drawWorld(){
- ctx.clearRect(0,0,W,H);
- // base blocks and night-time neighbourhood
- ctx.fillStyle='#20263a';ctx.fillRect(0,0,W,H);
- // pavements
- ctx.fillStyle='#454b63';ctx.fillRect(0,285,W,28);ctx.fillRect(0,535,W,28);ctx.fillRect(0,865,W,28);
- ctx.fillRect(0,0,22,H);ctx.fillRect(778,0,22,H);
- // roads
- ctx.fillStyle='#292e45';ctx.fillRect(0,313,W,222);ctx.fillRect(0,563,W,302);
- ctx.strokeStyle='#8e805c';ctx.lineWidth=3;ctx.setLineDash([48,55]);ctx.beginPath();ctx.moveTo(0,423);ctx.lineTo(W,423);ctx.stroke();ctx.setLineDash([]);
- // street lights
- for(const x of [75,400,725]){ctx.fillStyle='#eecb79';ctx.globalAlpha=.65;ctx.fillRect(x,335,3,28);ctx.fillRect(x,755,3,28);ctx.globalAlpha=1;}
- // green park pocket
- ctx.fillStyle='#29463e';ctx.fillRect(520,205,250,80);
- for(let i=0;i<6;i++){ctx.fillStyle=i%2?'#335b4a':'#203c35';ctx.beginPath();ctx.arc(555+i*38,245+(i%2)*9,18,0,Math.PI*2);ctx.fill();}
- buildings.forEach(drawBuilding);
- // sidewalk tile seams
- ctx.strokeStyle='#ffffff0b';ctx.lineWidth=2;
- for(let x=0;x<800;x+=78){ctx.beginPath();ctx.moveTo(x,285);ctx.lineTo(x,313);ctx.moveTo(x,535);ctx.lineTo(x,563);ctx.moveTo(x,865);ctx.lineTo(x,893);ctx.stroke();}
- // objective beacon and dotted guide
- if(!finished){const m=missions[mission],p=characters[active];ctx.save();ctx.strokeStyle='#ffd36d';ctx.lineWidth=3;ctx.setLineDash([8,11]);ctx.globalAlpha=.62;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(m.x,m.y);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
- ctx.shadowColor='#ffd36d';ctx.shadowBlur=25;ctx.fillStyle='#ffd36d';ctx.beginPath();ctx.arc(m.x,m.y-28,10+Math.sin(performance.now()/190)*3,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;ctx.fillStyle='#fff1b9';ctx.beginPath();ctx.moveTo(m.x,m.y-15);ctx.lineTo(m.x-9,m.y-32);ctx.lineTo(m.x+9,m.y-32);ctx.closePath();ctx.fill();ctx.restore();}
- // characters
- Object.entries(characters).forEach(([id,p])=>drawPerson(p,id===active));
- // interaction distance
- const p=characters[active],m=missions[mission],near=!finished&&Math.hypot(p.x-m.x,p.y-m.y)<65;
- $('interactBtn').disabled=!near||paused||toastOpen||finished;
-}
-function drawPerson(p,selected){
- ctx.save();ctx.translate(p.x,p.y);
- if(selected){ctx.fillStyle='#ffd36d35';ctx.beginPath();ctx.ellipse(0,9,28,14,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#ffd36d';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,-8,23,0,Math.PI*2);ctx.stroke();}
- ctx.fillStyle='#11152299';ctx.beginPath();ctx.ellipse(0,13,17,7,0,0,Math.PI*2);ctx.fill();
- ctx.fillStyle=p.color;ctx.beginPath();ctx.roundRect(-13,-9,26,26,10);ctx.fill();
- ctx.fillStyle='#f1c9a6';ctx.beginPath();ctx.arc(0,-18,12,0,Math.PI*2);ctx.fill();
- ctx.fillStyle='#3b2b32';ctx.beginPath();ctx.arc(0,-22,12,Math.PI,Math.PI*2);ctx.fill();
- ctx.fillStyle='#fff';ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.fillText(p.name,0,34);
- ctx.restore();
-}
-function isBlocked(x,y){if(x<28||x>772||y<28||y>972)return true;return buildings.some(b=>x>b.x-15&&x<b.x+b.w+15&&y>b.y-15&&y<b.y+b.h+15);}
-function tick(t){const dt=Math.min((t-last)/16.67||1,2);last=t;if(!paused&&!toastOpen&&!finished){let dx=move.x,dy=move.y;if(keys.ArrowLeft||keys.a)dx-=1;if(keys.ArrowRight||keys.d)dx+=1;if(keys.ArrowUp||keys.w)dy-=1;if(keys.ArrowDown||keys.s)dy+=1;const len=Math.hypot(dx,dy);if(len>1){dx/=len;dy/=len;}const p=characters[active],speed=3.05*dt;const nx=p.x+dx*speed,ny=p.y+dy*speed;if(!isBlocked(nx,p.y))p.x=nx;if(!isBlocked(p.x,ny))p.y=ny;}
- drawWorld();requestAnimationFrame(tick);}
-requestAnimationFrame(tick);
-function updateHUD(){const m=missions[mission];$('missionKicker').textContent='任務 '+(mission+1)+' / 4 · 星期五晚上';$('missionTitle').textContent=m.title;$('missionSub').textContent=m.sub;$('progressBar').style.width=(mission/4*100)+'%';$('status').innerHTML='目前操控：<b>'+characters[active].name+'</b>　·　'+m.place+'在前方';}
-function switchCharacter(){if(paused||toastOpen||finished)return;active=active==='bob'?'jenny':'bob';$('bobBtn').classList.toggle('active',active==='bob');$('jennyBtn').classList.toggle('active',active==='jenny');updateHUD();}
-function showToast(title,text,emoji,button){toastOpen=true;$('toastTitle').textContent=title;$('toastText').textContent=text;$('toastEmoji').textContent=emoji;$('toastBtn').textContent=button||'繼續 →';$('toast').classList.add('show');}
-function interact(){if($('interactBtn').disabled)return;const m=missions[mission],p=characters[active];p.load++;steps++;mission++;$('progressBar').style.width=(mission/4*100)+'%';if(mission<4){updateHUD();showToast('任務完成！',m.detail,m.icon,'下一個任務 →');}else{finished=true;$('missionKicker').textContent='全部任務完成';$('missionTitle').textContent='回到家，一起吃晚餐';$('missionSub').textContent='今天的城市任務完成了';$('progressBar').style.width='100%';showToast('今晚，這個家一起完成了任務','Bob 承擔 '+characters.bob.load+' 項；Jenny 承擔 '+characters.jenny.load+' 項。照顧與家務不只是「幫忙」，而是兩個人共同的責任。','🏡','重新開始');}}
-function continueToast(){ $('toast').classList.remove('show');toastOpen=false;if(finished){mission=0;steps=0;finished=false;characters.bob.x=125;characters.bob.y=890;characters.jenny.x=165;characters.jenny.y=890;characters.bob.load=0;characters.jenny.load=0;active='bob';$('bobBtn').classList.add('active');$('jennyBtn').classList.remove('active');$('hint').classList.remove('hide');}else if(mission===1){$('hint').classList.add('hide');}updateHUD();}
-$('toastBtn').addEventListener('click',continueToast);$('interactBtn').addEventListener('click',interact);
-$('bobBtn').addEventListener('click',()=>{if(active!=='bob')switchCharacter();});$('jennyBtn').addEventListener('click',()=>{if(active!=='jenny')switchCharacter();});$('switchBtn').addEventListener('click',switchCharacter);
-$('pauseBtn').addEventListener('click',()=>{if(toastOpen)return;paused=!paused;$('pauseBtn').textContent=paused?'▶ 繼續':'Ⅱ 暫停';if(paused)showToast('遊戲暫停','休息一下。準備好後按下繼續。','Ⅱ','繼續遊戲');else{$('toast').classList.remove('show');toastOpen=false;}});
-const joy=$('joystick'),stick=$('stick');let pointer=null;
-function joyMove(e){const r=joy.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,max=r.width*.34;let x=e.clientX-cx,y=e.clientY-cy,d=Math.hypot(x,y);if(d>max){x=x/d*max;y=y/d*max;}move={x:x/max,y:y/max};stick.style.left='calc(50% + '+x+'px)';stick.style.top='calc(50% + '+y+'px)';}
-joy.addEventListener('pointerdown',e=>{pointer=e.pointerId;joy.setPointerCapture(pointer);joyMove(e);});joy.addEventListener('pointermove',e=>{if(e.pointerId===pointer)joyMove(e);});function joyEnd(e){if(e.pointerId!==pointer)return;pointer=null;move={x:0,y:0};stick.style.left='50%';stick.style.top='50%';}joy.addEventListener('pointerup',joyEnd);joy.addEventListener('pointercancel',joyEnd);
-window.addEventListener('keydown',e=>{keys[e.key]=true;if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();if(e.key===' '||e.key==='Enter')interact();if(e.key==='Tab'){e.preventDefault();switchCharacter();}});window.addEventListener('keyup',e=>keys[e.key]=false);
-updateHUD();
-})();
-</script>
-</body></html>
+const buildings=[{x:110,y:100,w:310,h:235,name:'家',sub:'HOME',color:'#465b73'},{x:1240,y:100,w:360,h:260,name:'便利商店',sub:'24H MART',color:'#416c68'},{x:100,y:900,w:360,h:285,name:'街市',sub:'MARKET',color:'#765c50'},{x:510,y:90,w:205,h:220,name:'社區中心',sub:'COMMUNITY',color:'#625c7b'}];
+const trees=[[1090,900],[1200,940],[1510,890],[1640,1030],[1480,1190],[1170,1190],[1040,1070],[1600,870],[1380,1260],[1250,1120]];
+let active='bob',mission=0,paused=false,finished=false,toastTimer=0,keys=new Set(),joy={x:0,y:0},cw=innerWidth,ch=innerHeight,dpr=1,cam={x:0,y:0};
+const obstacles=buildings.map(b=>({x:b.x,y:b.y,w:b.w,h:b.h}));
+function clamp(n,a,b){return Math.max(a,Math.min(b,n))}
+function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
+function current(){return players[active]}function task(){return tasks[mission]}
+function resize(){dpr=Math.min(devicePixelRatio||1,2);cw=innerWidth;ch=innerHeight;canvas.width=cw*dpr;canvas.height=ch*dpr;canvas.style.width=cw+'px';canvas.style.height=ch+'px'}
+addEventListener('resize',resize);resize();
+function blocked(x,y){for(const r of obstacles){const a=clamp(x,r.x,r.x+r.w),b=clamp(y,r.y,r.y+r.h);if(Math.hypot(x-a,y-b)<19)return true}return false}
+function near(){return !finished&&task().actor===active&&dist(current(),task().target)<94}
+function hud(){const t=task();$('missionNumber').textContent=finished?'完成':'任務 '+(mission+1)+' / 4';$('missionTitle').textContent=finished?'今天辛苦了！':t.title;$('missionHint').textContent=finished?'你和家人一起完成了今天的行程。':t.hint;$('missionDetail').textContent=finished?'':t.detail;$('progressFill').style.width=(mission/4*100)+'%';$('bobSelect').classList.toggle('active',active==='bob');$('jennySelect').classList.toggle('active',active==='jenny');$('bobSelect').setAttribute('aria-pressed',active==='bob');$('jennySelect').setAttribute('aria-pressed',active==='jenny');$('actorLabel').textContent=finished?'行程完成':'目前操控：'+(active==='bob'?'Bob':'Jenny');$('actorTip').textContent=finished?'':t.actor===active?'角色正確，可以出發！':'這個任務需要 '+(t.actor==='bob'?'Bob':'Jenny')+'，請切換角色。';$('actionButton').disabled=!near();$('actionButton').textContent=finished?'已完成':near()?'✦　互動':'接近目標後互動';$('pauseButton').textContent=paused?'繼續':'暫停'}
+function notify(s){$('toast').textContent=s;$('toast').classList.add('show');toastTimer=2.8}
+function switchTo(w){if(finished)return;active=w;hud();notify('現在由 '+(w==='bob'?'Bob':'Jenny')+' 操控')}
+function interact(){if(paused||finished)return;const t=task();if(t.actor!==active){notify('這項任務需要 '+(t.actor==='bob'?'Bob':'Jenny')+'，先切換角色。');return}if(!near()){notify('還未到達'+t.place+'，跟著黃色箭頭走！');return}notify(t.done);mission++;if(mission===3){players.bob.x=480;players.bob.y=380}if(mission>=tasks.length){finished=true;$('finishText').textContent='你完成了今晚的四項任務。Bob 和 Jenny 都有參與家庭生活，也開始把照顧、採買和休息當成共同責任。';$('finishOverlay').classList.add('visible')}hud()}
+function move(dt){if(paused||finished)return;let x=joy.x,y=joy.y;if(keys.has('ArrowLeft')||keys.has('a'))x--;if(keys.has('ArrowRight')||keys.has('d'))x++;if(keys.has('ArrowUp')||keys.has('w'))y--;if(keys.has('ArrowDown')||keys.has('s'))y++;const n=Math.hypot(x,y);if(n>1){x/=n;y/=n}const p=current(),speed=225,nx=clamp(p.x+x*speed*dt,22,W-22),ny=clamp(p.y+y*speed*dt,22,H-22);if(!blocked(nx,p.y))p.x=nx;if(!blocked(p.x,ny))p.y=ny}
+function ground(){ctx.fillStyle='#29382f';ctx.fillRect(0,0,W,H);for(let y=0;y<H;y+=72)for(let x=0;x<W;x+=72){ctx.fillStyle=((x+y)/72)%2?'#2d3e34':'#293a32';ctx.fillRect(x+3,y+3,66,66)}ctx.fillStyle='#303246';ctx.fillRect(0,480,W,170);ctx.fillRect(790,0,180,H);ctx.fillStyle='#56576b';ctx.fillRect(0,420,W,60);ctx.fillRect(0,650,W,62);ctx.fillRect(730,0,60,H);ctx.fillRect(970,0,60,H);ctx.strokeStyle='#414458';ctx.lineWidth=3;for(let x=0;x<W;x+=86){ctx.beginPath();ctx.moveTo(x,422);ctx.lineTo(x,478);ctx.moveTo(x,652);ctx.lineTo(x,710);ctx.stroke()}for(let y=0;y<H;y+=82){ctx.beginPath();ctx.moveTo(732,y);ctx.lineTo(788,y);ctx.moveTo(972,y);ctx.lineTo(1028,y);ctx.stroke()}ctx.strokeStyle='#a99b70';ctx.lineWidth=4;ctx.setLineDash([58,88]);ctx.beginPath();ctx.moveTo(0,565);ctx.lineTo(W,565);ctx.moveTo(880,0);ctx.lineTo(880,H);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#d3c6a5';for(let i=0;i<6;i++){ctx.fillRect(745+i*27,483,15,42);ctx.fillRect(745+i*27,605,15,42);ctx.fillRect(800,430+i*9,42,5);ctx.fillRect(920,430+i*9,42,5)}}
+function building(b){ctx.fillStyle='#11152266';ctx.fillRect(b.x+10,b.y+12,b.w,b.h);ctx.fillStyle=b.color;ctx.fillRect(b.x,b.y,b.w,b.h);ctx.fillStyle='#ffffff12';ctx.fillRect(b.x+8,b.y+8,b.w-16,12);const cols=Math.max(2,Math.floor(b.w/72));for(let r=0;r<2;r++)for(let c=0;c<cols;c++){const x=b.x+24+c*(b.w-45)/cols,y=b.y+48+r*75;ctx.fillStyle=(c+r)%3===0?'#e8c36c':'#293047';ctx.fillRect(x,y,25,34);ctx.fillStyle='#ffffff16';ctx.fillRect(x,y,25,4)}ctx.fillStyle='#22283a';ctx.fillRect(b.x+b.w/2-28,b.y+b.h-62,56,62);ctx.textAlign='center';ctx.font='bold 24px sans-serif';ctx.fillStyle='#f4f0e8';ctx.fillText(b.name,b.x+b.w/2,b.y+b.h+33);ctx.font='10px sans-serif';ctx.fillStyle='#d3d0c4';ctx.fillText(b.sub,b.x+b.w/2,b.y+b.h+50)}
+function tree(x,y){ctx.fillStyle='#16251f88';ctx.beginPath();ctx.ellipse(x+7,y+17,35,17,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#76533f';ctx.fillRect(x-7,y-7,14,40);ctx.fillStyle='#477a55';ctx.beginPath();ctx.arc(x,y-12,32,0,Math.PI*2);ctx.fill();ctx.fillStyle='#5f9564';ctx.beginPath();ctx.arc(x-10,y-24,19,0,Math.PI*2);ctx.fill();ctx.fillStyle='#8eaa68';ctx.beginPath();ctx.arc(x+10,y-18,11,0,Math.PI*2);ctx.fill()}
+function park(){ctx.fillStyle='#355341';ctx.fillRect(1035,835,700,520);ctx.fillStyle='#476c50';ctx.fillRect(1070,875,625,430);ctx.strokeStyle='#c2b890';ctx.lineWidth=36;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(1060,800);ctx.quadraticCurveTo(1320,860,1420,1000);ctx.quadraticCurveTo(1530,1110,1670,1190);ctx.stroke();ctx.strokeStyle='#e1d7b5';ctx.lineWidth=3;ctx.stroke();trees.forEach(p=>tree(p[0],p[1]));ctx.fillStyle='#6e4c3a';ctx.fillRect(1265,785,90,15);ctx.fillRect(1275,800,8,22);ctx.fillRect(1338,800,8,22);ctx.fillStyle='#f6d58b';ctx.font='bold 24px sans-serif';ctx.textAlign='center';ctx.fillText('CITY PARK',1390,1320)}
+function props(){for(const [x,y] of [[620,440],[1080,440],[620,690],[1080,690],[700,280],[1005,280],[700,900],[1005,900]]){ctx.fillStyle='#1a1d2b';ctx.fillRect(x-4,y-35,8,44);ctx.fillStyle='#f4d17d';ctx.beginPath();ctx.arc(x,y-39,9,0,Math.PI*2);ctx.fill()}for(const [x,y] of [[470,450],[1160,450],[680,750],[1040,750],[600,1180],[950,1200]]){ctx.fillStyle='#a66e57';ctx.fillRect(x-9,y-10,18,17);ctx.fillStyle='#6f9b65';ctx.beginPath();ctx.arc(x,y-15,10,0,Math.PI*2);ctx.fill()}}
+function person(p,selected){const b=Math.sin(performance.now()/125+(p.name==='Bob'?0:1))*1.5;ctx.save();ctx.translate(p.x,p.y);ctx.fillStyle='#10121b88';ctx.beginPath();ctx.ellipse(0,15,22,9,0,0,Math.PI*2);ctx.fill();if(selected){ctx.strokeStyle=p.name==='Bob'?'#74e8f1':'#f6a9db';ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,-7,28,0,Math.PI*2);ctx.stroke()}ctx.fillStyle=p.shirt;ctx.beginPath();ctx.roundRect(-14,-4+b,28,29,12);ctx.fill();ctx.fillStyle=p.skin;ctx.beginPath();ctx.arc(0,-17+b,12,0,Math.PI*2);ctx.fill();ctx.fillStyle=p.hair;ctx.beginPath();ctx.arc(0,-21+b,12,Math.PI,Math.PI*2);ctx.fill();ctx.fillRect(-12,-22+b,24,6);ctx.fillStyle='#292331';ctx.beginPath();ctx.arc(-4,-16+b,1.3,0,Math.PI*2);ctx.arc(4,-16+b,1.3,0,Math.PI*2);ctx.fill();ctx.fillStyle='#f5f1e9';ctx.font='bold 12px sans-serif';ctx.textAlign='center';ctx.fillText(p.name,0,43);ctx.restore()}
+function arrow(p,t){const a=Math.atan2(t.y-p.y,t.x-p.x)+Math.PI/2,s=1+Math.sin(performance.now()/180)*.12;ctx.save();ctx.translate(p.x,p.y-52);ctx.rotate(a);ctx.scale(s,s);ctx.shadowColor='#ffd65e';ctx.shadowBlur=22;ctx.fillStyle='#ffd65e';ctx.beginPath();ctx.moveTo(0,-24);ctx.lineTo(15,-4);ctx.lineTo(5,-7);ctx.lineTo(5,12);ctx.lineTo(-5,12);ctx.lineTo(-5,-7);ctx.lineTo(-15,-4);ctx.closePath();ctx.fill();ctx.restore()}
+function draw(){ground();park();buildings.forEach(building);props();if(!finished){const t=task();ctx.save();ctx.translate(t.target.x,t.target.y);const s=1+Math.sin(performance.now()/220)*.13;ctx.scale(s,s);ctx.strokeStyle='#ffd65e';ctx.lineWidth=4;ctx.setLineDash([8,8]);ctx.beginPath();ctx.arc(0,0,33,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#ffd65e';ctx.font='bold 13px sans-serif';ctx.textAlign='center';ctx.fillText('目的地',0,-36);ctx.restore()}person({x:1370,y:960,name:'小朋友',skin:'#edc39e',hair:'#302b32',shirt:'#e6b45f'},false);person(players.bob,active==='bob');person(players.jenny,active==='jenny');if(!finished&&task().actor===active)arrow(current(),task().target)}
+function loop(now){if(!loop.last)loop.last=now;const dt=Math.min((now-loop.last)/1000,.04);loop.last=now;if(!paused&&!finished){move(dt);if(toastTimer>0){toastTimer-=dt;if(toastTimer<=0)$('toast').classList.remove('show')}}const p=current();cam.x=clamp(p.x-cw/2,0,W-cw);cam.y=clamp(p.y-ch/2,0,H-ch);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,cw,ch);ctx.save();ctx.translate(-cam.x,-cam.y);draw();ctx.restore();hud();requestAnimationFrame(loop)}
+function pause(){if(finished)return;paused=!paused;$('pauseOverlay').classList.toggle('visible',paused);hud()}
+$('bobSelect').addEventListener('click',()=>switchTo('bob'));$('jennySelect').addEventListener('click',()=>switchTo('jenny'));$('actionButton').addEventListener('click',interact);$('pauseButton').addEventListener('click',pause);$('resumeButton').addEventListener('click',pause);
+$('restartButton').addEventListener('click',()=>{mission=0;active='bob';paused=false;finished=false;players.bob.x=480;players.bob.y=380;players.jenny.x=555;players.jenny.y=380;$('finishOverlay').classList.remove('visible');$('pauseOverlay').classList.remove('visible');hud();notify('重新開始這趟家庭小冒險！')});
+$('againButton').addEventListener('click',()=>$('restartButton').click());
+addEventListener('keydown',e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();if(k===' '||k==='e'){interact();return}if(k==='Shift'){switchTo(active==='bob'?'jenny':'bob');return}keys.add(k)});
+addEventListener('keyup',e=>keys.delete(e.key.length===1?e.key.toLowerCase():e.key));
+const joystick=$('joystick'),knob=$('knob');let pointer=null;
+function joyMove(e){const r=joystick.getBoundingClientRect(),dx=e.clientX-r.left-r.width/2,dy=e.clientY-r.top-r.height/2,max=r.width*.32,n=Math.hypot(dx,dy),s=n>max?max/n:1;joy.x=dx*s/max;joy.y=dy*s/max;knob.style.transform='translate('+(dx*s)+'px,'+(dy*s)+'px)'}
+joystick.addEventListener('pointerdown',e=>{pointer=e.pointerId;joystick.setPointerCapture(pointer);joyMove(e)});joystick.addEventListener('pointermove',e=>{if(e.pointerId===pointer)joyMove(e)});
+function joyEnd(e){if(e.pointerId!==pointer)return;pointer=null;joy.x=0;joy.y=0;knob.style.transform='translate(0,0)'}
+joystick.addEventListener('pointerup',joyEnd);joystick.addEventListener('pointercancel',joyEnd);
+hud();requestAnimationFrame(loop);</script></body></html>
