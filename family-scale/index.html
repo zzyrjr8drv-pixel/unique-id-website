@@ -1,183 +1,139 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101522"><meta name="description" content="家庭協作模擬遊戲：親自控制 Bob 與 Jenny，安排家務、育兒與家庭生活。"><title>家庭協作｜The Home Shift</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><style>:root{color-scheme:dark;--bg:#101522;--panel:#192337;--line:#2c3a52;--ink:#f4f6fb;--muted:#a5b1c5;--soft:#71809a;--bob:#58c7d9;--jenny:#e6a0cf;--lime:#b7e58b;--gold:#f3c778;--sans:"DM Sans","Noto Sans TC",sans-serif}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% 0%,#293b5b 0,transparent 38%),radial-gradient(ellipse at 95% 15%,#392b49 0,transparent 30%),var(--bg);color:var(--ink);font:15px/1.7 var(--sans)}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.app{width:min(1440px,100%);margin:auto;padding:26px clamp(14px,3vw,42px) 48px}.topbar,.brand,.top-meta,.intro,.sim-hud,.sim-stats,.sim-meter>div:first-child,.task-head,.sim-task-heading,.game-controls,.side-title,.character,.side-metric,.footer{display:flex;align-items:center;justify-content:space-between;gap:12px}.topbar{margin-bottom:28px}.brand{justify-content:flex-start}.brand-mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#5ac8d9,#8c91ee);color:#101522;font-size:22px;font-weight:900}.brand small,.sim-brand span{display:block;color:var(--muted);font-size:9px;letter-spacing:.19em;font-weight:900}.brand strong{font-size:18px}.top-meta{font-size:11px;color:var(--muted)}.live-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}.intro{align-items:flex-end;margin-bottom:22px}.eyebrow,.game-tag{font-size:9px;letter-spacing:.2em;color:var(--bob);font-weight:900}.intro h1{font-size:clamp(29px,5vw,48px);line-height:1.18;margin:7px 0;letter-spacing:-.04em}.intro p{max-width:680px;color:var(--muted);margin:0;font-size:13px}.chapter-pill{flex:none;border:1px solid var(--line);background:#ffffff08;border-radius:999px;padding:9px 14px;color:var(--muted);font-size:11px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px;align-items:start}.main-panel,.side-panel{background:linear-gradient(160deg,#1b2639ed,#141c2bed);border:1px solid #ffffff12;border-radius:22px;box-shadow:0 24px 70px #0003}.main-panel{padding:clamp(16px,2.5vw,30px)}.side-panel{padding:19px;position:sticky;top:16px}.sim-hud{padding-bottom:16px;border-bottom:1px solid var(--line)}.sim-brand strong{font-size:17px}.sim-stats{gap:7px}.sim-stats>div{min-width:65px;padding:7px 9px;background:#ffffff08;border:1px solid #ffffff0b;border-radius:10px;text-align:center}.sim-stats small{display:block;color:var(--muted);font-size:9px}.sim-stats b{display:block;font-size:14px;color:var(--lime);font-variant-numeric:tabular-nums}.sim-meter-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:17px 0}.sim-meter{padding:12px;background:#ffffff06;border:1px solid #ffffff0c;border-radius:13px}.sim-meter>div:first-child{font-size:11px}.sim-meter strong{font-size:12px}.sim-meter:first-child strong{color:var(--bob)}.sim-meter:nth-child(2) strong{color:var(--jenny)}.sim-track{height:6px;background:#ffffff14;border-radius:99px;overflow:hidden;margin-top:8px}.sim-track i{display:block;height:100%;width:0;border-radius:99px;transition:width .35s}.sim-meter:first-child .sim-track i{background:linear-gradient(90deg,#398d9e,var(--bob))}.sim-meter:nth-child(2) .sim-track i{background:linear-gradient(90deg,#a65b99,var(--jenny))}.sim-meter>small{display:block;margin-top:6px;font-size:9px;color:var(--soft)}.progress{height:4px;background:#ffffff12;border-radius:99px;overflow:hidden;margin:0 0 19px}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--bob),var(--jenny),var(--lime));transition:width .4s}.game-stage{min-height:430px}.sim-scene{max-width:900px;margin:auto;padding:5px 0 12px}.sim-scene-head{display:flex;align-items:center;gap:15px;margin:6px 0 15px}.sim-scene-icon{width:60px;height:60px;flex:0 0 60px;border-radius:18px;display:grid;place-items:center;font-size:29px;background:linear-gradient(145deg,#ffffff17,#ffffff05);border:1px solid #ffffff14}.sim-scene-title h3,.sim-scene h3{margin:3px 0 0;font-size:clamp(23px,3vw,31px);line-height:1.3}.sim-scene>p{color:var(--muted);font-size:12px;margin:12px 0 17px}.sim-dialogue{display:flex;gap:12px;padding:12px 14px;margin:8px 0;background:#ffffff06;border:1px solid #ffffff0d;border-radius:12px}.sim-dialogue b{min-width:49px;color:var(--bob);font-size:12px}.sim-dialogue.jenny b{color:var(--jenny)}.sim-dialogue span{font-size:12px;color:#d6deeb}.sim-task-heading{margin:24px 0 10px}.sim-task-heading b{font-size:15px}.sim-task-heading span{font-size:10px;color:var(--muted)}.task-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.task-card{padding:14px;background:#ffffff06;border:1px solid #ffffff13;border-radius:14px;transition:.2s}.task-card:hover{transform:translateY(-2px);border-color:#ffffff30}.task-card.done{border-color:#8dbb7866;background:#a5d88d0c}.task-when{display:inline-flex;font-size:9px;color:var(--muted);background:#ffffff0b;border-radius:99px;padding:3px 8px;margin-bottom:8px}.task-head h4{margin:0;font-size:14px}.task-weight{font-size:10px;color:var(--gold)}.task-card p{font-size:11px;color:var(--muted);margin:7px 0 12px}.assign-row{display:flex;gap:7px}.assign-btn{flex:1;border:1px solid #ffffff1c;background:#ffffff08;color:#dce4f1;border-radius:9px;padding:8px;font-size:10px;font-weight:800}.assign-btn:hover{border-color:var(--bob);background:#58c7d91a}.assign-btn.primary-assign{border-color:#58c7d966;background:#58c7d91c;color:#9ae7f0}.task-result{font-size:10px;font-weight:800;color:var(--lime);margin-top:8px}.sim-choice{display:grid;gap:10px;margin:18px 0}.sim-choice button{width:100%;border:1px solid #ffffff18;background:#ffffff08;border-radius:13px;padding:14px 16px;text-align:left;color:var(--ink)}.sim-choice button:hover{border-color:var(--bob);background:#58c7d911;transform:translateX(3px)}.sim-choice button b{display:block;font-size:13px;margin-bottom:4px}.sim-choice button span{display:block;color:var(--muted);font-size:11px}.sim-outcome{padding:16px 18px;background:#f3c77810;border:1px solid #f3c77830;border-left:3px solid var(--gold);border-radius:12px;margin:17px 0;font-size:12px;color:#e7dfce}.sim-outcome b{display:block;color:var(--gold);margin-bottom:5px;font-size:14px}.sim-next-row{display:flex;justify-content:flex-end;margin:16px 0}.btn{border:0;border-radius:11px;padding:11px 17px;font-size:12px;font-weight:900;background:linear-gradient(110deg,#59c9d9,#9cabe9);color:#111827;box-shadow:0 8px 24px #58c7d92a}.btn.secondary{background:#ffffff0a;color:var(--muted);border:1px solid #ffffff19;box-shadow:none}.game-controls{margin-top:18px;padding-top:15px;border-top:1px solid var(--line)}.small{font-size:10px;color:var(--soft)}.side-title{margin-bottom:12px}.side-title b{font-size:13px}.side-title span{font-size:9px;color:var(--soft);letter-spacing:.12em}.character{width:100%;text-align:left;padding:12px;margin:8px 0;border:1px solid #ffffff14;border-radius:14px;background:#ffffff05;color:var(--ink)}.character.selected.bob{border-color:#58c7d988;background:#58c7d915}.character.selected.jenny{border-color:#e6a0cf88;background:#e6a0cf15}.avatar{width:44px;height:44px;flex:0 0 44px;border-radius:14px;display:grid;place-items:center;font-size:14px;font-weight:900}.bob .avatar{background:linear-gradient(145deg,#58c7d9,#276b85);color:#081c25}.jenny .avatar{background:linear-gradient(145deg,#f1b9dc,#a45a92);color:#2c1027}.character-info{flex:1}.character-info strong,.character-info small{display:block}.character-info strong{font-size:13px}.character-info small{color:var(--muted);font-size:10px}.control-tag{font-size:9px;color:var(--lime);font-weight:900}.side-divider{height:1px;background:var(--line);margin:17px 0}.side-metric{margin:11px 0;font-size:11px}.side-metric span{color:var(--muted)}.side-note{padding:13px;border:1px solid #ffffff12;background:#ffffff06;border-radius:12px;color:var(--muted);font-size:10px}.side-note strong{color:var(--ink)}.sim-ending{text-align:center;padding:48px 10px}.sim-ending .big{font-size:62px;font-weight:900;line-height:1;background:linear-gradient(120deg,var(--bob),var(--jenny));color:transparent;background-clip:text}.sim-ending h3{font-size:clamp(23px,3vw,32px);margin:12px auto}.sim-ending>p{max-width:650px;margin:10px auto;color:var(--muted);font-size:12px}.sim-ending .sim-outcome{text-align:left;max-width:700px;margin:22px auto}.sim-ending .btn{margin-top:15px}.footer{margin-top:20px;color:var(--soft);font-size:10px}.footer span:last-child{text-align:right}@media(max-width:980px){.layout{grid-template-columns:1fr}.side-panel{position:static;display:grid;grid-template-columns:1fr 1fr;gap:0 15px}.side-panel .side-title,.side-panel .side-divider,.side-panel .side-note{grid-column:1/-1}.side-divider{margin:12px 0}}@media(max-width:650px){.app{padding:16px 12px 30px}.topbar{margin-bottom:20px}.intro{display:block}.chapter-pill{display:inline-block;margin-top:14px}.sim-hud{display:block}.sim-stats{margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr)}.sim-stats>div{min-width:0}.sim-meter-grid,.task-list{grid-template-columns:1fr}.sim-task-heading{align-items:flex-start;flex-direction:column;gap:2px}.game-stage{min-height:380px}.side-panel{grid-template-columns:1fr 1fr;padding:14px}.character{padding:9px;gap:8px}.avatar{width:38px;height:38px;flex-basis:38px}.control-tag{display:none}.game-controls,.footer{align-items:flex-start;flex-direction:column}.footer span:last-child{text-align:left}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}</style></head><body><div class="app">
-<header class="topbar"><div class="brand"><div class="brand-mark">⌂</div><div><small>INTERACTIVE FAMILY SIMULATION</small><strong>THE HOME SHIFT</strong></div></div><div class="top-meta"><span class="live-dot"></span><span>單人遊玩 · 雙角色操控</span></div></header>
-<section class="intro"><div><div class="eyebrow">A DIFFERENT KIND OF FAMILY GAME</div><h1>家庭，不該只靠一個人撐起來。</h1><p>切換控制 Bob 與 Jenny，安排家務、照顧與個人時間。你的每個決定，都會改變這個家的節奏。</p></div><div class="chapter-pill">3 個章節　·　12 項家庭任務　·　多重結局</div></section>
-<div class="layout"><main class="main-panel">
-<div class="sim-hud"><div class="sim-brand"><span>YOUR FAMILY · YOUR DECISIONS</span><strong>家庭協作日誌</strong></div><div class="sim-stats"><div><small>章節</small><b id="simChapter">序幕</b></div><div><small>分工公平</small><b id="simBalance">50</b></div><div><small>彼此信任</small><b id="simTrust">55</b></div><div><small>完成任務</small><b id="simDone">0/12</b></div></div></div>
-<div class="sim-meter-grid"><div class="sim-meter"><div><b>Bob 的總負擔</b><strong id="bobLoad">2</strong></div><div class="sim-track"><i id="bobBar"></i></div><small>工作、家務與照顧責任</small></div><div class="sim-meter"><div><b>Jenny 的總負擔</b><strong id="jennyLoad">3</strong></div><div class="sim-track"><i id="jennyBar"></i></div><small>工作、家務與心智勞動</small></div></div>
-<div class="progress"><i id="simProgress"></i></div><div class="game-stage" id="simStage" aria-live="polite"></div><div class="game-controls"><span class="small" id="simHint">你可以切換角色，親自安排每一項家庭工作。</span><button class="btn secondary" id="simRestart" type="button">↻　重新開始</button></div>
-</main><aside class="side-panel"><div class="side-title"><b>選擇操控角色</b><span>PLAYER CONTROL</span></div>
-<button class="character bob selected" id="controlBob" type="button" aria-pressed="true"><span class="avatar">BO</span><span class="character-info"><strong>Bob</strong><small>經濟支柱 · 爸爸</small></span><span class="control-tag">操控中</span></button>
-<button class="character jenny" id="controlJenny" type="button" aria-pressed="false"><span class="avatar">JE</span><span class="character-info"><strong>Jenny</strong><small>照顧者 · 媽媽</small></span><span class="control-tag">切換</span></button>
-<div class="side-divider"></div><div class="side-title"><b>家庭狀態</b><span>LIVE STATUS</span></div><div class="side-metric"><span>家庭信任</span><b id="sideTrust">55 / 100</b></div><div class="side-metric"><span>目前完成任務</span><b id="sideTasks">0 / 12</b></div><div class="side-metric"><span>Jenny 個人發展支持</span><b id="sideGrowth">0</b></div><div class="side-divider"></div><div class="side-note"><strong>遊戲提示</strong><br>先選擇你要操控的角色，再把任務交給他／她。你也可以選擇「兩人一起」。共同承擔不只是分一半，也代表一起記得、一起負責。</div></aside></div>
-<footer class="footer"><span>THE HOME SHIFT · 一個關於照顧、選擇與公平的原創模擬遊戲</span><span>Every household has a story. Every choice changes it.</span></footer></div><script>
-
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#111522"><title>家庭日常：城市任務｜The Home Shift</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#f7f5f8;--muted:#b9bbca;--pink:#ff729b;--cyan:#77d9e7;--gold:#ffd36d;--panel:#171b2b}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111522;color:var(--ink);font-family:"DM Sans","Noto Sans TC",sans-serif;touch-action:none}button{font:inherit;touch-action:none}#game{position:relative;width:100%;height:100%;height:100dvh;overflow:hidden;background:#22283b}
+#world{display:block;width:100%;height:100%;background:#242a3e}
+.top-ui{position:absolute;z-index:5;top:max(12px,env(safe-area-inset-top));left:14px;right:14px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;pointer-events:none}
+.mission{pointer-events:auto;width:min(66%,430px);padding:14px 16px 13px;background:rgba(22,25,43,.94);border:1px solid rgba(255,255,255,.14);border-radius:19px;box-shadow:0 12px 34px #080b1690;backdrop-filter:blur(14px)}
+.mission-kicker{font-size:11px;color:#aeb5cb;letter-spacing:.12em;font-weight:800}.mission h1{font-size:clamp(16px,3vw,23px);line-height:1.35;margin:5px 0 4px}.mission p{font-size:12px;color:var(--pink);margin:0;font-weight:700}.mission-progress{height:4px;background:#ffffff18;border-radius:9px;margin-top:11px;overflow:hidden}.mission-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--gold));transition:width .3s}
+.top-actions{display:flex;gap:8px;pointer-events:auto}.pill{border:1px solid #ffffff35;background:#171b2be8;color:#fff;border-radius:99px;padding:10px 14px;font-size:11px;font-weight:800;backdrop-filter:blur(10px)}.pill:active,.action:active{transform:scale(.96)}
+.character-switch{position:absolute;z-index:5;top:max(120px,calc(env(safe-area-inset-top) + 108px));right:14px;display:flex;gap:7px}.char-btn{display:flex;align-items:center;gap:7px;border:1px solid #ffffff30;background:#171b2bdc;color:#fff;border-radius:14px;padding:8px 11px;font-size:11px;font-weight:800;backdrop-filter:blur(10px)}.char-btn .dot{width:9px;height:9px;border-radius:50%;background:var(--cyan)}.char-btn.jenny .dot{background:var(--pink)}.char-btn.active{border-color:var(--gold);box-shadow:0 0 0 2px #ffd36d30}
+.hint{position:absolute;z-index:4;left:50%;top:42%;transform:translate(-50%,-50%);width:max-content;max-width:82%;padding:12px 18px;border-radius:14px;background:#111522df;border:1px solid #ffffff20;text-align:center;font-size:clamp(13px,2.8vw,18px);font-weight:700;line-height:1.6;box-shadow:0 8px 30px #0005;pointer-events:none;transition:opacity .25s}.hint.hide{opacity:0}
+.bottom-ui{position:absolute;z-index:5;left:0;right:0;bottom:max(20px,env(safe-area-inset-bottom));display:flex;align-items:flex-end;justify-content:space-between;padding:0 24px;pointer-events:none}
+.joystick{width:142px;height:142px;border-radius:50%;border:4px solid #ffffff38;background:#aab2c322;box-shadow:0 0 0 9px #080b162d,inset 0 0 24px #fff1;position:relative;pointer-events:auto;touch-action:none;backdrop-filter:blur(4px)}
+.stick{position:absolute;left:50%;top:50%;width:61px;height:61px;transform:translate(-50%,-50%);border-radius:50%;border:4px solid #ffffffb8;background:linear-gradient(145deg,#d9dce8a8,#69728caa);box-shadow:0 4px 14px #0006;pointer-events:none}
+.joy-arrow{position:absolute;color:#ffffff9c;font-size:17px;font-weight:900;pointer-events:none}.up{top:9px;left:calc(50% - 6px)}.down{bottom:8px;left:calc(50% - 6px)}.left{left:10px;top:calc(50% - 11px)}.right{right:10px;top:calc(50% - 11px)}
+.action-wrap{display:flex;align-items:flex-end;gap:12px;pointer-events:auto}.action{width:82px;height:82px;border-radius:50%;border:2px solid #ffffff9c;background:linear-gradient(145deg,#ff91ad,#d84979);color:white;font-size:13px;font-weight:900;box-shadow:0 7px 24px #d8497950;touch-action:none}.action:disabled{filter:grayscale(1);opacity:.55}.mini-action{width:54px;height:54px;border-radius:50%;border:1px solid #ffffff75;background:#171b2bdc;color:white;font-size:11px;font-weight:800}
+.toast{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);opacity:0;pointer-events:none;background:#171b2bf5;border:1px solid #ffffff28;border-radius:18px;padding:20px 23px;text-align:center;width:min(86%,380px);box-shadow:0 20px 60px #0009;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}.toast .emoji{font-size:34px}.toast h2{font-size:20px;margin:7px 0}.toast p{font-size:13px;color:var(--muted);line-height:1.7;margin:0 0 15px}.toast button{border:0;border-radius:11px;background:linear-gradient(100deg,#ff91ad,#ffd36d);color:#231722;padding:11px 18px;font-weight:900}
+.status{position:absolute;z-index:4;left:14px;top:max(125px,calc(env(safe-area-inset-top) + 112px));background:#171b2bc9;border:1px solid #ffffff20;border-radius:12px;padding:8px 11px;font-size:10px;color:#cbd1e0;backdrop-filter:blur(10px)}.status b{color:var(--gold)}
+@media(min-width:850px){.mission{width:400px}.bottom-ui{padding:0 7vw}.joystick{width:154px;height:154px}.stick{width:66px;height:66px}.action{width:92px;height:92px}}
+@media(max-width:520px){.top-ui{left:10px;right:10px}.mission{width:70%;padding:11px 12px;border-radius:16px}.mission-kicker{font-size:9px}.mission h1{font-size:16px}.mission p{font-size:10px}.pill{padding:9px 10px;font-size:10px}.character-switch{top:max(118px,calc(env(safe-area-inset-top) + 108px));right:10px}.char-btn{padding:7px 9px;font-size:10px}.status{top:max(174px,calc(env(safe-area-inset-top) + 164px));left:10px}.joystick{width:126px;height:126px}.stick{width:56px;height:56px}.bottom-ui{padding:0 18px 8px}.action{width:73px;height:73px}.mini-action{width:48px;height:48px}}
+</style>
+</head>
+<body>
+<div id="game">
+<canvas id="world" aria-label="可操作的家庭城市冒險遊戲"></canvas>
+<div class="top-ui">
+ <section class="mission"><div class="mission-kicker" id="missionKicker">任務 1 / 4 · 星期五晚上</div><h1 id="missionTitle">去便利商店買宵夜</h1><p id="missionSub">跟著黃色箭頭走</p><div class="mission-progress"><i id="progressBar"></i></div></section>
+ <div class="top-actions"><button class="pill" id="pauseBtn">Ⅱ 暫停</button></div>
+</div>
+<div class="character-switch"><button class="char-btn active" id="bobBtn"><i class="dot"></i> Bob</button><button class="char-btn jenny" id="jennyBtn"><i class="dot"></i> Jenny</button></div>
+<div class="status" id="status">目前操控：<b>Bob</b>　·　靠近目的地按互動</div>
+<div class="hint" id="hint">穿上喜歡的衣服，出門買宵夜吧！<br><span style="color:#ff91ad">滑動左下方搖桿開始移動</span></div>
+<div class="bottom-ui">
+ <div class="joystick" id="joystick"><span class="joy-arrow up">▲</span><span class="joy-arrow down">▼</span><span class="joy-arrow left">◀</span><span class="joy-arrow right">▶</span><div class="stick" id="stick"></div></div>
+ <div class="action-wrap"><button class="mini-action" id="switchBtn">切換<br>角色</button><button class="action" id="interactBtn" disabled>互動</button></div>
+</div>
+<div class="toast" id="toast"><div class="emoji" id="toastEmoji">✨</div><h2 id="toastTitle">任務完成</h2><p id="toastText"></p><button id="toastBtn">繼續 →</button></div>
+</div>
+<script>
+(()=>{
+const canvas=document.getElementById('world'),ctx=canvas.getContext('2d');
 const $=id=>document.getElementById(id);
-const chapters=[
-{
- title:'忙碌的一天',time:'星期一 · 06:45–21:30',icon:'🏠',
- intro:'星期一早上，孩子比鬧鐘更早醒來。Bob 要趕去上班，Jenny 今天要照顧兩個孩子，也想留一點時間處理自己的事。請把一天的工作安排好。',
- dialogue:[['Jenny','「我不是不願意照顧孩子，只是有時候連吃一頓飯都要等到大家睡著。」'],['Bob','「我知道你很累。我也想多陪孩子，但工作時間真的很緊。」']],
- tasks:[
-  {title:'準備早餐與孩子用品',when:'早上 06:45',detail:'準備早餐、奶瓶、書包和外出用品。這些小事每天都會重複。',load:2},
-  {title:'送孩子上學／托育',when:'早上 07:30',detail:'接送需要配合交通與上班時間，也需要有人調整自己的行程。',load:2},
-  {title:'洗衣、採買與晚餐準備',when:'下午 17:30',detail:'除了動手做，還要記得家裡缺什麼、孩子需要什麼。這也是心智勞動。',load:3},
-  {title:'洗澡、陪玩與睡前照顧',when:'晚上 20:00',detail:'照顧不是單一工作，而是一連串需要耐心與情緒投入的責任。',load:3}
- ],
- event:{title:'晚飯後的一段對話',text:'孩子終於睡了。Jenny 說自己整天沒有真正休息；Bob 則覺得自己的工作壓力沒有被看見。兩人的疲勞都是真的。',choices:[
-  {title:'先聽兩人說完，再一起看工作清單',detail:'不急著判斷誰比較辛苦，先讓彼此的付出被看見。',result:'兩人開始理解，對方的壓力並不會抵銷自己的需要。一起討論，為下一天留下協商空間。',effects:{trust:12,fairness:4,growth:1}},
-  {title:'先讓 Bob 休息，家務暫時由 Jenny 承擔',detail:'認為 Bob 在外工作已經很累，家裡的事先由 Jenny 處理。',result:'Bob 得到休息，但 Jenny 的照顧責任再度增加。短期安靜下來，不代表問題消失。',effects:{jenny:2,trust:-8,fairness:-7}},
-  {title:'要求 Bob 把所有家務補回來',detail:'希望立即扭轉不平等，但沒有討論實際時間與能力。',result:'Jenny 感覺有人站在自己這邊；Bob 卻覺得自己被責怪。分工需要改變，也需要能持續的協商。',effects:{bob:2,trust:-4,fairness:-2}}
- ]}
-},
-{
- title:'快要撐不住了',time:'星期三 · 17:30–23:00',icon:'🌧️',
- intro:'幾天過去，疲勞仍然累積。Jenny 有一堂重要的課，Bob 卻臨時被要求加班。孩子需要有人照顧，家庭也需要有人記得所有安排。',
- dialogue:[['Jenny','「我想繼續上課，這對我以後工作很重要。我不想每次都要先問可不可以。」'],['Bob','「公司今天真的很忙。我也想幫忙，但如果不加班，工作可能會受影響。」']],
- tasks:[
-  {title:'安排晚餐與孩子用餐',when:'下午 17:30',detail:'孩子需要按時吃飯。誰準備、誰陪吃，也影響另一個人能否準時出門。',load:2},
-  {title:'Jenny 上課期間照顧孩子',when:'晚上 18:30',detail:'這段時間需要有人完整承擔照顧，而不是一邊工作、一邊等待 Jenny 回來。',load:3},
-  {title:'處理孩子半夜醒來',when:'晚上 22:30',detail:'夜間照顧會打斷睡眠。若長期由同一人負責，疲勞會不斷累積。',load:3},
-  {title:'採買並規劃下週用品',when:'晚上 20:30',detail:'記住尿布、食物、接送和孩子的安排，是容易被忽略的心智勞動。',load:2}
- ],
- event:{title:'今晚，Jenny 還能去上課嗎？',text:'Jenny 不想放棄自己的進修機會；Bob 也需要處理工作壓力。你要協助他們找到一個不把任何一方犧牲掉的方案。',choices:[
-  {title:'保留 Jenny 的上課時間，Bob 承擔照顧安排',detail:'把進修視為家庭需要支持的發展，而不是可有可無的空檔。',result:'Jenny 能繼續進修，Bob 也有機會實際參與親職。這可能需要重新安排工作，但雙方的需要都被認真對待。',effects:{bob:1,trust:12,fairness:5,growth:2}},
-  {title:'請 Jenny 取消課程，先把家裡顧好',detail:'短期最省事，但個人發展又一次被家庭責任擠掉。',result:'當晚的安排比較簡單，但 Jenny 失去自己的時間。若這種情況反覆出現，家庭分工就會限制她的選擇。',effects:{jenny:2,trust:-12,fairness:-8,growth:-2}},
-  {title:'尋求可信任的外部支援，再共同分擔',detail:'例如親友短暫協助或可負擔的社區照顧資源。',result:'兩人不用只在彼此身上尋找答案。適當的支持網絡，也能讓家庭照顧更可持續。',effects:{bob:-1,jenny:-1,trust:8,fairness:5,growth:2}}
- ]}
-},
-{
- title:'新的家庭節奏',time:'星期日 · 15:30–20:30',icon:'🌱',
- intro:'兩人決定重新協商。這次不只是把工作分出去，更要確保雙方有休息、進修、工作與陪伴孩子的空間。',
- dialogue:[['Bob','「我想當一個真正參與孩子生活的爸爸，不只是負責賺錢。」'],['Jenny','「我也希望我們的安排不是靠我一直提醒，而是兩個人都記得、都負責。」']],
- tasks:[
-  {title:'固定每週家庭會議',when:'星期日 15:30',detail:'一起檢視下週行程、工作量與彼此需要，讓協商成為固定習慣。',load:1},
-  {title:'安排 Jenny 的進修與個人時間',when:'每週固定時段',detail:'Jenny 的學習與發展不應只在所有家務完成後才有剩餘時間。',load:2},
-  {title:'安排 Bob 的親子照顧時段',when:'每週固定時段',detail:'Bob 不只是「幫忙」，而是共同承擔照顧責任，也建立與孩子的關係。',load:2},
-  {title:'建立家務輪替與提醒制度',when:'每週共同檢視',detail:'把採買、清潔、接送和照顧等工作寫下來，避免責任默默落在同一個人身上。',load:2}
- ],
- event:{title:'要把新的分工怎樣落實？',text:'兩人同意改變，但真正的考驗是：當工作忙起來、孩子生病，或有人需要休息時，這套安排能不能調整？',choices:[
-  {title:'建立共同日曆，每週檢視並按需要調整',detail:'不是硬性平均，而是共同負責、看見差異、定期重新協商。',result:'兩人有共同參與的制度，也保留了調整空間。Jenny 的發展與 Bob 的親職參與都成為家庭計劃的一部分。',effects:{trust:14,fairness:12,growth:2}},
-  {title:'把所有工作固定五五分，不再討論',detail:'看似公平，但忽略工作時數、照顧需求和生活變化。',result:'明確的清單讓事情比較好追蹤，但如果情況改變，僵化的平均分配也可能造成新的不公平。',effects:{trust:4,fairness:4,growth:1}},
-  {title:'維持 Jenny 作為主要照顧者，Bob 有空再幫忙',detail:'回到熟悉的方式，短期不用磨合。',result:'家庭運作看似穩定，但主要照顧責任仍集中在 Jenny 身上，個人時間和發展機會也容易再次被犧牲。',effects:{jenny:3,trust:-14,fairness:-12,growth:-2}}
- ]}
-}
+const W=800,H=1000;
+let scale=1,paused=false,finished=false,toastOpen=false,last=0,move={x:0,y:0},keys={};
+const colors={bob:'#72d6e3',jenny:'#f08cba'};
+const characters={bob:{name:'Bob',x:125,y:825,color:colors.bob,load:0},jenny:{name:'Jenny',x:165,y:825,color:colors.jenny,load:0}};
+let active='bob',mission=0,steps=0;
+const missions=[
+ {title:'去便利商店買宵夜',sub:'跟著螢光黃箭頭走',place:'便利商店',x:660,y:190,icon:'🏪',task:'買好孩子和兩人的宵夜',detail:'你走進便利商店，買了牛奶、麵包和孩子喜歡的小點心。記得：採買也包含事前記住家裡需要什麼。',who:'採買與規劃'},
+ {title:'到托育中心接孩子',sub:'孩子正在等你回家',place:'托育中心',x:145,y:180,icon:'🧸',task:'接孩子並確認明天用品',detail:'老師交代了孩子今天的情況，也提醒明天要帶替換衣物。照顧不只是接送，也包括記住孩子的需要。',who:'接送與照顧'},
+ {title:'到市場買晚餐食材',sub:'準備一家人的晚餐',place:'街市',x:660,y:570,icon:'🥬',task:'買齊晚餐食材',detail:'你買好了晚餐食材。這個家需要有人動手，也需要有人記得冰箱還缺什麼。',who:'家務與心智勞動'},
+ {title:'回家一起準備晚餐',sub:'今天的最後一個任務',place:'家',x:145,y:820,icon:'🏠',task:'與家人一起完成晚餐',detail:'孩子回到家了。今天的任務完成，但家庭分工不是一天就能解決。Bob 和 Jenny 開始討論：以後如何讓照顧和家務成為兩個人共同的責任？',who:'共同照顧'}
 ];
-
-let activeCharacter='bob';
-let sim={chapter:0,bob:2,jenny:3,trust:55,fairnessBonus:0,growth:0,history:[],eventChosen:[],started:false};
-const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
-function fairness(){return clamp(100-Math.abs(sim.bob-sim.jenny)*5+sim.fairnessBonus,0,100);}
-function updateMeters(){
- const f=fairness();
- $('controlBob').classList.toggle('selected',activeCharacter==='bob'); $('controlJenny').classList.toggle('selected',activeCharacter==='jenny');
- $('controlBob').setAttribute('aria-pressed',activeCharacter==='bob'); $('controlJenny').setAttribute('aria-pressed',activeCharacter==='jenny');
- $('simChapter').textContent=sim.started?(sim.chapter+1)+'/3':'序幕';
- $('simBalance').textContent=sim.started?f:50;
- $('simTrust').textContent=sim.started?clamp(sim.trust,0,100):55;
- $('simDone').textContent=sim.history.length+'/12';
- $('bobLoad').textContent=sim.bob;
- $('jennyLoad').textContent=sim.jenny;
- $('bobBar').style.width=clamp(sim.bob/25*100,0,100)+'%';
- $('jennyBar').style.width=clamp(sim.jenny/25*100,0,100)+'%';
- $('simProgress').style.width=(sim.history.length/12*100)+'%';
+const blocks=[
+ {x:0,y:0,w:800,h:115,c:'#20263a'}, {x:0,y:115,w:800,h:90,c:'#283e38'},
+ {x:0,y:205,w:800,h:90,c:'#444b63'}, {x:0,y:295,w:800,h:250,c:'#20263a'},
+ {x:0,y:545,w:800,h:85,c:'#454c64'}, {x:0,y:630,w:800,h:240,c:'#20263a'},
+ {x:0,y:870,w:800,h:130,c:'#454c64'}
+];
+const buildings=[
+ {x:22,y:120,w:250,h:145,name:'公寓',color:'#353b53',win:true},
+ {x:520,y:120,w:250,h:145,name:'便利商店',color:'#3d465c',win:true,sign:'便利商店'},
+ {x:22,y:650,w:250,h:200,name:'家',color:'#41465e',win:true,sign:'HOME'},
+ {x:520,y:650,w:250,h:200,name:'街市',color:'#3b435a',win:true,sign:'街市'},
+ {x:22,y:315,w:250,h:205,name:'托育中心',color:'#3c465d',win:true,sign:'托育中心'},
+ {x:520,y:315,w:250,h:205,name:'公園',color:'#29463e',win:false,sign:'PARK'}
+];
+function resize(){const dpr=Math.min(devicePixelRatio||1,2),r=canvas.getBoundingClientRect();canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);scale=Math.min(canvas.width/W,canvas.height/H);ctx.setTransform(scale,0,0,scale,(canvas.width-W*scale)/2,(canvas.height-H*scale)/2);}
+window.addEventListener('resize',resize);resize();
+function roundRect(x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}}
+function drawBuilding(b){
+ roundRect(b.x,b.y,b.w,b.h,8,b.color,'#ffffff13');
+ if(b.win){for(let y=b.y+25;y<b.y+b.h-15;y+=48)for(let x=b.x+20;x<b.x+b.w-15;x+=48){ctx.fillStyle=((x+y)%3<1)?'#f3c86b':'#262c42';ctx.fillRect(x,y,18,20);}}
+ if(b.sign){roundRect(b.x+22,b.y+10, b.w-44,28,7,'#171b2b','#ffffff22');ctx.fillStyle='#f7e9c9';ctx.font='bold 13px sans-serif';ctx.textAlign='center';ctx.fillText(b.sign,b.x+b.w/2,b.y+29);}
 }
-function intro(){
- sim={chapter:0,bob:2,jenny:3,trust:55,fairnessBonus:0,growth:0,history:[],eventChosen:[],started:false};
- $('simStage').innerHTML='<div class="sim-scene"><div class="sim-scene-head"><div class="sim-scene-icon">🏡</div><div class="sim-scene-title"><div class="game-tag">A FAMILY STORY · INTERACTIVE SIMULATION</div><h3>家的事情，從來不會自己完成</h3></div></div><p>Bob 是家中唯一的經濟來源；Jenny 辭去工作後負責照顧孩子。兩個人都付出，也都感到疲累。你將陪他們走過三天，安排家務、回應衝突，並嘗試建立新的家庭節奏。</p><div class="sim-dialogue"><b>Jenny</b><span>「我希望照顧孩子的責任能被看見，也希望我還有機會進修和發展。」</span></div><div class="sim-dialogue"><b>Bob</b><span>「我想照顧家庭，也想陪孩子，但我不太知道怎樣在工作和家裡之間取得平衡。」</span></div><div class="sim-outcome"><b>你的任務</b>安排 12 項家庭工作，作出 3 次重要協商。留意的不只是誰做了多少事，還有誰有時間休息、學習和參與家庭。</div><button class="btn" id="simStart" type="button">進入星期一 →</button></div>';
- $('simHint').textContent='工作量包含有酬工作、家務、照顧與心智勞動。';
- updateMeters();
+function drawWorld(){
+ ctx.clearRect(0,0,W,H);
+ // base blocks and night-time neighbourhood
+ ctx.fillStyle='#20263a';ctx.fillRect(0,0,W,H);
+ // pavements
+ ctx.fillStyle='#454b63';ctx.fillRect(0,285,W,28);ctx.fillRect(0,535,W,28);ctx.fillRect(0,865,W,28);
+ ctx.fillRect(0,0,22,H);ctx.fillRect(778,0,22,H);
+ // roads
+ ctx.fillStyle='#292e45';ctx.fillRect(0,313,W,222);ctx.fillRect(0,563,W,302);
+ ctx.strokeStyle='#8e805c';ctx.lineWidth=3;ctx.setLineDash([48,55]);ctx.beginPath();ctx.moveTo(0,423);ctx.lineTo(W,423);ctx.stroke();ctx.setLineDash([]);
+ // street lights
+ for(const x of [75,400,725]){ctx.fillStyle='#eecb79';ctx.globalAlpha=.65;ctx.fillRect(x,335,3,28);ctx.fillRect(x,755,3,28);ctx.globalAlpha=1;}
+ // green park pocket
+ ctx.fillStyle='#29463e';ctx.fillRect(520,205,250,80);
+ for(let i=0;i<6;i++){ctx.fillStyle=i%2?'#335b4a':'#203c35';ctx.beginPath();ctx.arc(555+i*38,245+(i%2)*9,18,0,Math.PI*2);ctx.fill();}
+ buildings.forEach(drawBuilding);
+ // sidewalk tile seams
+ ctx.strokeStyle='#ffffff0b';ctx.lineWidth=2;
+ for(let x=0;x<800;x+=78){ctx.beginPath();ctx.moveTo(x,285);ctx.lineTo(x,313);ctx.moveTo(x,535);ctx.lineTo(x,563);ctx.moveTo(x,865);ctx.lineTo(x,893);ctx.stroke();}
+ // objective beacon and dotted guide
+ if(!finished){const m=missions[mission],p=characters[active];ctx.save();ctx.strokeStyle='#ffd36d';ctx.lineWidth=3;ctx.setLineDash([8,11]);ctx.globalAlpha=.62;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(m.x,m.y);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
+ ctx.shadowColor='#ffd36d';ctx.shadowBlur=25;ctx.fillStyle='#ffd36d';ctx.beginPath();ctx.arc(m.x,m.y-28,10+Math.sin(performance.now()/190)*3,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;ctx.fillStyle='#fff1b9';ctx.beginPath();ctx.moveTo(m.x,m.y-15);ctx.lineTo(m.x-9,m.y-32);ctx.lineTo(m.x+9,m.y-32);ctx.closePath();ctx.fill();ctx.restore();}
+ // characters
+ Object.entries(characters).forEach(([id,p])=>drawPerson(p,id===active));
+ // interaction distance
+ const p=characters[active],m=missions[mission],near=!finished&&Math.hypot(p.x-m.x,p.y-m.y)<65;
+ $('interactBtn').disabled=!near||paused||toastOpen||finished;
 }
-function start(){sim.started=true;sim.chapter=0;renderChapter();}
-function renderChapter(){
- const c=chapters[sim.chapter];
- const dialogue=c.dialogue.map((d,i)=>'<div class="sim-dialogue '+(i?'jenny':'')+'"><b>'+d[0]+'</b><span>'+d[1]+'</span></div>').join('');
- $('simStage').innerHTML='<div class="sim-scene"><div class="sim-scene-head"><div class="sim-scene-icon">'+c.icon+'</div><div class="sim-scene-title"><div class="game-tag">CHAPTER 0'+(sim.chapter+1)+' · '+c.time+'</div><h3>'+c.title+'</h3></div></div><p>'+c.intro+'</p>'+dialogue+'<div class="sim-task-heading"><b>今日待辦工作</b><span>選擇由誰負責 · 可共同完成</span></div><div class="task-list" id="taskList"></div><div id="chapterFeedback"></div></div>';
- $('simHint').textContent='每項工作可以交給 Bob、Jenny，或由兩人共同完成。';
- renderTasks();updateMeters();
+function drawPerson(p,selected){
+ ctx.save();ctx.translate(p.x,p.y);
+ if(selected){ctx.fillStyle='#ffd36d35';ctx.beginPath();ctx.ellipse(0,9,28,14,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#ffd36d';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,-8,23,0,Math.PI*2);ctx.stroke();}
+ ctx.fillStyle='#11152299';ctx.beginPath();ctx.ellipse(0,13,17,7,0,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle=p.color;ctx.beginPath();ctx.roundRect(-13,-9,26,26,10);ctx.fill();
+ ctx.fillStyle='#f1c9a6';ctx.beginPath();ctx.arc(0,-18,12,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#3b2b32';ctx.beginPath();ctx.arc(0,-22,12,Math.PI,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#fff';ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.fillText(p.name,0,34);
+ ctx.restore();
 }
-function renderTasks(){
- const c=chapters[sim.chapter],list=$('taskList');
- list.innerHTML=c.tasks.map((t,i)=>{
-  const record=sim.history.find(x=>x.chapter===sim.chapter&&x.task===i);
-  return '<article class="task-card '+(record?'done':'')+'"><span class="task-when">'+t.when+'</span><div class="task-head"><h4>'+(record?'✓ ':'')+t.title+'</h4><span class="task-weight">負擔 '+t.load+'</span></div><p>'+t.detail+'</p>'+(record?'<div class="task-result">已安排：'+record.label+'</div>':'<div class="assign-row"><button class="assign-btn primary-assign" data-task="'+i+'" data-owner="'+activeCharacter+'">交給 '+(activeCharacter==='bob'?'Bob':'Jenny')+'</button><button class="assign-btn" data-task="'+i+'" data-owner="shared">兩人一起</button></div>')+'</article>';
- }).join('');
- if(c.tasks.every((t,i)=>sim.history.some(x=>x.chapter===sim.chapter&&x.task===i)))finishChapter();
-}
-function assign(i,owner){
- const c=chapters[sim.chapter],t=c.tasks[i];
- if(!t||sim.history.some(x=>x.chapter===sim.chapter&&x.task===i))return;
- let label='';
- if(owner==='bob'){sim.bob+=t.load;label='Bob';}
- else if(owner==='jenny'){sim.jenny+=t.load;label='Jenny';}
- else{const b=Math.ceil(t.load/2),j=Math.floor(t.load/2);sim.bob+=b;sim.jenny+=j;sim.trust+=3;label='共同分擔';}
- if(owner!=='shared'&&Math.abs(sim.bob-sim.jenny)>=6)sim.trust-=2;
- sim.history.push({chapter:sim.chapter,task:i,label});
- updateMeters();renderTasks();
-}
-function finishChapter(){
- const c=chapters[sim.chapter],f=fairness(),feedback=$('chapterFeedback');
- if(!feedback||feedback.dataset.ready)return;
- feedback.dataset.ready='1';
- const note=Math.abs(sim.bob-sim.jenny)<=2?'目前兩人的總工作量相當接近。':Math.abs(sim.bob-sim.jenny)<=5?'目前仍有一些負擔落差，記得也要看休息與個人時間。':'一方承擔了明顯較多的工作；家務完成了，不代表分工公平。';
- feedback.innerHTML='<div class="sim-outcome"><b>本章安排完成｜目前公平指數 '+f+'</b>'+note+'</div><div class="sim-next-row"><button class="btn" id="chapterContinue" type="button">面對家庭事件 →</button></div>';
- $('simHint').textContent='工作都已安排。接下來的對話，會影響兩人如何理解彼此。';
-}
-function renderEvent(){
- const e=chapters[sim.chapter].event;
- $('simStage').innerHTML='<div class="sim-scene"><div class="game-tag">CHAPTER 0'+(sim.chapter+1)+' · A FAMILY DECISION</div><h3>'+e.title+'</h3><p>'+e.text+'</p><div class="sim-choice">'+e.choices.map((c,i)=>'<button data-choice="'+i+'"><b>'+String.fromCharCode(65+i)+' · '+c.title+'</b><span>'+c.detail+'</span></button>').join('')+'</div></div>';
- $('simHint').textContent='選擇你認為最能回應雙方需要的做法；每個選擇都有代價與影響。';
-}
-function chooseEvent(i){
- const e=chapters[sim.chapter].event,choice=e.choices[i];
- if(!choice||sim.eventChosen[sim.chapter]!==undefined)return;
- const x=choice.effects;
- sim.bob+=x.bob||0;sim.jenny+=x.jenny||0;sim.trust=clamp(sim.trust+(x.trust||0),0,100);
- sim.fairnessBonus+=x.fairness||0;sim.growth+=x.growth||0;
- sim.eventChosen[sim.chapter]=i;updateMeters();
- $('simStage').innerHTML='<div class="sim-scene"><div class="game-tag">DECISION '+(i+1)+' · CONSEQUENCES</div><h3>'+choice.title+'</h3><div class="sim-outcome"><b>事情接下來如何發展？</b>'+choice.result+'</div><p>這個選擇已影響家庭的負擔、信任和個人發展。接下來看看他們如何面對下一個階段。</p><div class="sim-next-row"><button class="btn" id="nextChapter" type="button">'+(sim.chapter===2?'看看這個家的結局 →':'進入下一章 →')+'</button></div></div>';
- $('simHint').textContent='決定已記錄。不同的路線，會帶來不同的家庭結局。';
-}
-function nextChapter(){
- if(sim.chapter<2){sim.chapter++;renderChapter();}
- else showEnding();
-}
-function showEnding(){
- const f=fairness(),t=clamp(sim.trust,0,100),g=sim.growth;
- let title,body,lesson,grade;
- if(f>=72&&t>=68&&g>=2){
-  grade='A';title='一起生活，而不是一個人扛起整個家';
-  body='Bob 和 Jenny 開始把照顧視為共同責任。Jenny 有機會持續進修，Bob 也更投入親職。兩人並非每件事都一人一半，而是能持續看見彼此的需要。';
-  lesson='公平不是機械式的五五分，而是讓雙方都有協商權、休息時間與個人發展的空間。';
- }else if(f>=48&&t>=42){
-  grade='B';title='有了改變，但仍需要磨合';
-  body='兩人開始看見彼此的付出，不過部分工作仍然分配不均。若沒有持續溝通，舊有模式可能再次出現。';
-  lesson='平等不是一次協商就能完成，而是持續檢視權力、資源與照顧責任。';
- }else{
-  grade='C';title='舊有分工再次把兩人困住';
-  body='家庭裡的工作雖然有人完成，卻沒有真正解決負擔不均。Jenny 或 Bob 仍可能感到疲憊，個人時間和發展機會也容易被犧牲。';
-  lesson='只把事情做完並不等於公平；也要問誰失去了休息、選擇與發展的機會。';
- }
- $('simProgress').style.width='100%';
- $('simStage').innerHTML='<div class="sim-ending"><div class="game-tag">YOUR FAMILY STORY · ENDING</div><div class="big">'+grade+'</div><h3>'+title+'</h3><p>'+body+'</p><div class="sim-outcome"><b>帶走的社工思考</b>'+lesson+'</div><p>分工公平指數：'+f+'｜彼此信任：'+t+'｜Jenny 個人發展支持：'+Math.max(0,g)+'</p><p>Bob 工作負擔：'+sim.bob+'｜Jenny 工作負擔：'+sim.jenny+'</p><button class="btn" id="simAgain" type="button">再玩一次，嘗試另一種安排 ↻</button></div>';
- $('simHint').textContent='你可以重新開始，試試不同分工與協商，看看結局如何改變。';
- updateMeters();
-}
-$('simStage').addEventListener('click',event=>{
- const taskButton=event.target.closest('[data-task]');
- if(taskButton){assign(Number(taskButton.dataset.task),taskButton.dataset.owner);return;}
- const choiceButton=event.target.closest('[data-choice]');
- if(choiceButton){chooseEvent(Number(choiceButton.dataset.choice));return;}
- if(event.target.closest('#simStart')){start();return;}
- if(event.target.closest('#chapterContinue')){renderEvent();return;}
- if(event.target.closest('#nextChapter')){nextChapter();return;}
- if(event.target.closest('#simAgain')){intro();return;}
-});
-$('simRestart').addEventListener('click',intro);
-$('controlBob').addEventListener('click',()=>{activeCharacter='bob';updateMeters();if($('taskList'))renderTasks();});
-$('controlJenny').addEventListener('click',()=>{activeCharacter='jenny';updateMeters();if($('taskList'))renderTasks();});
-intro();
-
-
-const originalUpdateMeters=updateMeters;
-updateMeters=function(){originalUpdateMeters();$('sideTrust').textContent=clamp(sim.trust,0,100)+' / 100';$('sideTasks').textContent=sim.history.length+' / 12';$('sideGrowth').textContent=sim.growth;};
-</script></body></html>
+function isBlocked(x,y){if(x<28||x>772||y<28||y>972)return true;return buildings.some(b=>x>b.x-15&&x<b.x+b.w+15&&y>b.y-15&&y<b.y+b.h+15);}
+function tick(t){const dt=Math.min((t-last)/16.67||1,2);last=t;if(!paused&&!toastOpen&&!finished){let dx=move.x,dy=move.y;if(keys.ArrowLeft||keys.a)dx-=1;if(keys.ArrowRight||keys.d)dx+=1;if(keys.ArrowUp||keys.w)dy-=1;if(keys.ArrowDown||keys.s)dy+=1;const len=Math.hypot(dx,dy);if(len>1){dx/=len;dy/=len;}const p=characters[active],speed=3.05*dt;const nx=p.x+dx*speed,ny=p.y+dy*speed;if(!isBlocked(nx,p.y))p.x=nx;if(!isBlocked(p.x,ny))p.y=ny;}
+ drawWorld();requestAnimationFrame(tick);}
+requestAnimationFrame(tick);
+function updateHUD(){const m=missions[mission];$('missionKicker').textContent='任務 '+(mission+1)+' / 4 · 星期五晚上';$('missionTitle').textContent=m.title;$('missionSub').textContent=m.sub;$('progressBar').style.width=(mission/4*100)+'%';$('status').innerHTML='目前操控：<b>'+characters[active].name+'</b>　·　'+m.place+'在前方';}
+function switchCharacter(){if(paused||toastOpen||finished)return;active=active==='bob'?'jenny':'bob';$('bobBtn').classList.toggle('active',active==='bob');$('jennyBtn').classList.toggle('active',active==='jenny');updateHUD();}
+function showToast(title,text,emoji,button){toastOpen=true;$('toastTitle').textContent=title;$('toastText').textContent=text;$('toastEmoji').textContent=emoji;$('toastBtn').textContent=button||'繼續 →';$('toast').classList.add('show');}
+function interact(){if($('interactBtn').disabled)return;const m=missions[mission],p=characters[active];p.load++;steps++;mission++;$('progressBar').style.width=(mission/4*100)+'%';if(mission<4){updateHUD();showToast('任務完成！',m.detail,m.icon,'下一個任務 →');}else{finished=true;$('missionKicker').textContent='全部任務完成';$('missionTitle').textContent='回到家，一起吃晚餐';$('missionSub').textContent='今天的城市任務完成了';$('progressBar').style.width='100%';showToast('今晚，這個家一起完成了任務','Bob 承擔 '+characters.bob.load+' 項；Jenny 承擔 '+characters.jenny.load+' 項。照顧與家務不只是「幫忙」，而是兩個人共同的責任。','🏡','重新開始');}}
+function continueToast(){ $('toast').classList.remove('show');toastOpen=false;if(finished){mission=0;steps=0;finished=false;characters.bob.x=125;characters.bob.y=825;characters.jenny.x=165;characters.jenny.y=825;characters.bob.load=0;characters.jenny.load=0;active='bob';$('bobBtn').classList.add('active');$('jennyBtn').classList.remove('active');$('hint').classList.remove('hide');}else if(mission===1){$('hint').classList.add('hide');}updateHUD();}
+$('toastBtn').addEventListener('click',continueToast);$('interactBtn').addEventListener('click',interact);
+$('bobBtn').addEventListener('click',()=>{if(active!=='bob')switchCharacter();});$('jennyBtn').addEventListener('click',()=>{if(active!=='jenny')switchCharacter();});$('switchBtn').addEventListener('click',switchCharacter);
+$('pauseBtn').addEventListener('click',()=>{if(toastOpen)return;paused=!paused;$('pauseBtn').textContent=paused?'▶ 繼續':'Ⅱ 暫停';if(paused)showToast('遊戲暫停','休息一下。準備好後按下繼續。','Ⅱ','繼續遊戲');else{$('toast').classList.remove('show');toastOpen=false;}});
+const joy=$('joystick'),stick=$('stick');let pointer=null;
+function joyMove(e){const r=joy.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,max=r.width*.34;let x=e.clientX-cx,y=e.clientY-cy,d=Math.hypot(x,y);if(d>max){x=x/d*max;y=y/d*max;}move={x:x/max,y:y/max};stick.style.left='calc(50% + '+x+'px)';stick.style.top='calc(50% + '+y+'px)';}
+joy.addEventListener('pointerdown',e=>{pointer=e.pointerId;joy.setPointerCapture(pointer);joyMove(e);});joy.addEventListener('pointermove',e=>{if(e.pointerId===pointer)joyMove(e);});function joyEnd(e){if(e.pointerId!==pointer)return;pointer=null;move={x:0,y:0};stick.style.left='50%';stick.style.top='50%';}joy.addEventListener('pointerup',joyEnd);joy.addEventListener('pointercancel',joyEnd);
+window.addEventListener('keydown',e=>{keys[e.key]=true;if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();if(e.key===' '||e.key==='Enter')interact();if(e.key==='Tab'){e.preventDefault();switchCharacter();}});window.addEventListener('keyup',e=>keys[e.key]=false);
+updateHUD();
+})();
+</script>
+</body></html>
