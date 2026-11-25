@@ -49,13 +49,13 @@ const $=id=>document.getElementById(id);
 const W=800,H=1000;
 let scale=1,paused=false,finished=false,toastOpen=false,last=0,move={x:0,y:0},keys={};
 const colors={bob:'#72d6e3',jenny:'#f08cba'};
-const characters={bob:{name:'Bob',x:125,y:825,color:colors.bob,load:0},jenny:{name:'Jenny',x:165,y:825,color:colors.jenny,load:0}};
+const characters={bob:{name:'Bob',x:125,y:890,color:colors.bob,load:0},jenny:{name:'Jenny',x:165,y:890,color:colors.jenny,load:0}};
 let active='bob',mission=0,steps=0;
 const missions=[
- {title:'去便利商店買宵夜',sub:'跟著螢光黃箭頭走',place:'便利商店',x:660,y:190,icon:'🏪',task:'買好孩子和兩人的宵夜',detail:'你走進便利商店，買了牛奶、麵包和孩子喜歡的小點心。記得：採買也包含事前記住家裡需要什麼。',who:'採買與規劃'},
- {title:'到托育中心接孩子',sub:'孩子正在等你回家',place:'托育中心',x:145,y:180,icon:'🧸',task:'接孩子並確認明天用品',detail:'老師交代了孩子今天的情況，也提醒明天要帶替換衣物。照顧不只是接送，也包括記住孩子的需要。',who:'接送與照顧'},
- {title:'到市場買晚餐食材',sub:'準備一家人的晚餐',place:'街市',x:660,y:570,icon:'🥬',task:'買齊晚餐食材',detail:'你買好了晚餐食材。這個家需要有人動手，也需要有人記得冰箱還缺什麼。',who:'家務與心智勞動'},
- {title:'回家一起準備晚餐',sub:'今天的最後一個任務',place:'家',x:145,y:820,icon:'🏠',task:'與家人一起完成晚餐',detail:'孩子回到家了。今天的任務完成，但家庭分工不是一天就能解決。Bob 和 Jenny 開始討論：以後如何讓照顧和家務成為兩個人共同的責任？',who:'共同照顧'}
+ {title:'去便利商店買宵夜',sub:'跟著螢光黃箭頭走',place:'便利商店',x:660,y:285,icon:'🏪',task:'買好孩子和兩人的宵夜',detail:'你走進便利商店，買了牛奶、麵包和孩子喜歡的小點心。記得：採買也包含事前記住家裡需要什麼。',who:'採買與規劃'},
+ {title:'到托育中心接孩子',sub:'孩子正在等你回家',place:'托育中心',x:145,y:535,icon:'🧸',task:'接孩子並確認明天用品',detail:'老師交代了孩子今天的情況，也提醒明天要帶替換衣物。照顧不只是接送，也包括記住孩子的需要。',who:'接送與照顧'},
+ {title:'到市場買晚餐食材',sub:'準備一家人的晚餐',place:'街市',x:660,y:630,icon:'🥬',task:'買齊晚餐食材',detail:'你買好了晚餐食材。這個家需要有人動手，也需要有人記得冰箱還缺什麼。',who:'家務與心智勞動'},
+ {title:'回家一起準備晚餐',sub:'今天的最後一個任務',place:'家',x:145,y:890,icon:'🏠',task:'與家人一起完成晚餐',detail:'孩子回到家了。今天的任務完成，但家庭分工不是一天就能解決。Bob 和 Jenny 開始討論：以後如何讓照顧和家務成為兩個人共同的責任？',who:'共同照顧'}
 ];
 const blocks=[
  {x:0,y:0,w:800,h:115,c:'#20263a'}, {x:0,y:115,w:800,h:90,c:'#283e38'},
@@ -125,7 +125,7 @@ function updateHUD(){const m=missions[mission];$('missionKicker').textContent='�
 function switchCharacter(){if(paused||toastOpen||finished)return;active=active==='bob'?'jenny':'bob';$('bobBtn').classList.toggle('active',active==='bob');$('jennyBtn').classList.toggle('active',active==='jenny');updateHUD();}
 function showToast(title,text,emoji,button){toastOpen=true;$('toastTitle').textContent=title;$('toastText').textContent=text;$('toastEmoji').textContent=emoji;$('toastBtn').textContent=button||'繼續 →';$('toast').classList.add('show');}
 function interact(){if($('interactBtn').disabled)return;const m=missions[mission],p=characters[active];p.load++;steps++;mission++;$('progressBar').style.width=(mission/4*100)+'%';if(mission<4){updateHUD();showToast('任務完成！',m.detail,m.icon,'下一個任務 →');}else{finished=true;$('missionKicker').textContent='全部任務完成';$('missionTitle').textContent='回到家，一起吃晚餐';$('missionSub').textContent='今天的城市任務完成了';$('progressBar').style.width='100%';showToast('今晚，這個家一起完成了任務','Bob 承擔 '+characters.bob.load+' 項；Jenny 承擔 '+characters.jenny.load+' 項。照顧與家務不只是「幫忙」，而是兩個人共同的責任。','🏡','重新開始');}}
-function continueToast(){ $('toast').classList.remove('show');toastOpen=false;if(finished){mission=0;steps=0;finished=false;characters.bob.x=125;characters.bob.y=825;characters.jenny.x=165;characters.jenny.y=825;characters.bob.load=0;characters.jenny.load=0;active='bob';$('bobBtn').classList.add('active');$('jennyBtn').classList.remove('active');$('hint').classList.remove('hide');}else if(mission===1){$('hint').classList.add('hide');}updateHUD();}
+function continueToast(){ $('toast').classList.remove('show');toastOpen=false;if(finished){mission=0;steps=0;finished=false;characters.bob.x=125;characters.bob.y=890;characters.jenny.x=165;characters.jenny.y=890;characters.bob.load=0;characters.jenny.load=0;active='bob';$('bobBtn').classList.add('active');$('jennyBtn').classList.remove('active');$('hint').classList.remove('hide');}else if(mission===1){$('hint').classList.add('hide');}updateHUD();}
 $('toastBtn').addEventListener('click',continueToast);$('interactBtn').addEventListener('click',interact);
 $('bobBtn').addEventListener('click',()=>{if(active!=='bob')switchCharacter();});$('jennyBtn').addEventListener('click',()=>{if(active!=='jenny')switchCharacter();});$('switchBtn').addEventListener('click',switchCharacter);
 $('pauseBtn').addEventListener('click',()=>{if(toastOpen)return;paused=!paused;$('pauseBtn').textContent=paused?'▶ 繼續':'Ⅱ 暫停';if(paused)showToast('遊戲暫停','休息一下。準備好後按下繼續。','Ⅱ','繼續遊戲');else{$('toast').classList.remove('show');toastOpen=false;}});
