@@ -71,6 +71,85 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}
  .joy{width:94px;height:94px}
  .knob{width:45px;height:45px}
 }
+
+/* Full visual refresh: preserve all game content and mechanics */
+:root{
+ --ink:#fffaf3;--muted:#d2c8c2;--panel:rgba(36,31,43,.94);--line:#f8e6d633;--gold:#f6c86f;
+ --rose:#dc8c9d;--sage:#9ab7a1;--plum:#4b3d53;
+}
+html,body{background:#282a35;color:var(--ink);font-family:ui-rounded,"Avenir Next",system-ui,"Noto Sans TC",sans-serif}
+#world{background:radial-gradient(ellipse at 50% 20%,#59605b 0%,#30333d 58%,#252733 100%)}
+.hud{left:18px;top:max(18px,env(safe-area-inset-top));transform:none;width:min(560px,calc(100vw - 250px))}
+.card{padding:17px 20px;border:1px solid #f4dfc44a;border-radius:22px;background:linear-gradient(145deg,rgba(54,45,57,.96),rgba(34,37,48,.94));box-shadow:0 16px 42px #15131d70, inset 0 1px #ffffff18;backdrop-filter:blur(18px)}
+.kicker{color:#d8bfae;font-size:10px;letter-spacing:.18em}
+.title{color:#fff8ed;font-size:clamp(19px,2.4vw,25px);letter-spacing:.01em;margin:7px 0}
+.hint{display:inline-flex;align-items:center;gap:7px;color:#ffe0a0;background:#f4c96e18;border:1px solid #f4c96e38;padding:5px 9px;border-radius:8px;font-size:12px}
+.detail{color:#ded3ce;font-size:12px;line-height:1.65;margin-top:10px}
+.progress{height:7px;background:#ffffff17;border-radius:99px;margin-top:13px}
+.progress i{border-radius:99px;background:linear-gradient(90deg,#d887a0,#f5c86d,#b4c99e);box-shadow:0 0 12px #f5c86d66}
+.right{right:18px;top:max(18px,env(safe-area-inset-top));align-items:stretch;gap:9px}
+.pill{border:1px solid #f5e5d23b;border-radius:14px;background:linear-gradient(145deg,#494253ed,#303342ed);color:#fff8ef;padding:11px 16px;font-size:12px;letter-spacing:.01em;box-shadow:0 8px 22px #17151e55,inset 0 1px #ffffff18;transition:transform .16s,border-color .16s,filter .16s}
+.pill:active,.action:active,.primary:active{transform:translateY(2px) scale(.985)}
+#childNeed{background:linear-gradient(130deg,#a65372,#ce7890);border-color:#f4b4c4;color:white;box-shadow:0 8px 22px #6c344b66,inset 0 1px #ffffff35}
+#pause{background:linear-gradient(130deg,#515c67,#37404d)}
+.guide{top:150px;left:18px;transform:none;min-width:255px;max-width:min(390px,calc(100vw - 36px));padding:10px 14px;border:1px solid #f7df9b66;border-radius:17px;background:linear-gradient(120deg,rgba(58,48,55,.97),rgba(38,42,52,.97));box-shadow:0 12px 30px #15131d77,inset 0 1px #ffffff1c}
+.guide-arrow{background:linear-gradient(145deg,#ffe5a0,#f0bd5e);color:#443346;border-radius:13px;box-shadow:0 3px 12px #e7b85c55}
+.guide-copy small{color:#d8bca9;font-size:9px;letter-spacing:.15em}
+.guide-copy b{color:#fff6e9;font-size:14px}
+.guide-copy span{color:#e1d6cf;font-size:10px}
+.controls{left:22px;right:22px;bottom:calc(22px + env(safe-area-inset-bottom))}
+.joy{width:146px;height:146px;border:1px solid #f9e9d777;background:radial-gradient(circle at 35% 28%,#73727c99,#292c3dbb);box-shadow:0 12px 28px #17151e66,inset 0 1px 12px #ffffff20;backdrop-filter:blur(8px)}
+.knob{width:66px;height:66px;border:2px solid #fff9;background:linear-gradient(145deg,#d8d0d0,#8c91a1);box-shadow:0 5px 16px #17151e77,inset 0 2px 5px #ffffffaa}
+.action{border:1px solid #fff0cf;border-radius:17px;padding:16px 23px;background:linear-gradient(135deg,#ffe19a,#edb66c 60%,#d99b78);color:#493448;font-size:14px;letter-spacing:.02em;min-height:60px;box-shadow:0 12px 26px #17151e66,inset 0 1px #ffffffa6;transition:transform .16s,filter .16s}
+.action:disabled{opacity:.72;filter:saturate(.45);box-shadow:0 7px 18px #17151e44}
+.toast{bottom:calc(190px + env(safe-area-inset-bottom));border:1px solid #f4dfc44a;border-radius:16px;background:linear-gradient(145deg,#403747f7,#292d3af7);color:#fff6e9;padding:13px 18px;box-shadow:0 14px 35px #11131b88}
+.overlay{background:linear-gradient(135deg,#191a25df,#302634e8);backdrop-filter:blur(12px)}
+.modal{width:min(680px,100%);padding:clamp(22px,4vw,34px);border:1px solid #f4dfc455;border-radius:26px;background:linear-gradient(150deg,#403747,#282e3b 75%);box-shadow:0 30px 90px #10111bb8,inset 0 1px #ffffff1d}
+.modal .kicker{color:#e6bb9c}
+.modal h2{color:#fff5e8;font-size:clamp(23px,4vw,30px);line-height:1.25;margin:10px 0 16px}
+.modal h3{color:#f6d79c;font-size:15px;margin:22px 0 10px}
+.modal p{color:#e0d6d1;font-size:13px;line-height:1.9}
+.primary{border:1px solid #fff0cf;border-radius:15px;padding:15px 18px;background:linear-gradient(120deg,#ffe09a,#e9b16e 65%,#d88e82);color:#493448;font-size:14px;box-shadow:0 8px 20px #15131d55,inset 0 1px #ffffffa6;transition:transform .16s,filter .16s}
+.theories{gap:10px}
+.theories div{border:1px solid #ffffff14;border-radius:13px;background:linear-gradient(145deg,#555064,#3c4350);padding:13px;color:#e7ded9;font-size:11px;line-height:1.75}
+.theories b{color:#f6d79c;font-size:12px;margin-bottom:3px}
+.actor{border:1px solid #ffffff22;border-radius:10px;background:#292d3ddd;color:#eee3d9}
+button:focus-visible{outline:3px solid #ffe19a;outline-offset:3px}
+@media(max-width:700px){
+ .hud{left:9px;right:9px;top:max(8px,env(safe-area-inset-top));width:auto}
+ .card{padding:12px 14px;border-radius:17px}
+ .kicker{font-size:8px}
+ .title{font-size:18px;margin:5px 0}
+ .hint{font-size:10px;padding:4px 7px}
+ .detail{font-size:10px;line-height:1.5;margin-top:7px;-webkit-line-clamp:2}
+ .progress{height:5px;margin-top:9px}
+ .right{top:calc(137px + env(safe-area-inset-top));left:9px;right:9px;gap:6px;flex-direction:row;align-items:stretch}
+ .pill{flex:1;min-width:0;padding:9px 6px;font-size:10px;border-radius:11px}
+ .guide{top:calc(184px + env(safe-area-inset-top));left:9px;right:9px;width:auto;min-width:0;max-width:none;padding:8px 11px;border-radius:14px}
+ .guide-arrow{width:34px;height:34px;flex-basis:34px;font-size:23px}
+ .guide-copy b{font-size:12px}
+ .guide-copy span{font-size:9px}
+ .controls{left:12px;right:12px;bottom:calc(13px + env(safe-area-inset-bottom))}
+ .joy{width:112px;height:112px}
+ .knob{width:52px;height:52px}
+ .action{font-size:11px;padding:12px 14px;min-height:52px;border-radius:14px;max-width:58vw}
+ .toast{bottom:calc(139px + env(safe-area-inset-bottom));font-size:11px}
+ .modal{padding:22px 18px;border-radius:21px;max-height:88vh}
+ .modal h2{font-size:23px}
+ .theories{grid-template-columns:1fr 1fr;gap:7px}
+ .theories div{padding:10px;font-size:10px}
+ .theories b{font-size:11px}
+}
+@media(max-height:650px) and (max-width:700px){
+ .detail{display:none}
+ .right{top:calc(101px + env(safe-area-inset-top))}
+ .guide{top:calc(146px + env(safe-area-inset-top))}
+ .joy{width:88px;height:88px}
+ .knob{width:43px;height:43px}
+ .controls{bottom:calc(9px + env(safe-area-inset-bottom))}
+ .action{min-height:46px}
+ .modal{max-height:84vh}
+}
 </style></head><body><canvas id="world"></canvas>
 <div class="hud"><div class="card"><div class="kicker" id="num">FAMILY DAY</div><div class="title" id="title">先看見 Jenny 的一天</div><div class="hint" id="hint">準備進入家中</div><div class="detail" id="detail"></div><div class="progress"><i id="bar"></i></div></div></div>
 <div class="right"><button class="pill" id="person">目前：Bob</button><button class="pill" id="childNeed">孩子需要你 ♥</button><button class="pill" id="pause">暫停</button></div>
