@@ -52,16 +52,141 @@ const questions=[
 {stage:3,title:"第三關｜理論快問：文化女性主義",desc:"社會常把照顧工作視為理所當然，女性的照顧經驗與付出卻未受到肯定。這最接近哪一流派？",options:[["文化女性主義","肯定照顧價值與女性經驗。",1],["社會主義女性主義","主要分析無酬勞動與經濟結構。",0],["自由女性主義","主要關注平等機會。",0]]},
 {stage:3,title:"第三關｜理論快問：後現代女性主義",desc:"Bob 和 Jenny 發現，自己對「好爸爸」與「好媽媽」的想像來自家庭與社會反覆傳遞的性別論述。這最接近哪一流派？",options:[["後現代女性主義","關注性別建構、語言與個人經驗如何形塑角色。",1],["基進女性主義","主要聚焦父權權力關係。",0],["文化女性主義","主要肯定照顧價值。",0]]}
 ];
-let state={started:false,index:0,score:0,lives:3,combo:0,answered:false,levelCorrect:0,levelTotal:0,sound:false,levelScores:[0,0,0]};
-let high=0;try{high=Number(localStorage.getItem("familyScaleHigh")||0)}catch(e){}
+let state={started:false,index:0,score:0,lives:3,combo:0,answered:false,levelCorrect:0,sound:false};
+let high=0,timerHandle=null;
+try{high=Number(localStorage.getItem("familyScaleHigh")||0)}catch(e){}
 const levelStarts=[0,7,12],levelEnds=[7,12,17],levelNames=["諮商室","家務日記","理論快問"];
-function updateStats(){ $("score").textContent=state.score;$("lives").textContent="♥".repeat(state.lives)+"♡".repeat(3-state.lives);$("combo").textContent=state.combo;$("levelNum").textContent=state.started?(state.index<7?1:state.index<12?2:3):"—";$("progressBar").style.width=(state.index/questions.length*100)+"%";}
-function showIntro(){ $("gameStage").innerHTML='<div class="game-tag">準備好了嗎？</div><h3>讓家庭重新找到平衡</h3><p>你將扮演諮商師，在不同情境中作出選擇。答對可得分並累積連擊；答錯會失去一條生命。共有三關，第三關是理論快問。</p><p class="small">最高分（本機）：'+high+' 分。按下開始，試試你的社工判斷。</p><button class="btn" id="startGame" type="button">開始第一關</button>'; $("startGame").onclick=startGame;updateStats();}
-function startGame(){state={...state,started:true,index:0,score:0,lives:3,combo:0,answered:false,levelCorrect:0,levelTotal:0,levelScores:[0,0,0]};renderQuestion();}
-function renderQuestion(){if(state.lives<=0){finish(false);return}if(state.index>=questions.length){finish(true);return}const q=questions[state.index];state.answered=false;const level=q.stage-1;const within=state.index-levelStarts[level]+1;const duration=q.stage===2?20:0;let timer=duration;$("gameStage").innerHTML='<div class="game-tag">第 '+q.stage+' 關｜'+levelNames[level]+' · 第 '+within+' 題 / '+(levelEnds[level]-levelStarts[level])+' 題</div><h3>'+q.title+'</h3><p>'+q.desc+'</p><div class="answers">'+q.options.map((o,i)=>'<button class="answer" data-answer="'+i+'">'+String.fromCharCode(65+i)+'．'+o[0]+'</button>').join('')+'</div><div id="feedback"></div>';$("gameHint").textContent=q.stage===2?"第二關限時作答：請在 20 秒內選擇。":"思考你的選擇，再選出最符合女性主義觀點的回應。";$("gameStage").querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>choose(+b.dataset.answer));updateStats();if(duration){$("gameHint").innerHTML='剩餘時間：<span class="timer" id="timer">20</span> 秒';state.timerId=setInterval(()=>{timer--;$("timer").textContent=timer;if(timer<=0){clearInterval(state.timerId);if(!state.answered){choose(-1,true)}}},1000)}}
-function choose(choice,timeout=false){if(state.answered)return;state.answered=true;if(state.timerId)clearInterval(state.timerId);const q=questions[state.index],correct=q.options.findIndex(x=>x[2]===1),right=choice===correct;state.levelTotal++;if(right){state.combo++;const bonus=Math.min(state.combo-1,5)*2+10;state.score+=bonus;state.levelCorrect++;$("feedback").innerHTML='<div class="feedback">✓ <b>回答正確！ +'+bonus+' 分</b><br>'+q.options[correct][1]+'</div>'}else{state.lives=Math.max(0,state.lives-1);state.combo=0;$("feedback").innerHTML='<div class="feedback">✕ <b>'+(timeout?'時間到，失去一條生命。':'再想一想，失去一條生命。')+'</b><br>參考答案：'+q.options[correct][0]+'。'+q.options[correct][1]+'</div>'}Array.from($("gameStage").querySelectorAll(".answer")).forEach((b,i)=>{b.disabled=true;if(i===correct)b.classList.add("correct");else if(i===choice)b.classList.add("wrong")});updateStats();$("gameControls");$("gameHint").textContent="本題完成。請查看回饋，再繼續。";let next=$("nextQuestion");if(!next){next=document.createElement("button");next.id="nextQuestion";next.className="btn";next.textContent="下一題 →";$("gameControls").appendChild(next)}next.onclick=()=>{next.remove();state.index++;if(state.index===7||state.index===12){state.levelScores[state.index===7?0:1]=state.levelCorrect;state.levelCorrect=0;showLevelBreak()}else renderQuestion();};}
-function showLevelBreak(){const n=state.index===7?2:3;const done=state.index===7?"第一關｜諮商室":"第二關｜家務日記";$("gameStage").innerHTML='<div class="end-panel"><div class="game-tag">關卡完成</div><div class="big">✓</div><h3>'+done+' 完成！</h3><p>你已完成這個階段。接下來繼續看見家庭中的權力與照顧分工。</p><button class="btn" id="continueLevel">進入第 '+n+' 關 →</button></div>';$("continueLevel").onclick=renderQuestion;updateStats();}
-function finish(won){if(state.timerId)clearInterval(state.timerId);if(state.score>high){high=state.score;try{localStorage.setItem("familyScaleHigh",String(high))}catch(e){}}const pct=Math.round(state.score/170*100);$("progressBar").style.width="100%";$("gameStage").innerHTML='<div class="end-panel"><div class="game-tag">'+(won?"全部關卡完成":"挑戰結束")+'</div><div class="big">'+state.score+'</div><h3>'+(won?"你為這個家庭找到更多平衡的可能！":"生命用完了，再試一次吧！")+'</h3><p>本次分數：'+state.score+' 分｜最高分：'+high+' 分<br>你在三個關卡中練習了理解需求、辨認無酬勞動，以及運用女性主義觀點分析情境。</p><button class="btn" id="playAgain">重新挑戰</button></div>';$("gameHint").textContent="最高分會儲存在目前瀏覽器的本機，不會上傳。";$("playAgain").onclick=()=>{showIntro()};updateStats();}
-$("startGame").onclick=startGame;$("restartGame").onclick=()=>{if(state.timerId)clearInterval(state.timerId);state.started=false;showIntro();$("gameHint").textContent="已重設遊戲。";};$("soundToggle").onclick=()=>{state.sound=!state.sound;$("soundToggle").textContent=state.sound?"♪ 音效：開":"♪ 音效：關";$("gameHint").textContent=state.sound?"目前已開啟音效設定（此版本不播放外部音檔）。":"音效已關閉。";};showIntro();
+function stopTimer(){if(timerHandle!==null){clearInterval(timerHandle);timerHandle=null}}
+function updateStats(){
+  $("score").textContent=state.score;
+  $("lives").textContent="♥".repeat(state.lives)+"♡".repeat(3-state.lives);
+  $("combo").textContent=state.combo;
+  $("levelNum").textContent=!state.started?"—":(state.index<7?1:state.index<12?2:3);
+  $("progressBar").style.width=(Math.min(state.index,questions.length)/questions.length*100)+"%";
+}
+function playTone(ok){
+  if(!state.sound)return;
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC)return;
+    const ctx=new AC(),osc=ctx.createOscillator(),gain=ctx.createGain();
+    osc.type="sine";osc.frequency.value=ok?660:220;
+    gain.gain.setValueAtTime(.0001,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.08,ctx.currentTime+.02);
+    gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+.18);
+    osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+.2);
+    osc.onended=()=>ctx.close();
+  }catch(e){}
+}
+function showIntro(){
+  stopTimer();
+  $("gameStage").innerHTML='<div class="game-tag">準備好了嗎？</div><h3>讓家庭重新找到平衡</h3><p>你將扮演諮商師，在不同情境中作出選擇。答對可得分並累積連擊；答錯會失去一條生命。完成三個關卡，看看你能否幫助這個家庭找到更公平的分工。</p><p class="small">本機最高分：'+high+' 分。按下開始，試試你的社工判斷。</p><button class="btn" id="startGame" type="button">開始第一關</button>';
+  $("gameHint").textContent="每題選擇後會出現解說和「下一題」按鈕。";
+  updateStats();
+}
+function startGame(){
+  stopTimer();
+  state={started:true,index:0,score:0,lives:3,combo:0,answered:false,levelCorrect:0,sound:state.sound};
+  renderQuestion();
+}
+function renderQuestion(){
+  stopTimer();
+  if(state.lives<=0){finish(false);return}
+  if(state.index>=questions.length){finish(true);return}
+  const q=questions[state.index],level=q.stage-1;
+  const within=state.index-levelStarts[level]+1;
+  const count=levelEnds[level]-levelStarts[level];
+  state.answered=false;
+  const timed=q.stage===2;
+  $("gameStage").innerHTML=
+    '<div class="game-tag">第 '+q.stage+' 關｜'+levelNames[level]+' · 第 '+within+' 題 / '+count+' 題</div>'+
+    '<h3>'+q.title+'</h3><p>'+q.desc+'</p>'+
+    (timed?'<p class="timer" id="timer" role="status">剩餘時間：20 秒</p>':'')+
+    '<div class="answers">'+q.options.map((o,i)=>'<button class="answer" type="button" data-answer="'+i+'">'+String.fromCharCode(65+i)+'．'+o[0]+'</button>').join('')+'</div>'+
+    '<div id="feedback" class="feedback" aria-live="polite" hidden></div>'+
+    '<div class="question-next" id="questionNext" hidden><button class="btn" id="nextQuestion" type="button">下一題 →</button></div>';
+  $("gameHint").textContent=timed?"第二關限時作答：請在 20 秒內選擇。":"思考你的選擇，再選出最符合女性主義觀點的回應。";
+  updateStats();
+  if(timed){
+    let remaining=20;
+    timerHandle=setInterval(()=>{
+      remaining--;
+      const timer=$("timer");
+      if(timer)timer.textContent="剩餘時間："+remaining+" 秒";
+      if(remaining<=0){stopTimer();if(!state.answered)choose(-1,true)}
+    },1000);
+  }
+}
+function choose(choice,timeout){
+  if(state.answered)return;
+  state.answered=true;stopTimer();
+  const q=questions[state.index];
+  const correct=q.options.findIndex(o=>o[2]===1);
+  const right=choice===correct;
+  const feedback=$("feedback");
+  if(right){
+    state.combo++;
+    const points=10+Math.min(state.combo-1,5)*2;
+    state.score+=points;state.levelCorrect++;
+    feedback.innerHTML='<b>✓ 回答正確！ +'+points+' 分</b><br>'+q.options[correct][1];
+  }else{
+    state.lives=Math.max(0,state.lives-1);state.combo=0;
+    feedback.innerHTML='<b>✕ '+(timeout?"時間到，失去一條生命。":"再想一想，失去一條生命。")+'</b><br>參考答案：'+q.options[correct][0]+'。'+q.options[correct][1];
+  }
+  feedback.hidden=false;
+  $("gameStage").querySelectorAll("[data-answer]").forEach((button,i)=>{
+    button.disabled=true;
+    if(i===correct)button.classList.add("correct");
+    else if(i===choice)button.classList.add("wrong");
+  });
+  const nextWrap=$("questionNext");
+  nextWrap.hidden=false;
+  $("nextQuestion").textContent=state.lives<=0?"查看結果 →":(state.index===6?"完成第一關 →":state.index===11?"完成第二關 →":state.index===questions.length-1?"完成挑戰 →":"下一題 →");
+  $("gameHint").textContent="本題完成。請閱讀回饋，再按「下一題」繼續。";
+  updateStats();playTone(right);
+}
+function advanceQuestion(){
+  if(!state.answered)return;
+  if(state.lives<=0){finish(false);return}
+  state.index++;
+  if(state.index===7){showLevelBreak(2,"第一關｜諮商室");return}
+  if(state.index===12){showLevelBreak(3,"第二關｜家務日記");return}
+  renderQuestion();
+}
+function showLevelBreak(nextLevel,completed){
+  stopTimer();
+  $("gameStage").innerHTML='<div class="end-panel"><div class="game-tag">關卡完成</div><div class="big">✓</div><h3>'+completed+' 完成！</h3><p>你已完成這個階段。接下來繼續看見家庭中的權力與照顧分工。</p><button class="btn" id="continueLevel" type="button">進入第 '+nextLevel+' 關 →</button></div>';
+  $("gameHint").textContent="準備好就進入下一關。";
+  updateStats();
+}
+function finish(won){
+  stopTimer();
+  if(state.score>high){
+    high=state.score;
+    try{localStorage.setItem("familyScaleHigh",String(high))}catch(e){}
+  }
+  $("progressBar").style.width="100%";
+  $("gameStage").innerHTML='<div class="end-panel"><div class="game-tag">'+(won?"全部關卡完成":"挑戰結束")+'</div><div class="big">'+state.score+'</div><h3>'+(won?"你為這個家庭找到更多平衡的可能！":"生命用完了，再試一次吧！")+'</h3><p>本次分數：'+state.score+' 分｜最高分：'+high+' 分<br>你在三個關卡中練習了理解需求、辨認無酬勞動，以及運用女性主義觀點分析情境。</p><button class="btn" id="playAgain" type="button">重新挑戰</button></div>';
+  $("gameHint").textContent="最高分會儲存在目前瀏覽器的本機，不會上傳。";
+  updateStats();
+}
+$("gameStage").addEventListener("click",event=>{
+  const answer=event.target.closest("[data-answer]");
+  if(answer){choose(Number(answer.dataset.answer),false);return}
+  if(event.target.closest("#startGame")){startGame();return}
+  if(event.target.closest("#nextQuestion")){advanceQuestion();return}
+  if(event.target.closest("#continueLevel")){renderQuestion();return}
+  if(event.target.closest("#playAgain")){startGame();return}
+});
+$("restartGame").addEventListener("click",()=>{
+  stopTimer();state={started:false,index:0,score:0,lives:3,combo:0,answered:false,levelCorrect:0,sound:state.sound};showIntro();
+});
+$("soundToggle").addEventListener("click",()=>{
+  state.sound=!state.sound;
+  $("soundToggle").textContent=state.sound?"♪ 音效：開":"♪ 音效：關";
+  $("gameHint").textContent=state.sound?"音效已開啟；答題時會播放簡短提示音。":"音效已關閉。";
+  playTone(true);
+});
+showIntro();
 </script>
 </body></html>
