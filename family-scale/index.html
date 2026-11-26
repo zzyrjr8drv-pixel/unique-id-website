@@ -155,7 +155,9 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}
 .mini-result.show{display:block}
 .mini-next{width:100%;border:0;border-radius:14px;padding:14px 18px;background:linear-gradient(110deg,#edcf83,#e7a36f);color:#30273b;font-size:13px;font-weight:950}
 @media(max-width:600px){.mini-overlay{padding:9px}.mini-card{border-radius:20px;max-height:94vh}.mini-head{padding:16px 17px 14px}.mini-body{padding:13px;gap:9px}.mini-choice{padding:11px 12px;font-size:12px}.mini-foot{padding:0 13px 14px}}
-.mini-choices{display:grid;grid-template-columns:1fr;gap:9px}.mini-choice{display:flex;align-items:center;gap:13px;text-align:left;padding:13px 15px;border-radius:15px;border:1px solid #ddd6cb;background:#fff;color:#3f3948;font-size:13px;font-weight:850;line-height:1.5;cursor:pointer}.mini-choice .emoji{font-size:25px;width:34px;text-align:center;flex:0 0 34px}.mini-choice:disabled{opacity:.48}.mini-choice.done{background:#e2efe7;border-color:#a7c8b2;color:#315b43}.mini-choice.wrong{background:#f7e7e4;border-color:#dfb6ac}.mini-choice .tick{margin-left:auto;font-size:17px}</style></head><body><canvas id="world"></canvas>
+.mini-choices{display:grid;grid-template-columns:1fr;gap:9px}.mini-choice{display:flex;align-items:center;gap:13px;text-align:left;padding:13px 15px;border-radius:15px;border:1px solid #ddd6cb;background:#fff;color:#3f3948;font-size:13px;font-weight:850;line-height:1.5;cursor:pointer}.mini-choice .emoji{font-size:25px;width:34px;text-align:center;flex:0 0 34px}.mini-choice:disabled{opacity:.48}.mini-choice.done{background:#e2efe7;border-color:#a7c8b2;color:#315b43}.mini-choice.wrong{background:#f7e7e4;border-color:#dfb6ac}.mini-choice .tick{margin-left:auto;font-size:17px}
+.role-switch-hint{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);left:14px;z-index:12;max-width:min(270px,68vw);padding:10px 13px;border-radius:14px;background:rgba(38,31,52,.94);border:1px solid #f0d38a;color:#fff;box-shadow:0 8px 25px #0005;pointer-events:none;display:flex;flex-direction:column;gap:3px}.role-switch-hint b{font-size:12px;color:#f3d68d}.role-switch-hint span{font-size:10px;line-height:1.45;color:#eee8f4}.role-switch-hint.hidden{display:none}
+</style></head><body><canvas id="world"></canvas>
 <div class="hud-shade"></div>
 <div class="hud">
  <div class="meta-row"><span class="brand">THE WEIGHT OF A DAY</span><span class="stage" id="num">FAMILY DAY</span><span class="timer hidden" id="timer">00:30</span></div>
@@ -170,9 +172,10 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}
  <button class="pill" id="childNeed" aria-label="孩子需要你" title="孩子需要你"><span class="ui-icon">♥</span><span class="button-label">孩子需要你</span></button>
  <button class="pill" id="pause" aria-label="暫停" title="暫停"><span class="ui-icon">Ⅱ</span><span class="button-label">暫停</span></button>
 </div>
+<div class="role-switch-hint hidden" id="roleSwitchHint"><b>下一段需要 Jenny</b><span>請切換至 Jenny，再前往社工會談室</span></div>
 <div class="actor" id="actor">2D 家庭場景｜Bob 的視角</div>
 <div class="controls"><div class="joy" id="joy"><div class="knob" id="knob"></div></div><button class="action" id="act" disabled>接近黃色標記後互動</button></div><div class="toast" id="toast"></div>
-<div class="overlay show" id="intro"><div class="modal"><div class="kicker">A DAY IN JENNY'S SHOES</div><h2>先從 Jenny 的一天開始</h2><p>第二個孩子出生後，Jenny 辭去工作，主要負責照顧孩子和處理家務。她感到育兒壓力，也覺得 Bob 缺乏實際協助與情感支持。她希望自己的需要、獨立與個人發展也能被看見。</p><p>這次你會先扮演 Jenny，在 <b>30 秒</b>內完成家務與育兒任務；接著 Bob 認為「這些很簡單」，決定親自試試看，但他只有 <b>20 秒</b>。兩輪時間是遊戲體驗設計，並非案例實際記載的時間。</p><p><b>請留意：</b>任務不只是做完一件事，還包括持續留意孩子、安排下一件工作，以及承擔反覆出現的照顧責任。</p><button class="primary" id="start">以 Jenny 的身份開始 · 30 秒 →</button></div></div>
+<div class="overlay show" id="intro"><div class="modal"><div class="kicker">A DAY IN JENNY'S SHOES</div><h2>先從 Jenny 的一天開始</h2><p>第二個孩子出生後，Jenny 辭去工作，主要負責照顧孩子和處理家務。她感到育兒壓力，也覺得 Bob 缺乏實際協助與情感支持。她希望自己的需要、獨立與個人發展也能被看見。</p><p>這次你會先扮演 Jenny，在 <b>30 秒</b>內完成家務與育兒任務；接著 Bob 認為「這些很簡單」，決定親自試試看，而 Bob 也會有 <b>30 秒</b>。兩輪時間是遊戲體驗設計，並非案例實際記載的時間。</p><p><b>請留意：</b>任務不只是做完一件事，還包括持續留意孩子、安排下一件工作，以及承擔反覆出現的照顧責任。</p><button class="primary" id="start">以 Jenny 的身份開始 · 30 秒 →</button></div></div>
 <div class="overlay" id="pauseBox"><div class="modal"><h2>暫停一下</h2><p>準備好後繼續探索。</p><button class="primary" id="resume">繼續</button></div></div>
 <div class="overlay" id="childNeedBox"><div class="modal"><div class="kicker">FAMILY REMINDER</div><h2>孩子需要你</h2><p id="childNeedText">孩子需要你的陪伴與照顧。請先查看目前的任務。</p><button class="primary" id="childNeedClose">我知道了，繼續照顧</button></div></div>
 <div class="overlay reflection-overlay" id="reflection">
@@ -189,7 +192,7 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}
   <footer class="reflection-footer"><div class="reflection-footnote">理論不是替角色下判斷，而是幫助我們看見日常背後的性別分工與權力關係。</div><button class="reflection-next" id="reflectionNext">繼續下一個任務 →</button></footer>
  </section>
 </div>
-<div class="overlay dialog-overlay" id="middleTalk"><section class="dialog-card"><header class="dialog-head"><div class="dialog-kicker">A CONVERSATION AT HOME · AFTER JENNY'S TURN</div><h2>「這些事情有這麼難嗎？」</h2></header><div class="dialog-body"><div class="dialog-line jenny"><div class="dialog-speaker">Jenny</div><div class="dialog-bubble">這些事情每天都會重複。做完早餐，還要留意孩子、收拾、洗衣；有時候我才剛坐下，孩子又有需要。我不是只做一件事，而是一直要記住下一件事。</div></div><div class="dialog-line bob"><div class="dialog-speaker">Bob</div><div class="dialog-bubble">我可以做啊。這些事情看起來很簡單，我試一次就知道了。</div></div><div class="dialog-line jenny"><div class="dialog-speaker">Jenny</div><div class="dialog-bubble">那你試試看吧。我不是要跟你比誰比較辛苦，只是希望你也能看見，照顧和家務實際上需要多少時間和心力。</div></div></div><div class="dialog-foot"><button class="dialog-button" id="bobTry">換 Bob 試試看 · 只有 20 秒 →</button></div></section></div>
+<div class="overlay dialog-overlay" id="middleTalk"><section class="dialog-card"><header class="dialog-head"><div class="dialog-kicker">A CONVERSATION AT HOME · AFTER JENNY'S TURN</div><h2>「這些事情有這麼難嗎？」</h2></header><div class="dialog-body"><div class="dialog-line jenny"><div class="dialog-speaker">Jenny</div><div class="dialog-bubble">這些事情每天都會重複。做完早餐，還要留意孩子、收拾、洗衣；有時候我才剛坐下，孩子又有需要。我不是只做一件事，而是一直要記住下一件事。</div></div><div class="dialog-line bob"><div class="dialog-speaker">Bob</div><div class="dialog-bubble">我可以做啊。這些事情看起來很簡單，我試一次就知道了。</div></div><div class="dialog-line jenny"><div class="dialog-speaker">Jenny</div><div class="dialog-bubble">那你試試看吧。我不是要跟你比誰比較辛苦，只是希望你也能看見，照顧和家務實際上需要多少時間和心力。</div></div></div><div class="dialog-foot"><button class="dialog-button" id="bobTry">換 Bob 試試看 · 30 秒 →</button></div></section></div>
 <div class="overlay dialog-overlay" id="finalTalk"><section class="dialog-card"><header class="dialog-head"><div class="dialog-kicker">SOCIAL WORKER'S ROOM · FAMILY CONVERSATION</div><h2>Bob 終於看見 Jenny 的一天</h2></header><div class="dialog-body"><div class="dialog-line worker"><div class="dialog-speaker">社工</div><div class="dialog-bubble">Bob，經過兩次體驗和今天的討論，你現在怎麼看待家中的照顧與分工？</div></div><div class="dialog-line bob"><div class="dialog-speaker">Bob</div><div class="dialog-bubble">我以前覺得這些事情很簡單，還以為只要安排好就可以。我錯了。你每天不只是做家務，還要一直留意孩子的需要、安撫他們、安排下一件事，幾乎沒有真正的下班時間。你真的很累。</div></div><div class="dialog-line jenny"><div class="dialog-speaker">Jenny</div><div class="dialog-bubble">我需要的不只是你說理解，而是實際分擔。我也希望能繼續上課，保留自己的發展空間。</div></div><div class="dialog-line bob"><div class="dialog-speaker">Bob</div><div class="dialog-bubble">我願意在你上課時照顧孩子，也想和你一起重新安排家務與育兒。我知道這不是一次就能解決的事，我們可以定期談談，看分工是否公平。</div></div><div class="dialog-line worker"><div class="dialog-speaker">社工</div><div class="dialog-bubble">這是一個新的開始。接下來仍要持續檢視雙方的休息、個人時間和親職參與，再按需要調整。</div></div></div><div class="dialog-foot"><button class="dialog-button" id="finalContinue">回顧女性主義觀點與處遇 →</button></div></section></div>
 <div class="overlay mini-overlay" id="miniGame"><section class="mini-card" role="dialog" aria-modal="true" aria-labelledby="miniTitle"><header class="mini-head"><span class="mini-timer" id="miniTimer">00:08</span><div class="mini-kicker" id="miniKicker">BOB'S QUICK CHALLENGE</div><span class="mini-game-tag" id="miniType">MINI GAME 1 / 9</span><h2 id="miniTitle">一日中的小挑戰</h2><p id="miniPrompt">完成這個小遊戲，看看照顧工作需要哪些判斷。</p></header><div class="mini-body"><div class="mini-progress"><span id="miniProgress">進度 0 / 3</span><span id="miniInstruction">依提示完成挑戰</span></div><div class="mini-choices" id="miniChoices"></div><div class="mini-feedback" id="miniFeedback">開始挑戰。</div><div class="mini-result" id="miniResult"></div></div><footer class="mini-foot"><button class="mini-next" id="miniNext" style="display:none">繼續 Bob 的家務挑戰 →</button></footer></section></div><div class="overlay" id="end"><div class="modal"><div class="kicker">CASE JOURNEY COMPLETE</div><h2>看見彼此，才有新的可能。</h2><p>你先以 Jenny 的身份進行 30 秒家務挑戰，再讓 Bob 用 20 秒嘗試同一組工作，之後進入個別會談與家庭協商。限時是遊戲體驗設計，不是案例實際時間。案例中的處遇方向包括 Bob 在 Jenny 上課期間照顧孩子；這是重要改變，但不能推論所有不平等已經消失，仍需持續追蹤。</p><h3>五個女性主義鏡頭</h3><div class="theories"><div><b>自由主義女性主義</b>Jenny 是否有進修、工作與個人發展的機會？</div><div><b>基進女性主義</b>家庭權力與照顧責任是否受到父權角色影響？</div><div><b>社會主義女性主義</b>有薪與無酬勞動如何被衡量？</div><div><b>文化女性主義</b>關懷與照顧是否受到肯定，而非被視為女性天職？</div><div><b>後現代女性主義</b>「男主外、女主內」如何透過家庭經驗與文化期待被建構？</div></div><h3>整合女性主義處遇六步驟</h3><p>1. 了解家庭處境與需求；2. 透過家務日記讓付出與不平等變得可見；3. 挑戰傳統性別觀念；4. 協商新的家庭分工；5. 支持雙方自主發展；6. 持續追蹤與調整。案例中 Bob 同意在 Jenny 上課期間照顧孩子，但仍需持續檢視分工是否公平。</p><button class="primary" id="again">再玩一次</button></div></div>
 <script>
@@ -207,11 +210,12 @@ function updateHud(){
  $('num').textContent=timed?(runPhase==='jenny'?'JENNY｜家庭體驗':'BOB｜家庭體驗')+' · '+Math.min(idx+1,home.length)+' / '+home.length:scene==='home'?'家庭日常｜'+Math.min(idx+1,home.length)+' / '+home.length:'城市探索｜'+Math.min(idx+1,city.length)+' / '+city.length;
  $('timer').classList.toggle('hidden',!timed);$('timer').classList.toggle('urgent',timed&&phaseRemaining<=10);if(timed){const secs=Math.max(0,Math.ceil(phaseRemaining));$('timer').textContent='00:'+String(secs).padStart(2,'0')}
  $('title').textContent=finished?'旅程完成':scene==='home'?(t?t[1]:'家庭日常完成'):(t?t[0]:'城市探索完成');
- $('hint').textContent=timed?(runPhase==='jenny'?'Jenny 的日常挑戰 · 30 秒':'Bob 的日常挑戰 · 20 秒'):finished?'今天的家庭旅程完成了。':scene==='home'?(t?t[0]+' · '+t[2]:'即將進入城市探索'):(t?t[1]:'旅程完成');
+ $('hint').textContent=timed?(runPhase==='jenny'?'Jenny 的日常挑戰 · 30 秒':'Bob 的日常挑戰 · 30 秒'):finished?'今天的家庭旅程完成了。':scene==='home'?(t?t[0]+' · '+t[2]:'即將進入城市探索'):(t?t[1]:'旅程完成');
  $('detail').textContent=timed?(t?t[6]:'這一輪的家務已完成。'):finished?'今天的家庭旅程完成了。':scene==='home'?(t?t[6]:''):(t?t[5]:'');
  $('bar').style.width=(timed?idx/home.length*100:Math.min(done,total)/total*100)+'%';
  $('act').disabled=!near||paused||finished;$('act').textContent=near?'✦ 已抵達｜完成這項工作':'跟隨箭頭前往目標';
  $('actor').textContent=scene==='home'?'家中體驗｜'+activePerson+' 的視角':'城市探索｜個案會談與協商';
+ $('roleSwitchHint').classList.toggle('hidden',!(scene==='city'&&idx===1&&activePerson!=='Jenny'));
  $('guide').classList.toggle('hidden',!started||finished||paused||!goal);
  if(goal){const dx=goal.x-p.x,dy=goal.y-p.y,angle=Math.atan2(dy,dx)*180/Math.PI;$('guideArrow').style.transform='rotate('+angle+'deg)';$('guideName').textContent=scene==='home'?home[idx][2]:(city[idx][1].replace(/^前往/,'').replace(/^切換至Jenny，/,'')||'任務地點');$('guideDistance').textContent=near?'已到達目的地，可以按下互動':distance(p,goal)<170?'目標就在附近':'依箭頭方向移動，前往目前任務'}
 }
@@ -220,7 +224,18 @@ function showReflection(type,t){
  paused=true;pendingReflection={type,task:t};
  if(type==='home'){
   $('reflectionEyebrow').textContent='TASK COMPLETE · FAMILY DAY';$('reflectionIcon').textContent=t[5];$('reflectionTitle').textContent=t[1];$('reflectionSub').textContent=t[0]+' · '+t[2];
-  $('storyLabel').textContent='你剛剛經歷的事';$('reflectionStory').textContent=t[6];$('quoteLabel').textContent='Bob 的發現';$('reflectionQuote').textContent=t[7];
+  $('storyLabel').textContent='你剛剛經歷的事';$('reflectionStory').textContent=t[6];
+  if(phaseActive&&runPhase==='jenny'){
+   $('quoteLabel').textContent='Bob 原本的態度';
+   $('reflectionQuote').textContent='「這些不就是每天都要做的家務嗎？整理一下、照顧孩子，應該很快就能完成吧。」';
+  }else if(phaseActive&&runPhase==='bob'){
+   const bobAfter=['「原來準備早餐還要同時留意孩子、安排時間，並不是把食物做好就結束。」','「孩子哭了，我要停下手邊的事，先理解他的需要。照顧也包括情緒上的陪伴。」','「玩具很快又會散落。整理不是一次完成，而是每天反覆出現的工作。」','「洗衣要分類、清洗、晾曬和收好；每一步都要記得，事情才算完成。」','「準備一餐之後還有照顧孩子用餐、清潔和收拾，原來工作是一連串的。」','「我才坐下來就被打斷。Jenny 的休息時間，原來也常常是這樣被切碎。」','「晚餐不是只負責煮好，還要清潔、收拾和照顧孩子。我應該主動分擔。」','「孩子睡前還有很多事要做。即使他睡著了，照顧者還在安排明天。」','「如果我要讓 Jenny 去上課，就必須真的接手照顧，而不是讓她一邊上課一邊操心。」'];
+   $('quoteLabel').textContent='Bob 親身體驗後的反思';
+   $('reflectionQuote').textContent=bobAfter[idx]||'「我現在明白，這些工作並沒有我想像中簡單。」';
+  }else{
+   $('quoteLabel').textContent='家庭日常中的觀察';
+   $('reflectionQuote').textContent=t[7];
+  }
   const parts=t[8].split('｜');$('reflectionTheory').textContent=parts[0]||t[8];$('reflectionTheoryCopy').textContent=(parts[1]?parts[1]+'。':'')+t[9];
   $('reflectionQuestion').textContent='如果這項工作長期只由 Jenny 承擔，她的休息、個人選擇與發展空間會受到什麼影響？';$('reflectionNext').textContent='繼續下一個任務 →';
  }else{
@@ -233,14 +248,14 @@ function showReflection(type,t){
 }
 function showRunDebrief(who,count){
  paused=true;phaseActive=false;phaseCompleted=count;const jenny=who==='jenny';
- $('reflectionEyebrow').textContent=jenny?'JENNY’S DAY · 30-SECOND EXPERIENCE':'BOB’S TURN · 20-SECOND EXPERIENCE';
+ $('reflectionEyebrow').textContent=jenny?'JENNY’S DAY · 30-SECOND EXPERIENCE':'BOB’S TURN · 30-SECOND EXPERIENCE';
  $('reflectionIcon').textContent=jenny?'🧺':'⏱️';
- $('reflectionTitle').textContent=jenny?'30 秒到了。還有工作沒有完成。':'20 秒到了。原來時間真的不夠用。';
+ $('reflectionTitle').textContent=jenny?'30 秒到了。還有工作沒有完成。':'30 秒到了。原來時間真的不夠用。';
  $('reflectionSub').textContent=(jenny?'Jenny':'Bob')+' 完成 '+count+' / '+home.length+' 項任務 · 限時體驗';
  $('storyLabel').textContent='這一輪發生了什麼';
- $('reflectionStory').textContent=jenny?'你剛剛嘗試在短時間內完成早餐、照顧孩子、整理、洗衣和其他家庭工作。即使時間到了，未完成的工作也不會自動消失；照顧責任仍然留在家庭裡。':'Bob 也用自己的方式嘗試同一組工作，但只有 20 秒。這個挑戰讓他開始看見：家務不只是單一任務，還包括持續留意孩子、安排先後次序，以及在不同需要之間切換。';
+ $('reflectionStory').textContent=jenny?'你剛剛嘗試在短時間內完成早餐、照顧孩子、整理、洗衣和其他家庭工作。即使時間到了，未完成的工作也不會自動消失；照顧責任仍然留在家庭裡。':'Bob 也用自己的方式嘗試同一組工作，和 Jenny 一樣有 30 秒。這個挑戰讓他開始看見：家務不只是單一任務，還包括持續留意孩子、安排先後次序，以及在不同需要之間切換。';
  $('quoteLabel').textContent=jenny?'Jenny 的處境':'Bob 開始理解';
- $('reflectionQuote').textContent=jenny?'「我不是只做一件事。我還要記得下一件事，並隨時回應孩子的需要。」':'「我以為只要動手做就好，現在才發現每一件事背後還有很多需要同時處理。」';
+ $('reflectionQuote').textContent=jenny?'「我不是只做一件事。我還要記得下一件事，並隨時回應孩子的需要。」':'「我以前把這些事看得太簡單。親自做過才知道，家務和育兒需要一直留意、記住和安排。我之前低估了 Jenny 的付出，這是我不對。」';
  $('reflectionTheory').textContent=jenny?'社會主義女性主義｜看見無酬勞動':'基進女性主義｜檢視私領域中的性別角色';
  $('reflectionTheoryCopy').textContent=jenny?'家務與育兒維持家庭運作，卻沒有薪水標籤。透過記錄工作內容與時間，才能讓無酬勞動變得可見，也讓雙方有基礎討論分工。':'當照顧容易被視為母親自然應負的責任，家庭中的性別角色便可能被當成理所當然。重點不是責怪 Bob，而是檢視傳統期待如何影響雙方的分工與理解。';
  $('reflectionQuestion').textContent=jenny?'如果這些工作每天重複發生，而且同時需要照顧孩子，Jenny 還能有多少休息與個人發展時間？':'如果 Bob 只完成部分工作，是否代表 Jenny 平常承擔的工作量也應該被重新看見，而不是被視為「很簡單」？';
@@ -248,7 +263,7 @@ function showRunDebrief(who,count){
  pendingReflection={type:jenny?'jennyDebrief':'bobDebrief'};$('reflection').classList.add('show');
 }
 function finishTimedPhase(){if(!phaseActive)return;const who=runPhase,count=idx;phaseActive=false;phaseRemaining=0;showRunDebrief(who,count)}
-function startBobRun(){$('middleTalk').classList.remove('show');runPhase='bob';phaseDuration=20;phaseRemaining=20;phaseActive=true;phaseCompleted=0;idx=0;scene='home';activePerson='Bob';$('personLabel').textContent='Bob';$('person').setAttribute('aria-label','目前角色：Bob；計時挑戰中');p.x=480;p.y=470;paused=false;updateHud()}
+function startBobRun(){$('middleTalk').classList.remove('show');runPhase='bob';phaseDuration=30;phaseRemaining=30;phaseActive=true;phaseCompleted=0;idx=0;scene='home';activePerson='Bob';$('personLabel').textContent='Bob';$('person').setAttribute('aria-label','目前角色：Bob；計時挑戰中');p.x=480;p.y=470;paused=false;updateHud()}
 function startCityJourney(){runPhase='city';phaseActive=false;phaseRemaining=0;scene='city';idx=0;activePerson='Bob';$('personLabel').textContent='Bob';$('person').setAttribute('aria-label','目前角色：Bob；點擊切換');p.x=480;p.y=470;paused=false;updateHud();say('接下來進入城市，完成個別會談與家庭協商。')}
 function showFinalConversation(){paused=true;p.x=1420;p.y=390;scene='city';$('finalTalk').classList.add('show');updateHud()}
 const bobMiniGames=[
