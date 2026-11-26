@@ -133,6 +133,28 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}
 .dialog-line.bob .dialog-bubble{background:#e7f1f1;border-color:#cbdede}.dialog-line.jenny .dialog-bubble{background:#f7eaf0;border-color:#ecd5df}.dialog-line.worker .dialog-bubble{background:#eee8f5;border-color:#ded3e9}
 .dialog-foot{padding:0 22px 22px}.dialog-button{width:100%;border:0;border-radius:14px;padding:14px 18px;background:linear-gradient(110deg,#edcf83,#e7a36f);color:#30273b;font-size:13px;font-weight:950}
 @media(max-width:600px){.timer{padding:6px 9px;font-size:11px;gap:5px}.dialog-overlay{padding:10px}.dialog-card{border-radius:20px;max-height:92vh}.dialog-head{padding:16px 17px 14px}.dialog-head h2{font-size:20px}.dialog-body{padding:13px;gap:8px}.dialog-line{grid-template-columns:56px 1fr;gap:7px}.dialog-speaker{font-size:10px}.dialog-bubble{font-size:12px;line-height:1.65;padding:10px 12px}.dialog-foot{padding:0 13px 14px}}
+
+.mini-overlay{z-index:24;background:rgba(9,12,22,.86);backdrop-filter:blur(13px);padding:14px}
+.mini-card{width:min(620px,100%);max-height:92vh;overflow:auto;border-radius:25px;background:#f4f0e8;color:#302b3d;border:1px solid #ffffff55;box-shadow:0 28px 90px #000a}
+.mini-head{padding:20px 23px 17px;background:linear-gradient(120deg,#284957,#416a70);color:#fff}
+.mini-kicker{font-size:10px;letter-spacing:.16em;font-weight:950;color:#f5dca1}
+.mini-head h2{font-size:clamp(21px,3vw,27px);line-height:1.25;margin:8px 0 5px}
+.mini-head p{font-size:12px;line-height:1.6;color:#e0eceb;margin:0}
+.mini-timer{float:right;border-radius:99px;padding:7px 11px;background:#182e3a;color:#ffe4a5;font-size:13px;font-weight:950;font-variant-numeric:tabular-nums}
+.mini-body{padding:19px 22px;display:flex;flex-direction:column;gap:12px}
+.mini-progress{font-size:11px;font-weight:900;color:#776d80;display:flex;justify-content:space-between}
+.mini-choices{display:grid;grid-template-columns:1fr;gap:9px}
+.mini-choice{display:flex;align-items:center;gap:13px;text-align:left;padding:13px 15px;border-radius:15px;border:1px solid #ddd6cb;background:#fff;color:#3f3948;font-size:13px;font-weight:850;line-height:1.5}
+.mini-choice .emoji{font-size:25px;width:34px;text-align:center;flex:0 0 34px}
+.mini-choice:disabled{opacity:.48}
+.mini-choice.done{background:#e2efe7;border-color:#a7c8b2;color:#315b43}
+.mini-choice .tick{margin-left:auto;font-size:17px}
+.mini-feedback{min-height:42px;border-radius:13px;background:#e9e3ef;padding:11px 13px;font-size:12px;line-height:1.65;color:#51445e}
+.mini-foot{padding:0 22px 21px}
+.mini-result{display:none;border-radius:15px;padding:13px 15px;background:#e4eee9;color:#315b43;font-size:13px;line-height:1.7}
+.mini-result.show{display:block}
+.mini-next{width:100%;border:0;border-radius:14px;padding:14px 18px;background:linear-gradient(110deg,#edcf83,#e7a36f);color:#30273b;font-size:13px;font-weight:950}
+@media(max-width:600px){.mini-overlay{padding:9px}.mini-card{border-radius:20px;max-height:94vh}.mini-head{padding:16px 17px 14px}.mini-body{padding:13px;gap:9px}.mini-choice{padding:11px 12px;font-size:12px}.mini-foot{padding:0 13px 14px}}
 </style></head><body><canvas id="world"></canvas>
 <div class="hud-shade"></div>
 <div class="hud">
@@ -169,10 +191,24 @@ button{font:inherit;cursor:pointer;touch-action:manipulation}
 </div>
 <div class="overlay dialog-overlay" id="middleTalk"><section class="dialog-card"><header class="dialog-head"><div class="dialog-kicker">A CONVERSATION AT HOME · AFTER JENNY'S TURN</div><h2>「這些事情有這麼難嗎？」</h2></header><div class="dialog-body"><div class="dialog-line jenny"><div class="dialog-speaker">Jenny</div><div class="dialog-bubble">這些事情每天都會重複。做完早餐，還要留意孩子、收拾、洗衣；有時候我才剛坐下，孩子又有需要。我不是只做一件事，而是一直要記住下一件事。</div></div><div class="dialog-line bob"><div class="dialog-speaker">Bob</div><div class="dialog-bubble">我可以做啊。這些事情看起來很簡單，我試一次就知道了。</div></div><div class="dialog-line jenny"><div class="dialog-speaker">Jenny</div><div class="dialog-bubble">那你試試看吧。我不是要跟你比誰比較辛苦，只是希望你也能看見，照顧和家務實際上需要多少時間和心力。</div></div></div><div class="dialog-foot"><button class="dialog-button" id="bobTry">換 Bob 試試看 · 只有 20 秒 →</button></div></section></div>
 <div class="overlay dialog-overlay" id="finalTalk"><section class="dialog-card"><header class="dialog-head"><div class="dialog-kicker">SOCIAL WORKER'S ROOM · FAMILY CONVERSATION</div><h2>Bob 終於看見 Jenny 的一天</h2></header><div class="dialog-body"><div class="dialog-line worker"><div class="dialog-speaker">社工</div><div class="dialog-bubble">Bob，經過兩次體驗和今天的討論，你現在怎麼看待家中的照顧與分工？</div></div><div class="dialog-line bob"><div class="dialog-speaker">Bob</div><div class="dialog-bubble">我以前覺得這些事情很簡單，還以為只要安排好就可以。我錯了。你每天不只是做家務，還要一直留意孩子的需要、安撫他們、安排下一件事，幾乎沒有真正的下班時間。你真的很累。</div></div><div class="dialog-line jenny"><div class="dialog-speaker">Jenny</div><div class="dialog-bubble">我需要的不只是你說理解，而是實際分擔。我也希望能繼續上課，保留自己的發展空間。</div></div><div class="dialog-line bob"><div class="dialog-speaker">Bob</div><div class="dialog-bubble">我願意在你上課時照顧孩子，也想和你一起重新安排家務與育兒。我知道這不是一次就能解決的事，我們可以定期談談，看分工是否公平。</div></div><div class="dialog-line worker"><div class="dialog-speaker">社工</div><div class="dialog-bubble">這是一個新的開始。接下來仍要持續檢視雙方的休息、個人時間和親職參與，再按需要調整。</div></div></div><div class="dialog-foot"><button class="dialog-button" id="finalContinue">回顧女性主義觀點與處遇 →</button></div></section></div>
+<div class="overlay mini-overlay" id="miniGame"><section class="mini-card" role="dialog" aria-modal="true" aria-labelledby="miniTitle">
+ <header class="mini-head"><span class="mini-timer" id="miniTimer">00:10</span><div class="mini-kicker">BOB'S QUICK CHALLENGE · MENTAL LOAD</div><h2 id="miniTitle">三件事同時發生，你先處理哪一件？</h2><p>孩子在哭、爐上的水正在滾、洗衣機也剛好完成。請依照優先次序選出三件事。你有 10 秒。</p></header>
+ <div class="mini-body"><div class="mini-progress"><span id="miniProgress">已完成 0 / 3</span><span>依序選擇 1 → 2 → 3</span></div>
+  <div class="mini-choices">
+   <button class="mini-choice" data-mini="child"><span class="emoji">🧒</span><span>先回應正在哭泣的孩子</span><span class="tick" id="tick-child"></span></button>
+   <button class="mini-choice" data-mini="stove"><span class="emoji">🍲</span><span>先確認爐火與滾燙的鍋子安全</span><span class="tick" id="tick-stove"></span></button>
+   <button class="mini-choice" data-mini="laundry"><span class="emoji">🧺</span><span>先把洗好的衣服拿去晾</span><span class="tick" id="tick-laundry"></span></button>
+  </div>
+  <div class="mini-feedback" id="miniFeedback">提示：先處理可能立即造成危險的事情，再回應孩子，最後處理可以稍後完成的家務。</div>
+  <div class="mini-result" id="miniResult"></div>
+ </div>
+ <footer class="mini-foot"><button class="mini-next" id="miniNext" style="display:none">繼續 Bob 的家務挑戰 →</button></footer>
+</section></div>
 <div class="overlay" id="end"><div class="modal"><div class="kicker">CASE JOURNEY COMPLETE</div><h2>看見彼此，才有新的可能。</h2><p>你先以 Jenny 的身份進行 30 秒家務挑戰，再讓 Bob 用 20 秒嘗試同一組工作，之後進入個別會談與家庭協商。限時是遊戲體驗設計，不是案例實際時間。案例中的處遇方向包括 Bob 在 Jenny 上課期間照顧孩子；這是重要改變，但不能推論所有不平等已經消失，仍需持續追蹤。</p><h3>五個女性主義鏡頭</h3><div class="theories"><div><b>自由主義女性主義</b>Jenny 是否有進修、工作與個人發展的機會？</div><div><b>基進女性主義</b>家庭權力與照顧責任是否受到父權角色影響？</div><div><b>社會主義女性主義</b>有薪與無酬勞動如何被衡量？</div><div><b>文化女性主義</b>關懷與照顧是否受到肯定，而非被視為女性天職？</div><div><b>後現代女性主義</b>「男主外、女主內」如何透過家庭經驗與文化期待被建構？</div></div><h3>整合女性主義處遇六步驟</h3><p>1. 了解家庭處境與需求；2. 透過家務日記讓付出與不平等變得可見；3. 挑戰傳統性別觀念；4. 協商新的家庭分工；5. 支持雙方自主發展；6. 持續追蹤與調整。案例中 Bob 同意在 Jenny 上課期間照顧孩子，但仍需持續檢視分工是否公平。</p><button class="primary" id="again">再玩一次</button></div></div>
 <script>
 const $=id=>document.getElementById(id),c=$('world'),g=c.getContext('2d');let w=innerWidth,h=innerHeight,dpr=1,scene='home',started=false,paused=false,finished=false,idx=0,toastT=0,joy={x:0,y:0},keys={},cam={x:0,y:0},p={x:480,y:470},pointer=null;
 let runPhase='jenny',phaseActive=false,phaseDuration=30,phaseRemaining=30,phaseCompleted=0,childNeedPaused=false;
+let miniGameActive=false,miniGameRemaining=10,miniGameStep=0,miniGameFinished=false;
 const home=[['07:00','早餐與孩子起床','廚房',340,260,'🍳','孩子醒來了。準備早餐、留意兩個孩子的需要，也要安排早晨時間。','「原來早上不是只做一頓早餐，還要同時安排時間和照顧孩子。」','社會主義女性主義｜無酬勞動','家務與育兒維持家庭運作，卻沒有薪水標籤。不能只用收入衡量家庭成員的貢獻。'],['08:30','照顧孩子、安撫與陪伴','客廳',650,260,'🧸','孩子需要陪伴，也可能哭鬧或突然需要你。你要持續觀察、回應和安撫。','「真正的照顧需要投入注意力，也需要情感支持。」','文化女性主義｜關懷的價值','關懷與關係維繫是重要的家庭勞動，不應因沒有薪水而被低估。'],['10:00','整理客廳與收拾玩具','客廳',650,440,'🧹','玩具散落一地，生活空間需要整理。家務不是做一次便結束，而是持續出現。','「家務不是偶爾幫忙，而是反覆發生、需要有人持續負責。」','基進女性主義｜私領域性別角色','檢視為何照顧與整理容易被認為是母親的責任，以及傳統性別角色如何在家庭日常中運作。'],['11:30','洗衣、晾衣與整理衣物','洗衣區',950,260,'🧺','衣服要分類、清洗、晾曬，之後還要收回和整理。','「每一項家務都有流程。若我沒有做，工作不會消失，只會留給 Jenny。」','社會主義女性主義｜家務日記','家務日記能把工作內容具體記錄下來，讓無酬勞動變得可討論。'],['13:00','準備午餐與清理廚房','廚房',340,260,'🥘','準備食物、照顧孩子用餐，飯後還要清理桌面和廚具。','「我做完一餐，才發現後面還有清潔、收拾和孩子的需要。」','文化女性主義｜照顧與合作','家庭福祉不只靠收入，也靠照顧、合作與關係維繫。'],['15:00','孩子需要你，休息被打斷','遊戲區',650,440,'🧩','你原本想休息，但孩子又需要協助。照顧者很難完全按照自己的時間表生活。','「Jenny 需要的不只是口頭安慰，而是實際分擔。」','自由主義女性主義｜個人選擇','當照顧責任集中在 Jenny 身上，她進修、工作和個人發展的選擇可能受到限制。'],['17:30','晚餐、收拾與家務收尾','廚房',340,260,'🍽️','晚餐時間到了。你要安排用餐、照顧孩子，也要收拾餐桌和清潔廚房。','「我有工作的壓力，也想做個好父親；但 Jenny 的工作可能沒有明確下班時間。」','後現代女性主義｜性別角色建構','雙方原生家庭都呈現父親賺錢、母親持家的模式，影響兩人對母職與父職的想像。'],['19:00','睡前照顧與準備明天','孩子房間',950,440,'🌙','陪孩子準備睡覺、安撫情緒，再把明天需要的東西整理好。','「Jenny 的疲累不是因為她不會安排時間，而是她長期承擔大量工作。」','整合女性主義｜平等協商','改變需要共同承擔照顧、讓 Jenny 有個人發展時間，並持續評估分工是否公平。'],['20:00','Jenny 去上課，Bob 接手照顧孩子','學習空間',950,440,'📚','Jenny 要去上課。你要自己照顧孩子，讓她有真正可以用來學習和發展的時間。','「支持 Jenny 不只是說我支持她上課，而是要實際安排時間。」','自由主義女性主義｜機會平等','案例結果：Bob 同意在 Jenny 上課期間照顧孩子，讓她能參與課程並取得個人發展空間。']];
 const city=[['個別會談：理解 Bob 的壓力','前往城市中的社工會談室',1420,390,'Bob','Bob 是唯一經濟來源，承受經濟責任，也想成為盡責父親，卻覺得工作讓自己沒有足夠時間陪伴孩子。','文化與基進女性主義：看見父職期待與家庭性別角色，也不忽略 Bob 真實的經濟壓力。'],['個別會談：聽見 Jenny 的需要','切換至 Jenny，前往會談室',1420,390,'Jenny','Jenny 主要負責育兒與家務，感到缺乏實際協助與情感支持，也擔心個人發展和獨立。','自由主義女性主義：關注 Jenny 是否仍有進修、工作與個人發展的選擇。'],['家庭協商：建立新的育兒安排','回到家庭，重新協商分工',480,470,'Bob','雙方父母都呈現父親賺錢、母親持家的家庭模式。現在兩人要反思這些期待，並持續檢視新的照顧安排是否公平。','整合處遇：共同對話、重新協商分工，並持續追蹤與調整。']];
 function resize(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;c.style.width=w+'px';c.style.height=h+'px'}addEventListener('resize',resize);resize();
@@ -228,6 +264,36 @@ function finishTimedPhase(){if(!phaseActive)return;const who=runPhase,count=idx;
 function startBobRun(){$('middleTalk').classList.remove('show');runPhase='bob';phaseDuration=20;phaseRemaining=20;phaseActive=true;phaseCompleted=0;idx=0;scene='home';activePerson='Bob';$('personLabel').textContent='Bob';$('person').setAttribute('aria-label','目前角色：Bob；計時挑戰中');p.x=480;p.y=470;paused=false;updateHud()}
 function startCityJourney(){runPhase='city';phaseActive=false;phaseRemaining=0;scene='city';idx=0;activePerson='Bob';$('personLabel').textContent='Bob';$('person').setAttribute('aria-label','目前角色：Bob；點擊切換');p.x=480;p.y=470;paused=false;updateHud();say('接下來進入城市，完成個別會談與家庭協商。')}
 function showFinalConversation(){paused=true;p.x=1420;p.y=390;scene='city';$('finalTalk').classList.add('show');updateHud()}
+function startMiniGame(){
+ miniGameActive=true;miniGameRemaining=10;miniGameStep=0;miniGameFinished=false;paused=true;
+ $('miniGame').classList.add('show');$('miniTimer').textContent='00:10';
+ $('miniProgress').textContent='已完成 0 / 3';$('miniFeedback').textContent='提示：先處理可能立即造成危險的事情，再回應孩子，最後處理可以稍後完成的家務。';
+ $('miniResult').classList.remove('show');$('miniResult').textContent='';$('miniNext').style.display='none';
+ document.querySelectorAll('.mini-choice').forEach(b=>{b.disabled=false;b.classList.remove('done');b.querySelector('.tick').textContent=''});
+ updateHud();
+}
+function chooseMiniTask(choice){
+ if(!miniGameActive||miniGameFinished)return;
+ const order=['stove','child','laundry'],labels={stove:'確認爐火安全',child:'回應孩子',laundry:'晾衣'};
+ if(choice!==order[miniGameStep]){
+  $('miniFeedback').textContent=miniGameStep===0?'先想想：哪一件事可能立即造成安全風險？':'這件事可以稍後處理。先完成更急切的需要，再回來處理它。';
+  return;
+ }
+ const btn=document.querySelector('[data-mini="'+choice+'"]');btn.disabled=true;btn.classList.add('done');$('tick-'+choice).textContent='✓';
+ miniGameStep++;$('miniProgress').textContent='已完成 '+miniGameStep+' / 3';
+ $('miniFeedback').textContent=miniGameStep===1?'很好，先確保環境安全。接著回應孩子的情緒與需要。':miniGameStep===2?'孩子得到回應後，再處理可以稍後完成的洗衣。':'排序完成！你同時留意安全、孩子需要和家務先後，這就是照顧工作中的判斷與安排。';
+ if(miniGameStep===3)finishMiniGame(true);
+}
+function finishMiniGame(success){
+ if(!miniGameActive||miniGameFinished)return;
+ miniGameFinished=true;miniGameActive=false;
+ $('miniResult').textContent=success?'完成！你先確保爐火安全，再回應孩子，最後處理洗衣。照顧者不只是執行工作，也要不斷判斷、記住和安排事情。':'時間到了。三件事仍然同時存在，照顧者必須在有限時間內判斷優先次序；未完成的事情也不會自動消失。';
+ $('miniResult').classList.add('show');$('miniFeedback').textContent='這個小挑戰呈現的是照顧工作中的「心智負荷」：持續注意、記憶、判斷與安排。';
+ $('miniNext').style.display='block';$('miniNext').textContent='繼續 Bob 的家務挑戰 →';
+}
+function closeMiniGame(){
+ $('miniGame').classList.remove('show');miniGameFinished=false;miniGameActive=false;paused=false;updateHud();
+}
 function continueReflection(){
  if(!pendingReflection)return;const type=pendingReflection.type;pendingReflection=null;$('reflection').classList.remove('show');
  if(type==='jennyDebrief'){$('middleTalk').classList.add('show');paused=true}
@@ -235,6 +301,7 @@ function continueReflection(){
  else if(type==='timedHome'){
   idx++;
   if(idx>=home.length){paused=false;finishTimedPhase()}
+  else if(runPhase==='bob'&&idx===4){startMiniGame()}
   else{paused=false;updateHud()}
  }
  else{paused=false;if(type==='home'){idx++;if(idx>=home.length){scene='city';idx=0;p.x=480;p.y=470;say('你完成了 Bob 的一天。接下來回到城市，繼續個別會談與家庭協商。')}}else{idx++;if(idx>=city.length)showFinalConversation()}}
@@ -254,9 +321,13 @@ function marker(x,y,label){g.save();g.shadowColor='#ffd65e';g.shadowBlur=16;g.fi
 function drawGuideArrow(){const t=target();if(!t)return;const dx=t.x-p.x,dy=t.y-p.y,len=Math.hypot(dx,dy)||1;const ux=dx/len,uy=dy/len;const sx=p.x+ux*34,sy=p.y+uy*34,ex=p.x+ux*88,ey=p.y+uy*88;g.save();g.strokeStyle='#fff2a8';g.fillStyle='#fff2a8';g.lineWidth=7;g.lineCap='round';g.shadowColor='#1b1725';g.shadowBlur=9;g.beginPath();g.moveTo(sx,sy);g.lineTo(ex,ey);g.stroke();g.translate(ex,ey);g.rotate(Math.atan2(dy,dx));g.beginPath();g.moveTo(13,0);g.lineTo(-8,-10);g.lineTo(-8,10);g.closePath();g.fill();g.restore()}
 function cityDraw(){g.fillStyle='#293a32';g.fillRect(0,0,1800,1400);for(let y=0;y<1400;y+=72)for(let x=0;x<1800;x+=72){g.fillStyle=((x+y)/72)%2?'#2d3e34':'#293a32';g.fillRect(x+3,y+3,66,66)}g.fillStyle='#39394f';g.fillRect(0,480,1800,170);g.fillRect(790,0,180,1400);const bs=[{x:110,y:100,w:310,h:235,n:'家庭',c:'#465b73'},{x:1240,y:100,w:360,h:260,n:'社工會談室',c:'#416c68'},{x:100,y:900,w:360,h:285,n:'社區空間',c:'#765c50'},{x:510,y:90,w:205,h:220,n:'課程中心',c:'#625c7b'}];bs.forEach(b=>{g.fillStyle=b.c;g.fillRect(b.x,b.y,b.w,b.h);g.fillStyle='#ffffff22';for(let r=0;r<2;r++)for(let x=0;x<3;x++)g.fillRect(b.x+25+x*75,b.y+50+r*75,25,34);g.fillStyle='#fff';g.font='bold 23px sans-serif';g.textAlign='center';g.fillText(b.n,b.x+b.w/2,b.y+b.h+30)});const goal=target();if(goal)marker(goal.x,goal.y,'目前任務')}
 function homeDraw(){g.fillStyle='#b6a38b';g.fillRect(0,0,1200,720);g.fillStyle='#e8d8c2';g.fillRect(35,55,1130,620);g.fillStyle='#9a7861';g.fillRect(35,55,1130,18);g.fillRect(35,657,1130,18);g.fillRect(35,55,18,620);g.fillRect(1147,55,18,620);g.fillStyle='#c9b59b';g.fillRect(500,55,14,620);g.fillRect(820,55,14,620);g.fillRect(35,350,1130,14);const rooms=[['廚房',60,80,420,245,'#7b6758'],['客廳',530,80,270,245,'#536b75'],['洗衣區',850,80,270,245,'#617b70'],['用餐區',60,390,420,245,'#80684e'],['遊戲區',530,390,270,245,'#74617b'],['孩子房間／學習空間',850,390,270,245,'#5b6d89']];rooms.forEach(r=>{g.fillStyle=r[5];g.fillRect(r[1],r[2],r[3],r[4]);g.fillStyle='#fff3';g.font='bold 20px sans-serif';g.textAlign='left';g.fillText(r[0],r[1]+15,r[2]+30)});g.fillStyle='#a66e57';g.fillRect(100,150,130,70);g.fillStyle='#6c4738';g.fillRect(585,160,150,75);g.fillStyle='#e5d9c8';g.fillRect(875,150,180,85);g.fillStyle='#9b6b4d';g.fillRect(110,460,190,85);g.fillStyle='#d6bd9b';g.fillRect(555,465,210,100);g.fillStyle='#f1d38e';g.fillRect(890,465,170,100);if(home[idx])marker(home[idx][3],home[idx][4],home[idx][5]);g.fillStyle='#fff';g.font='bold 13px sans-serif';g.textAlign='center';g.fillText('在家中移動，靠近黃色任務標記並按互動',600,700)}
-function loop(now){if(!loop.last)loop.last=now;let dt=Math.min((now-loop.last)/1000,.04);loop.last=now;if(phaseActive&&started&&!paused&&scene==='home'){phaseRemaining=Math.max(0,phaseRemaining-dt);if(phaseRemaining<=0)finishTimedPhase()}move(dt);if(toastT>0){toastT-=dt;if(toastT<=0)$('toast').classList.remove('show')}cam.x=Math.max(0,Math.min((scene==='home'?1200:1800)-w,p.x-w/2));cam.y=Math.max(0,Math.min((scene==='home'?720:1400)-h,p.y-h/2));g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);g.save();g.translate(-cam.x,-cam.y);scene==='home'?homeDraw():cityDraw();person(p.x,p.y,activePerson,activePerson==='Bob'?'#51bdca':'#d68ab8');drawGuideArrow();g.restore();updateHud();requestAnimationFrame(loop)}
+function loop(now){if(!loop.last)loop.last=now;let dt=Math.min((now-loop.last)/1000,.04);loop.last=now;if(phaseActive&&started&&!paused&&scene==='home'){phaseRemaining=Math.max(0,phaseRemaining-dt);if(phaseRemaining<=0)finishTimedPhase()}
+ if(miniGameActive){miniGameRemaining=Math.max(0,miniGameRemaining-dt);$('miniTimer').textContent='00:'+String(Math.ceil(miniGameRemaining)).padStart(2,'0');if(miniGameRemaining<=0)finishMiniGame(false)}
+ move(dt);if(toastT>0){toastT-=dt;if(toastT<=0)$('toast').classList.remove('show')}cam.x=Math.max(0,Math.min((scene==='home'?1200:1800)-w,p.x-w/2));cam.y=Math.max(0,Math.min((scene==='home'?720:1400)-h,p.y-h/2));g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);g.save();g.translate(-cam.x,-cam.y);scene==='home'?homeDraw():cityDraw();person(p.x,p.y,activePerson,activePerson==='Bob'?'#51bdca':'#d68ab8');drawGuideArrow();g.restore();updateHud();requestAnimationFrame(loop)}
 $('start').onclick=()=>{$('intro').classList.remove('show');started=true;finished=false;paused=false;scene='home';idx=0;runPhase='jenny';phaseDuration=30;phaseRemaining=30;phaseActive=true;activePerson='Jenny';$('personLabel').textContent='Jenny';$('person').setAttribute('aria-label','目前角色：Jenny；計時挑戰中');p.x=480;p.y=470;updateHud()};
 $('act').onclick=interact;$('reflectionNext').onclick=continueReflection;$('bobTry').onclick=startBobRun;
+document.querySelectorAll('.mini-choice').forEach(b=>b.onclick=()=>chooseMiniTask(b.dataset.mini));
+$('miniNext').onclick=closeMiniGame;
 $('finalContinue').onclick=()=>{$('finalTalk').classList.remove('show');paused=false;finished=true;$('end').classList.add('show');updateHud()};
 $('childNeed').onclick=()=>{const t=scene==='home'?home[idx]:city[idx];const need=scene==='home'&&t?t[6]:scene==='city'&&t?t[5]:'孩子需要你的陪伴與照顧。請先完成目前的家庭任務。';$('childNeedText').textContent=need;childNeedPaused=phaseActive&&!paused;if(childNeedPaused)paused=true;$('childNeedBox').classList.add('show')};
 $('childNeedClose').onclick=()=>{$('childNeedBox').classList.remove('show');if(childNeedPaused){paused=false;childNeedPaused=false}};
