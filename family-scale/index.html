@@ -232,12 +232,17 @@ function continueReflection(){
  if(!pendingReflection)return;const type=pendingReflection.type;pendingReflection=null;$('reflection').classList.remove('show');
  if(type==='jennyDebrief'){$('middleTalk').classList.add('show');paused=true}
  else if(type==='bobDebrief'){startCityJourney()}
+ else if(type==='timedHome'){
+  idx++;
+  if(idx>=home.length){paused=false;finishTimedPhase()}
+  else{paused=false;updateHud()}
+ }
  else{paused=false;if(type==='home'){idx++;if(idx>=home.length){scene='city';idx=0;p.x=480;p.y=470;say('你完成了 Bob 的一天。接下來回到城市，繼續個別會談與家庭協商。')}}else{idx++;if(idx>=city.length)showFinalConversation()}}
  updateHud();
 }
 function interact(){
  if(!close()||paused||finished)return;
- if(scene==='home'&&phaseActive){const t=home[idx];say('完成 '+(idx+1)+' / '+home.length+' · '+t[1]+'｜'+t[8]);idx++;phaseCompleted=idx;if(idx>=home.length)finishTimedPhase();updateHud();return}
+ if(scene==='home'&&phaseActive){const t=home[idx];showReflection('home',t);pendingReflection={type:'timedHome',task:t};updateHud();return}
  if(scene==='home'){showReflection('home',home[idx])}
  else{const t=city[idx];if(t[4]==='Jenny'&&activePerson!=='Jenny'){say('這一段需要切換至 Jenny。');return}if(t[4]==='Bob'&&activePerson!=='Bob'){say('這一段需要切換至 Bob。');return}showReflection('city',t)}
  updateHud();
