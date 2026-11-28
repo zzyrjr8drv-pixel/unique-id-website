@@ -20,7 +20,7 @@
 #touchControls{display:none;position:fixed;inset:0;z-index:7;pointer-events:none}.stick-base{position:absolute;left:24px;bottom:calc(29px + env(safe-area-inset-bottom));width:116px;height:116px;border:1px solid #eaf7f866;border-radius:50%;background:#06152255;pointer-events:auto;touch-action:none;backdrop-filter:blur(3px)}.stick-knob{position:absolute;width:48px;height:48px;left:33px;top:33px;border-radius:50%;background:#dceff0a6;border:1px solid #fff;box-shadow:0 3px 14px #0008;pointer-events:none}.touch-action{position:absolute;right:26px;bottom:calc(42px + env(safe-area-inset-bottom));width:74px;height:74px;border:1px solid var(--gold);border-radius:50%;background:#071a2bc9;color:var(--gold);font:600 10px var(--sans);letter-spacing:.1em;pointer-events:auto;touch-action:manipulation;backdrop-filter:blur(4px)}.touch-action:active{background:#dfc58b;color:#061522}
 #notice{position:fixed;z-index:12;left:50%;top:50%;transform:translate(-50%,-50%);font:italic 22px var(--serif);color:var(--gold);text-shadow:0 2px 15px #000;opacity:0;pointer-events:none;transition:opacity .4s;text-align:center;width:80%;}#notice.show{opacity:1}
 @media(pointer:coarse),(max-width:800px){#touchControls{display:block}.top-right{top:calc(17px + env(safe-area-inset-top));right:14px;font-size:8px}.top-left{top:calc(14px + env(safe-area-inset-top));left:12px;padding:10px 12px;max-width:60vw}#objective{font-size:20px}#progress{font-size:9px}#centerPrompt{bottom:calc(155px + env(safe-area-inset-bottom));font-size:9px}#dialogue{bottom:calc(16px + env(safe-area-inset-bottom));padding:16px 17px 14px}.dialogue-name{font-size:24px}#dialogueText{font-size:12px;line-height:1.7}.dialogue-hint{display:none}.controls-copy{max-width:270px;margin-left:auto;margin-right:auto}}
-@media(hover:none) and (orientation:landscape){.stick-base{width:98px;height:98px;bottom:18px}.stick-knob{left:27px;top:27px}.touch-action{width:65px;height:65px;bottom:25px}#centerPrompt{bottom:100px}}
+@media(pointer:fine){#touchControls{display:none!important}}\n@media(hover:none) and (orientation:landscape){.stick-base{width:98px;height:98px;bottom:18px}.stick-knob{left:27px;top:27px}.touch-action{width:65px;height:65px;bottom:25px}#centerPrompt{bottom:100px}}
 </style>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
 </head>
@@ -53,7 +53,7 @@ const prompt=document.getElementById('centerPrompt');
 const notice=document.getElementById('notice');
 let scene,camera,renderer,clock;
 let player,furina;
-let cameraYaw=0;
+let cameraYaw=0,cameraPitch=0.18;
 let insideTheatre=false,hasMetFurina=false,doorUnlocked=false,hasSpokenBackstage=false,finished=false;
 const memories=[false,false,false];
 const memoryObjects=[];
@@ -432,7 +432,7 @@ function rendererPointerSetup(){
  const el=view;
  el.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;looking=true;lastX=e.clientX;lastY=e.clientY;});
  window.addEventListener('pointerup',()=>looking=false);
- window.addEventListener('pointermove',e=>{if(!looking)return;const dx=e.clientX-lastX;lastX=e.clientX;lastY=e.clientY;cameraYaw-=dx*0.006;});
+ window.addEventListener('pointermove',e=>{if(!looking)return;const dx=e.clientX-lastX,dy=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;cameraYaw-=dx*0.006;cameraPitch=THREE.MathUtils.clamp(cameraPitch+dy*0.002,-0.12,0.62);});
  el.addEventListener('contextmenu',e=>e.preventDefault());
 }
 function updatePlayer(dt){
@@ -459,7 +459,7 @@ function updateCamera(dt){
  const distance=insideTheatre?7.2:8.5;
  const desired=new THREE.Vector3(
   player.position.x+Math.sin(cameraYaw)*distance,
-  player.position.y+5.1,
+  player.position.y+4.2+cameraPitch*6,
   player.position.z+Math.cos(cameraYaw)*distance
  );
  camera.position.lerp(desired,1-Math.pow(0.001,dt));
@@ -480,7 +480,7 @@ function animate(){
  requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),0.035);
  updatePlayer(dt);updateCamera(dt);animateWater(clock.elapsedTime);
  if(furina){furina.position.y=Math.sin(clock.elapsedTime*1.5)*0.035;}
- if(furina&&furina.userData.halo){furina.userData.halo.position.y=3.35+Math.sin(clock.elapsedTime*1.7)*0.12;furina.userData.halo.rotation.z=clock.elapsedTime*0.35;}
+ if(furina&&furina.userData.halo){furina.userData.halo.position.set(furina.position.x,3.35+Math.sin(clock.elapsedTime*1.7)*0.12,furina.position.z);furina.userData.halo.rotation.z=clock.elapsedTime*0.35;}
  if(memoryObjects.length)memoryObjects.forEach((o,i)=>{if(o&&o.group.visible){o.gem.rotation.y+=dt*0.8;o.gem.rotation.x+=dt*0.35;o.small.rotation.z+=dt*0.4;o.group.position.y=0.12+Math.sin(clock.elapsedTime*2+i)*0.12;}});
  if(!dialogue.classList.contains('show'))renderPrompt();
  renderer.render(scene,camera);
