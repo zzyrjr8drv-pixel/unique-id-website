@@ -1,108 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071522">
-<meta name="description" content="A short playable story game inspired by Furina and Fontaine.">
-<title>Furina: Behind the Curtain — The Final Performance</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#071827">
+<title>Furina: Behind the Curtain — A Fontaine Story</title>
 <style>
-:root{--night:#061522;--navy:#0b2639;--blue:#174763;--cyan:#9be3ef;--gold:#e1c78b;--cream:#f5f2e9;--muted:#a9c1cb;--line:#bfe6ec38;--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',Arial,sans-serif}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--night);color:var(--cream);font-family:var(--sans)}body{min-height:100svh;display:grid;place-items:center;padding:18px;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 42%,#1c526a 0,#0d2a40 34%,#061522 75%);z-index:0}
-button{font:inherit;cursor:pointer}button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}.game-shell{width:min(100%,980px);min-height:min(760px,calc(100svh - 36px));position:relative;z-index:1;border:1px solid #c2e9ee3b;background:linear-gradient(145deg,#102d42f2,#061522f5 70%);box-shadow:0 30px 100px #0008;overflow:hidden;display:flex;flex-direction:column}
-.game-shell:before,.game-shell:after{content:"";position:absolute;pointer-events:none;z-index:0}.game-shell:before{inset:0;background:linear-gradient(90deg,#040d17 0,transparent 15%,transparent 85%,#040d17 100%);opacity:.5}.game-shell:after{height:1px;left:8%;right:8%;top:72px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.6}
-.topbar{height:73px;flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,4vw,38px);position:relative;z-index:2;border-bottom:1px solid var(--line)}
-.brand{font:600 19px var(--serif);letter-spacing:.09em}.brand span{color:var(--gold)}.top-note{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#9abac5}
-.screen{display:none;flex:1;position:relative;z-index:1;padding:clamp(24px,5vw,48px);animation:appear .45s ease both}.screen.active{display:flex;flex-direction:column}@keyframes appear{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
-.kicker{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}h1,h2,h3,p{margin-top:0}.serif{font-family:var(--serif)}
-.title-screen{justify-content:center;align-items:center;text-align:center;min-height:580px;background:radial-gradient(ellipse at 50% 42%,#25617a55,transparent 60%)}
-.curtain-art{position:absolute;inset:0;pointer-events:none;overflow:hidden}.curtain-art:before,.curtain-art:after{content:"";position:absolute;top:-8%;bottom:-4%;width:18%;background:repeating-linear-gradient(90deg,#081b2a 0 15px,#102c41 18px,#061522 34px);box-shadow:inset -14px 0 35px #0008}.curtain-art:before{left:0;border-right:2px solid #d5b87955}.curtain-art:after{right:0;transform:scaleX(-1);border-left:2px solid #d5b87955}
-.spotlight{position:absolute;width:min(66vw,570px);height:min(66vw,570px);border-radius:50%;left:50%;top:45%;transform:translate(-50%,-50%);background:radial-gradient(circle,#8dd7e31c 0,#4d9bb422 37%,transparent 70%);filter:blur(2px)}
-.title-content{position:relative;z-index:1;max-width:650px}.title-content h1{font:500 clamp(52px,9vw,96px)/.84 var(--serif);letter-spacing:.02em;margin:20px 0}.title-content h1 em{display:block;font-weight:400;color:var(--cyan)}.subtitle{font:italic clamp(19px,3vw,25px) var(--serif);color:#e4d6b3;margin-bottom:22px}.description{max-width:490px;margin:0 auto 32px;color:#b8cbd2;font-size:13px;line-height:1.8}.main-btn,.next-btn{border:1px solid var(--gold);background:var(--gold);color:#102333;padding:14px 25px;text-transform:uppercase;font-size:10px;font-weight:700;letter-spacing:.17em;transition:.2s}.main-btn:hover,.next-btn:hover{background:transparent;color:var(--gold);transform:translateY(-2px)}.microcopy{display:block;margin-top:16px;color:#789aa8;font-size:9px;letter-spacing:.17em;text-transform:uppercase}
-.hud{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:23px}.meter{border:1px solid var(--line);background:#03111d88;padding:12px 14px}.meter-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px}.meter-name{font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:#c7d9dd}.meter-value{font:500 23px var(--serif);color:var(--gold)}.track{height:5px;background:#ffffff16;overflow:hidden}.fill{height:100%;width:50%;background:linear-gradient(90deg,#549daf,var(--cyan));transition:width .5s}.meter.freedom .fill{background:linear-gradient(90deg,#ad8d56,var(--gold))}
-.roundline{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.round-label{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold)}.dots{display:flex;gap:7px}.dot{width:7px;height:7px;border:1px solid #a6cbd0;border-radius:50%;opacity:.35}.dot.done{background:var(--gold);border-color:var(--gold);opacity:1}.dot.current{outline:4px solid #d9bb7e25;opacity:1}
-.scene{border:1px solid var(--line);background:linear-gradient(145deg,#10334a,#091b2a 75%);position:relative;padding:clamp(20px,4vw,34px);min-height:290px;overflow:hidden}.scene:after{content:"";position:absolute;right:-80px;top:-120px;width:310px;height:310px;border-radius:50%;background:radial-gradient(circle,#61c5d41c,transparent 68%);pointer-events:none}.scene h2{font:500 clamp(32px,5vw,49px)/1 var(--serif);margin:9px 0 14px;position:relative;z-index:1}.scene-copy{max-width:690px;color:#c0d2d7;font-size:13px;line-height:1.8;margin-bottom:22px;position:relative;z-index:1}.prompt{font:italic 19px var(--serif);color:var(--gold);position:relative;z-index:1}
-.options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.option{border:1px solid #b5d9df40;background:#071a29;color:var(--cream);padding:16px;text-align:left;min-height:126px;transition:.2s;position:relative}.option:hover:not(:disabled){border-color:var(--gold);background:#d9bb7e12;transform:translateY(-3px)}.option:disabled{cursor:default;opacity:.85}.option .letter{font:italic 26px var(--serif);color:var(--gold);display:block;margin-bottom:7px}.option strong{font:500 20px var(--serif);display:block;margin-bottom:5px}.option small{font-size:10px;line-height:1.5;color:#a9c1cb;display:block}.option.chosen{border-color:var(--gold);background:#d9bb7e18;box-shadow:inset 0 0 0 1px #d9bb7e55}.feedback{display:none;margin-top:15px;padding:16px 18px;background:#d9bb7e0d;border-left:2px solid var(--gold);color:#c9d9dc;font-size:12px;line-height:1.7}.feedback.show{display:block;animation:appear .3s ease}.feedback b{display:block;font:500 22px var(--serif);color:var(--gold);margin-bottom:4px}.delta{display:flex;gap:15px;flex-wrap:wrap;margin-top:9px;color:#9edce3;font-size:10px;letter-spacing:.08em}.controls{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:17px}.hint{color:#7899a7;font-size:9px;letter-spacing:.12em;text-transform:uppercase}.next-btn:disabled{opacity:.35;cursor:not-allowed;transform:none}.end-screen{justify-content:center;align-items:center;text-align:center;min-height:580px}.ending-mark{width:90px;height:90px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;margin:0 auto 25px;font:italic 53px var(--serif);color:var(--gold);box-shadow:0 0 45px #b8dfe522}.end-screen h2{font:500 clamp(39px,7vw,66px)/.95 var(--serif);margin:13px auto 18px;max-width:700px}.end-description{max-width:560px;color:#bfd0d6;font-size:13px;line-height:1.9;margin:0 auto 23px}.final-stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:0 auto 27px}.final-stat{border:1px solid var(--line);padding:10px 16px;min-width:130px}.final-stat span{display:block;color:#90abb5;font-size:9px;letter-spacing:.14em;text-transform:uppercase}.final-stat b{font:500 25px var(--serif);color:var(--gold)}.restart{border:1px solid #b4d4dc;background:transparent;color:var(--cream);padding:13px 22px;text-transform:uppercase;letter-spacing:.15em;font-size:10px}.restart:hover{border-color:var(--gold);color:var(--gold)}
-.footer{border-top:1px solid var(--line);padding:12px 20px;text-align:center;color:#72909c;font-size:9px;letter-spacing:.13em;text-transform:uppercase;position:relative;z-index:1}
-@media(max-width:640px){body{padding:0}.game-shell{min-height:100svh;width:100%;border-left:0;border-right:0}.topbar{height:64px;padding:0 16px}.brand{font-size:16px}.top-note{font-size:8px}.screen{padding:22px 16px}.title-screen,.end-screen{min-height:calc(100svh - 112px)}.curtain-art:before,.curtain-art:after{width:12%}.hud{gap:8px}.meter{padding:10px}.meter-name{font-size:8px}.meter-value{font-size:20px}.options{grid-template-columns:1fr;gap:8px}.option{min-height:0;padding:13px;display:grid;grid-template-columns:30px 1fr;column-gap:8px;align-items:center}.option .letter{grid-row:span 2;margin:0}.option strong{margin:0}.option small{grid-column:2}.scene{min-height:0;padding:20px 16px}.scene h2{font-size:36px}.controls{align-items:flex-end}.hint{max-width:55%;line-height:1.5}.ending-mark{width:75px;height:75px;font-size:43px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#071827;color:#eef8fa;font-family:Georgia,serif}#game{position:fixed;inset:0}canvas{display:block}
+#hud{position:fixed;inset:0;pointer-events:none;font-family:Arial,sans-serif}
+#brand{position:absolute;top:20px;left:22px;font:600 17px Georgia,serif;letter-spacing:.12em;text-shadow:0 2px 8px #000}#brand span{color:#e3c987}
+#chapter{position:absolute;top:23px;right:24px;text-align:right;font:10px Arial;letter-spacing:.2em;text-transform:uppercase;color:#d8e9ed;text-shadow:0 2px 7px #000}
+#objective{position:absolute;left:22px;top:70px;padding:12px 15px;background:#061522a8;border-left:2px solid #dfc17e;max-width:270px;backdrop-filter:blur(8px)}#objective b{display:block;color:#e2c888;font:10px Arial;letter-spacing:.18em;text-transform:uppercase;margin-bottom:5px}#objective span{font:13px/1.5 Arial;color:#e5f1f3}
+#hint{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);padding:11px 18px;background:#061522d9;border:1px solid #c6e7e54d;color:#f3ead1;font:12px Arial;letter-spacing:.04em;opacity:0;transition:.2s;white-space:nowrap}#hint.show{opacity:1}
+#interact{position:absolute;left:50%;bottom:5%;transform:translateX(-50%);pointer-events:auto;border:1px solid #e2c888;background:#d9bc7e;color:#102435;padding:13px 24px;font:bold 10px Arial;letter-spacing:.16em;text-transform:uppercase;display:none}
+#interact.show{display:block}
+#crosshair{position:absolute;left:50%;top:50%;width:5px;height:5px;border-radius:50%;background:#eaf7f7;box-shadow:0 0 5px #001;transform:translate(-50%,-50%);opacity:.8}
+#dialogue{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);width:min(760px,92vw);background:linear-gradient(110deg,#071b2ceF,#102d42ef);border:1px solid #d9c08088;padding:22px 26px 18px;display:none;pointer-events:auto;box-shadow:0 12px 50px #0008}
+#dialogue.show{display:block}#speaker{font:10px Arial;letter-spacing:.22em;text-transform:uppercase;color:#e2c888;margin-bottom:8px}#line{font:italic 21px/1.5 Georgia,serif;color:#f2f5ee;min-height:55px}#continue{float:right;margin-top:12px;background:transparent;border:1px solid #b7d5d9;color:#e9f4f4;padding:8px 15px;font:10px Arial;letter-spacing:.14em;text-transform:uppercase}
+#intro,#ending,#pause{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 42%,#1e5067dd,#061522f5 72%);z-index:5;padding:24px;text-align:center}
+.panel{width:min(680px,94vw);padding:clamp(24px,5vw,52px);border:1px solid #d6c18477;background:#061827c9;box-shadow:0 25px 90px #0009}.eyebrow{font:10px Arial;letter-spacing:.3em;text-transform:uppercase;color:#e3c987}.panel h1{font:500 clamp(42px,8vw,78px)/.9 Georgia,serif;margin:20px 0}.panel h1 em{display:block;color:#9ee3eb;font-weight:400}.panel p{font:15px/1.8 Arial;color:#c4d8de;max-width:550px;margin:0 auto 25px}.goldbtn{border:1px solid #e2c888;background:#e2c888;color:#102435;padding:14px 25px;font:bold 10px Arial;letter-spacing:.17em;text-transform:uppercase;cursor:pointer}.goldbtn:hover{background:transparent;color:#e2c888}
+#ending,#pause{display:none}#ending.show,#pause.show{display:flex}#ending h2{font:italic 48px Georgia;color:#e2c888;margin:14px 0}#ending p{font:15px/1.8 Arial;color:#d0e0e4;max-width:560px;margin:0 auto 25px}
+#pause{background:#03101bdc;backdrop-filter:blur(8px)}#pause .panel{width:min(420px,90vw)}
+#mobile{position:fixed;bottom:22px;left:22px;width:116px;height:116px;border-radius:50%;border:1px solid #d3edf044;background:#071a2a66;display:none;pointer-events:auto;touch-action:none}
+#stick{position:absolute;width:46px;height:46px;left:34px;top:34px;border-radius:50%;background:#c6e5e777;border:1px solid #d8f0efaa}
+#looktip{position:absolute;bottom:25px;right:20px;color:#d9e9e9a8;font:9px Arial;letter-spacing:.1em;text-transform:uppercase;display:none}
+#progress{position:absolute;right:22px;top:70px;color:#dcebee;font:10px Arial;letter-spacing:.1em;text-shadow:0 2px 5px #000}
+@media(pointer:coarse){#mobile{display:block}#looktip{display:block}#hint{bottom:165px}#interact{bottom:120px}}
+@media(max-width:600px){#brand{font-size:13px;left:13px;top:14px}#chapter{right:13px;top:17px;font-size:8px}#objective{left:12px;top:48px;padding:9px 11px;max-width:210px}#objective span{font-size:11px}#progress{top:48px;right:12px;font-size:9px}#dialogue{bottom:12px;padding:15px 16px}#line{font-size:17px;min-height:65px}}
 </style>
 </head>
 <body>
-<div class="game-shell">
-<header class="topbar"><div class="brand">FURINA<span>:</span> BEHIND THE CURTAIN</div><div class="top-note">A short story game · Fontaine</div></header>
-<section class="screen title-screen active" id="startScreen">
-<div class="curtain-art" aria-hidden="true"></div><div class="spotlight" aria-hidden="true"></div>
-<div class="title-content"><div class="kicker">The final performance</div><h1>BEHIND <em>THE CURTAIN</em></h1><div class="subtitle">Every performance has a secret.</div><p class="description">The people of Fontaine are waiting. Furina has one final performance to give — but what happens when the role she has played for so long begins to disappear?</p><button class="main-btn" id="startBtn" type="button">Begin the story</button><span class="microcopy">3 decisions · 4 possible endings · about 2 minutes</span></div>
-</section>
-<section class="screen" id="gameScreen">
-<div class="hud">
-<div class="meter"><div class="meter-top"><span class="meter-name">Audience trust</span><span class="meter-value" id="trustValue">50</span></div><div class="track"><div class="fill" id="trustBar"></div></div></div>
-<div class="meter freedom"><div class="meter-top"><span class="meter-name">Furina's freedom</span><span class="meter-value" id="freedomValue">50</span></div><div class="track"><div class="fill" id="freedomBar"></div></div></div>
+<div id="game"></div>
+<div id="hud">
+ <div id="brand">FURINA<span>:</span> BEHIND THE CURTAIN</div><div id="chapter">ACT I · THE STAGE</div>
+ <div id="objective"><b>YOUR JOURNEY</b><span id="objectiveText">Explore the Opera Epiclese plaza.</span></div>
+ <div id="progress">MEMORIES 0 / 4</div><div id="crosshair"></div>
+ <div id="hint">A memory is nearby</div><button id="interact">E · INTERACT</button>
+ <div id="dialogue"><div id="speaker">FURINA</div><div id="line"></div><button id="continue">Continue →</button></div>
+ <div id="mobile"><div id="stick"></div></div><div id="looktip">Drag screen to look around</div>
 </div>
-<div class="roundline"><span class="round-label" id="roundLabel">Decision 1 / 3</span><div class="dots" aria-label="Game progress"><i class="dot current"></i><i class="dot"></i><i class="dot"></i></div></div>
-<div class="scene"><div class="kicker" id="sceneKicker">The public performance</div><h2 id="sceneTitle">The eyes of Fontaine</h2><p class="scene-copy" id="sceneCopy"></p><div class="prompt" id="scenePrompt">What will you do?</div></div>
-<div class="options" id="options"></div>
-<div class="feedback" id="feedback" aria-live="polite"></div>
-<div class="controls"><span class="hint" id="keyHint">Choose A, B or C</span><button class="next-btn" id="nextBtn" type="button" disabled>Next decision →</button></div>
-</section>
-<section class="screen end-screen" id="endScreen">
-<div class="ending-mark">✧</div><div class="kicker">The curtain falls</div><h2 id="endingTitle">The Honest Curtain</h2><p class="end-description" id="endingText"></p>
-<div class="final-stats"><div class="final-stat"><span>Audience trust</span><b id="endTrust">50</b></div><div class="final-stat"><span>Furina's freedom</span><b id="endFreedom">50</b></div></div>
-<button class="restart" id="restartBtn" type="button">Play again ↻</button>
-</section>
-<footer class="footer">An original mini-game inspired by the themes of Genshin Impact · Fontaine</footer>
-</div>
-<script>
-'use strict';
-const rounds=[
-{label:'The Public Performance',kicker:'Decision 01 · The spotlight',title:'A nation is watching.',copy:'You must reassure all of Fontaine. Everyone expects confidence and certainty. But behind the applause, you are afraid of what the future may bring.',choices:[
-{title:'Keep performing',desc:'Smile, stay confident, and protect the public image.',trust:18,freedom:-12,result:'The audience applauds. Fontaine feels reassured — but you must keep your fear hidden.',reflection:'A strong performance can protect others, but it can also become a heavy mask.'},
-{title:'Tell them the truth',desc:'Admit that you are uncertain and afraid.',trust:-6,freedom:16,result:'Some people are surprised. Others appreciate your honesty. For once, your words belong to you.',reflection:'Honesty may change how people see you, but it can create a genuine connection.'},
-{title:'Step away for now',desc:'Leave the stage and face the problem in private.',trust:-9,freedom:8,result:'You find a little space to breathe. The public still has questions, and the pressure has not disappeared.',reflection:'Taking space can help, even when it does not solve everything.'}
-]},
-{label:'The Lonely Stage',kicker:'Decision 02 · The burden',title:'Who carries the weight?',copy:'You have fulfilled this responsibility for years. People admire you and expect you to continue, but your own wishes have slowly faded. You cannot carry everything in the same way forever.',choices:[
-{title:'Carry on alone',desc:'Finish the responsibility before thinking about yourself.',trust:12,freedom:-15,result:'You keep your promise to the people who depend on you. Your own needs remain waiting backstage.',reflection:'Responsibility gives life meaning, but it should not erase the person carrying it.'},
-{title:'Trust someone',desc:'Let another person understand what you are going through.',trust:7,freedom:12,result:'Your burden is no longer entirely yours. Nothing is magically fixed, but you are not alone.',reflection:'Sometimes strength begins when we allow someone to stand beside us.'},
-{title:'Choose your own life',desc:'Begin discovering who you are beyond this role.',trust:-6,freedom:18,result:'The future is uncertain, but a new possibility opens: a life shaped by your own choices.',reflection:'Freedom can be frightening when you have spent so long following a script.'}
-]},
-{label:'The Final Decision',kicker:'Decision 03 · The curtain call',title:'The performance is ending.',copy:'You can preserve the identity everyone recognises, reveal everything, or leave the role behind. Your decision will shape both the audience’s memory and your own future.',choices:[
-{title:'Protect the image',desc:'Keep the familiar role until the very last moment.',trust:15,freedom:-18,result:'The audience remembers the figure they have always admired. The mask remains in place.',reflection:'A familiar identity can feel safer than an uncertain future.'},
-{title:'Reveal everything',desc:'Let the audience see the person behind the performance.',trust:-3,freedom:15,result:'The truth changes the story Fontaine tells about you. You no longer have to hide behind the same image.',reflection:'Being understood may mean accepting that not everyone will admire you.'},
-{title:'Start again',desc:'Leave the stage and write a different story.',trust:-10,freedom:20,result:'The lights fade. The future is unknown, but the next chapter is finally yours to write.',reflection:'The end of one story can be the beginning of another.'}
-]}
+<div id="intro"><div class="panel"><div class="eyebrow">A small 3D exploration story</div><h1>FURINA <em>BEHIND THE CURTAIN</em></h1><p>Fontaine is quiet tonight. The opera house is empty, the fountains still flow, and someone has left four memories scattered across the city. Walk through the world, discover what happened behind the performance, and find Furina's final message.</p><button class="goldbtn" id="start">ENTER FONTAINE</button><p style="font-size:10px;margin-top:18px;color:#8daeb8">WASD to move · Mouse to look · E to interact · ESC to pause<br>On mobile: left joystick to move · drag to look · tap interact</p></div></div>
+<div id="pause"><div class="panel"><div class="eyebrow">The city is waiting</div><h1 style="font-size:45px">PAUSED</h1><p>Take a moment. Fontaine is not going anywhere.</p><button class="goldbtn" id="resume">RETURN TO THE CITY</button></div></div>
+<div id="ending"><div class="panel"><div class="eyebrow">The final memory</div><h2>The curtain falls.</h2><p id="endingText">For the first time, the stage is empty. Furina can finally decide what comes next.</p><button class="goldbtn" id="again">EXPLORE AGAIN</button></div></div>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+const mount=document.getElementById('game');
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x8ab8c8);scene.fog=new THREE.FogExp2(0x8ab8c8,.009);
+const camera=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.1,500);
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;mount.appendChild(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xc9edff,0x33475a,2.1));
+const sun=new THREE.DirectionalLight(0xffe7c1,3.1);sun.position.set(-35,60,30);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-70;sun.shadow.camera.right=70;sun.shadow.camera.top=70;sun.shadow.camera.bottom=-70;scene.add(sun);
+const mat=(color,roughness=.8,metalness=0)=>new THREE.MeshStandardMaterial({color,roughness,metalness});
+const stone=mat(0xc8d3d0),pale=mat(0xe7e2d3),blue=mat(0x527e91),roof=mat(0x294b60),gold=mat(0xd4b66f,.38,.55),dark=mat(0x142d3e),waterMat=new THREE.MeshStandardMaterial({color:0x328da5,roughness:.22,metalness:.25,transparent:true,opacity:.88});
+function box(w,h,d,m,x,y,z){const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;scene.add(o);return o}
+function cyl(rt,rb,h,m,x,y,z,n=12){const o=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,n),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;scene.add(o);return o}
+function sphere(r,m,x,y,z){const o=new THREE.Mesh(new THREE.SphereGeometry(r,16,12),m);o.position.set(x,y,z);o.castShadow=true;scene.add(o);return o}
+function plane(w,d,m,x,y,z){const o=new THREE.Mesh(new THREE.PlaneGeometry(w,d),m);o.rotation.x=-Math.PI/2;o.position.set(x,y,z);o.receiveShadow=true;scene.add(o);return o}
+plane(180,180,mat(0x9aada9),0,-.15,0);
+const water=plane(14,90,waterMat,0,.01,0);water.position.x=0;
+for(let z=-42;z<48;z+=8){box(1,.18,3,pale,-8,.05,z);box(1,.18,3,pale,8,.05,z)}
+// Canal banks and bridges
+box(3,.55,92,stone,-9,.15,0);box(3,.55,92,stone,9,.15,0);
+for(let z=-35;z<40;z+=25){box(23,.45,4,pale,0,.28,z);for(let x=-8;x<=8;x+=4)cyl(.16,.16,.5,gold,x,.65,z,8)}
+// Central square
+plane(42,42,mat(0xb9c5bf),0,.02,0);
+for(let x=-18;x<=18;x+=6)for(let z=-18;z<=18;z+=6){if(Math.abs(x)>3||Math.abs(z)>3){const tile=box(5.8,.08,5.8,Math.random()>.5?pale:stone,x,.08,z);tile.castShadow=false}}
+function building(x,z,w,d,h,accent=blue){
+box(w,h,d,pale,x,h/2,z);box(w+1,.7,d+1,accent,x,h+.3,z);box(w+1.3,.35,d+1.3,gold,x,h+.8,z);
+for(let xx=x-w/2+2;xx<x+w/2-1;xx+=3){box(.85,3,.25,dark,xx,2,z-d/2-.14);box(.85,3,.25,dark,xx,2,z+d/2+.14);cyl(.12,.12,3,gold,xx,2,z-d/2-.3,8)}
+for(let zz=z-d/2+2;zz<z+d/2-1;zz+=3){box(.25,3,.85,dark,x-w/2-.14,2,zz);box(.25,3,.85,dark,x+w/2+.14,2,zz)}
+for(let i=0;i<3;i++){const y=h+1+i*.65;const r=new THREE.Mesh(new THREE.ConeGeometry(w*.7,1.2,4),roof);r.rotation.y=Math.PI/4;r.position.set(x,y,z);r.castShadow=true;scene.add(r)}
+}
+building(-25,-24,18,17,13);building(25,-24,18,17,13);building(-25,25,18,17,11);building(25,25,18,17,12);
+building(-30,0,12,16,9);building(30,0,12,16,9);
+// Opera Epiclese, grand facade and dome
+box(30,15,10,pale,0,7,-51);box(34,1,12,gold,0,15,-51);box(25,8,1,blue,0,10,-56);
+for(let x=-11;x<=11;x+=5){cyl(.55,.7,10,pale,x,6,-57,16);cyl(.72,.72,.35,gold,x,11,-57,16)}
+const dome=new THREE.Mesh(new THREE.SphereGeometry(8,24,16,0,Math.PI*2,0,Math.PI/2),roof);dome.position.set(0,15,-51);dome.scale.y=.7;dome.castShadow=true;scene.add(dome);
+cyl(1.2,1.2,3,gold,0,22,-51,12);sphere(1.2,gold,0,24,-51);
+// fountains
+function fountain(x,z){cyl(4.2,4.5,.55,pale,x,.4,z,32);cyl(3.4,3.7,.3,waterMat,x,.82,z,32);cyl(1.1,1.5,1.8,stone,x,1.8,z,16);cyl(.55,.8,.4,gold,x,2.9,z,16);sphere(.6,waterMat,x,3.5,z);for(let a=0;a<8;a++){const t=a*Math.PI/4;const s=sphere(.14,waterMat,x+Math.cos(t)*2.1,1.35,z+Math.sin(t)*2.1);s.scale.y=1.8}}
+fountain(0,0);fountain(-23,0);fountain(23,0);
+// street lamps
+for(let x=-34;x<=34;x+=12)for(let z=-40;z<=40;z+=20){if(Math.abs(x)<12&&Math.abs(z)<12)continue; cyl(.12,.2,4,dark,x,2,z,8);box(.8,.9,.8,gold,x,4.3,z);const l=new THREE.PointLight(0xffdca0,.55,9);l.position.set(x,4.5,z);scene.add(l)}
+// Trees
+const trunk=mat(0x604c3d),leaf=mat(0x477e70);
+for(const [x,z] of [[-18,-17],[18,-17],[-18,18],[18,18],[-37,13],[37,13],[-38,-18],[38,-18]]){cyl(.35,.5,3,trunk,x,1.5,z);for(let i=0;i<3;i++)sphere(2.2-i*.25,leaf,x+(Math.random()-.5),3.5+i*.6,z+(Math.random()-.5))}
+function person(x,z,color=0x355a78){const g=new THREE.Group();const body=new THREE.Mesh(new THREE.CylinderGeometry(.42,.55,1.45,8),mat(color));body.position.y=1.2;body.castShadow=true;g.add(body);const head=new THREE.Mesh(new THREE.SphereGeometry(.38,12,10),mat(0xf0d3bd));head.position.y=2.15;g.add(head);const hat=new THREE.Mesh(new THREE.CylinderGeometry(.5,.5,.12,12),gold);hat.position.y=2.52;g.add(hat);g.position.set(x,0,z);scene.add(g);return g}
+person(-5,-13,0x426e89);person(14,11,0x7b5366);person(-30,8,0x557a70);person(27,-4,0x7c6b50);
+const furina=person(0,-43,0x253d71);furina.scale.set(1.1,1.1,1.1);sphere(.08,gold,0,2.7,-43);
+// memory markers
+const memories=[
+{id:0,pos:new THREE.Vector3(0,1,-43),title:'The applause',chapter:'ACT I · THE STAGE',objective:'Find the memory outside the Opera Epiclese.',speaker:'A voice from the stage',lines:['The applause used to feel endless. Every night, every face, every expectation.','They saw a star. They never asked how long the performance had lasted.'],done:false},
+{id:1,pos:new THREE.Vector3(-23,1,0),title:'The public mask',chapter:'ACT II · THE ROLE',objective:'Search the fountain square for another memory.',speaker:'Furina',lines:['“Of course I was confident. That was what they needed to see.”','A role can become so familiar that even its actor forgets where it ends.'],done:false},
+{id:2,pos:new THREE.Vector3(0,1,31),title:'The lonely promise',chapter:'ACT III · THE TRIAL',objective:'Follow the canal and find the quiet waterside.',speaker:'Furina',lines:['There were days when I wanted to tell someone. Anyone.','But what if the truth put everything at risk? What if the people who depended on me lost hope?'],done:false},
+{id:3,pos:new THREE.Vector3(0,1,0),title:'Behind the curtain',chapter:'ACT IV · BEHIND THE MASK',objective:'Return to the central fountain. Find the final memory.',speaker:'Furina',lines:['The stage is empty now. There is no audience to impress.','I do not know exactly who I will become. But perhaps that is the point.','For the first time, the next scene is mine to choose.'],done:false}
 ];
-let roundIndex=0,trust=50,freedom=50,locked=false,history=[];
-const $=id=>document.getElementById(id);
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');}
-function updateMeters(){trust=Math.max(0,Math.min(100,trust));freedom=Math.max(0,Math.min(100,freedom));$('trustValue').textContent=trust;$('freedomValue').textContent=freedom;$('trustBar').style.width=trust+'%';$('freedomBar').style.width=freedom+'%';}
-function renderRound(){
- locked=false;const r=rounds[roundIndex];$('roundLabel').textContent='Decision '+(roundIndex+1)+' / 3';$('sceneKicker').textContent=r.kicker;$('sceneTitle').textContent=r.title;$('sceneCopy').textContent=r.copy;$('scenePrompt').textContent='What will you do?';$('feedback').className='feedback';$('feedback').textContent='';$('nextBtn').disabled=true;$('nextBtn').textContent=roundIndex===2?'See your ending →':'Next decision →';$('keyHint').textContent='Choose A, B or C';
-document.querySelectorAll('.dot').forEach((d,i)=>{d.classList.toggle('done',i<roundIndex);d.classList.toggle('current',i===roundIndex);});
-$('options').innerHTML=r.choices.map((c,i)=>'<button type="button" class="option" data-choice="'+i+'"><span class="letter">'+String.fromCharCode(65+i)+'</span><strong>'+c.title+'</strong><small>'+c.desc+'</small></button>').join('');
-$('options').querySelectorAll('[data-choice]').forEach(btn=>btn.addEventListener('click',()=>choose(Number(btn.dataset.choice))));
-updateMeters();
+const markers=[];
+memories.forEach((m,i)=>{const group=new THREE.Group();const orb=new THREE.Mesh(new THREE.IcosahedronGeometry(.48,1),new THREE.MeshStandardMaterial({color:i===3?0xe6c982:0x9ce9f0,emissive:i===3?0x9b6920:0x236b80,emissiveIntensity:1.8,metalness:.3,roughness:.25}));group.add(orb);const ring=new THREE.Mesh(new THREE.TorusGeometry(.8,.045,8,32),gold);ring.rotation.x=Math.PI/2;group.add(ring);const beam=new THREE.Mesh(new THREE.CylinderGeometry(.025,.18,3,8,1,true),new THREE.MeshBasicMaterial({color:0x9ce9f0,transparent:true,opacity:.12,side:THREE.DoubleSide}));beam.position.y=-1.1;group.add(beam);group.position.copy(m.pos);group.position.y=2.1;scene.add(group);markers.push(group)});
+const player={pos:new THREE.Vector3(0,0,12),yaw:Math.PI,pitch:0};camera.position.set(0,1.7,12);
+let started=false,dialogue=null,lineIndex=0,nearby=null,move={x:0,y:0},keys={},pointer=false,drag=null;
+function setObjective(t){document.getElementById('objectiveText').textContent=t}
+function nearest(){let best=null,dist=999;memories.forEach((m,i)=>{if(m.done)return;const d=player.pos.distanceTo(new THREE.Vector3(m.pos.x,0,m.pos.z));if(d<dist){dist=d;best=m}});return dist<5?best:null}
+function beginMemory(m){if(dialogue||m.done)return;dialogue=m;lineIndex=0;document.getElementById('speaker').textContent=m.speaker;document.getElementById('line').textContent=m.lines[0];document.getElementById('dialogue').classList.add('show');document.getElementById('interact').classList.remove('show');document.getElementById('hint').classList.remove('show');}
+function nextLine(){if(!dialogue)return;lineIndex++;if(lineIndex<dialogue.lines.length){document.getElementById('line').textContent=dialogue.lines[lineIndex];return;}dialogue.done=true;const i=dialogue.id;markers[i].visible=false;dialogue=null;document.getElementById('dialogue').classList.remove('show');const count=memories.filter(m=>m.done).length;document.getElementById('progress').textContent='MEMORIES '+count+' / 4';if(count===4){document.getElementById('chapter').textContent='ACT V · A NEW BEGINNING';setObjective('All memories found. Return to Furina at the Opera Epiclese.');setTimeout(showEnding,500);}else{const next=memories.find(m=>!m.done);document.getElementById('chapter').textContent=next.chapter;setObjective(next.objective);}}
+function showEnding(){document.getElementById('endingText').textContent='The city is still here. The fountains still flow. But the performance has ended, and Furina no longer has to live as the person the audience expected. You explored Fontaine, found all four memories, and witnessed the story behind the curtain.';document.getElementById('ending').classList.add('show');}
+document.getElementById('continue').addEventListener('click',nextLine);document.getElementById('interact').addEventListener('click',()=>{if(nearby)beginMemory(nearby)});
+function start(){document.getElementById('intro').style.display='none';started=true;setObjective(memories[0].objective);document.getElementById('chapter').textContent=memories[0].chapter;renderer.domElement.requestPointerLock?.();if(matchMedia('(pointer:coarse)').matches)renderer.domElement.requestPointerLock=undefined;}
+document.getElementById('start').addEventListener('click',start);
+document.getElementById('again').addEventListener('click',()=>location.reload());
+document.addEventListener('pointerlockchange',()=>{pointer=document.pointerLockElement===renderer.domElement});
+document.addEventListener('mousemove',e=>{if(pointer&&started&&!dialogue){player.yaw-=e.movementX*.0022;player.pitch=Math.max(-.75,Math.min(.75,player.pitch-e.movementY*.0018));}});
+document.addEventListener('keydown',e=>{keys[e.code]=true;if(e.code==='KeyE'&&nearby&&!dialogue)beginMemory(nearby);if(e.code==='Escape'&&started&&!dialogue){document.getElementById('pause').classList.toggle('show');if(document.getElementById('pause').classList.contains('show'))document.exitPointerLock?.();}});
+document.addEventListener('keyup',e=>keys[e.code]=false);
+document.getElementById('resume').addEventListener('click',()=>{document.getElementById('pause').classList.remove('show');renderer.domElement.requestPointerLock?.()});
+let touchLook=null;renderer.domElement.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'&&started&&!dialogue)touchLook={x:e.clientX,y:e.clientY};});
+renderer.domElement.addEventListener('pointermove',e=>{if(touchLook&&e.pointerType==='touch'&&started&&!dialogue){player.yaw-=(e.clientX-touchLook.x)*.004;player.pitch=Math.max(-.7,Math.min(.7,player.pitch-(e.clientY-touchLook.y)*.003));touchLook={x:e.clientX,y:e.clientY};}});
+renderer.domElement.addEventListener('pointerup',()=>touchLook=null);
+const mobile=document.getElementById('mobile'),stick=document.getElementById('stick');let joy=null;
+mobile.addEventListener('pointerdown',e=>{joy=mobile.getBoundingClientRect();mobile.setPointerCapture(e.pointerId);joyMove(e)});
+mobile.addEventListener('pointermove',e=>{if(joy)joyMove(e)});mobile.addEventListener('pointerup',()=>{joy=null;move.x=0;move.y=0;stick.style.transform='translate(0,0)'});
+function joyMove(e){const r=mobile.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;let dx=e.clientX-cx,dy=e.clientY-cy;const len=Math.hypot(dx,dy),max=35;if(len>max){dx=dx/len*max;dy=dy/len*max}move.x=dx/max;move.y=-dy/max;stick.style.transform='translate('+dx+'px,'+dy+'px)'}
+const clock=new THREE.Clock();
+function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.04);if(started&&!dialogue&&!document.getElementById('pause').classList.contains('show')&&!document.getElementById('ending').classList.contains('show')){
+let f=(keys.KeyW||keys.ArrowUp?1:0)-(keys.KeyS||keys.ArrowDown?1:0)+move.y;let s=(keys.KeyD||keys.ArrowRight?1:0)-(keys.KeyA||keys.ArrowLeft?1:0)+move.x;const len=Math.hypot(f,s);if(len>1){f/=len;s/=len}const speed=keys.ShiftLeft?10:6;const forward=new THREE.Vector3(-Math.sin(player.yaw),0,-Math.cos(player.yaw));const right=new THREE.Vector3(Math.cos(player.yaw),0,-Math.sin(player.yaw));player.pos.addScaledVector(forward,f*speed*dt);player.pos.addScaledVector(right,s*speed*dt);player.pos.x=THREE.MathUtils.clamp(player.pos.x,-43,43);player.pos.z=THREE.MathUtils.clamp(player.pos.z,-59,48);
+camera.position.set(player.pos.x,1.7,player.pos.z);camera.rotation.order='YXZ';camera.rotation.y=player.yaw;camera.rotation.x=player.pitch;
 }
-function choose(choiceIndex){
- if(locked)return;locked=true;const picked=rounds[roundIndex].choices[choiceIndex];trust+=picked.trust;freedom+=picked.freedom;updateMeters();history.push({round:roundIndex,choice:choiceIndex});$('options').querySelectorAll('button').forEach((btn,i)=>{btn.disabled=true;if(i===choiceIndex)btn.classList.add('chosen');});
- const feedback=$('feedback');feedback.innerHTML='<b>'+picked.result+'</b><span> '+picked.reflection+'</span><div class="delta"><span>Audience trust '+(picked.trust>=0?'+':'')+picked.trust+'</span><span>Freedom '+(picked.freedom>=0?'+':'')+picked.freedom+'</span></div>';feedback.classList.add('show');$('scenePrompt').textContent='Your decision has been made.';$('keyHint').textContent='The story moves forward';$('nextBtn').disabled=false;
-}
-function finish(){
- let title,copy;
- if(trust>=60&&freedom>=60){title='The Honest Curtain';copy='You chose to trust honesty and make room for a life beyond the performance. Fontaine may remember the spectacle, but it also gets to see the person behind it. Your ending brings public trust and personal freedom into balance.';}
- else if(trust>=70&&freedom<40){title='The Perfect Performance';copy='Fontaine gives you a standing ovation. You protected the image and fulfilled every expectation. Yet when the theatre empties, the mask is still there. The audience got the performance — but did you get to be yourself?';}
- else if(freedom>=70&&trust<45){title='A Life of Her Own';copy='You stepped away from the role and chose an unknown future. Not everyone understands your decision, and not every question is answered. But for the first time, the next chapter belongs to you.';}
- else{title='The Unwritten Future';copy='You made compromises, took risks, and refused to let one decision define everything. The future remains uncertain. The curtain has fallen, and now you have the freedom to decide what comes next.';}
- $('endingTitle').textContent=title;$('endingText').textContent=copy;$('endTrust').textContent=trust;$('endFreedom').textContent=freedom;showScreen('endScreen');
-}
-$('startBtn').addEventListener('click',()=>{roundIndex=0;trust=50;freedom=50;history=[];showScreen('gameScreen');renderRound();});
-$('nextBtn').addEventListener('click',()=>{if(!locked)return;if(roundIndex<2){roundIndex++;renderRound();}else finish();});
-$('restartBtn').addEventListener('click',()=>{roundIndex=0;trust=50;freedom=50;history=[];showScreen('startScreen');});
-document.addEventListener('keydown',e=>{if(!$('gameScreen').classList.contains('active')||locked)return;const n=Number(e.key);if(n>=1&&n<=3){const b=$('options').querySelectorAll('button')[n-1];if(b)b.click();}});
+const t=clock.elapsedTime;markers.forEach((g,i)=>{if(g.visible){g.position.y=2.1+Math.sin(t*1.7+i)*.2;g.rotation.y=t*.6;g.children[1].rotation.z=t*.4;}});
+waterMat.color.offsetHSL(0,0,Math.sin(t*.5)*.006);
+if(started&&!dialogue){nearby=nearest();const hint=document.getElementById('hint'),btn=document.getElementById('interact');if(nearby){hint.textContent='A memory is close · '+nearby.title;hint.classList.add('show');btn.classList.add('show')}else{hint.classList.remove('show');btn.classList.remove('show')}}
+renderer.render(scene,camera)}
+animate();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
 </script>
-</body>
-</html>
+</body></html>
